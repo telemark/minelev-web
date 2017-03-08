@@ -1,0 +1,28 @@
+<div class="mdl-grid {{showMe classes}}">
+    <table class="mdl-data-table mdl-js-data-table mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Skole</th>
+            <th class="mdl-data-table__cell--non-numeric">Klasse</th>
+            <th class="mdl-data-table__cell--non-numeric">Vis elever</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each classes}}
+        <tr>
+            <td class="mdl-data-table__cell--non-numeric">
+                {{showSchoolNameFromId Id}}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+                {{showClassNameFromId Id}}
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+                <a href="/classes/{{Id}}" title="Vis elever i klassen {{Id}}" class="mdl-color-text--black">
+                    <i class="material-icons">group</i>
+                </a>
+            </td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>

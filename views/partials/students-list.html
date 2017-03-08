@@ -1,0 +1,34 @@
+<div class="mdl-grid {{showMe students}}">
+    <table class="mdl-data-table mdl-js-data-table mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Logg</th>
+            <th class="mdl-data-table__cell--non-numeric">Elev</th>
+            <th class="mdl-data-table__cell--non-numeric">Klasse</th>
+            <th class="mdl-data-table__cell--non-numeric">Varsel</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each students}}
+        <tr>
+            <td class="mdl-data-table__cell--non-numeric">
+                <a href="/logs?studentId={{personalIdNumber}}" title="Vis aktivitetslogg for {{fullName}} {{birthdateFromId personalIdNumber}}" class="mdl-color-text--black">
+                    <i class="material-icons">list</i>
+                </a>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">{{fullName}}</td>
+            <td class="mdl-data-table__cell--non-numeric">
+                <a href="/classes/{{mainGroupName}}" title="Skriv nytt varsel til {{fullName}} {{birthdateFromId personalIdNumber}}" class="mdl-color-text--black">
+                    {{showClassNameFromId mainGroupName}}
+                </a>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+                <a href="/warning/{{userName}}" title="Skriv nytt varsel til {{fullName}} {{birthdateFromId personalIdNumber}}" class="mdl-color-text--black">
+                    <i class="material-icons">note_add</i>
+                </a>
+            </td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>

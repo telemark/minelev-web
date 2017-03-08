@@ -1,0 +1,18 @@
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--3-col"></div>
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-typography--text-center mdl-typography--headline">
+        <form action="/search" method="post">
+            <div class="mdl-textfield mdl-js-textfield mdl-typography--text-center">
+                <input class="mdl-textfield__input" type="text" id="searchText" name="searchText" value="{{searchText}}">
+                <label class="mdl-textfield__label" for="searchText">Søk etter elev...</label>
+            </div>
+            <button type="submit" id="SearchFormSubmit" title="Søk etter elever" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-color-text--black">
+                <i class="material-icons">search</i>
+            </button>
+        </form>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col"></div>
+</div>
+
+<!-- Helperscript for search -->
+<script src="/public/js/searchform-validate.js"></script>

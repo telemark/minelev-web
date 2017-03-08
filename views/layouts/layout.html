@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>{{systemName}}</title>
+<!-- Core CSS -->
+<link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+<!-- pdfviewer -->
+<script src="/public/js/compatibility.js"></script>
+<script src="/public/js/pdf.js"></script>
+<!-- Custom CSS -->
+<link href="/public/css/custom.css" rel="stylesheet">
+<!-- Icons -->
+<link rel="icon" sizes="192x192" href="/public/images/icons/chrome-touch-icon-192x192.png">
+<link rel="apple-touch-icon" href="/public/images/icons/apple-touch-icon-precomposed.png">
+<link rel="shortcut icon" href="/public/images/icons/favicon.ico">
+<!-- Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=no' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title mdl-color-text--black">
+                    <span class="logo"></span>
+                    &nbsp;&nbsp;{{systemName}}
+                </span>
+                <span class="mdl-color-text--black margin-left-20">{{credentials.data.userName}}</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation. We hide it in small screens. -->
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link mdl-navigation__link--icon mdl-color-text--black" href="/"><span id="homepageLink" class="material-icons">home</span></a>
+                    <div class="mdl-tooltip mdl-tooltip--large" for="homepageLink">Til forsiden</div>
+                    <a class="mdl-navigation__link mdl-navigation__link--icon mdl-color-text--black" href="/logs"><span id="logpageLink" class="material-icons">list</span></a>
+                    <div class="mdl-tooltip mdl-tooltip--large" for="logpageLink">Til aktivitetsloggen</div>
+                    <a class="mdl-navigation__link mdl-navigation__link--icon mdl-color-text--black {{showMe myContactClasses}}" href="/classes"><span id="classpageLink" class="material-icons">group</span></a>
+                    <div class="mdl-tooltip mdl-tooltip--large {{showMe myContactClasses}}" for="classpageLink">Til klasseoversikten</div>
+                    <a class="mdl-navigation__link mdl-navigation__link--icon mdl-color-text--black" href="/stats"><span id="statspageLink" class="material-icons">poll</span></a>
+                    <div class="mdl-tooltip mdl-tooltip--large" for="statspageLink">Til statistikksiden</div>
+                    <a class="mdl-navigation__link mdl-navigation__link--icon mdl-color-text--black" href="/help"><span id="helppageLink" class="material-icons">help_outline</span></a>
+                    <div class="mdl-tooltip mdl-tooltip--large" for="helppageLink">Til hjelpesiden</div>
+                    <a class="mdl-navigation__link mdl-navigation__link--icon mdl-color-text--black" href="/logout"><span id="logoutLink" class="material-icons">power_settings_new</span></a>
+                    <div class="mdl-tooltip mdl-tooltip--large" for="logoutLink">Logg ut av {{systemName}}</div>
+                </nav>
+            </div>
+        </header>
+        <main class="mdl-layout mdl-js-layout mdl-layout__content">
+            {{{content}}}
+        </main>
+        <div class="mdl-snackbar mdl-js-snackbar">
+            <div class="mdl-snackbar__text"></div>
+            <button class="mdl-snackbar__action"></button>
+        </div>
+    </div>
+</body>
+</html>
