@@ -1,5 +1,6 @@
 'use strict'
 
+const fs = require('fs')
 const axios = require('axios')
 const getWarningTemplatesPath = require('tfk-saksbehandling-elev-varsel-templates')
 const FormData = require('form-data')
@@ -122,6 +123,7 @@ module.exports.submitWarning = async (request, reply) => {
     }
   ]
 
+  axios.defaults.headers.common['Authorization'] = token
   const results = await axios.put(url, postData)
 
   reply.redirect('/?documentAdded=' + results.data._id)
