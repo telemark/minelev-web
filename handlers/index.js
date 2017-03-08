@@ -1,15 +1,24 @@
 'use strict'
 
-const fs = require('fs')
 const axios = require('axios')
-const logger = require('../lib/logger')
 const config = require('../config')
 const pkg = require('../package.json')
+const generateSystemJwt = require('../lib/generate-system-jwt')
 
-module.exports.getFrontpage = (request, reply) => {
+module.exports.getFrontpage = async (request, reply) => {
   const yar = request.yar
-  // const userId = request.auth.credentials.data.userId
+  const userId = request.auth.credentials.data.userId
+  const token = generateSystemJwt(userId)
+  const url = `${config.LOGS_SERVICE_URL}/logs/search`
   const myContactClasses = yar.get('myContactClasses') || []
+  let mongoQuery = {'userId': userId}
+  if (myContactClasses.length > 0) {
+    const classIds = myContactClasses.map(item => item.Id)
+    mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': classIds}}]}
+  }
+
+  axios.defaults.headers.common['Authorization'] = token
+  const results = await axios.post(url, mongoQuery)
 
   const viewOptions = {
     version: pkg.version,
@@ -20,44 +29,18 @@ module.exports.getFrontpage = (request, reply) => {
     credentials: request.auth.credentials,
     myContactClasses: myContactClasses,
     latestId: request.query.documentAdded,
-    logs: data || []
+    logs: results.data || []
   }
   reply.view('index', viewOptions)
-
-  /*
-
-
-  var mongoQuery = {'userId': userId}
-
-  if (myContactClasses.length > 0) {
-    const classIds = myContactClasses.map(item => item.Id)
-    mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': classIds}}]}
-  }
-  logs.find(mongoQuery).sort({timeStamp: -1}).limit(40, function (error, data) {
-    if (error) {
-      logger(['getFrontpage', 'error', JSON.stringify(error)])
-    }
-    const viewOptions = {
-      version: pkg.version,
-      versionName: pkg.louie.versionName,
-      versionVideoUrl: pkg.louie.versionVideoUrl,
-      systemName: pkg.louie.systemName,
-      githubUrl: pkg.repository.url,
-      credentials: request.auth.credentials,
-      myContactClasses: myContactClasses,
-      latestId: request.query.documentAdded,
-      logs: data || []
-    }
-    reply.view('index', viewOptions)
-  })
-  */
 }
 
-module.exports.getLogspage = (request, reply) => {
+module.exports.getLogspage = async (request, reply) => {
   const userId = request.auth.credentials.data.userId
+  const token = generateSystemJwt(userId)
+  const url = `${config.LOGS_SERVICE_URL}/logs/search`
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
-  var mongoQuery = {}
+  let mongoQuery = {}
   if (request.query.studentId) {
     mongoQuery.studentId = request.query.studentId
   } else {
@@ -69,26 +52,24 @@ module.exports.getLogspage = (request, reply) => {
     }
   }
 
-  logs.find(mongoQuery).sort({timeStamp: -1}, function (error, data) {
-    if (error) {
-      logger(['getLogspage', 'error', JSON.stringify(error)])
-    }
-    const viewOptions = {
-      version: pkg.version,
-      versionName: pkg.louie.versionName,
-      versionVideoUrl: pkg.louie.versionVideoUrl,
-      systemName: pkg.louie.systemName,
-      githubUrl: pkg.repository.url,
-      credentials: request.auth.credentials,
-      myContactClasses: myContactClasses,
-      logs: data
-    }
-    if (request.query.studentId) {
-      reply.view('logs-detailed', viewOptions)
-    } else {
-      reply.view('logs', viewOptions)
-    }
-  })
+  axios.defaults.headers.common['Authorization'] = token
+  const results = await axios.post(url, mongoQuery)
+
+  const viewOptions = {
+    version: pkg.version,
+    versionName: pkg.louie.versionName,
+    versionVideoUrl: pkg.louie.versionVideoUrl,
+    systemName: pkg.louie.systemName,
+    githubUrl: pkg.repository.url,
+    credentials: request.auth.credentials,
+    myContactClasses: myContactClasses,
+    logs: results.data
+  }
+  if (request.query.studentId) {
+    reply.view('logs-detailed', viewOptions)
+  } else {
+    reply.view('logs', viewOptions)
+  }
 }
 
 module.exports.getHelppage = (request, reply) => {
@@ -106,14 +87,16 @@ module.exports.getHelppage = (request, reply) => {
   reply.view('help', viewOptions)
 }
 
-module.exports.doSearch = (request, reply) => {
+module.exports.doSearch = async (request, reply) => {
   const yar = request.yar
   const data = request.payload
   const searchText = data.searchText
   const userId = request.auth.credentials.data.userId
+  const token = generateSystemJwt(userId)
+  const url = `${config.BUDDY_SERVICE_URL}/students?name=${searchText}`
   const myContactClasses = yar.get('myContactClasses') || []
 
-  var viewOptions = {
+  let viewOptions = {
     version: pkg.version,
     versionName: pkg.louie.versionName,
     versionVideoUrl: pkg.louie.versionVideoUrl,
@@ -124,22 +107,19 @@ module.exports.doSearch = (request, reply) => {
     searchText: searchText
   }
 
-  request.seneca.act({role: 'buddy', search: 'students', userId: userId, query: searchText}, (error, payload) => {
-    if (error) {
-      logger(['doSearch', 'buddy', 'students', 'error', error])
-      reply(error)
-    } else {
-      if (!payload.statusKode) {
-        viewOptions.students = payload
-        reply.view('search-results', viewOptions)
-      }
-      if (payload.statusKode === 404) {
-        viewOptions.students = []
-        reply.view('search-results', viewOptions)
-      }
-      if (payload.statusKode === 401) {
-        reply.redirect('/logout')
-      }
-    }
-  })
+  axios.defaults.headers.common['Authorization'] = token
+  const results = await axios.get(url)
+  const payload = results.data
+
+  if (!payload.statusKode) {
+    viewOptions.students = payload
+    reply.view('search-results', viewOptions)
+  }
+  if (payload.statusKode === 404) {
+    viewOptions.students = []
+    reply.view('search-results', viewOptions)
+  }
+  if (payload.statusKode === 401) {
+    reply.redirect('/logout')
+  }
 }

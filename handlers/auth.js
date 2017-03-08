@@ -2,8 +2,6 @@
 
 const verifySigninJwt = require('../lib/verify-signin-jwt')
 const getContactClasses = require('../lib/get-contact-classes')
-const config = require('../config')
-const pkg = require('../package.json')
 
 module.exports.doSignIn = async (request, reply) => {
   try {
