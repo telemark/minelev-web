@@ -31,6 +31,8 @@ module.exports.getFrontpage = async (request, reply) => {
     latestId: request.query.documentAdded,
     logs: results.data || []
   }
+  console.log(viewOptions)
+
   reply.view('index', viewOptions)
 }
 

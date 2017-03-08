@@ -1,14 +1,10 @@
 'use strict'
 
 const Hapi = require('hapi')
-// const Hoek = require('hoek')
-// const hapiAuthCookie = require('hapi-auth-cookie')
-// const hapiAuthJwt2 = require('hapi-auth-jwt2')
 const server = new Hapi.Server()
 const config = require('./config')
 const louieService = require('./index')
 const validate = require('./lib/validateJWT')
-const validateAPI = require('./lib/validateAPI')
 
 const goodOptions = {
   ops: {
@@ -29,13 +25,13 @@ const yarOptions = {
   storeBlank: false,
   cookieOptions: {
     password: config.YAR_SECRET,
-    isSecure: false
+    isSecure: process.env.NODE_ENV !== 'development',
+    isSameSite: 'Lax'
   }
 }
 
 const plugins = [
-  {register: require('hapi-auth-cookie')},
-  {register: require('hapi-auth-jwt2')},
+  {register: require('hapi-auth-cookie-issamesite-patch')},
   {register: require('vision')},
   {register: require('inert')},
   {register: require('yar'), options: yarOptions},
@@ -61,16 +57,11 @@ server.register(plugins, (error) => {
     cookie: 'web-minelev-session',
     validateFunc: validate,
     redirectTo: `${config.AUTH_SERVICE_URL}?origin=${config.ORIGIN_URL}`,
-    isSecure: false
+    isSecure: process.env.NODE_ENV !== 'development',
+    isSameSite: 'Lax'
   })
 
   server.auth.default('session')
-
-  server.auth.strategy('jwt', 'jwt', {
-    key: config.JWT_SECRET,          // Never Share your secret key
-    validateFunc: validateAPI,            // validate function defined above
-    verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
-  })
 
   server.views({
     engines: {
