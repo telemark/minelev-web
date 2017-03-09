@@ -25,7 +25,7 @@ const yarOptions = {
   storeBlank: false,
   cookieOptions: {
     password: config.YAR_SECRET,
-    isSecure: false,
+    isSecure: process.env.NODE_ENV !== 'development',
     isSameSite: 'Lax'
   }
 }
@@ -57,7 +57,7 @@ server.register(plugins, (error) => {
     cookie: 'web-minelev-session',
     validateFunc: validate,
     redirectTo: `${config.AUTH_SERVICE_URL}?origin=${config.ORIGIN_URL}`,
-    isSecure: false,
+    isSecure: process.env.NODE_ENV !== 'development',
     isSameSite: 'Lax'
   })
 
