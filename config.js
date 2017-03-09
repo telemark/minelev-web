@@ -10,6 +10,6 @@ module.exports = {
   AUTH_SERVICE_URL: process.env.AUTH_SERVICE_URL || 'https://api.auth.com',
   BUDDY_SERVICE_URL: process.env.BUDDY_SERVICE_URL || 'https://api.buddy.com',
   LOGS_SERVICE_URL: process.env.LOGS_SERVICE_URL || 'https://api.logs.com',
-  PDF_SERVICE_URL: process.env.PDF_SERVICE_URL || 'https://pdftemplater-webservice-docker-jpwnkqxujr.now.sh',
+  PDF_SERVICE_URL: process.env.PDF_SERVICE_URL || 'https://pdf.minelev.t-fk.win',
   QUEUE_SERVICE_URL: process.env.QUEUE_SERVICE_URL || 'https://api.queue.com'
 }
