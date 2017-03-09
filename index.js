@@ -4,6 +4,7 @@ const routes = require('./routes')
 const auth = require('./routes/auth')
 const stats = require('./routes/stats')
 const classes = require('./routes/classes')
+const reports = require('./routes/reports')
 const warnings = require('./routes/warnings')
 
 exports.register = (server, options, next) => {
@@ -11,6 +12,7 @@ exports.register = (server, options, next) => {
   server.route(auth)
   server.route(stats)
   server.route(classes)
+  server.route(reports)
   server.route(warnings)
   next()
 }

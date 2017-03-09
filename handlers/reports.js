@@ -4,22 +4,24 @@ const axios = require('axios')
 const config = require('../config')
 const pkg = require('../package.json')
 const generateSystemJwt = require('../lib/generate-system-jwt')
-const repackStats = require('../lib/repack-stats')
+const repackClassReport = require('../lib/repack-class-report')
 
-module.exports.getStats = async (request, reply) => {
+module.exports.getClassReport = async (request, reply) => {
   const yar = request.yar
   const userId = request.auth.credentials.data.userId
+  const classId = request.params.groupID
   const token = generateSystemJwt(userId)
-  const urlTotal = `${config.LOGS_SERVICE_URL}/stats/total`
-  const urlSchools = `${config.LOGS_SERVICE_URL}/stats/schools`
-  const urlCategories = `${config.LOGS_SERVICE_URL}/stats/categories`
+  const url = `${config.LOGS_SERVICE_URL}/logs/search`
   const myContactClasses = yar.get('myContactClasses') || []
+  const query = {
+    studentMainGroupName: classId
+  }
 
   axios.defaults.headers.common['Authorization'] = token
 
-  const [total, schools, categories] = await Promise.all([axios.get(urlTotal), axios.get(urlSchools), axios.get(urlCategories)])
+  const results = await axios.post(url, query)
 
-  const stats = repackStats({total: total.data, schools: schools.data, categories: categories.data})
+  const report = myContactClasses.map(line => line.Id).includes(classId) ? repackClassReport(results.data) : []
 
   const viewOptions = {
     version: pkg.version,
@@ -29,8 +31,8 @@ module.exports.getStats = async (request, reply) => {
     githubUrl: pkg.repository.url,
     credentials: request.auth.credentials,
     myContactClasses: myContactClasses,
-    stats: stats
+    report: report
   }
 
-  reply.view('statistikk', viewOptions)
+  reply.view('report-class', viewOptions)
 }
