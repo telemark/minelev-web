@@ -34,5 +34,14 @@ module.exports = [
     config: {
       description: 'Search'
     }
+  },
+  {
+    method: 'GET',
+    path: '/ping',
+    handler: (request, reply) => reply('pong'),
+    config: {
+      description: 'Search',
+      auth: false
+    }
   }
 ]

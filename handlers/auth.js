@@ -10,7 +10,11 @@ module.exports.doSignIn = async (request, reply) => {
   const myContactClasses = await getContactClasses(user.userId)
   request.cookieAuth.set({data: user, token: token})
   yar.set('myContactClasses', Array.isArray(myContactClasses) ? myContactClasses : [])
-  reply.redirect('/')
+  if (user.nextPath && user.nextPath.length > 0) {
+    reply.redirect(user.nextPath)
+  } else {
+    reply.redirect('/')
+  }
 }
 
 module.exports.doSignOut = (request, reply) => {

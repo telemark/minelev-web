@@ -52,7 +52,15 @@
       "web.minelev.t-fk.win"
     ],
     "env": {
-      "NODE_ENV": "production"
+      "NODE_ENV": "production",
+      "COOKIE_SECRET": "@minelev-cookie-secret",
+      "ENCRYPTOR_SECRET": "@minelev-encryptor-secret",
+      "JWT_SECRET": "@minelev-jwt-secret",
+      "YAR_SECRET": "@minelev-session-secret",
+      "AUTH_SERVICE_URL": "@minelev-auth-service-url",
+      "BUDDY_SERVICE_URL": "@minelev-buddy-service-url",
+      "LOGS_SERVICE_URL": "@minelev-logs-service-url",
+      "QUEUE_SERVICE_URL": "@minelev-queue-service-url"
     },
     "type": "npm"
   },

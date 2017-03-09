@@ -31,7 +31,6 @@ module.exports.getFrontpage = async (request, reply) => {
     latestId: request.query.documentAdded,
     logs: results.data || []
   }
-  console.log(viewOptions)
 
   reply.view('index', viewOptions)
 }
@@ -39,7 +38,8 @@ module.exports.getFrontpage = async (request, reply) => {
 module.exports.getLogspage = async (request, reply) => {
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
-  const url = `${config.LOGS_SERVICE_URL}/logs/search`
+  const documentId = request.query.documentId
+  const url = documentId ? `${config.LOGS_SERVICE_URL}/logs/${documentId}` : `${config.LOGS_SERVICE_URL}/logs/search`
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
   let mongoQuery = {}
@@ -55,7 +55,7 @@ module.exports.getLogspage = async (request, reply) => {
   }
 
   axios.defaults.headers.common['Authorization'] = token
-  const results = await axios.post(url, mongoQuery)
+  const results = documentId ? await axios.get(url) : await axios.post(url, mongoQuery)
 
   const viewOptions = {
     version: pkg.version,
@@ -67,7 +67,7 @@ module.exports.getLogspage = async (request, reply) => {
     myContactClasses: myContactClasses,
     logs: results.data
   }
-  if (request.query.studentId) {
+  if (request.query.studentId || documentId) {
     reply.view('logs-detailed', viewOptions)
   } else {
     reply.view('logs', viewOptions)
