@@ -7,6 +7,7 @@ const generateSystemJwt = require('../lib/generate-system-jwt')
 
 module.exports.getFrontpage = async (request, reply) => {
   const yar = request.yar
+  const warningAdded = yar.get('warningAdded')
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
   const url = `${config.LOGS_SERVICE_URL}/logs/search`
@@ -25,9 +26,10 @@ module.exports.getFrontpage = async (request, reply) => {
     githubUrl: pkg.repository.url,
     credentials: request.auth.credentials,
     myContactClasses: myContactClasses,
-    latestId: request.query.documentAdded
+    latestId: warningAdded ? 'Ok' : ''
   }
 
+  yar.set('warningAdded', false)
   axios.defaults.headers.common['Authorization'] = token
 
   axios.post(url, mongoQuery).then(results => {
@@ -62,7 +64,7 @@ module.exports.getLogspage = async (request, reply) => {
   axios.defaults.headers.common['Authorization'] = token
   const results = documentId ? await axios.get(url) : await axios.post(url, mongoQuery)
 
-  const viewOptions = {
+  let viewOptions = {
     version: pkg.version,
     versionName: pkg.louie.versionName,
     versionVideoUrl: pkg.louie.versionVideoUrl,
@@ -73,6 +75,11 @@ module.exports.getLogspage = async (request, reply) => {
     logs: results.data
   }
   if (request.query.studentId || documentId) {
+    const doc = results.data[0]
+    const isValid = (userId === doc.userId || myContactClasses.map(line => line.Id).includes(doc.studentMainGroupName))
+    if (!isValid) {
+      viewOptions.logs = []
+    }
     reply.view('logs-detailed', viewOptions)
   } else {
     reply.view('logs', viewOptions)

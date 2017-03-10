@@ -11,7 +11,7 @@
   },
   "main": "index.js",
   "engines": {
-    "node": ">=7.7.1"
+    "node": ">=7.7.2"
   },
   "scripts": {
     "test": "standard && nsp check && ava",
@@ -19,7 +19,7 @@
     "coverage": "nyc ava",
     "coveralls": "nyc ava && nyc report --reporter=lcov && cat coverage/lcov.info | coveralls",
     "standard-fix": "standard --fix",
-    "now-deploy": "npm test && now --npm -E minelev-web.env && now alias",
+    "now-deploy": "npm test && now --npm && now alias",
     "start": "node standalone.js",
     "dev": "NODE_ENV=development node standalone.js"
   },

@@ -1,6 +1,5 @@
 <div class="mdl-grid {{showMe logs}}">
-    <div class="mdl-cell mdl-cell--2-col"></div>
-    <table class="mdl-data-table mdl-js-data-table mdl-cell--8-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+    <table class="mdl-data-table mdl-js-data-table mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
         <thead>
         <tr>
             <th class="mdl-data-table__cell--non-numeric">Logg</th>
@@ -8,6 +7,7 @@
             <th class="mdl-data-table__cell--non-numeric">Type</th>
             <th class="mdl-data-table__cell--non-numeric">Status</th>
             <th class="mdl-data-table__cell--non-numeric">Dato</th>
+            <th class="mdl-data-table__cell--non-numeric">Sendt av</th>
             <th class="mdl-data-table__cell--non-numeric">Varsel</th>
         </tr>
         </thead>
@@ -22,7 +22,8 @@
             <td class="mdl-data-table__cell--non-numeric">{{studentName}}</td>
             <td class="mdl-data-table__cell--non-numeric">{{documentCategory}}</td>
             <td class="mdl-data-table__cell--non-numeric">{{latestDocumentStatus documentStatus}}</td>
-            <td class="mdl-data-table__cell--non-numeric">{{latestDocumentStatusTimestamp documentStatus}}</td>
+            <td class="mdl-data-table__cell--non-numeric"><a href="/logs?documentId={{_id}}" title="Vis varselet">{{latestDocumentStatusTimestamp documentStatus}}</a></td>
+            <td class="mdl-data-table__cell--non-numeric">{{userName}}</td>
             <td class="mdl-data-table__cell--non-numeric">
                 <a href="/warning/{{studentUserName}}" title="Skriv nytt varsel til {{studentName}}" class="mdl-color-text--black">
                     <span class="material-icons">note_add</span>
@@ -32,5 +33,4 @@
         {{/each}}
         </tbody>
     </table>
-    <div class="mdl-cell mdl-cell--2-col"></div>
 </div>
