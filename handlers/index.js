@@ -57,7 +57,7 @@ module.exports.getLogspage = async (request, reply) => {
   axios.defaults.headers.common['Authorization'] = token
   const results = documentId ? await axios.get(url) : await axios.post(url, mongoQuery)
 
-  const viewOptions = {
+  let viewOptions = {
     version: pkg.version,
     versionName: pkg.louie.versionName,
     versionVideoUrl: pkg.louie.versionVideoUrl,
@@ -68,6 +68,11 @@ module.exports.getLogspage = async (request, reply) => {
     logs: results.data
   }
   if (request.query.studentId || documentId) {
+    const doc = results.data[0]
+    const isValid = (userId === doc.userId || myContactClasses.map(line => line.Id).includes(doc.studentMainGroupName))
+    if (!isValid) {
+      viewOptions.logs = []
+    }
     reply.view('logs-detailed', viewOptions)
   } else {
     reply.view('logs', viewOptions)

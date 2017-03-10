@@ -112,7 +112,7 @@ module.exports.submitWarning = async (request, reply) => {
   let data = request.payload
   data.studentId = request.params.studentID
   data.userId = user.userId
-  data.userName = user.cn
+  data.userName = user.userName
   data.userAgent = request.headers['user-agent']
   let postData = prepareWarning(data)
 
