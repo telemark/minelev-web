@@ -19,7 +19,7 @@
             <td class="mdl-data-table__cell--non-numeric">{{formatDate timeStamp}}</td>
         </tr>
         <tr>
-            <td class="mdl-data-table__cell--non-numeric" colspan="4">
+            <td class="mdl-data-table__cell--non-numeric" colspan="5">
                 <p class="fontBigger">
                     {{{newlineToBr gradesCategories}}}{{{newlineToBr orderCategories}}}{{{newlineToBr behaviourCategories}}}
                 </p>
@@ -27,7 +27,7 @@
             </td>
         </tr>
         <tr>
-            <td class="mdl-data-table__cell--non-numeric" colspan="4">
+            <td class="mdl-data-table__cell--non-numeric" colspan="5">
                 {{#each documentStatus}}
                   {{formatDateTime timeStamp}} - {{status}}<br/>
                 {{/each}}
