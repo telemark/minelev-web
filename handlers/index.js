@@ -17,10 +17,7 @@ module.exports.getFrontpage = async (request, reply) => {
     mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': classIds}}]}
   }
 
-  axios.defaults.headers.common['Authorization'] = token
-  const results = await axios.post(url, mongoQuery)
-
-  const viewOptions = {
+  let viewOptions = {
     version: pkg.version,
     versionName: pkg.louie.versionName,
     versionVideoUrl: pkg.louie.versionVideoUrl,
@@ -28,11 +25,19 @@ module.exports.getFrontpage = async (request, reply) => {
     githubUrl: pkg.repository.url,
     credentials: request.auth.credentials,
     myContactClasses: myContactClasses,
-    latestId: request.query.documentAdded,
-    logs: results.data || []
+    latestId: request.query.documentAdded
   }
 
-  reply.view('index', viewOptions)
+  axios.defaults.headers.common['Authorization'] = token
+
+  axios.post(url, mongoQuery).then(results => {
+    viewOptions.logs = results.data || []
+    reply.view('index', viewOptions)
+  }).catch(error => {
+    console.error(error)
+    viewOptions.logs = []
+    reply.view('index', viewOptions)
+  })
 }
 
 module.exports.getLogspage = async (request, reply) => {
