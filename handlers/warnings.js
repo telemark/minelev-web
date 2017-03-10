@@ -106,6 +106,7 @@ module.exports.generateWarningPreview = (request, reply) => {
 }
 
 module.exports.submitWarning = async (request, reply) => {
+  const yar = request.yar
   const user = request.auth.credentials.data
   const token = generateSystemJwt(user.userId)
   const url = `${config.QUEUE_SERVICE_URL}`
@@ -126,5 +127,7 @@ module.exports.submitWarning = async (request, reply) => {
   axios.defaults.headers.common['Authorization'] = token
   const results = await axios.put(url, postData)
 
-  reply.redirect('/?documentAdded=' + results.data._id)
+  yar.set('warningAdded', true)
+
+  reply.redirect('/')
 }

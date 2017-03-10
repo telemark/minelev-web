@@ -7,6 +7,7 @@ const generateSystemJwt = require('../lib/generate-system-jwt')
 
 module.exports.getFrontpage = async (request, reply) => {
   const yar = request.yar
+  const warningAdded = yar.get('warningAdded')
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
   const url = `${config.LOGS_SERVICE_URL}/logs/search`
@@ -20,6 +21,7 @@ module.exports.getFrontpage = async (request, reply) => {
   axios.defaults.headers.common['Authorization'] = token
   const results = await axios.post(url, mongoQuery)
 
+  yar.set('warningAdded', false)
   const viewOptions = {
     version: pkg.version,
     versionName: pkg.louie.versionName,
@@ -28,7 +30,7 @@ module.exports.getFrontpage = async (request, reply) => {
     githubUrl: pkg.repository.url,
     credentials: request.auth.credentials,
     myContactClasses: myContactClasses,
-    latestId: request.query.documentAdded,
+    latestId: warningAdded,
     logs: results.data || []
   }
 
