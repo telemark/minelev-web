@@ -295,3 +295,8 @@ a:visited {
     margin-right: 0.8rem;
     display: inline-block;
 }
+
+.systemmsg {
+    padding: 5px;
+    font-size: large;
+}

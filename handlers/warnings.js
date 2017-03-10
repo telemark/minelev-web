@@ -125,9 +125,14 @@ module.exports.submitWarning = async (request, reply) => {
   ]
 
   axios.defaults.headers.common['Authorization'] = token
-  const results = await axios.put(url, postData)
 
-  yar.set('warningAdded', true)
-
-  reply.redirect('/')
+  axios.put(url, postData)
+    .then(results => {
+      yar.set('warningAdded', true)
+      reply.redirect('/')
+    }).catch(error => {
+      console.error(error)
+      yar.set('warningAdded', false)
+      reply.redirect('/')
+    })
 }

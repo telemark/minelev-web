@@ -30,7 +30,7 @@ module.exports.getFrontpage = async (request, reply) => {
     githubUrl: pkg.repository.url,
     credentials: request.auth.credentials,
     myContactClasses: myContactClasses,
-    latestId: warningAdded,
+    latestId: warningAdded ? 'Ok' : '',
     logs: results.data || []
   }
 
