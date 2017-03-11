@@ -27,31 +27,50 @@ services:
       - minelev_micro_buddy
       - minelev_micro_logs
       - minelev_micro_auth_ldap
-      - nginx_proxy
       - minelev_buddy_api
+      - nginx_proxy
+
 
   minelev_micro_logs:
     container_name: minelev_micro_logs
     image: telemark/minelev-logs
     env_file: envs/logs.env
     restart: always
+    depends_on:
+      - nginx_proxy
 
   minelev_micro_buddy:
     container_name: minelev_micro_buddy
     image: telemark/minelev-buddy
     env_file: envs/buddy.env
     restart: always
-
-  minelev_log:
+    depends_on:
+      - nginx_proxy
+ 
+  minelev_log_db:
     image: mongo:3.2.9
-    container_name: minelev_log
+    container_name: minelev_log_db
     env_file: envs/mongo.env
     restart: always
     volumes:
       - /mongo/minelev2/logs:/data/db
+    ports:
+      - "27017:27017"
+    depends_on:
+      - nginx_proxy
 
   minelev_buddy_api:
     image: telemark/buddy-minelev-api
     container_name: minelev_buddy_api
     restart: always
     env_file: envs/buddy-api.env
+    depends_on:
+      - nginx_proxy
+
+  minelev_pdftemplater:
+    image: telemark/pdftemplater-webservice-docker
+    container_name: minelev_pdftemplater
+    env_file: envs/pdf.env
+    restart: always
+    depends_on:
+      - nginx_proxy
