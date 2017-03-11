@@ -6,6 +6,16 @@
 
 web frontend for minelev
 
+## Docker
+
+Se [examples/envs](examples/envs)
+
+Gjør evt nødvendige endringer i env-filene
+
+```bash
+$ docker-compose up -d
+```
+
 ## License
 
 [MIT](LICENSE)

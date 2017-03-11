@@ -2,22 +2,13 @@
 
 const axios = require('axios')
 const config = require('../config')
-const pkg = require('../package.json')
 const generateSystemJwt = require('../lib/generate-system-jwt')
+const createViewOptions = require('../lib/create-view-options')
 
 module.exports.showClasses = async (request, reply) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
-  let viewOptions = {
-    version: pkg.version,
-    versionName: pkg.louie.versionName,
-    versionVideoUrl: pkg.louie.versionVideoUrl,
-    systemName: pkg.louie.systemName,
-    githubUrl: pkg.repository.url,
-    credentials: request.auth.credentials,
-    myContactClasses: myContactClasses,
-    classes: myContactClasses
-  }
+  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, classes: myContactClasses })
 
   reply.view('klasseliste', viewOptions)
 }
@@ -29,18 +20,13 @@ module.exports.listStudentsInClass = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/classes/${groupId}/students`
   const myContactClasses = yar.get('myContactClasses') || []
-  let viewOptions = {
-    version: pkg.version,
-    versionName: pkg.louie.versionName,
-    versionVideoUrl: pkg.louie.versionVideoUrl,
-    systemName: pkg.louie.systemName,
-    githubUrl: pkg.repository.url,
-    credentials: request.auth.credentials,
-    myContactClasses: myContactClasses
-  }
+
+  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
 
   axios.defaults.headers.common['Authorization'] = token
+
   const results = await axios.get(url)
+
   const payload = results.data
 
   if (!payload.statusKode) {
