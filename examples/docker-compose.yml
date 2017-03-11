@@ -15,8 +15,6 @@ services:
     container_name: minelev_micro_auth_ldap
     env_file: envs/ldap.env
     restart: always
-    ports:
-      - "82:8080"
     depends_on:
       - nginx_proxy
 
@@ -25,10 +23,6 @@ services:
     container_name: minelev_webserver
     env_file: envs/minelev.env
     restart: always
-    cpu_shares: 512
-    mem_limit: 1000000000
-    ports:
-      - "85:3000"
     depends_on:
       - minelev_micro_buddy
       - minelev_micro_logs
@@ -41,28 +35,23 @@ services:
     image: telemark/minelev-logs
     env_file: envs/logs.env
     restart: always
-    ports:
-      - "86:3000"
 
   minelev_micro_buddy:
     container_name: minelev_micro_buddy
     image: telemark/minelev-buddy
     env_file: envs/buddy.env
     restart: always
-    ports:
-      - "84:3000"
 
   minelev_log:
     image: mongo:3.2.9
     container_name: minelev_log
+    env_file: envs/mongo.env
+    restart: always
     volumes:
       - /mongo/minelev2/logs:/data/db
-    ports:
-      - "27017:27017"
 
   minelev_buddy_api:
     image: telemark/buddy-minelev-api
     container_name: minelev_buddy_api
+    restart: always
     env_file: envs/buddy-api.env
-    ports:
-      - "87:3000"
