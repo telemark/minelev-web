@@ -4,7 +4,7 @@ services:
   nginx_proxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
-    restart: always
+    #restart: always
     volumes:
       -  /var/run/docker.sock:/tmp/docker.sock:ro
     ports:
@@ -14,7 +14,7 @@ services:
     image: telemark/micro-auth-ldap
     container_name: minelev_micro_auth_ldap
     env_file: envs/ldap.env
-    restart: always
+    #restart: always
     depends_on:
       - nginx_proxy
 
@@ -22,38 +22,39 @@ services:
     image: telemark/minelev-web
     container_name: minelev_webserver
     env_file: envs/minelev.env
-    restart: always
+    #restart: always
     depends_on:
       - minelev_micro_buddy
       - minelev_micro_logs
       - minelev_micro_auth_ldap
-      - minelev_buddy_api
+      - minelev_pdftemplater
       - nginx_proxy
-
 
   minelev_micro_logs:
     container_name: minelev_micro_logs
     image: telemark/minelev-logs
     env_file: envs/logs.env
-    restart: always
+    #restart: always
     depends_on:
       - nginx_proxy
+      - minelev_log_db
 
   minelev_micro_buddy:
     container_name: minelev_micro_buddy
     image: telemark/minelev-buddy
     env_file: envs/buddy.env
-    restart: always
+    #restart: always
     depends_on:
       - nginx_proxy
- 
+      - minelev_buddy_api
+
   minelev_log_db:
     image: mongo:3.2.9
     container_name: minelev_log_db
     env_file: envs/mongo.env
-    restart: always
+    #restart: always
     volumes:
-      - /mongo/minelev2/logs:/data/db
+      - ./mongo/minelev/logs:/data/db
     ports:
       - "27017:27017"
     depends_on:
@@ -62,7 +63,7 @@ services:
   minelev_buddy_api:
     image: telemark/buddy-minelev-api
     container_name: minelev_buddy_api
-    restart: always
+    #restart: always
     env_file: envs/buddy-api.env
     depends_on:
       - nginx_proxy
@@ -71,6 +72,6 @@ services:
     image: telemark/pdftemplater-webservice-docker
     container_name: minelev_pdftemplater
     env_file: envs/pdf.env
-    restart: always
+    #restart: always
     depends_on:
       - nginx_proxy
