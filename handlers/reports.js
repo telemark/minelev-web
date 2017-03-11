@@ -2,9 +2,9 @@
 
 const axios = require('axios')
 const config = require('../config')
-const pkg = require('../package.json')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const repackClassReport = require('../lib/repack-class-report')
+const createViewOptions = require('../lib/create-view-options')
 
 module.exports.getClassReport = async (request, reply) => {
   const yar = request.yar
@@ -16,23 +16,13 @@ module.exports.getClassReport = async (request, reply) => {
   const query = {
     studentMainGroupName: classId
   }
-
   axios.defaults.headers.common['Authorization'] = token
 
   const results = await axios.post(url, query)
 
   const report = myContactClasses.map(line => line.Id).includes(classId) ? repackClassReport(results.data) : []
 
-  const viewOptions = {
-    version: pkg.version,
-    versionName: pkg.louie.versionName,
-    versionVideoUrl: pkg.louie.versionVideoUrl,
-    systemName: pkg.louie.systemName,
-    githubUrl: pkg.repository.url,
-    credentials: request.auth.credentials,
-    myContactClasses: myContactClasses,
-    report: report
-  }
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, report: report })
 
   reply.view('report-class', viewOptions)
 }

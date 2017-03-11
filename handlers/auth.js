@@ -8,8 +8,10 @@ module.exports.doSignIn = async (request, reply) => {
   const yar = request.yar
   const user = await verifySigninJwt(token)
   const myContactClasses = await getContactClasses(user.userId)
+
   request.cookieAuth.set({data: user, token: token})
   yar.set('myContactClasses', Array.isArray(myContactClasses) ? myContactClasses : [])
+
   if (user.nextPath && user.nextPath.length > 0) {
     reply.redirect(user.nextPath)
   } else {

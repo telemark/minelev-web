@@ -2,9 +2,9 @@
 
 const axios = require('axios')
 const config = require('../config')
-const pkg = require('../package.json')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const repackStats = require('../lib/repack-stats')
+const createViewOptions = require('../lib/create-view-options')
 
 module.exports.getStats = async (request, reply) => {
   const yar = request.yar
@@ -21,16 +21,7 @@ module.exports.getStats = async (request, reply) => {
 
   const stats = repackStats({total: total.data, schools: schools.data, categories: categories.data})
 
-  const viewOptions = {
-    version: pkg.version,
-    versionName: pkg.louie.versionName,
-    versionVideoUrl: pkg.louie.versionVideoUrl,
-    systemName: pkg.louie.systemName,
-    githubUrl: pkg.repository.url,
-    credentials: request.auth.credentials,
-    myContactClasses: myContactClasses,
-    stats: stats
-  }
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, stats: stats })
 
   reply.view('statistikk', viewOptions)
 }
