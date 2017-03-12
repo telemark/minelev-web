@@ -57,6 +57,7 @@ server.register(plugins, (error) => {
     cookie: 'web-minelev-session',
     validateFunc: validate,
     redirectTo: `${config.AUTH_SERVICE_URL}?origin=${config.ORIGIN_URL}`,
+    appendNext: 'nextPath',
     isSecure: process.env.NODE_ENV !== 'development',
     isSameSite: 'Lax'
   })
