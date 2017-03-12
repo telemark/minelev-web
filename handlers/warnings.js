@@ -5,7 +5,6 @@ const axios = require('axios')
 const getWarningTemplatesPath = require('tfk-saksbehandling-elev-varsel-templates')
 const FormData = require('form-data')
 const config = require('../config')
-const pkg = require('../package.json')
 const prepareWarning = require('../lib/prepare-warning')
 const prepareWarningPreview = require('../lib/prepare-warning-preview')
 const courseCategory = require('../lib/categories-courses')
@@ -13,10 +12,11 @@ const order = require('../lib/categories-order')
 const behaviour = require('../lib/categories-behaviour')
 const warningTypes = require('../lib/categories-warnings')
 const generateSystemJwt = require('../lib/generate-system-jwt')
+const createViewOptions = require('../lib/create-view-options')
 
 function filterWarningTypes (contactTeacher) {
   let filteredList = []
-  warningTypes.forEach(function (type) {
+  warningTypes.forEach(type => {
     if (type.id === 'fag' || contactTeacher) {
       filteredList.push(type)
     }
@@ -32,18 +32,7 @@ module.exports.writeWarning = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
 
-  let viewOptions = {
-    version: pkg.version,
-    versionName: pkg.louie.versionName,
-    versionVideoUrl: pkg.louie.versionVideoUrl,
-    systemName: pkg.louie.systemName,
-    githubUrl: pkg.repository.url,
-    credentials: request.auth.credentials,
-    myContactClasses: myContactClasses,
-    order: order,
-    behaviour: behaviour,
-    courseCategory: courseCategory
-  }
+  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory })
 
   axios.defaults.headers.common['Authorization'] = token
   const results = await axios.get(url)
@@ -74,7 +63,7 @@ module.exports.generateWarningPreview = (request, reply) => {
   const template = getWarningTemplatesPath(postData.documentCategory)
   let templaterForm = new FormData()
 
-  Object.keys(previewData).forEach(function (key) {
+  Object.keys(previewData).forEach(key => {
     templaterForm.append(key, previewData[key])
   })
 

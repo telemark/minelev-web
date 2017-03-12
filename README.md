@@ -6,6 +6,32 @@
 
 web frontend for minelev
 
+## Docker
+
+For test legg til disse DNS-pekerne i hosts-filen:
+
+```
+127.0.0.1      minelev.no
+127.0.0.1      auth.minelev.no
+127.0.0.1      buddy.minelev.no
+127.0.0.1      logs.minelev.no
+127.0.0.1      buddy-api.minelev.no
+127.0.0.1      mongodb.minelev.no
+127.0.0.1      pdf.minelev.no
+```
+
+Se [examples/envs](examples/envs)
+
+Gjør evt nødvendige endringer i env-filene
+
+```bash
+$ docker-compose up -d
+```
+
+Åpne http://minelev.no i nettleseren
+
+Logg inn med brukernavn: gauss passord: password
+
 ## License
 
 [MIT](LICENSE)
