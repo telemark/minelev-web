@@ -70,21 +70,21 @@
       "value": "Du har brutt skolens ordensreglement"
     }
   ],
-  "warnings": [
+  "categories": [
     {
       "id": "atferd",
       "description": "Atferd",
-      "value": "Atferd"
+      "value": "atferd"
     },
     {
       "id": "fag",
       "description": "Fag",
-      "value": "Fag"
+      "value": "fag"
     },
     {
       "id": "orden",
       "description": "Orden",
-      "value": "Orden"
+      "value": "orden"
     }
   ]
 }

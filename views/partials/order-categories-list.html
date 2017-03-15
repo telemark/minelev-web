@@ -1,7 +1,7 @@
 <div class="mdl-typography--headline warning-form-header chxBxorden margin-top-10">Årsak til varsel</div>
 {{#each order}}
     <label for="orderChkbox{{id}}" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect chxBxorden">
-        <input type="checkbox" name="orderCategories" value="{{description}}" id="orderChkbox{{id}}" class="mdl-checkbox__input">
+        <input type="checkbox" name="orderCategories" value="{{value}}" id="orderChkbox{{id}}" class="mdl-checkbox__input">
         <span class="mdl-checkbox__label">{{description}}</span>
     </label>
 {{/each}}

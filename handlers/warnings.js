@@ -7,10 +7,11 @@ const FormData = require('form-data')
 const config = require('../config')
 const prepareWarning = require('../lib/prepare-warning')
 const prepareWarningPreview = require('../lib/prepare-warning-preview')
-const courseCategory = require('../lib/categories-courses')
-const order = require('../lib/categories-order')
-const behaviour = require('../lib/categories-behaviour')
-const warningTypes = require('../lib/categories-warnings')
+const warnings = require('../lib/data/warnings.json')
+const courseCategory = warnings.courses
+const order = warnings.order
+const behaviour = warnings.behaviour
+const warningTypes = warnings.categories
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 
@@ -38,14 +39,14 @@ module.exports.writeWarning = async (request, reply) => {
   const results = await axios.get(url)
   const payload = results.data
 
-  if (!payload.statusCode) {
+  if (!payload.statusKode) {
     const student = payload[0]
     viewOptions.student = student
     viewOptions.warningTypes = filterWarningTypes(student.contactTeacher)
     viewOptions.skjemaUtfyllingStart = new Date().getTime()
     reply.view('warning', viewOptions)
   }
-  if (payload.statusCode === 401) {
+  if (payload.statusKode === 401) {
     console.log(JSON.stringify(payload))
     reply.redirect('/logout')
   }
