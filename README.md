@@ -24,8 +24,6 @@ You need to set DNS pointers to use this example:
 127.0.0.1      pdf.minelev.no
 ```
 
-### 2. with-links
-
 Do changes in the env-files
 
 ```bash
@@ -33,6 +31,16 @@ $ docker-compose up -d
 ```
 
 Open http://minelev.no in the browser
+
+Login with username: `gauss` password: `password`
+
+### 2. with-links
+
+```bash
+$ docker-compose up -d
+```
+
+Open http://localhost in the browser
 
 Login with username: `gauss` password: `password`
 
