@@ -61,7 +61,7 @@ services:
       - nginx_proxy
 
   minelev_buddy_api:
-    image: telemark/buddy-minelev-api
+    image: telemark/minelev-buddy-dummy
     container_name: minelev_buddy_api
     #restart: always
     env_file: envs/buddy-api.env
