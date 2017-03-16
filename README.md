@@ -10,7 +10,19 @@ See [examples](examples)
 
 ## Docker
 
-### 1. with-nginx-proxy
+Be sure to get the time on the server right!
+
+`ntpdate no.pool.ntp.org`
+
+
+### 1. with-docker-datacenter
+
+See [this example](examples/with-docker-datacenter)
+
+Set DNS for the minelev_micro_auth_ldap and the minelev_webserver services.
+These are the only services that needs to be exposed to the internet.
+
+### 2. with-nginx-proxy
 
 See [this example](examples/with-nginx-proxy)
 
@@ -36,7 +48,7 @@ Open http://minelev.no in the browser
 
 Login with username: `gauss` password: `password`
 
-### 2. with-links
+### 3. with-links
 
 See [this example](examples/with-links)
 
