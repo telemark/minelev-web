@@ -72,8 +72,6 @@ services:
     #restart: always
     #volumes:
     #  - ./mongo/minelev/logs:/data/db
-    ports:
-      - "27017:27017"
 
   minelev_buddy_api:
     environment:
