@@ -20,7 +20,7 @@ For test legg til disse DNS-pekerne i hosts-filen:
 127.0.0.1      pdf.minelev.no
 ```
 
-Se [examples/envs](examples/envs)
+Se [examples](examples)
 
 Gjør evt nødvendige endringer i env-filene
 

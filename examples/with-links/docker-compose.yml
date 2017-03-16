@@ -1,0 +1,57 @@
+version: "2"
+
+services:
+  minelev_micro_auth_ldap:
+    image: telemark/micro-auth-ldap
+    container_name: minelev_micro_auth_ldap
+    env_file: envs/ldap.env
+    ports:
+      - "81:8080"
+
+  minelev_webserver:
+    image: telemark/minelev-web
+    container_name: minelev_webserver
+    env_file: envs/minelev.env
+    depends_on:
+      - minelev_micro_buddy
+      - minelev_micro_logs
+      - minelev_micro_auth_ldap
+      - minelev_pdftemplater
+    ports:
+      - "80:8000"
+    links:
+      - minelev_micro_logs
+      - minelev_micro_buddy
+      - minelev_pdftemplater
+
+  minelev_micro_logs:
+    container_name: minelev_micro_logs
+    image: telemark/minelev-logs
+    env_file: envs/logs.env
+    depends_on:
+      - minelev_log_db
+    links:
+      - minelev_log_db
+
+  minelev_micro_buddy:
+    container_name: minelev_micro_buddy
+    image: telemark/minelev-buddy
+    env_file: envs/buddy.env
+    depends_on:
+      - minelev_buddy_api
+    links:
+      - minelev_buddy_api
+
+  minelev_log_db:
+    image: mongo:3.2.9
+    container_name: minelev_log_db
+    volumes:
+      - ./mongo/minelev/logs:/data/db
+
+  minelev_buddy_api:
+    image: telemark/minelev-buddy-dummy
+    container_name: minelev_buddy_api
+
+  minelev_pdftemplater:
+    image: telemark/pdftemplater-webservice-docker
+    container_name: minelev_pdftemplater
