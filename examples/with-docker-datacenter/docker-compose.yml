@@ -1,0 +1,88 @@
+version: "3"
+
+services:
+  minelev_micro_auth_ldap:
+    image: telemark/micro-auth-ldap
+    environment:
+      - TZ=Europe/Oslo
+      - NODE_ENV=development
+      - JWT_SECRET=Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go
+      - ENCRYPTOR_SECRET=Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go
+      - SESSION_STORAGE_URL=https://tmp.storage.micro.t-fk.no
+      - LDAP_URL=
+      - LDAP_BIND_DN=
+      - LDAP_BIND_CREDENTIALS=
+      - LDAP_SEARCH_BASE=
+      - LDAP_SEARCH_FILTER=
+    #restart: always
+    ports:
+      - 8080:3000
+
+  minelev_webserver:
+    image: telemark/minelev-web
+    environment:
+      - TZ=Europe/Oslo
+      - NODE_ENV=development
+      - WEB_SERVER_PORT=8000
+      - ORIGIN_URL=https://minelev.no/signin # CHANGE THIS
+      - COOKIE_SECRET=Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go
+      - ENCRYPTOR_SECRET=Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go
+      - JWT_SECRET=Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go
+      - YAR_SECRET=Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go
+      - AUTH_SERVICE_URL=https://auth.minelev.no/login # CHANGE THIS
+      - BUDDY_SERVICE_URL=http://minelev_micro_buddy:3000
+      - LOGS_SERVICE_URL=http://minelev_micro_logs:3000
+      - PDF_SERVICE_URL=http://minelev_pdftemplater:3000
+      - QUEUE_SERVICE_URL=http://minelev_micro_logs:3000/logs
+    #restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - minelev_micro_buddy
+      - minelev_micro_logs
+      - minelev_micro_auth_ldap
+      - minelev_pdftemplater
+
+  minelev_micro_logs:
+    image: telemark/minelev-logs
+    environment:
+      - TZ=Europe/Oslo
+      - NODE_ENV=development
+      - DB=mongodb://minelev_log_db/logs
+      - JWT_SECRET=Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go
+    #restart: always
+    depends_on:
+      - minelev_log_db
+
+  minelev_micro_buddy:
+    image: telemark/minelev-buddy
+    environment:
+      - TZ=Europe/Oslo
+      - NODE_ENV=development
+      - BUDDY_API=http://minelev_buddy_api:3000
+      - JWT_SECRET=Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go
+    #restart: always
+    depends_on:
+      - minelev_buddy_api
+
+  minelev_log_db:
+    image: mongo:3.2.9
+    environment:
+      - TZ=Europe/Oslo
+    #restart: always
+    #volumes:
+    #  - ./mongo/minelev/logs:/data/db
+    ports:
+      - "27017:27017"
+
+  minelev_buddy_api:
+    environment:
+      - TZ=Europe/Oslo
+    image: telemark/minelev-buddy-dummy
+    #restart: always
+
+  minelev_pdftemplater:
+    environment:
+      - TZ=Europe/Oslo
+    image: telemark/pdftemplater-webservice-docker
+    #restart: always
