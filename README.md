@@ -12,6 +12,8 @@ See [examples](examples)
 
 ### 1. with-nginx-proxy
 
+See [this example](examples/with-nginx-proxy)
+
 You need to set DNS pointers to use this example:
 
 ```
@@ -35,6 +37,8 @@ Open http://minelev.no in the browser
 Login with username: `gauss` password: `password`
 
 ### 2. with-links
+
+See [this example](examples/with-links)
 
 ```bash
 $ docker-compose up -d
