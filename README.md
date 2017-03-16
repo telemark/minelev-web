@@ -32,6 +32,14 @@ $ docker-compose up -d
 
 Logg inn med brukernavn: gauss passord: password
 
+# Flow
+
+![MinElev flyt](http://bildr.no/image/Nks0MHNs.jpeg)
+
+# Example DNS-pointers
+
+![MinElev DNS](http://bildr.no/image/QURTR3lz.jpeg)
+
 ## License
 
 [MIT](LICENSE)
