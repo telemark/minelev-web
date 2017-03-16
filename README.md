@@ -48,7 +48,7 @@ Open http://minelev.no in the browser
 
 Login with username: `gauss` password: `password`
 
-### 3. with-links (if you just want to try)
+### 3. with-links (ready to go, if you just want to try)
 
 See [this example](examples/with-links)
 
