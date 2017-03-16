@@ -6,9 +6,13 @@
 
 web frontend for minelev
 
+See [examples](examples)
+
 ## Docker
 
-For test legg til disse DNS-pekerne i hosts-filen:
+### 1. with-nginx-proxy
+
+You need to set DNS pointers to use this example:
 
 ```
 127.0.0.1      minelev.no
@@ -20,17 +24,17 @@ For test legg til disse DNS-pekerne i hosts-filen:
 127.0.0.1      pdf.minelev.no
 ```
 
-Se [examples](examples)
+### 2. with-links
 
-Gjør evt nødvendige endringer i env-filene
+Do changes in the env-files
 
 ```bash
 $ docker-compose up -d
 ```
 
-Åpne http://minelev.no i nettleseren
+Open http://minelev.no in the browser
 
-Logg inn med brukernavn: gauss passord: password
+Login with username: `gauss` password: `password`
 
 # Flow
 
