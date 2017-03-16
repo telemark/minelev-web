@@ -2,7 +2,8 @@ version: "3"
 
 services:
   minelev_micro_auth_ldap:
-    image: telemark/micro-auth-ldap
+    # image: telemark/micro-auth-ldap # Use this to try with LDAP
+    image: telemark/micro-auth-mock
     environment:
       - TZ=Europe/Oslo
       - NODE_ENV=development
@@ -77,6 +78,7 @@ services:
     environment:
       - TZ=Europe/Oslo
     image: telemark/minelev-buddy-dummy
+    # image: telemark/buddy-minelev-api use this if you have Buddy
     #restart: always
 
   minelev_pdftemplater:
