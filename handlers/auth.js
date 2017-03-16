@@ -7,16 +7,21 @@ module.exports.doSignIn = async (request, reply) => {
   const token = request.query.jwt
   const nextPath = request.query.nextPath
   const yar = request.yar
-  const user = await verifySigninJwt(token)
-  const myContactClasses = await getContactClasses(user.userId)
+  try {
+    const user = await verifySigninJwt(token)
+    const myContactClasses = await getContactClasses(user.userId)
 
-  request.cookieAuth.set({data: user, token: token})
-  yar.set('myContactClasses', Array.isArray(myContactClasses) ? myContactClasses : [])
+    request.cookieAuth.set({data: user, token: token})
+    yar.set('myContactClasses', Array.isArray(myContactClasses) ? myContactClasses : [])
 
-  if (nextPath && nextPath.length > 0) {
-    reply.redirect(nextPath)
-  } else {
-    reply.redirect('/')
+    if (nextPath && nextPath.length > 0) {
+      reply.redirect(nextPath)
+    } else {
+      reply.redirect('/')
+    }
+  } catch (error) {
+    console.error(error)
+    reply(error)
   }
 }
 

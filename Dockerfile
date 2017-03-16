@@ -4,8 +4,8 @@
 #
 ###########################################################
 
-# Setting the base to nodejs 7.7.2
-FROM node:7.7.2-alpine
+# Setting the base to nodejs 7.7.3
+FROM node:7.7.3-alpine
 
 # Maintainer
 MAINTAINER Geir Gåsodden
