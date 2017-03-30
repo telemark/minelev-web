@@ -31,7 +31,7 @@ const yarOptions = {
 }
 
 const plugins = [
-  {register: require('hapi-auth-cookie-issamesite-patch')},
+  {register: require('hapi-auth-cookie')},
   {register: require('vision')},
   {register: require('inert')},
   {register: require('yar'), options: yarOptions},
