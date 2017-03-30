@@ -6,6 +6,7 @@ const stats = require('./routes/stats')
 const classes = require('./routes/classes')
 const reports = require('./routes/reports')
 const warnings = require('./routes/warnings')
+const followups = require('./routes/followups')
 const systems = require('./routes/systems')
 
 exports.register = (server, options, next) => {
@@ -14,6 +15,7 @@ exports.register = (server, options, next) => {
   server.route(stats)
   server.route(classes)
   server.route(reports)
+  server.route(followups)
   server.route(warnings)
   server.route(systems)
   next()

@@ -8,7 +8,7 @@ module.exports = [
     path: '/warning/{studentID}',
     handler: handlers.writeWarning,
     config: {
-      description: 'Get student by {studentID}'
+      description: 'Prepare warning for {studentID}'
     }
   },
   {
@@ -24,7 +24,7 @@ module.exports = [
     path: '/warning/{studentID}',
     handler: handlers.submitWarning,
     config: {
-      description: 'Get student by {studentID}'
+      description: 'Submit warning for {studentID}'
     }
   }
 ]

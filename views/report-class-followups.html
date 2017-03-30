@@ -1,0 +1,24 @@
+<div class="mdl-grid">
+    <table class="mdl-data-table mdl-js-data-table mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Navn</th>
+            <th class="mdl-data-table__cell--non-numeric">Periode</th>
+            <th class="mdl-data-table__cell--non-numeric">Angående</th>
+            <th class="mdl-data-table__cell--non-numeric">Sendt av</th>
+            <th class="mdl-data-table__cell--non-numeric">Dato</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each report}}
+        <tr>
+            <td class="mdl-data-table__cell--non-numeric">{{studentName}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{period}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{stripSchoolId category}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{userName}}</td>
+            <td class="mdl-data-table__cell--non-numeric"><a href="/logs?documentId={{documentId}}" title="Se det opprinnelige varselet">{{formatDate date}}</a></td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>

@@ -4,7 +4,8 @@
         <tr>
             <th class="mdl-data-table__cell--non-numeric">Skole</th>
             <th class="mdl-data-table__cell--non-numeric">Klasse</th>
-            <th class="mdl-data-table__cell--non-numeric">Vis rapport</th>
+            <th class="mdl-data-table__cell--non-numeric">Rapport varsler</th>
+            <th class="mdl-data-table__cell--non-numeric">Rapport samtaler</th>
             <th class="mdl-data-table__cell--non-numeric">Vis elever</th>
         </tr>
         </thead>
@@ -18,7 +19,12 @@
                 {{showClassNameFromId Id}}
             </td>
             <td class="mdl-data-table__cell--non-numeric">
-                <a href="/reports/class/{{Id}}" title="Vis rapport for klassen {{Id}}" class="mdl-color-text--black">
+                <a href="/reports/warnings/{{Id}}" title="Vis rapport over varsler for klassen {{Id}}" class="mdl-color-text--black">
+                    <i class="material-icons">poll</i>
+                </a>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+                <a href="/reports/followups/{{Id}}" title="Vis rapport over elevsamtaler for klassen {{Id}}" class="mdl-color-text--black">
                     <i class="material-icons">poll</i>
                 </a>
             </td>

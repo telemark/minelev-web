@@ -8,6 +8,7 @@ const createViewOptions = require('../lib/create-view-options')
 module.exports.getFrontpage = async (request, reply) => {
   const yar = request.yar
   const warningAdded = yar.get('warningAdded')
+  const followupAdded = yar.get('followupAdded')
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
   const url = `${config.LOGS_SERVICE_URL}/logs/search`
@@ -19,9 +20,10 @@ module.exports.getFrontpage = async (request, reply) => {
     mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': classIds}}]}
   }
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, latestId: warningAdded ? 'Ok' : '' })
+  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, latestIdWarnings: warningAdded ? 'Ok' : '', latestIdFollowups: followupAdded ? 'Ok' : '' })
 
   yar.set('warningAdded', false)
+  yar.set('followupAdded', false)
 
   axios.defaults.headers.common['Authorization'] = token
   axios.post(url, mongoQuery).then(results => {
