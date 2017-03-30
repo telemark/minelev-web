@@ -121,8 +121,8 @@ module.exports.submitFollowup = async (request, reply) => {
       yar.set('followupAdded', true)
       reply.redirect('/')
     }).catch(error => {
-    console.error(error)
-    yar.set('followupAdded', false)
-    reply.redirect('/')
-  })
+      console.error(error)
+      yar.set('followupAdded', false)
+      reply.redirect('/')
+    })
 }
