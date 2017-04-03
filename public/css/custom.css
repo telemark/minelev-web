@@ -300,3 +300,7 @@ a:visited {
     padding: 5px;
     font-size: large;
 }
+
+.mdl-data-table__cell--non-numeric {
+    vertical-align: text-top !important;
+}

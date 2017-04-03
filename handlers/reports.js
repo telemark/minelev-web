@@ -5,6 +5,7 @@ const config = require('../config')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const repackClassReport = require('../lib/repack-class-report')
 const createViewOptions = require('../lib/create-view-options')
+const logger = require('../lib/logger')
 
 module.exports.getWarningsClassReport = async (request, reply) => {
   const yar = request.yar
@@ -17,13 +18,15 @@ module.exports.getWarningsClassReport = async (request, reply) => {
     studentMainGroupName: classId,
     documentType: 'varsel'
   }
+
   axios.defaults.headers.common['Authorization'] = token
 
+  logger(['reports', 'warnings', 'class', classId, 'user', userId])
   const results = await axios.post(url, query)
 
   const report = myContactClasses.map(line => line.Id).includes(classId) ? repackClassReport(results.data) : []
 
-  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, report: report })
+  const viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, report: report, classId: classId})
 
   reply.view('report-class-warnings', viewOptions)
 }
