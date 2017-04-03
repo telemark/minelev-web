@@ -72,7 +72,7 @@
     "hapi": "16.1.0",
     "hapi-auth-cookie": "7.0.0",
     "hapi-auth-jwt2": "7.2.4",
-    "inert": "4.1.0",
+    "inert": "4.2.0",
     "jsonwebtoken": "7.3.0",
     "simple-encryptor": "1.1.0",
     "tfk-saksbehandling-elev-varsel-templates": "5.0.14",
