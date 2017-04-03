@@ -2,6 +2,7 @@
 
 const verifySigninJwt = require('../lib/verify-signin-jwt')
 const getContactClasses = require('../lib/get-contact-classes')
+const logger = require('../lib/logger')
 
 module.exports.doSignIn = async (request, reply) => {
   const token = request.query.jwt
@@ -10,6 +11,8 @@ module.exports.doSignIn = async (request, reply) => {
   try {
     const user = await verifySigninJwt(token)
     const myContactClasses = await getContactClasses(user.userId)
+
+    logger(['auth', 'signin', 'verified', user.userId])
 
     request.cookieAuth.set({data: user, token: token})
     yar.set('myContactClasses', Array.isArray(myContactClasses) ? myContactClasses : [])
@@ -20,7 +23,7 @@ module.exports.doSignIn = async (request, reply) => {
       reply.redirect('/')
     }
   } catch (error) {
-    console.error(error)
+    logger(['auth', 'error', error])
     reply(error)
   }
 }
