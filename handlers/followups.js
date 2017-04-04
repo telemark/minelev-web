@@ -7,23 +7,14 @@ const FormData = require('form-data')
 const config = require('../config')
 const prepareFollowup = require('../lib/prepare-followup')
 const prepareFollowupPreview = require('../lib/prepare-followup-preview')
-const warnings = require('../lib/data/warnings.json')
-const courseCategory = warnings.courses
-const order = warnings.order
-const behaviour = warnings.behaviour
-const warningTypes = warnings.categories
+const followups = require('../lib/data/followups.json')
+const courseCategory = followups.courses
+const order = followups.order
+const behaviour = followups.behaviour
+const types = followups.types
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
-
-function filterWarningTypes (contactTeacher) {
-  let filteredList = []
-  warningTypes.forEach(type => {
-    if (type.id === 'fag' || contactTeacher) {
-      filteredList.push(type)
-    }
-  })
-  return filteredList
-}
+const logger = require('../lib/logger')
 
 module.exports.writeFollowup = async (request, reply) => {
   const yar = request.yar
@@ -36,18 +27,24 @@ module.exports.writeFollowup = async (request, reply) => {
   let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory })
 
   axios.defaults.headers.common['Authorization'] = token
+
+  logger(['followups', 'writeFollowup', 'userId', userId, 'studentUserName', studentUserName, 'start'])
+
   const results = await axios.get(url)
   const payload = results.data
 
   if (!payload.statusKode) {
     const student = payload[0]
     viewOptions.student = student
-    viewOptions.warningTypes = filterWarningTypes(student.contactTeacher)
+    viewOptions.types = types
     viewOptions.skjemaUtfyllingStart = new Date().getTime()
+
+    logger(['followups', 'writeFollowup', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
+
     reply.view('followup', viewOptions)
   }
   if (payload.statusKode === 401) {
-    console.log(JSON.stringify(payload))
+    logger(['followups', 'writeFollowup', 'userId', userId, 'studentUserName', studentUserName, 'error', JSON.stringify(payload)])
     reply.redirect('/logout')
   }
 }
@@ -64,6 +61,8 @@ module.exports.generateFollowupPreview = (request, reply) => {
   const template = getWarningTemplatesPath(postData.documentCategory)
   let templaterForm = new FormData()
 
+  logger(['followups', 'generateFollowupPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
+
   Object.keys(previewData).forEach(key => {
     templaterForm.append(key, previewData[key])
   })
@@ -72,6 +71,7 @@ module.exports.generateFollowupPreview = (request, reply) => {
 
   templaterForm.submit(config.PDF_SERVICE_URL, (error, docx) => {
     if (error) {
+      logger(['followups', 'generateFollowupPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'error', error])
       reply(error)
     } else {
       let chunks = []
@@ -89,6 +89,7 @@ module.exports.generateFollowupPreview = (request, reply) => {
           chunks[i].copy(results, pos)
           pos += chunks[i].length
         }
+        logger(['followups', 'generateFollowupPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'preview generated'])
         reply(results.toString('base64'))
       })
     }
