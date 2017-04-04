@@ -15,6 +15,7 @@ const types = followups.types
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 const logger = require('../lib/logger')
+const datePadding = require('../lib/date-padding')
 
 module.exports.writeFollowup = async (request, reply) => {
   const yar = request.yar
@@ -35,9 +36,11 @@ module.exports.writeFollowup = async (request, reply) => {
 
   if (!payload.statusKode) {
     const student = payload[0]
+    const today = new Date()
     viewOptions.student = student
     viewOptions.types = types
-    viewOptions.skjemaUtfyllingStart = new Date().getTime()
+    viewOptions.skjemaUtfyllingStart = today.getTime()
+    viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
 
     logger(['followups', 'writeFollowup', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
 

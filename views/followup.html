@@ -20,6 +20,7 @@
                 <h2 class="mdl-card__title-text">{{student.fullName}}</h2>
             </div>
             <div class="mdl-card__supporting-text mdl-color-text--black">
+                {{>followup-date}}
                 {{>followup-type-list}}
                 {{>courses-list}}
                 {{>courses-categories-list}}
@@ -53,3 +54,5 @@
 <script src="/public/js/serialize-0.2.min.js"></script>
 <!-- Helperscript for form -->
 <script src="/public/js/followup-form.js"></script>
+<!-- Date input polyfill -->
+<script src="/public/js/date-input-polyfill.dist.js"></script>
