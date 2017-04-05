@@ -71,10 +71,12 @@ function hideAllHeaders () {
 function validateWarning () {
   var submitButton = document.getElementById('submitFollowup')
   var previewButton = document.getElementById('previewFollowup')
+  var dateField = document.getElementById('followupDate')
   var followupTypes = document.querySelectorAll('.followup-type-selector')
   var checkBoxes = document.querySelectorAll('.mdl-checkbox__input')
   var checkboxCount = 0
   var type = false
+  var dateOK = false
   var typeOK = false
   var temaOK = false
 
@@ -82,6 +84,7 @@ function validateWarning () {
   submitButton.disabled = true
   previewButton.disabled = true
 
+  // Checks if type is selected
   Array.prototype.forEach.call(followupTypes, function(el) {
     if (el.checked) {
       type = el.value
@@ -89,26 +92,31 @@ function validateWarning () {
     }
   })
 
+  // Checks if at least one subitem is selected
   Array.prototype.forEach.call(checkBoxes, function(el) {
     if (el.checked) {
       if (type === 'utvikling' && /utvikling/.test(el.id)) {
         checkboxCount ++
       }
-      if (type === 'undervegs' && /utvikling/.test(el.id)) {
+      if (type === 'undervegs' && /undervegs/.test(el.id)) {
         checkboxCount ++
       }
-      if (type === 'annen' && /utvikling/.test(el.id)) {
+      if (type === 'annen' && /annen/.test(el.id)) {
         checkboxCount ++
       }
     }
   })
+
+  if (dateField.value !== '') {
+    dateOK = true
+  }
 
   if (checkboxCount > 0) {
     temaOK = true
   }
 
   // If everything is OK let's go :-)
-  if (typeOK && temaOK) {
+  if (typeOK && temaOK && dateOK) {
     submitButton.disabled = false
     previewButton.disabled = false
   }
