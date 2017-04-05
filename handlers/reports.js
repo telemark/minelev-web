@@ -1,11 +1,16 @@
 'use strict'
 
 const axios = require('axios')
+const winston = require('winston')
 const config = require('../config')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const repackClassReport = require('../lib/repack-class-report')
 const createViewOptions = require('../lib/create-view-options')
-const logger = require('../lib/logger')
+const logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.Console)({timestamp: true})
+  ]
+})
 
 module.exports.getWarningsClassReport = async (request, reply) => {
   const yar = request.yar
@@ -21,7 +26,7 @@ module.exports.getWarningsClassReport = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
 
-  logger(['reports', 'warnings', 'class', classId, 'user', userId])
+  logger.info('reports', 'getWarningsClassReport', 'class', classId, 'user', userId)
   const results = await axios.post(url, query)
 
   const report = myContactClasses.map(line => line.Id).includes(classId) ? repackClassReport(results.data) : []
@@ -42,6 +47,9 @@ module.exports.getFollowupsClassReport = async (request, reply) => {
     studentMainGroupName: classId,
     documentType: 'samtale'
   }
+
+  logger.info('reports', 'getFollowupsClassReport', 'class', classId, 'user', userId)
+
   axios.defaults.headers.common['Authorization'] = token
 
   const results = await axios.post(url, query)

@@ -1,9 +1,15 @@
 'use strict'
 
 const axios = require('axios')
+const winston = require('winston')
 const config = require('../config')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
+const logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.Console)({timestamp: true})
+  ]
+})
 
 module.exports.showClasses = async (request, reply) => {
   const yar = request.yar
@@ -23,6 +29,8 @@ module.exports.listStudentsInClass = async (request, reply) => {
 
   let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
 
+  logger.info('classes', 'listStudentsInClass', 'userId', userId, 'start')
+
   axios.defaults.headers.common['Authorization'] = token
 
   const results = await axios.get(url)
@@ -31,13 +39,16 @@ module.exports.listStudentsInClass = async (request, reply) => {
 
   if (!payload.statusKode) {
     viewOptions.students = payload.map(student => Object.assign(student, {mainGroupName: groupId}))
+    logger.info('classes', 'listStudentsInClass', 'userId', userId, 'success')
     reply.view('klasse-elevliste', viewOptions)
   }
   if (payload.statusKode === 404) {
     viewOptions.students = []
+    logger.info('classes', 'listStudentsInClass', 'userId', userId, '404')
     reply.view('klasse-elevliste', viewOptions)
   }
   if (payload.statusKode === 401) {
+    logger.info('classes', 'listStudentsInClass', 'userId', userId, '401')
     reply.redirect('/logout')
   }
 }
