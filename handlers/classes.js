@@ -7,9 +7,10 @@ const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 const logger = new (winston.Logger)({
   transports: [
-    new (winston.transports.Console)({timestamp: true})
+    new (winston.transports.Console)()
   ]
 })
+const formatLogMessage = require('../lib/format-log-message')
 
 module.exports.showClasses = async (request, reply) => {
   const yar = request.yar
@@ -29,7 +30,7 @@ module.exports.listStudentsInClass = async (request, reply) => {
 
   let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
 
-  logger.info('classes', 'listStudentsInClass', 'userId', userId, 'start')
+  logger.info(formatLogMessage(['classes', 'listStudentsInClass', 'userId', userId, 'start']))
 
   axios.defaults.headers.common['Authorization'] = token
 
@@ -39,16 +40,16 @@ module.exports.listStudentsInClass = async (request, reply) => {
 
   if (!payload.statusKode) {
     viewOptions.students = payload.map(student => Object.assign(student, {mainGroupName: groupId}))
-    logger.info('classes', 'listStudentsInClass', 'userId', userId, 'success')
+    logger.info(formatLogMessage(['classes', 'listStudentsInClass', 'userId', userId, 'success']))
     reply.view('klasse-elevliste', viewOptions)
   }
   if (payload.statusKode === 404) {
     viewOptions.students = []
-    logger.info('classes', 'listStudentsInClass', 'userId', userId, '404')
+    logger.info(formatLogMessage(['classes', 'listStudentsInClass', 'userId', userId, '404']))
     reply.view('klasse-elevliste', viewOptions)
   }
   if (payload.statusKode === 401) {
-    logger.info('classes', 'listStudentsInClass', 'userId', userId, '401')
+    logger.info(formatLogMessage(['classes', 'listStudentsInClass', 'userId', userId, '401']))
     reply.redirect('/logout')
   }
 }
