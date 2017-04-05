@@ -59,7 +59,7 @@
     "coveralls": "2.13.0",
     "nsp": "2.6.3",
     "nyc": "10.2.0",
-    "standard": "9.0.2"
+    "standard": "10.0.0"
   },
   "dependencies": {
     "axios": "0.16.0",
@@ -75,7 +75,7 @@
     "inert": "4.2.0",
     "jsonwebtoken": "7.3.0",
     "simple-encryptor": "1.1.0",
-    "tfk-saksbehandling-elev-varsel-templates": "5.0.14",
+    "tfk-saksbehandling-elev-varsel-templates": "5.1.0",
     "tfk-saksbehandling-schools-info": "2.0.12",
     "vision": "4.1.1",
     "yar": "8.1.2"
