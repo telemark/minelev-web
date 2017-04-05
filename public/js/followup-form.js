@@ -1,8 +1,7 @@
 'use strict'
 
 function init () {
-  var radios = document.querySelectorAll('.warning-type-selector')
-  var periods = document.querySelectorAll('.period-selector')
+  var radios = document.querySelectorAll('.followup-type-selector')
   var checkboxes = document.querySelectorAll('.mdl-checkbox')
   var previewButton = document.getElementById('previewFollowup')
   var closePreviewButtons = document.querySelectorAll('.closePreviewButton')
@@ -27,11 +26,6 @@ function init () {
       validateWarning()
     })
   })
-  Array.prototype.forEach.call(periods, function(el) {
-    el.addEventListener('click', function (e) {
-      validateWarning()
-    })
-  })
 
   previewButton.addEventListener('click', function (e) {
     previewWarning(e)
@@ -50,20 +44,6 @@ function init () {
       location.hash=''
     })
   })
-
-  preselectFag()
-}
-
-function preselectFag () {
-  var radios = document.querySelectorAll('.warning-type-selector')
-  var courses = document.querySelectorAll('.chxBxfagInput')
-  if (radios.length === 1) {
-    radios[0].checked = true
-    showMe(radios[0].value)
-  }
-  if (courses.length === 1) {
-    courses[0].checked = true
-  }
 }
 
 function showMe (type) {
@@ -91,65 +71,44 @@ function hideAllHeaders () {
 function validateWarning () {
   var submitButton = document.getElementById('submitFollowup')
   var previewButton = document.getElementById('previewFollowup')
-  var warningTypes = document.querySelectorAll('.warning-type-selector')
-  var periods = document.querySelectorAll('.period-selector')
+  var followupTypes = document.querySelectorAll('.followup-type-selector')
   var checkBoxes = document.querySelectorAll('.mdl-checkbox__input')
-  var arsakCourse = document.querySelectorAll('.course-category-selector')
   var checkboxCount = 0
   var type = false
   var typeOK = false
-  var periodOK = false
-  var courseOK = false
-  var reasonOK = false
+  var temaOK = false
 
   // Starts by disabling button
   submitButton.disabled = true
   previewButton.disabled = true
 
-  Array.prototype.forEach.call(warningTypes, function(el) {
+  Array.prototype.forEach.call(followupTypes, function(el) {
     if (el.checked) {
       type = el.value
       typeOK = true
     }
   })
 
-  Array.prototype.forEach.call(periods, function(el) {
-    if (el.checked) {
-      periodOK = true
-    }
-  })
-
-  Array.prototype.forEach.call(arsakCourse, function(el) {
-    if (el.checked) {
-      reasonOK = true
-    }
-  })
-
   Array.prototype.forEach.call(checkBoxes, function(el) {
     if (el.checked) {
-      if (type === 'atferd' && /behaviour/.test(el.id)) {
+      if (type === 'utvikling' && /utvikling/.test(el.id)) {
         checkboxCount ++
       }
-      if (type === 'orden' && /order/.test(el.id)) {
+      if (type === 'undervegs' && /utvikling/.test(el.id)) {
         checkboxCount ++
       }
-      if (type === 'fag' && /course/.test(el.id)) {
+      if (type === 'annen' && /utvikling/.test(el.id)) {
         checkboxCount ++
       }
     }
   })
 
-  if (type === 'fag' && checkboxCount > 0) {
-    courseOK = true
-  }
-
-  if (type !== 'fag' && checkboxCount > 0) {
-    reasonOK = true
-    courseOK = true
+  if (checkboxCount > 0) {
+    temaOK = true
   }
 
   // If everything is OK let's go :-)
-  if (typeOK && periodOK && courseOK && reasonOK) {
+  if (typeOK && temaOK) {
     submitButton.disabled = false
     previewButton.disabled = false
   }
@@ -265,7 +224,6 @@ function renderPDF(data, canvasContainer, options) {
 
   PDFJS.disableWorker = true;
   PDFJS.getDocument(data).then(renderPages);
-
 }
 
 function ready (fn) {

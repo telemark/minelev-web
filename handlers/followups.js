@@ -8,9 +8,9 @@ const config = require('../config')
 const prepareFollowup = require('../lib/prepare-followup')
 const prepareFollowupPreview = require('../lib/prepare-followup-preview')
 const followups = require('../lib/data/followups.json')
-const courseCategory = followups.courses
-const order = followups.order
-const behaviour = followups.behaviour
+const utvikling = followups.utvikling
+const undervegs = followups.undervegs
+const annen = followups.annen
 const types = followups.types
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
@@ -25,7 +25,7 @@ module.exports.writeFollowup = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory })
+  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, annen: annen, utvikling: utvikling, undervegs: undervegs})
 
   axios.defaults.headers.common['Authorization'] = token
 

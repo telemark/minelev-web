@@ -1,0 +1,7 @@
+<div class="mdl-typography--headline warning-form-header chxBxundervegs margin-top-10">Tema for undervegsvurdering</div>
+{{#each undervegs}}
+<label for="undervegsChkbox{{id}}" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect chxBxundervegs">
+    <input type="checkbox" name="undervegsCategories" value="{{value}}" id="undervegsChkbox{{id}}" class="mdl-checkbox__input">
+    <span class="mdl-checkbox__label">{{description}}</span>
+</label>
+{{/each}}

@@ -1,0 +1,7 @@
+<div class="mdl-typography--headline warning-form-header chxBxannen margin-top-10">Tema for annen samtale</div>
+{{#each annen}}
+<label for="annenChkbox{{id}}" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect chxBxannen">
+    <input type="checkbox" name="annenCategories" value="{{value}}" id="annenChkbox{{id}}" class="mdl-checkbox__input">
+    <span class="mdl-checkbox__label">{{description}}</span>
+</label>
+{{/each}}

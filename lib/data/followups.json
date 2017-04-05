@@ -1,5 +1,5 @@
 {
-  "behaviour": [
+  "utvikling": [
     {
       "id": "01",
       "description": "Eleven forstyrrer undervisning eller skoleaktivitet",
@@ -31,7 +31,7 @@
       "value": "Du har brutt skolens ordensreglement"
     }
   ],
-  "courses": [
+  "undervegs": [
     {
       "id": "01",
       "description": "Eleven har manglende vurderingsgrunnlag",
@@ -43,7 +43,7 @@
       "value": "Du har udokumentert fravær"
     }
   ],
-  "order": [
+  "annen": [
     {
       "id": "01",
       "description": "Eleven er for sen til undervisning",
@@ -74,17 +74,17 @@
     {
       "id": "utvikling",
       "description": "Dialog om anna utvikling",
-      "value": "Dialog om anna utvikling"
+      "value": "utvikling"
     },
     {
       "id": "undervegs",
       "description": "Undervegsvurdering",
-      "value": "Undervegsvurdering"
+      "value": "undervegs"
     },
     {
       "id": "annen",
       "description": "Annen type samtale",
-      "value": "Annen type samtale"
+      "value": "annen"
     }
   ]
 }

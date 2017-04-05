@@ -1,0 +1,7 @@
+<div class="mdl-typography--headline warning-form-header chxBxutvikling margin-top-10">Tema for utviklingssamtale</div>
+{{#each utvikling}}
+<label for="utviklingChkbox{{id}}" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect chxBxutvikling">
+    <input type="checkbox" name="utviklingCategories" value="{{value}}" id="utviklingChkbox{{id}}" class="mdl-checkbox__input">
+    <span class="mdl-checkbox__label">{{description}}</span>
+</label>
+{{/each}}
