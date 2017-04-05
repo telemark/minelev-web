@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const axios = require('axios')
-const getWarningTemplatesPath = require('tfk-saksbehandling-elev-varsel-templates')
+const getWarningTemplatesPath = require('tfk-saksbehandling-minelev-templates')
 const FormData = require('form-data')
 const config = require('../config')
 const prepareFollowup = require('../lib/prepare-followup')
@@ -86,7 +86,7 @@ module.exports.generateFollowupPreview = (request, reply) => {
       })
 
       docx.on('end', function () {
-        let results = new Buffer(totallength)
+        let results = Buffer.alloc(totallength)
         let pos = 0
         for (var i = 0; i < chunks.length; i++) {
           chunks[i].copy(results, pos)

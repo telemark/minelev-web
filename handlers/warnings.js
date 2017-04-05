@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const axios = require('axios')
-const getWarningTemplatesPath = require('tfk-saksbehandling-elev-varsel-templates')
+const getWarningTemplatesPath = require('tfk-saksbehandling-minelev-templates')
 const FormData = require('form-data')
 const config = require('../config')
 const prepareWarning = require('../lib/prepare-warning')
@@ -33,7 +33,7 @@ module.exports.writeWarning = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory })
+  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory})
 
   axios.defaults.headers.common['Authorization'] = token
   const results = await axios.get(url)
@@ -83,7 +83,7 @@ module.exports.generateWarningPreview = (request, reply) => {
       })
 
       docx.on('end', function () {
-        let results = new Buffer(totallength)
+        let results = Buffer.alloc(totallength)
         let pos = 0
         for (var i = 0; i < chunks.length; i++) {
           chunks[i].copy(results, pos)
