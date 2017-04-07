@@ -2,7 +2,6 @@
 
 const fs = require('fs')
 const axios = require('axios')
-const winston = require('winston')
 const getWarningTemplatesPath = require('tfk-saksbehandling-minelev-templates')
 const FormData = require('form-data')
 const config = require('../config')
@@ -16,12 +15,7 @@ const types = followups.types
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 const datePadding = require('../lib/date-padding')
-const logger = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)()
-  ]
-})
-const formatLogMessage = require('../lib/format-log-message')
+const logger = require('../lib/logger')
 
 module.exports.writeFollowup = async (request, reply) => {
   const yar = request.yar
@@ -35,7 +29,7 @@ module.exports.writeFollowup = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
 
-  logger.info(formatLogMessage(['followups', 'writeFollowup', 'userId', userId, 'studentUserName', studentUserName, 'start']))
+  logger('info', ['followups', 'writeFollowup', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
   const results = await axios.get(url)
   const payload = results.data
@@ -48,12 +42,12 @@ module.exports.writeFollowup = async (request, reply) => {
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
 
-    logger.info(formatLogMessage(['followups', 'writeFollowup', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved']))
+    logger('info', ['followups', 'writeFollowup', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
 
     reply.view('followup', viewOptions)
   }
   if (payload.statusKode === 401) {
-    logger.info(formatLogMessage(['followups', 'writeFollowup', 'userId', userId, 'studentUserName', studentUserName, '401']))
+    logger('info', ['followups', 'writeFollowup', 'userId', userId, 'studentUserName', studentUserName, '401'])
     reply.redirect('/logout')
   }
 }
@@ -70,7 +64,7 @@ module.exports.generateFollowupPreview = (request, reply) => {
   const template = getWarningTemplatesPath(postData.documentCategory)
   let templaterForm = new FormData()
 
-  logger.info(formatLogMessage(['followups', 'generateFollowupPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start']))
+  logger('info', ['followups', 'generateFollowupPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
 
   Object.keys(previewData).forEach(key => {
     templaterForm.append(key, previewData[key])
@@ -80,7 +74,7 @@ module.exports.generateFollowupPreview = (request, reply) => {
 
   templaterForm.submit(config.PDF_SERVICE_URL, (error, docx) => {
     if (error) {
-      logger.error(formatLogMessage(['followups', 'generateFollowupPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'error', error]))
+      logger('error', ['followups', 'generateFollowupPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'error', error])
       reply(error)
     } else {
       let chunks = []
@@ -98,7 +92,7 @@ module.exports.generateFollowupPreview = (request, reply) => {
           chunks[i].copy(results, pos)
           pos += chunks[i].length
         }
-        logger.info(formatLogMessage(['followups', 'generateFollowupPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'preview generated']))
+        logger('info', ['followups', 'generateFollowupPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'preview generated'])
         reply(results.toString('base64'))
       })
     }
@@ -126,15 +120,15 @@ module.exports.submitFollowup = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
 
-  logger.info(formatLogMessage(['followups', 'submitFollowup', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start']))
+  logger('info', ['followups', 'submitFollowup', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
 
   axios.put(url, postData)
     .then(results => {
-      logger.info(formatLogMessage(['followups', 'submitFollowup', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted']))
+      logger('info', ['followups', 'submitFollowup', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted'])
       yar.set('followupAdded', true)
       reply.redirect('/')
     }).catch(error => {
-      logger.error(formatLogMessage(['followups', 'submitFollowup', 'userId', data.userId, 'studentUserName', data.studentUserName, error]))
+      logger('error', ['followups', 'submitFollowup', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
       yar.set('followupAdded', false)
       reply.redirect('/')
     })

@@ -2,6 +2,7 @@
 
 const axios = require('axios')
 const config = require('../config')
+const logger = require('../lib/logger')
 
 module.exports.checkSystems = async (request, reply) => {
   const systems = [
@@ -30,7 +31,7 @@ module.exports.checkSystems = async (request, reply) => {
     const results = checks.map(check => check.data)
     reply(systems.map((site, index) => Object.assign(site, {result: results[index]})))
   } catch (error) {
-    console.error(error)
+    logger('error', ['systems', 'checkSystems', error])
     reply(error)
   }
 }

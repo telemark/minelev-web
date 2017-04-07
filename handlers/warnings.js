@@ -2,7 +2,6 @@
 
 const fs = require('fs')
 const axios = require('axios')
-const winston = require('winston')
 const getWarningTemplatesPath = require('tfk-saksbehandling-minelev-templates')
 const FormData = require('form-data')
 const config = require('../config')
@@ -15,11 +14,7 @@ const behaviour = warnings.behaviour
 const warningTypes = warnings.categories
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
-const logger = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)({timestamp: true})
-  ]
-})
+const logger = require('../lib/logger')
 
 function filterWarningTypes (contactTeacher) {
   let filteredList = []
@@ -41,7 +36,7 @@ module.exports.writeWarning = async (request, reply) => {
 
   let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory})
 
-  logger.info('warnings', 'writeWarning', 'userId', userId, 'studentUserName', studentUserName, 'start')
+  logger('info', ['warnings', 'writeWarning', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
   axios.defaults.headers.common['Authorization'] = token
   const results = await axios.get(url)
@@ -53,12 +48,12 @@ module.exports.writeWarning = async (request, reply) => {
     viewOptions.warningTypes = filterWarningTypes(student.contactTeacher)
     viewOptions.skjemaUtfyllingStart = new Date().getTime()
 
-    logger.info('warnings', 'writeWarning', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved')
+    logger('info', ['warnings', 'writeWarning', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
 
     reply.view('warning', viewOptions)
   }
   if (payload.statusKode === 401) {
-    logger.info('warnings', 'writeWarning', 'userId', userId, 'studentUserName', studentUserName, '401')
+    logger('info', ['warnings', 'writeWarning', 'userId', userId, 'studentUserName', studentUserName, '401'])
     reply.redirect('/logout')
   }
 }
@@ -75,7 +70,7 @@ module.exports.generateWarningPreview = (request, reply) => {
   const template = getWarningTemplatesPath(postData.documentCategory)
   let templaterForm = new FormData()
 
-  logger.info('warnings', 'generateWarningPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start')
+  logger('info', ['warnings', 'generateWarningPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
 
   Object.keys(previewData).forEach(key => {
     templaterForm.append(key, previewData[key])
@@ -85,7 +80,7 @@ module.exports.generateWarningPreview = (request, reply) => {
 
   templaterForm.submit(config.PDF_SERVICE_URL, (error, docx) => {
     if (error) {
-      logger.error('warnings', 'generateWarningPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'error', error)
+      logger('error', ['warnings', 'generateWarningPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'error', error])
       reply(error)
     } else {
       let chunks = []
@@ -103,7 +98,7 @@ module.exports.generateWarningPreview = (request, reply) => {
           chunks[i].copy(results, pos)
           pos += chunks[i].length
         }
-        logger.info('warnings', 'generateWarningPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'preview generated')
+        logger('info', ['warnings', 'generateWarningPreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'preview generated'])
         reply(results.toString('base64'))
       })
     }
@@ -131,15 +126,15 @@ module.exports.submitWarning = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
 
-  logger.info('warnings', 'submitWarning', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start')
+  logger('info', ['warnings', 'submitWarning', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
 
   axios.put(url, postData)
     .then(results => {
-      logger.info('warnings', 'submitWarning', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted')
+      logger('info', ['warnings', 'submitWarning', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted'])
       yar.set('warningAdded', true)
       reply.redirect('/')
     }).catch(error => {
-      logger.error('warnings', 'submitWarning', 'userId', data.userId, 'studentUserName', data.studentUserName, error)
+      logger('error', ['warnings', 'submitWarning', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
       yar.set('warningAdded', false)
       reply.redirect('/')
     })

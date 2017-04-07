@@ -1,14 +1,8 @@
 'use strict'
 
-const winston = require('winston')
 const verifySigninJwt = require('../lib/verify-signin-jwt')
 const getContactClasses = require('../lib/get-contact-classes')
-const logger = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)()
-  ]
-})
-const formatLogMessage = require('../lib/format-log-message')
+const logger = require('../lib/logger')
 
 module.exports.doSignIn = async (request, reply) => {
   const token = request.query.jwt
@@ -18,7 +12,7 @@ module.exports.doSignIn = async (request, reply) => {
     const user = await verifySigninJwt(token)
     const myContactClasses = await getContactClasses(user.userId)
 
-    logger.info(formatLogMessage(['auth', 'signin', 'verified', user.userId]))
+    logger('info', ['auth', 'signin', 'verified', user.userId])
 
     request.cookieAuth.set({data: user, token: token})
     yar.set('myContactClasses', Array.isArray(myContactClasses) ? myContactClasses : [])
@@ -29,7 +23,7 @@ module.exports.doSignIn = async (request, reply) => {
       reply.redirect('/')
     }
   } catch (error) {
-    logger.error(formatLogMessage(['auth', error]))
+    logger('error', ['auth', error])
     reply(error)
   }
 }
