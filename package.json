@@ -62,7 +62,7 @@
     "standard": "10.0.1"
   },
   "dependencies": {
-    "axios": "0.16.0",
+    "axios": "0.16.1",
     "form-data": "git+https://github.com/telemark/form-data.git",
     "get-skole-aar": "1.0.0",
     "good": "7.1.0",
