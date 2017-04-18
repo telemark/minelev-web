@@ -12,6 +12,7 @@ const courseCategory = warnings.courses
 const order = warnings.order
 const behaviour = warnings.behaviour
 const warningTypes = warnings.categories
+const samtale = warnings.samtale
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 const logger = require('../lib/logger')
@@ -34,7 +35,7 @@ module.exports.writeWarning = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
 
-  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory})
+  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory, samtale: samtale})
 
   logger('info', ['warnings', 'writeWarning', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 

@@ -44,10 +44,21 @@ function init () {
       location.hash=''
     })
   })
+
+  showMe('fag')
 }
 
 function showMe (type) {
   var thisClass = '.chxBx' + type
+  var checkBoxes = document.querySelectorAll(thisClass)
+  Array.prototype.forEach.call(checkBoxes, function(el) {
+    el.style.display = ''
+  })
+  showFag()
+}
+
+function showFag () {
+  var thisClass = '.chxBxfag'
   var checkBoxes = document.querySelectorAll(thisClass)
   Array.prototype.forEach.call(checkBoxes, function(el) {
     el.style.display = ''

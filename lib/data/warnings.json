@@ -70,6 +70,12 @@
       "value": "Du har brutt skolens ordensreglement"
     }
   ],
+  "samtale": [
+    {
+      "id": "01",
+      "description": "Punkter skal følges opp"
+    }
+  ],
   "categories": [
     {
       "id": "atferd",
@@ -85,6 +91,11 @@
       "id": "orden",
       "description": "Orden",
       "value": "orden"
+    },
+    {
+      "id": "samtale",
+      "description": "Elevsamtale",
+      "value": "samtale"
     }
   ]
 }
