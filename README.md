@@ -6,7 +6,7 @@
 
 web frontend for minelev
 
-See [examples](examples)
+See [examples](docs/examples)
 
 ## Docker
 
@@ -17,14 +17,14 @@ Be sure to get the time on the server right!
 
 ### 1. with-docker-datacenter
 
-See [this example](examples/with-docker-datacenter)
+See [this example](docs/examples/with-docker-datacenter)
 
 Set DNS for the minelev_micro_auth_ldap and the minelev_webserver services.
 These are the only services that needs to be exposed to the internet.
 
 ### 2. with-nginx-proxy
 
-See [this example](examples/with-nginx-proxy)
+See [this example](docs/examples/with-nginx-proxy)
 
 You need to set DNS pointers to use this example:
 
@@ -50,7 +50,7 @@ Login with username: `gauss` password: `password`
 
 ### 3. with-links (ready to go, if you just want to try)
 
-See [this example](examples/with-links)
+See [this example](docs/examples/with-links)
 
 ```bash
 $ docker-compose up -d
