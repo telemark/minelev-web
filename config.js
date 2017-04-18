@@ -12,7 +12,7 @@ module.exports = {
   LOGS_SERVICE_URL: process.env.LOGS_SERVICE_URL || 'https://logs.demo.minelev.t-fk.win',
   PDF_SERVICE_URL: process.env.PDF_SERVICE_URL || 'https://pdf.minelev.t-fk.win',
   QUEUE_SERVICE_URL: process.env.QUEUE_SERVICE_URL || 'https://logs.demo.minelev.t-fk.win/logs',
-  PAPERTRAIL_HOSTNAME: process.env.PAPERTRAIL_HOSTNAME || 'minelev-leder',
+  PAPERTRAIL_HOSTNAME: process.env.PAPERTRAIL_HOSTNAME || 'minelev-dev',
   PAPERTRAIL_HOST: process.env.PAPERTRAIL_HOST || 'logs.papertrailapp.com',
   PAPERTRAIL_PORT: process.env.PAPERTRAIL_PORT || 12345
 }
