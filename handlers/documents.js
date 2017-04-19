@@ -135,8 +135,8 @@ module.exports.submit = async (request, reply) => {
       yar.set('warningAdded', true)
       reply.redirect('/')
     }).catch(error => {
-    logger('error', ['documents', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
-    yar.set('warningAdded', false)
-    reply.redirect('/')
-  })
+      logger('error', ['documents', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
+      yar.set('warningAdded', false)
+      reply.redirect('/')
+    })
 }
