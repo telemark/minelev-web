@@ -96,22 +96,22 @@
   "categories": [
     {
       "id": "atferd",
-      "description": "Atferd",
+      "description": "Varselbrev atferd",
       "value": "atferd"
     },
     {
       "id": "fag",
-      "description": "Fag",
+      "description": "Varselbrev fag",
       "value": "fag"
     },
     {
       "id": "orden",
-      "description": "Orden",
+      "description": "Varselbrev orden",
       "value": "orden"
     },
     {
       "id": "samtale",
-      "description": "Elevsamtale",
+      "description": "Dokumentasjon elevsamtale",
       "value": "samtale"
     }
   ]

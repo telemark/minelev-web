@@ -1,7 +1,7 @@
 'use strict'
 
 function init () {
-  var radios = document.querySelectorAll('.warning-type-selector')
+  var radios = document.querySelectorAll('.document-type-selector')
   var periods = document.querySelectorAll('.period-selector')
   var checkboxes = document.querySelectorAll('.mdl-checkbox')
   var previewButton = document.getElementById('previewWarning')
@@ -11,11 +11,13 @@ function init () {
   hideAllCheckboxes()
   hideAllHeaders()
   validateWarning()
+  hideMe('warningPeriod')
   Array.prototype.forEach.call(radios, function(el) {
     el.addEventListener('click', function (e) {
       hideAllCheckboxes()
       hideAllHeaders()
       showMe(e.target.value)
+      showWarningPeriods()
       validateWarning()
     })
     if (el.checked) {
@@ -31,6 +33,7 @@ function init () {
     el.addEventListener('click', function (e) {
       validateWarning()
     })
+
   })
 
   previewButton.addEventListener('click', function (e) {
@@ -55,7 +58,7 @@ function init () {
 }
 
 function preselectFag () {
-  var radios = document.querySelectorAll('.warning-type-selector')
+  var radios = document.querySelectorAll('.document-type-selector')
   var courses = document.querySelectorAll('.chxBxfagInput')
   if (radios.length === 1) {
     radios[0].checked = true
@@ -74,6 +77,29 @@ function showMe (type) {
   })
 }
 
+function hideMe (type) {
+  var thisClass = '.chxBx' + type
+  var checkBoxes = document.querySelectorAll(thisClass)
+  Array.prototype.forEach.call(checkBoxes, function(el) {
+    el.style.display = 'none'
+  })
+}
+
+function showWarningPeriods () {
+  var radios = document.querySelectorAll('.document-type-selector')
+  var type = false
+  Array.prototype.forEach.call(radios, function(el) {
+    if (el.checked) {
+      type = el.value
+    }
+  })
+  if (type !== 'samtale') {
+    showMe('warningPeriod')
+  } else {
+    hideMe('warningPeriod')
+  }
+}
+
 function hideAllCheckboxes () {
   var checkBoxes = document.querySelectorAll('.mdl-checkbox')
   Array.prototype.forEach.call(checkBoxes, function(el) {
@@ -82,7 +108,7 @@ function hideAllCheckboxes () {
 }
 
 function hideAllHeaders () {
-  var headers = document.querySelectorAll('.warning-form-header')
+  var headers = document.querySelectorAll('.document-form-header')
   Array.prototype.forEach.call(headers, function(el) {
     el.style.display = 'none'
   })
@@ -91,7 +117,7 @@ function hideAllHeaders () {
 function validateWarning () {
   var submitButton = document.getElementById('submitWarning')
   var previewButton = document.getElementById('previewWarning')
-  var warningTypes = document.querySelectorAll('.warning-type-selector')
+  var documentTypes = document.querySelectorAll('.document-type-selector')
   var periods = document.querySelectorAll('.period-selector')
   var checkBoxes = document.querySelectorAll('.mdl-checkbox__input')
   var arsakCourse = document.querySelectorAll('.course-category-selector')
@@ -106,7 +132,7 @@ function validateWarning () {
   submitButton.disabled = true
   previewButton.disabled = true
 
-  Array.prototype.forEach.call(warningTypes, function(el) {
+  Array.prototype.forEach.call(documentTypes, function(el) {
     if (el.checked) {
       type = el.value
       typeOK = true

@@ -16,6 +16,7 @@ const samtale = documents.samtale
 const warningPeriods = documents.period
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
+const datePadding = require('../lib/date-padding')
 const logger = require('../lib/logger')
 
 function filterDocumentTypes (contactTeacher) {
@@ -36,7 +37,7 @@ module.exports.write = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
 
-  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory, samtale: samtale, documentTypes: documentTypes, waningPeriods: warningPeriods})
+  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory, samtale: samtale, documentTypes: documentTypes, warningPeriods: warningPeriods})
 
   logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
@@ -46,9 +47,11 @@ module.exports.write = async (request, reply) => {
 
   if (!payload.statusKode) {
     const student = payload[0]
+    const today = new Date()
     viewOptions.student = student
     viewOptions.warningTypes = filterDocumentTypes(student.contactTeacher)
-    viewOptions.skjemaUtfyllingStart = new Date().getTime()
+    viewOptions.skjemaUtfyllingStart = today.getTime()
+    viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
 
     logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
 

@@ -1,7 +1,7 @@
-<div class="mdl-typography--headline margin-top-10">Varselet gjelder</div>
-{{each warningPeriods}}
-<label for="terminRadioCourse{{id}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
-    <input type="radio" name="warningPeriod" value="{{value}}" id="terminRadioCourse{{id}}" class="mdl-radio__button period-selector">
-    <span class="mdl-radio__label">{{description}}</span>
+<div class="mdl-typography--headline document-form-header chxBxwarningPeriod margin-top-10">Varselet gjelder</div>
+{{#each warningPeriods}}
+<label for="terminRadioCourse{{id}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxwarningPeriod">
+    <input type="radio" name="warningPeriod" value="{{value}}" id="terminRadioCourse{{id}}" class="mdl-radio__button period-selector chxBxwarningPeriod">
+    <span class="mdl-radio__label chxBxwarningPeriod">{{description}}</span>
 </label><br/>
 {{/each}}
