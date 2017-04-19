@@ -8,8 +8,7 @@ const logger = require('../lib/logger')
 
 module.exports.getFrontpage = async (request, reply) => {
   const yar = request.yar
-  const warningAdded = yar.get('warningAdded')
-  const followupAdded = yar.get('followupAdded')
+  const documentAdded = yar.get('documentAdded')
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
   const url = `${config.LOGS_SERVICE_URL}/logs/search`
@@ -24,10 +23,9 @@ module.exports.getFrontpage = async (request, reply) => {
     logger('info', ['index', 'getFrontpage', 'userId', userId, 'contact teacher', classIds.join(', ')])
   }
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, latestIdWarnings: warningAdded ? 'Ok' : '', latestIdFollowups: followupAdded ? 'Ok' : '' })
+  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, latestIdDocument: documentAdded ? 'Ok' : ''})
 
-  yar.set('warningAdded', false)
-  yar.set('followupAdded', false)
+  yar.set('documentAdded', false)
 
   axios.defaults.headers.common['Authorization'] = token
   axios.post(url, mongoQuery).then(results => {
@@ -125,6 +123,6 @@ module.exports.doSearch = async (request, reply) => {
   }
   if (payload.statusKode === 401) {
     logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, '401'])
-    reply.redirect('/logout')
+    reply.redirect('/signout')
   }
 }

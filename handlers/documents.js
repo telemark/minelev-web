@@ -13,6 +13,7 @@ const order = documents.order
 const behaviour = documents.behaviour
 const documentTypes = documents.categories
 const samtale = documents.samtale
+const warningPeriods = documents.period
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 const logger = require('../lib/logger')
@@ -35,7 +36,7 @@ module.exports.write = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
 
-  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory, samtale: samtale})
+  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory, samtale: samtale, documentTypes: documentTypes, waningPeriods: warningPeriods})
 
   logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
@@ -51,11 +52,11 @@ module.exports.write = async (request, reply) => {
 
     logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
 
-    reply.view('warning', viewOptions)
+    reply.view('document', viewOptions)
   }
   if (payload.statusKode === 401) {
     logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, '401'])
-    reply.redirect('/logout')
+    reply.redirect('/signout')
   }
 }
 
@@ -132,11 +133,11 @@ module.exports.submit = async (request, reply) => {
   axios.put(url, postData)
     .then(results => {
       logger('info', ['documents', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted'])
-      yar.set('warningAdded', true)
+      yar.set('documentAdded', true)
       reply.redirect('/')
     }).catch(error => {
       logger('error', ['documents', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
-      yar.set('warningAdded', false)
+      yar.set('documentAdded', false)
       reply.redirect('/')
     })
 }

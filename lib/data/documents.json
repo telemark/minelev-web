@@ -76,6 +76,23 @@
       "description": "Punkter skal følges opp"
     }
   ],
+  "period": [
+    {
+      "id": "01",
+      "description": "Halvårsvurdering 1. termin",
+      "value": "Halvårsvurdering 1. termin"
+    },
+    {
+      "id": "02",
+      "description": "Halvårsvurdering 2. termin",
+      "value": "Halvårsvurdering 2. termin"
+    },
+    {
+      "id": "03",
+      "description": "Standpunktkarakter",
+      "value": "Standpunktkarakter"
+    }
+  ],
   "categories": [
     {
       "id": "atferd",

@@ -44,6 +44,6 @@ module.exports.listStudentsInClass = async (request, reply) => {
   }
   if (payload.statusKode === 401) {
     logger('info', ['classes', 'listStudentsInClass', 'userId', userId, '401'])
-    reply.redirect('/logout')
+    reply.redirect('/signout')
   }
 }

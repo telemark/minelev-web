@@ -8,8 +8,7 @@
             <th class="mdl-data-table__cell--non-numeric">Status</th>
             <th class="mdl-data-table__cell--non-numeric">Dato</th>
             <th class="mdl-data-table__cell--non-numeric">Sendt av</th>
-            <th class="mdl-data-table__cell--non-numeric">Varsel</th>
-            <th class="mdl-data-table__cell--non-numeric">Samtale</th>
+            <th class="mdl-data-table__cell--non-numeric">Dokument</th>
         </tr>
         </thead>
         <tbody>
@@ -23,16 +22,11 @@
             <td class="mdl-data-table__cell--non-numeric">{{studentName}}</td>
             <td class="mdl-data-table__cell--non-numeric">{{documentCategory}}</td>
             <td class="mdl-data-table__cell--non-numeric">{{latestDocumentStatus documentStatus}}</td>
-            <td class="mdl-data-table__cell--non-numeric"><a href="/logs?documentId={{_id}}" title="Vis varselet">{{latestDocumentStatusTimestamp documentStatus}}</a></td>
+            <td class="mdl-data-table__cell--non-numeric"><a href="/logs?documentId={{_id}}" title="Vis dokument">{{latestDocumentStatusTimestamp documentStatus}}</a></td>
             <td class="mdl-data-table__cell--non-numeric">{{userName}}</td>
             <td class="mdl-data-table__cell--non-numeric">
-                <a href="/warning/{{studentUserName}}" title="Skriv nytt varsel til {{studentName}}" class="mdl-color-text--black">
+                <a href="/document/{{studentUserName}}" title="Skriv nytt dokument for {{studentName}}" class="mdl-color-text--black">
                     <span class="material-icons">note_add</span>
-                </a>
-            </td>
-            <td class="mdl-data-table__cell--non-numeric">
-                <a href="/followup/{{studentUserName}}" title="Dokumenter ny samtale med {{studentName}}" class="mdl-color-text--black">
-                    <span class="material-icons">group_add</span>
                 </a>
             </td>
         </tr>
