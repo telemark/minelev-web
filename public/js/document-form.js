@@ -174,6 +174,12 @@ function validateWarning () {
     courseOK = true
   }
 
+  if (type === 'samtale') {
+    reasonOK = true
+    courseOK = true
+    periodOK = true
+  }
+
   // If everything is OK let's go :-)
   if (typeOK && periodOK && courseOK && reasonOK) {
     submitButton.disabled = false
