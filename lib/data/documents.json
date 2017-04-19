@@ -73,7 +73,8 @@
   "samtale": [
     {
       "id": "01",
-      "description": "Punkter skal følges opp"
+      "description": "Punkter skal følges opp",
+      "value": "Punkter skal følges opp"
     }
   ],
   "period": [
