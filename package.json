@@ -73,7 +73,7 @@
     "hapi-auth-cookie": "7.0.0",
     "hapi-auth-jwt2": "7.2.4",
     "inert": "4.2.0",
-    "jsonwebtoken": "7.3.0",
+    "jsonwebtoken": "7.4.0",
     "simple-encryptor": "1.1.0",
     "tfk-saksbehandling-minelev-templates": "1.1.1",
     "tfk-saksbehandling-schools-info": "2.0.12",
