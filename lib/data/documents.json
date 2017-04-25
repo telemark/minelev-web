@@ -73,6 +73,11 @@
   "samtale": [
     {
       "id": "01",
+      "description": "Eleven ønsker ikke samtale",
+      "value": "Eleven ønsker ikke samtale"
+    },
+    {
+      "id": "02",
       "description": "Punkter skal følges opp",
       "value": "Punkter skal følges opp"
     }
