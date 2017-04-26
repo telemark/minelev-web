@@ -17,6 +17,7 @@ const warningPeriods = documents.period
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 const datePadding = require('../lib/date-padding')
+const getTemplateType = require('../lib/get-template-type')
 const logger = require('../lib/logger')
 
 function filterDocumentTypes (contactTeacher) {
@@ -72,7 +73,7 @@ module.exports.generatePreview = (request, reply) => {
   data.userAgent = request.headers['user-agent']
   const postData = prepareDocument(data)
   const previewData = prepareDocumentPreview(postData)
-  const template = getDocumentTemplatesPath(postData.documentCategory)
+  const template = getDocumentTemplatesPath(getTemplateType(postData))
   let templaterForm = new FormData()
 
   logger('info', ['documents', 'generatePreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])

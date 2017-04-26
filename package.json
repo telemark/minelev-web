@@ -1,6 +1,6 @@
 {
   "name": "minelev-web",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "web frontend for MinElev",
   "license": "MIT",
   "private": true,
@@ -50,7 +50,7 @@
   "homepage": "https://github.com/telemark/minelev-web",
   "now": {
     "alias": [
-      "web.minelev.t-fk.win"
+      "www.minelev.no"
     ],
     "type": "npm"
   },
