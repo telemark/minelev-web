@@ -7,7 +7,7 @@ module.exports = {
   ENCRYPTOR_SECRET: process.env.ENCRYPTOR_SECRET || 'Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go',
   JWT_SECRET: process.env.JWT_SECRET || 'Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go',
   YAR_SECRET: process.env.YAR_SECRET || 'Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go',
-  AUTH_SERVICE_URL: process.env.AUTH_SERVICE_URL || 'https://auth.demo.t-fk.win/login',
+  AUTH_SERVICE_URL: process.env.AUTH_SERVICE_URL || 'https://feide-mock.service.t-fk.no',
   BUDDY_SERVICE_URL: process.env.BUDDY_SERVICE_URL || 'https://buddy.demo.minelev.t-fk.win',
   LOGS_SERVICE_URL: process.env.LOGS_SERVICE_URL || 'https://logs.demo.minelev.t-fk.win',
   PDF_SERVICE_URL: process.env.PDF_SERVICE_URL || 'https://pdf.minelev.t-fk.win',

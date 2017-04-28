@@ -1,5 +1,6 @@
 'use strict'
 
+const config = require('../config')
 const verifySigninJwt = require('../lib/verify-signin-jwt')
 const getContactClasses = require('../lib/get-contact-classes')
 const logger = require('../lib/logger')
@@ -29,6 +30,9 @@ module.exports.doSignIn = async (request, reply) => {
 }
 
 module.exports.doSignOut = (request, reply) => {
+  const yar = request.yar
+  const userId = request.auth.credentials.data.userId
+  logger('info', ['auth', 'doSignOut', userId])
   request.cookieAuth.clear()
-  reply.redirect('/')
+  reply.redirect(`${config.AUTH_SERVICE_URL}/logout`)
 }
