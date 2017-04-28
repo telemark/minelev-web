@@ -13,7 +13,7 @@ module.exports.doSignIn = async (request, reply) => {
     const user = await verifySigninJwt(token)
     const myContactClasses = await getContactClasses(user.userId)
 
-    logger('info', ['auth', 'signin', 'verified', user.userId])
+    logger('info', ['auth', 'doSignIn', 'verified', user.userId])
 
     request.cookieAuth.set({data: user, token: token})
     yar.set('myContactClasses', Array.isArray(myContactClasses) ? myContactClasses : [])
@@ -24,13 +24,12 @@ module.exports.doSignIn = async (request, reply) => {
       reply.redirect('/')
     }
   } catch (error) {
-    logger('error', ['auth', error])
+    logger('error', ['auth', 'doSignIn', error])
     reply(error)
   }
 }
 
 module.exports.doSignOut = (request, reply) => {
-  const yar = request.yar
   const userId = request.auth.credentials.data.userId
   logger('info', ['auth', 'doSignOut', userId])
   request.cookieAuth.clear()
