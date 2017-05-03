@@ -75,11 +75,6 @@
       "id": "01",
       "description": "Eleven ønsker ikke samtale",
       "value": "Eleven ønsker ikke samtale"
-    },
-    {
-      "id": "02",
-      "description": "Punkter skal følges opp",
-      "value": "Punkter skal følges opp"
     }
   ],
   "period": [
@@ -102,22 +97,22 @@
   "categories": [
     {
       "id": "atferd",
-      "description": "Varselbrev atferd",
+      "description": "Varsel atferd",
       "value": "atferd"
     },
     {
       "id": "fag",
-      "description": "Varselbrev fag",
+      "description": "Varsel fag",
       "value": "fag"
     },
     {
       "id": "orden",
-      "description": "Varselbrev orden",
+      "description": "Varsel orden",
       "value": "orden"
     },
     {
       "id": "samtale",
-      "description": "Dokumentasjon elevsamtale",
+      "description": "Elevsamtale",
       "value": "samtale"
     }
   ]
