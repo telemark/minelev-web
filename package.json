@@ -1,6 +1,6 @@
 {
   "name": "minelev-web",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "web frontend for MinElev",
   "license": "MIT",
   "private": true,
@@ -11,7 +11,7 @@
   },
   "main": "index.js",
   "engines": {
-    "node": ">=7.9.0"
+    "node": ">=7.10.0"
   },
   "scripts": {
     "test": "standard && nsp check && ava",
@@ -75,7 +75,7 @@
     "inert": "4.2.0",
     "jsonwebtoken": "7.4.0",
     "simple-encryptor": "1.1.0",
-    "tfk-saksbehandling-minelev-templates": "1.2.5",
+    "tfk-saksbehandling-minelev-templates": "1.2.6",
     "tfk-saksbehandling-schools-info": "2.0.12",
     "vision": "4.1.1",
     "winston": "2.3.1",
