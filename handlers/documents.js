@@ -37,18 +37,25 @@ module.exports.write = async (request, reply) => {
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
+  const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
 
   let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory, samtale: samtale, documentTypes: documentTypes, warningPeriods: warningPeriods})
 
   logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
   axios.defaults.headers.common['Authorization'] = token
-  const results = await axios.get(url)
+  // Retrieves student and students contactTeachers
+  const [results, contactTeachersResult] = await Promise.all([axios.get(url), axios.get(urlContactTeachers)])
   const payload = results.data
+  const contactTeachers = contactTeachersResult.data
+  const mainGroupName = contactTeachers[0].groupId
+
+  logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'mainGroupName', mainGroupName])
 
   if (!payload.statusKode) {
-    const student = payload[0]
+    let student = payload[0]
     const today = new Date()
+    student.mainGroupName = mainGroupName
     viewOptions.student = student
     viewOptions.warningTypes = filterDocumentTypes(student.contactTeacher)
     viewOptions.skjemaUtfyllingStart = today.getTime()
