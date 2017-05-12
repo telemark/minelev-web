@@ -51,7 +51,7 @@ module.exports.getLogspage = async (request, reply) => {
   logger('info', ['index', 'getLogspage', 'userId', userId, 'start'])
 
   if (request.query.studentId) {
-    logger.info('index', 'getLogspage', 'userId', userId, 'studentId', request.query.studentId)
+    logger('info', ['index', 'getLogspage', 'userId', userId, 'studentId', request.query.studentId])
     mongoQuery.studentId = request.query.studentId
   } else {
     if (myContactClasses.length > 0) {
