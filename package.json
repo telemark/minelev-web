@@ -79,7 +79,7 @@
     "tfk-saksbehandling-schools-info": "2.0.12",
     "vision": "4.1.1",
     "winston": "2.3.1",
-    "winston-papertrail": "1.0.5",
+    "winston-papertrail": "1.0.4",
     "yar": "8.1.2"
   }
 }
