@@ -73,6 +73,11 @@
   "samtale": [
     {
       "id": "01",
+      "description": "Elevsamtalen er gjennomført",
+      "value": "Elevsamtalen er gjennomført"
+    },
+    {
+      "id": "02",
       "description": "Eleven ønsker ikke samtale",
       "value": "Eleven ønsker ikke samtale"
     }

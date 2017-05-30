@@ -1,7 +1,44 @@
-<div class="mdl-typography--headline document-form-header chxBxsamtale margin-top-10">Ønsker ikke samtale</div>
+<div class="mdl-typography--headline document-form-header chxBxsamtale margin-top-10">Momenter til elevsamtale</div>
+<div class="document-form-header chxBxsamtale">
+    (Områder vi tenker det kan være naturlig å samtale om)
+    <div class="mdl-typography--headline document-form-header margin-top-10">Skolehistorie</div>
+    <ul>
+        <li>Hvilken skole/skoler har du vært elev ved?</li>
+        <li>Hvorfor har du valgt dette utdanningsprogrammet?</li>
+    </ul>
+    <div class="mdl-typography--headline document-form-header margin-top-10">Fag</div>
+    <ul>
+        <li>Hvilke fag syns du at du gjør det godt i?</li>
+        <li>Hvilke fag ønsker du å gjøre det bedre i, og hva er spesielt vanskelig i dette eller disse fagene?</li>
+        <li>Hva tror du at du selv kan gjøre for å oppnå bedre resultat?</li>
+        <li>Hva kan skolen og lærerne gjøre for at du skal lykkes?</li>
+    </ul>
+    <div class="mdl-typography--headline document-form-header margin-top-10">Tilretteleggingsbehov i fag</div>
+    <ul>
+        <li>Har du hatt noen tilrettelegging tidligere?</li>
+    </ul>
+    <div class="mdl-typography--headline document-form-header margin-top-10">Annen tilrettelegging?</div>
+    <ul>
+        <li>Ift helsebehov?</li>
+        <li>Samtale med helsesøster/rådgiver/PPT</li>
+    </ul>
+    <div class="mdl-typography--headline document-form-header margin-top-10">Fravær, orden og atferd</div>
+    <ul>
+        <li>På hvilken måte holder du kontroll over ditt eget fravær?</li>
+        <li>På hvilken måte informerer du lærerne dine når du vet at du blir borte fra skolen?</li>
+        <li>Vurder din egen orden og atferd</li>
+    </ul>
+    <div class="mdl-typography--headline document-form-header margin-top-10">Eventuelt</div>
+    <ul>
+        <li>Er det noe jeg som kontaktlærer bør vite som er av betydning for skolegangen din?</li>
+    </ul>
+</div>
+<div class="mdl-typography--headline document-form-header chxBxsamtale margin-top-10">Dokumentasjon</div>
+<div class="document-form-header chxBxsamtale">
 {{#each samtale}}
-<label for="samtaleChkbox{{id}}" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect chxBxsamtale">
-    <input type="checkbox" name="samtaleCategories" value="{{value}}" id="samtaleChkbox{{id}}" class="mdl-checkbox__input">
-    <span class="mdl-checkbox__label">{{description}}</span>
+<label for="samtaleChkbox{{id}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxsamtale">
+    <input type="radio" name="samtaleCategories" value="{{value}}" id="samtaleChkbox{{id}}" class="mdl-radio__button chxBxsamtale">
+    <span class="mdl-radio__label">{{description}}</span>
 </label>
 {{/each}}
+</div>
