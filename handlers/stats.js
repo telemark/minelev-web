@@ -13,8 +13,8 @@ module.exports.getStats = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const urlTotalVarsel = `${config.LOGS_SERVICE_URL}/stats/total/varsel`
   const urlTotalSamtale = `${config.LOGS_SERVICE_URL}/stats/total/samtale`
-  const urlSchoolsVarsel = `${config.LOGS_SERVICE_URL}/stats/schoolsVarsel`
-  const urlSchoolsSamtale = `${config.LOGS_SERVICE_URL}/stats/schoolsSamtale`
+  const urlSchoolsVarsel = `${config.LOGS_SERVICE_URL}/stats/schools/varsel`
+  const urlSchoolsSamtale = `${config.LOGS_SERVICE_URL}/stats/schools/samtale`
   const urlCategories = `${config.LOGS_SERVICE_URL}/stats/categories`
   const myContactClasses = yar.get('myContactClasses') || []
 
