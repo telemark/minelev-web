@@ -11,8 +11,10 @@ module.exports.getStats = async (request, reply) => {
   const yar = request.yar
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
-  const urlTotal = `${config.LOGS_SERVICE_URL}/stats/total`
-  const urlSchools = `${config.LOGS_SERVICE_URL}/stats/schools`
+  const urlTotalVarsel = `${config.LOGS_SERVICE_URL}/stats/total/varsel`
+  const urlTotalSamtale = `${config.LOGS_SERVICE_URL}/stats/total/samtale`
+  const urlSchoolsVarsel = `${config.LOGS_SERVICE_URL}/stats/schoolsVarsel`
+  const urlSchoolsSamtale = `${config.LOGS_SERVICE_URL}/stats/schoolsSamtale`
   const urlCategories = `${config.LOGS_SERVICE_URL}/stats/categories`
   const myContactClasses = yar.get('myContactClasses') || []
 
@@ -20,9 +22,9 @@ module.exports.getStats = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
 
-  const [total, schools, categories] = await Promise.all([axios.get(urlTotal), axios.get(urlSchools), axios.get(urlCategories)])
+  const [totalVarsel, totalSamtale, schoolsVarsel, schoolsSamtale, categories] = await Promise.all([axios.get(urlTotalVarsel), axios.get(urlTotalSamtale), axios.get(urlSchoolsVarsel), axios.get(urlSchoolsSamtale), axios.get(urlCategories)])
 
-  const stats = repackStats({total: total.data, schools: schools.data, categories: categories.data})
+  const stats = repackStats({totalVarsel: totalVarsel.data, totalSamtale: totalSamtale.data, schoolsVarsel: schoolsVarsel.data, schoolsSamtale: schoolsSamtale.data, categories: categories.data})
 
   const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, stats: stats })
 
