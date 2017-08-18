@@ -3,11 +3,13 @@
 function init () {
   var radios = document.querySelectorAll('.document-type-selector')
   var periods = document.querySelectorAll('.period-selector')
+  var samtaler = document.querySelectorAll('.samtaleSelector')
   var checkboxes = document.querySelectorAll('.mdl-checkbox')
   var previewButton = document.getElementById('previewWarning')
   var closePreviewButtons = document.querySelectorAll('.closePreviewButton')
   var modalPreview = document.getElementById('modalPreview')
   var warningCard = document.getElementById('warningCard')
+
   hideAllCheckboxes()
   hideAllHeaders()
   validateWarning()
@@ -30,6 +32,12 @@ function init () {
     })
   })
   Array.prototype.forEach.call(periods, function(el) {
+    el.addEventListener('click', function (e) {
+      validateWarning()
+    })
+
+  })
+  Array.prototype.forEach.call(samtaler, function(el) {
     el.addEventListener('click', function (e) {
       validateWarning()
     })
@@ -121,7 +129,7 @@ function validateWarning () {
   var periods = document.querySelectorAll('.period-selector')
   var checkBoxes = document.querySelectorAll('.mdl-checkbox__input')
   var arsakCourse = document.querySelectorAll('.course-category-selector')
-  var samtaler = document.querySelectorAll('.samtale-selector')
+  var samtaler = document.querySelectorAll('.samtaleSelector')
   var checkboxCount = 0
   var type = false
   var typeOK = false
