@@ -121,12 +121,14 @@ function validateWarning () {
   var periods = document.querySelectorAll('.period-selector')
   var checkBoxes = document.querySelectorAll('.mdl-checkbox__input')
   var arsakCourse = document.querySelectorAll('.course-category-selector')
+  var samtaler = document.querySelectorAll('.samtale-selector')
   var checkboxCount = 0
   var type = false
   var typeOK = false
   var periodOK = false
   var courseOK = false
   var reasonOK = false
+  var samtaleOK = false
 
   // Starts by disabling button
   submitButton.disabled = true
@@ -178,10 +180,17 @@ function validateWarning () {
     reasonOK = true
     courseOK = true
     periodOK = true
+    Array.prototype.forEach.call(samtaler, function(el) {
+      if (el.checked) {
+        samtaleOK = true
+      }
+    })
+  } else {
+    samtaleOK = true
   }
 
   // If everything is OK let's go :-)
-  if (typeOK && periodOK && courseOK && reasonOK) {
+  if (typeOK && periodOK && courseOK && reasonOK && samtaleOK) {
     submitButton.disabled = false
     previewButton.disabled = false
   }
