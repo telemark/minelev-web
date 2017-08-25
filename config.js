@@ -10,6 +10,7 @@ module.exports = {
   AUTH_SERVICE_URL: process.env.AUTH_SERVICE_URL || 'https://feide.tjeneste.win',
   BUDDY_SERVICE_URL: process.env.BUDDY_SERVICE_URL || 'https://buddy.minelev.win',
   LOGS_SERVICE_URL: process.env.LOGS_SERVICE_URL || 'https://logs.minelev.win',
+  STATS_SERVICE_URL: process.env.STATS_SERVICE_URL || 'https://logs.minelev.win',
   PDF_SERVICE_URL: process.env.PDF_SERVICE_URL || 'https://pdf.minelev.win',
   QUEUE_SERVICE_URL: process.env.QUEUE_SERVICE_URL || 'https://logs.minelev.win/logs',
   PAPERTRAIL_HOSTNAME: process.env.PAPERTRAIL_HOSTNAME || 'minelev-dev',
