@@ -38,6 +38,7 @@ module.exports.write = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
+  let mainGroupName = false
 
   let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory, samtale: samtale, documentTypes: documentTypes, warningPeriods: warningPeriods})
 
@@ -48,10 +49,12 @@ module.exports.write = async (request, reply) => {
   const [results, contactTeachersResult] = await Promise.all([axios.get(url), axios.get(urlContactTeachers)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
-  const mainGroupName = contactTeachers[0].groupId
-
-  logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'mainGroupName', mainGroupName])
-
+  if (contactTeachers.length > 0) {
+    mainGroupName = contactTeachers[0].groupId
+    logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'mainGroupName', mainGroupName])
+  } else {
+    logger('error', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
+  }
   if (!payload.statusKode) {
     let student = payload[0]
     const today = new Date()
@@ -62,8 +65,11 @@ module.exports.write = async (request, reply) => {
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
 
     logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
-
-    reply.view('document', viewOptions)
+    if (mainGroupName !== false) {
+      reply.view('document', viewOptions)
+    } else {
+      reply.view('error-missing-contact-teacher', viewOptions)
+    }
   }
   if (payload.statusKode === 401) {
     logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, '401'])
