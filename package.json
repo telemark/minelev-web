@@ -1,6 +1,6 @@
 {
   "name": "minelev-web",
-  "version": "1.6.9",
+  "version": "1.6.10",
   "description": "web frontend for MinElev",
   "license": "MIT",
   "private": true,
@@ -58,7 +58,7 @@
     "ava": "0.22.0",
     "coveralls": "2.13.1",
     "nsp": "2.8.0",
-    "nyc": "11.2.1",
+    "nyc": "11.1.0",
     "standard": "10.0.3"
   },
   "dependencies": {
