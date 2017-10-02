@@ -1,6 +1,6 @@
 {
   "name": "minelev-web",
-  "version": "1.6.10",
+  "version": "1.6.11",
   "description": "web frontend for MinElev",
   "license": "MIT",
   "private": true,
@@ -11,7 +11,7 @@
   },
   "main": "index.js",
   "engines": {
-    "node": ">=8.4.0"
+    "node": ">=8.6.0"
   },
   "scripts": {
     "test": "standard && nsp check && ava",
@@ -19,7 +19,7 @@
     "coverage": "nyc ava",
     "coveralls": "nyc ava && nyc report --reporter=lcov && cat coverage/lcov.info | coveralls",
     "standard-fix": "standard --fix",
-    "now-deploy": "npm test && now --npm -E production.env && now alias",
+    "now-deploy": "npm test && now --npm && now alias",
     "start": "node standalone.js",
     "dev": "NODE_ENV=development node standalone.js"
   },
@@ -52,18 +52,19 @@
     "alias": [
       "www.minelev.no"
     ],
-    "type": "npm"
+    "type": "npm",
+    "dotenv": "production.env"
   },
   "devDependencies": {
     "ava": "0.22.0",
     "coveralls": "3.0.0",
     "nsp": "2.8.1",
-    "nyc": "11.1.0",
+    "nyc": "^11.2.1",
     "standard": "10.0.3"
   },
   "dependencies": {
     "axios": "0.16.2",
-    "form-data": "git+https://github.com/telemark/form-data.git",
+    "form-data": "2.3.1",
     "get-skole-aar": "1.0.0",
     "good": "7.3.0",
     "good-console": "6.4.0",
@@ -72,7 +73,7 @@
     "hapi": "16.6.2",
     "hapi-auth-cookie": "7.0.0",
     "hapi-auth-jwt2": "7.3.0",
-    "inert": "5.0.0-rc1",
+    "inert": "4.2.1",
     "jsonwebtoken": "8.0.1",
     "simple-encryptor": "1.1.0",
     "tfk-saksbehandling-minelev-templates": "1.4.10",
