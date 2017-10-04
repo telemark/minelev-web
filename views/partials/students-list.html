@@ -6,7 +6,7 @@
             <th class="mdl-data-table__cell--non-numeric">Elev</th>
             <th class="mdl-data-table__cell--non-numeric">Klasse</th>
             <th class="mdl-data-table__cell--non-numeric">Ny</th>
-            <th class="mdl-data-table__cell--non-numeric {{showMe features.useYFF}}">YFF</th>
+            <th class="mdl-data-table__cell--non-numeric {{featureToggle features.useYFF}}">YFF</th>
         </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@
                     <i class="material-icons">note_add</i>
                 </a>
             </td>
-            <td class="mdl-data-table__cell--non-numeric {{showMe ../features.useYFF}}">
+            <td class="mdl-data-table__cell--non-numeric {{featureToggle ../features.useYFF}}">
                 <a href="/yff/{{userName}}" title="YFF for {{fullName}} {{birthdateFromId personalIdNumber}}" class="mdl-color-text--black">
                     <i class="material-icons">playlist_add</i>
                 </a>

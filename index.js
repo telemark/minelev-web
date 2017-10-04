@@ -7,6 +7,7 @@ const classes = require('./routes/classes')
 const reports = require('./routes/reports')
 const documents = require('./routes/documents')
 const systems = require('./routes/systems')
+const yff = require('./routes/yff')
 
 exports.register = (server, options, next) => {
   server.route(routes)
@@ -16,6 +17,7 @@ exports.register = (server, options, next) => {
   server.route(reports)
   server.route(documents)
   server.route(systems)
+  server.route(yff)
   next()
 }
 
