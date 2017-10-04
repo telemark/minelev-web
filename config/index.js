@@ -12,6 +12,8 @@ module.exports = {
   LOGS_SERVICE_URL: process.env.LOGS_SERVICE_URL || 'https://logs.minelev.win',
   STATS_SERVICE_URL: process.env.STATS_SERVICE_URL || 'https://logs.minelev.win',
   PDF_SERVICE_URL: process.env.PDF_SERVICE_URL || 'https://pdf.minelev.win',
+  FEATURE_USE_YFF: process.env.FEATURE_USE_YFF,
+  FEATURE_USE_NOTES: process.env.FEATURE_USE_NOTES,
   QUEUE_SERVICE_URL: process.env.QUEUE_SERVICE_URL || 'https://logs.minelev.win/logs',
   PAPERTRAIL_HOSTNAME: process.env.PAPERTRAIL_HOSTNAME || 'minelev-dev',
   PAPERTRAIL_HOST: process.env.PAPERTRAIL_HOST || 'logs.papertrailapp.com',
