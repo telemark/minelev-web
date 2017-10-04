@@ -3,11 +3,16 @@
 function init () {
   var lookupOrganizationButton = document.getElementById('lookupOrganisasjonsnummer')
   var bedriftsWrapper = document.getElementById('bedriftsinfoWrapper')
+  var lookupField = document.getElementById('organisasjonsNummer')
 
   bedriftsWrapper.style.display = 'none'
   lookupOrganizationButton.addEventListener('click', function (e) {
     lookupOrganization()
   })
+
+  setTimeout(function () {
+    lookupField.focus()
+  }, 500)
 }
 
 //MDL Text Input Cleanup
@@ -37,10 +42,16 @@ function setupOrganization (data) {
 function lookupOrganization () {
   var organizationNumberField = document.getElementById('organisasjonsNummer')
   var organizationNumber = organizationNumberField.value
+  var lookupIcon = document.getElementById('searchIcon')
   const url = `https://organisasjonsnummer.service.t-fk.no?organisasjonsnummer=${organizationNumber}`
+  lookupIcon.innerText = 'hourglass_empty'
   axios.get(url)
     .then(result => {
+      lookupIcon.innerText = 'search'
       setupOrganization(result.data)
+    }).catch(error => {
+      console.error(error)
+      lookupIcon.innerText = 'search'
     })
 }
 

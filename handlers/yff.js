@@ -56,7 +56,7 @@ module.exports.frontPage = async (request, reply) => {
   }
 }
 
-module.exports.contract = async (request, reply) => {
+module.exports.information = async (request, reply) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
   const studentUserName = request.params.studentID
@@ -91,7 +91,7 @@ module.exports.contract = async (request, reply) => {
 
     logger('info', ['yff', 'contract', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
-      reply.view('yff-contract', viewOptions)
+      reply.view('yff-information', viewOptions)
     } else {
       reply.view('error-missing-contact-teacher', viewOptions)
     }

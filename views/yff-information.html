@@ -20,14 +20,14 @@
                 <h2 class="mdl-card__title-text">Informasjonsskriv {{student.fullName}}</h2>
             </div>
             <div class="mdl-card__supporting-text mdl-color-text--black">
-                <label class="mdl-button mdl-js-button mdl-button--icon" for="organisasjonsnummer" id="lookupOrganisasjonsnummer">
-                    <i class="material-icons">search</i>
-                </label>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="organisasjonsNummer">
                     <label class="mdl-textfield__label" for="organisasjonsNummer">Bedriftens organisasjonsnummer</label>
                     <span class="mdl-textfield__error">Vennligst bare bruk tall</span>
                 </div>
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="organisasjonsnummer" id="lookupOrganisasjonsnummer">
+                    <i class="material-icons" id="searchIcon">search</i>
+                </label>
                 <div id="bedriftsinfoWrapper">
                     <div class="mdl-typography--headline">Bedriftsinformasjon</div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -57,20 +57,20 @@
                     </div><br/>
                     <div class="mdl-typography--headline">Tidsrom</div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="startDato">
+                        <input class="mdl-textfield__input" type="date" id="startDato" value="{{thisDay}}">
                         <label class="mdl-textfield__label" for="startDato">Fra og med</label>
                     </div><br/>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="sluttDato">
+                        <input class="mdl-textfield__input" type="date" id="sluttDato" value="{{thisDay}}">
                         <label class="mdl-textfield__label" for="sluttDato">Til og med</label>
                     </div>
                     <div class="mdl-typography--headline">Arbeidstid</div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="startTid">
+                        <input class="mdl-textfield__input" type="time" id="startTid" value="08:00">
                         <label class="mdl-textfield__label" for="startTid">Fra kl</label>
                     </div><br/>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="sluttTid">
+                        <input class="mdl-textfield__input" type="time" id="sluttTid" value="16:00">
                         <label class="mdl-textfield__label" for="sluttTid">Til kl</label>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
 <!-- serialize -->
 <script src="/public/js/serialize-0.2.min.js"></script>
 <!-- Helperscript for form -->
-<script src="/public/js/yff-contract-form.js"></script>
+<script src="/public/js/yff-information-form.js"></script>
 <!-- Date input polyfill -->
 <script src="/public/js/date-input-polyfill.dist.js"></script>
 <!-- Axios -->
