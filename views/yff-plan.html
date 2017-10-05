@@ -23,6 +23,8 @@
                 {{>yff-plan-skoler}}
                 {{>yff-plan-ub}}
                 {{>yff-plan-felles}}
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="addPlanSkole">Legg til skole</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="addPlanUB">Legg til ungdomsbedrift</button>
             </div>
             <div class="mdl-card__actions mdl-card--border">
                 <a href="/" id="deletePlan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett lokal læreplan for {{student.fullName}}"><i class="material-icons">delete</i></a>
@@ -48,6 +50,8 @@
 
 <!-- serialize -->
 <script src="/public/js/serialize-0.2.min.js"></script>
+<!-- Helperscript for form -->
+<script src="/public/js/yff-plan-form.js"></script>
 <!-- Date input polyfill -->
 <script src="/public/js/date-input-polyfill.dist.js"></script>
 <!-- uuid -->
