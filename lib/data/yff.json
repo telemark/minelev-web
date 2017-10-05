@@ -1,0 +1,36 @@
+{
+  "evaluation": [
+    {
+      "id": "01",
+      "description": "Lav måloppnåelse",
+      "value": "Lav måloppnåelse"
+    },
+    {
+      "id": "02",
+      "description": "Middels måloppnåelse",
+      "value": "Middels måloppnåelse"
+    },
+    {
+      "id": "03",
+      "description": "Høy måloppnåelse",
+      "value": "Høy måloppnåelse"
+    }
+  ],
+  "order": [
+    {
+      "id": "01",
+      "description": "God",
+      "value": "God"
+    },
+    {
+      "id": "02",
+      "description": "Nokså god",
+      "value": "Nokså god"
+    },
+    {
+      "id": "03",
+      "description": "Lite god",
+      "value": "Lite god"
+    }
+  ]
+}

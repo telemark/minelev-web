@@ -12,6 +12,7 @@ const createViewOptions = require('../lib/create-view-options')
 const datePadding = require('../lib/date-padding')
 const getTemplateType = require('../lib/get-template-type')
 const logger = require('../lib/logger')
+const yffData = require('../lib/data/yff.json')
 
 module.exports.frontPage = async (request, reply) => {
   const yar = request.yar
@@ -180,6 +181,8 @@ module.exports.evaluation = async (request, reply) => {
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
+    viewOptions.evaluationScores = yffData.evaluation
+    viewOptions.evaluationOrders = yffData.order
 
     logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {

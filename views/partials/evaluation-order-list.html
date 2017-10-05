@@ -1,0 +1,7 @@
+<div class="mdl-typography--headline document-form-header chxBxEvaluationOrder margin-top-10">Punktlighet og orden</div>
+{{#each evaluationOrders}}
+<label for="orderRadioCourse{{id}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxEvaluationOrder">
+    <input type="radio" name="evaluationOrder" value="{{value}}" id="orderRadioCourse{{id}}" class="mdl-radio__button period-selector chxBxEvaluationOrder">
+    <span class="mdl-radio__label chxBxEvaluationOrder">{{description}}</span>
+</label><br/>
+{{/each}}

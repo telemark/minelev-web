@@ -1,0 +1,7 @@
+<div class="mdl-typography--headline document-form-header chxBxEvaluationScore margin-top-10">Faglig måloppnåelse</div>
+{{#each evaluationScores}}
+<label for="terminRadioCourse{{id}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxEvaluationScore">
+    <input type="radio" name="evaluationScore" value="{{value}}" id="terminRadioCourse{{id}}" class="mdl-radio__button period-selector chxBxEvaluationScore">
+    <span class="mdl-radio__label chxBxEvaluationScore">{{description}}</span>
+</label><br/>
+{{/each}}
