@@ -9,6 +9,7 @@
             <th class="mdl-data-table__cell--non-numeric">Dato</th>
             <th class="mdl-data-table__cell--non-numeric">Sendt av</th>
             <th class="mdl-data-table__cell--non-numeric">Ny</th>
+            <th class="mdl-data-table__cell--non-numeric {{featureToggle features.useYFF}}">YFF</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +28,11 @@
             <td class="mdl-data-table__cell--non-numeric">
                 <a href="/document/{{studentUserName}}" title="Skriv nytt dokument for {{studentName}}" class="mdl-color-text--black">
                     <span class="material-icons">note_add</span>
+                </a>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric {{featureToggle ../features.useYFF}}">
+                <a href="/yff/{{studentUserName}}" title="YFF for {{studentName}}" class="mdl-color-text--black">
+                    <i class="material-icons">playlist_add</i>
                 </a>
             </td>
         </tr>

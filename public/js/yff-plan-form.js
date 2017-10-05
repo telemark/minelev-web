@@ -9,15 +9,29 @@ function init () {
     e.preventDefault()
     addUB()
   })
+  document.getElementById('addPlanKompetanse').addEventListener('click', (e) => {
+    e.preventDefault()
+    duplicateRow('planFellesTable')
+  })
   toggleTable('planUBTable')
   toggleTable('planSkoleTable')
 }
 
 function toggleTable (id) {
   const table = document.getElementById(id)
+  const heading = document.getElementById(`${id}Heading`)
   const body = table.getElementsByTagName('tbody')[0]
   const trs = body.getElementsByTagName('tr')
-  table.style.display = trs.length > 0 ? '' : 'none'
+  const display = trs.length > 0 ? '' : 'none'
+  table.style.display = display
+  heading.style.display = display
+}
+
+function removeRow (id) {
+  const row = document.getElementById(id)
+  row.parentNode.removeChild(row)
+  toggleTable('planUBTable')
+  toggleTable('planSkoleTable')
 }
 
 function createInput (name) {
@@ -36,12 +50,6 @@ function createInput (name) {
   div.appendChild(input)
   div.appendChild(label)
   return div
-}
-
-function removeUBRow (id) {
-  const row = document.getElementById(id)
-  row.parentNode.removeChild(row)
-  toggleTable('planUBTable')
 }
 
 function addUB () {
@@ -77,15 +85,9 @@ function addUB () {
     e.preventDefault()
     const id = e.target.id.replace('slett', '')
     document.getElementById(e.target.id).removeEventListener('click', (e) => console.log('removed'))
-    removeUBRow(id)
+    removeRow(id)
   })
   toggleTable('planUBTable')
-}
-
-function removeSkoleRow (id) {
-  const row = document.getElementById(id)
-  row.parentNode.removeChild(row)
-  toggleTable('planSkoleTable')
 }
 
 function addSkole () {
@@ -125,9 +127,42 @@ function addSkole () {
     e.preventDefault()
     const id = e.target.id.replace('slett', '')
     document.getElementById(e.target.id).removeEventListener('click', (e) => console.log('removed'))
-    removeSkoleRow(id)
+    removeRow(id)
   })
   toggleTable('planSkoleTable')
+}
+
+function duplicateRow (id) {
+  const rowId = uuidv4()
+  const table = document.getElementById(id)
+  const body = table.getElementsByTagName('tbody')[0]
+  const tr = body.getElementsByTagName('tr')[0]
+  const newRow = tr.cloneNode(true)
+  const cells = newRow.getElementsByTagName('td')
+  const slettCelle = document.createElement('td')
+  const slettButton = document.createElement('button')
+  const lastCell = cells[cells.length - 1]
+
+  newRow.setAttribute('id', rowId)
+  slettButton.setAttribute('id', `slett${rowId}`)
+  slettButton.innerHTML = 'Slett'
+  slettButton.classList.add('mdl-button')
+  slettButton.classList.add('mdl-js-button')
+  slettButton.classList.add('mdl-button--raised')
+  slettButton.classList.add('mdl-js-ripple-effect')
+  slettCelle.classList.add('mdl-data-table__cell--non-numeric')
+  slettCelle.appendChild(slettButton)
+
+  newRow.replaceChild(slettCelle, lastCell)
+
+  body.appendChild(newRow)
+
+  document.getElementById(`slett${rowId}`).addEventListener('click', (e) => {
+    e.preventDefault()
+    const id = e.target.id.replace('slett', '')
+    document.getElementById(e.target.id).removeEventListener('click', (e) => console.log('removed'))
+    removeRow(id)
+  })
 }
 
 function ready (fn) {
