@@ -155,6 +155,7 @@ module.exports.evaluation = async (request, reply) => {
   const studentUserName = request.params.studentID
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
+  const evaluationPeriods = require('../lib/data/dummy-evaluation.json')
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
   let mainGroupName = false
@@ -183,6 +184,7 @@ module.exports.evaluation = async (request, reply) => {
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
     viewOptions.evaluationScores = yffData.evaluation
     viewOptions.evaluationOrders = yffData.order
+    viewOptions.evaluationPeriods = evaluationPeriods
 
     logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
