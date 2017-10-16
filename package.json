@@ -76,7 +76,7 @@
     "inert": "4.2.1",
     "jsonwebtoken": "8.1.0",
     "simple-encryptor": "1.1.1",
-    "tfk-saksbehandling-minelev-templates": "1.5.1",
+    "tfk-saksbehandling-minelev-templates": "1.5.2",
     "tfk-saksbehandling-schools-info": "2.0.12",
     "vision": "4.1.1",
     "winston": "2.4.0",
