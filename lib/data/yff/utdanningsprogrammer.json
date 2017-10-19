@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Bygg- og anleggsteknikk",
+    "id": "BA",
+    "url": "https://www.udir.no/kl06/BA"
+  },
+  {
+    "name": "Design og håndverk",
+    "id": "DH",
+    "url": "https://www.udir.no/kl06/DH"
+  },
+  {
+    "name": "Elektrofag",
+    "id": "EL",
+    "url": "https://www.udir.no/kl06/EL"
+  },
+  {
+    "name": "Helse- og oppvekstfag",
+    "id": "HS",
+    "url": "https://www.udir.no/kl06/HS"
+  },
+  {
+    "name": "Naturbruk",
+    "id": "NA",
+    "url": "https://www.udir.no/kl06/NA"
+  },
+  {
+    "name": "Restaurant- og matfag",
+    "id": "RM",
+    "url": "https://www.udir.no/kl06/RM"
+  },
+  {
+    "name": "Service og samferdsel",
+    "id": "SS",
+    "url": "https://data.udir.no/kl06/SS"
+  },
+  {
+    "name": "Teknikk og industriell produksjon",
+    "id": "TP",
+    "url": "https://data.udir.no/kl06/TP"
+  }
+]
