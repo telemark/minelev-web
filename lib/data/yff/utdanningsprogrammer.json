@@ -32,11 +32,11 @@
   {
     "name": "Service og samferdsel",
     "id": "SS",
-    "url": "https://data.udir.no/kl06/SS"
+    "url": "https://www.udir.no/kl06/SS"
   },
   {
     "name": "Teknikk og industriell produksjon",
     "id": "TP",
-    "url": "https://data.udir.no/kl06/TP"
+    "url": "https://www.udir.no/kl06/TP"
   }
 ]
