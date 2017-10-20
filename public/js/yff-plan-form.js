@@ -14,9 +14,9 @@ function init () {
     e.preventDefault()
     addUB()
   })
-  document.getElementById('addPlanKompetanse').addEventListener('click', (e) => {
+  document.getElementById('addPlanBedrift').addEventListener('click', (e) => {
     e.preventDefault()
-    duplicateRow('planFellesTable')
+    addBedrift()
   })
   document.getElementById('utdanningsprogramVelger').addEventListener('change', (e) => {
     e.preventDefault()
@@ -25,6 +25,7 @@ function init () {
   })
   toggleTable('planUBTable')
   toggleTable('planSkoleTable')
+  toggleTable('planBedriftTable')
 }
 
 function getProgramInnhold (programId) {
@@ -95,6 +96,12 @@ function buildProgramOmrader () {
       getKompetanseMaal(index)
     }
   })
+}
+
+function cloneKompetanse () {
+  const div = document.getElementById('kompetansemaal')
+  const clone = div.cloneNode(true)
+  return clone
 }
 
 function toggleTable (id) {
@@ -210,6 +217,48 @@ function addSkole () {
     removeRow(id)
   })
   toggleTable('planSkoleTable')
+}
+
+function addBedrift () {
+  const rowId = uuidv4()
+  const table = document.getElementById('planBedriftTable')
+  const body = table.getElementsByTagName('tbody')[0]
+  const tr = document.createElement('tr')
+  const kompetanseCelle = document.createElement('td')
+  const oppgaveCelle = document.createElement('td')
+  const bedriftCelle = document.createElement('td')
+  const slettCelle = document.createElement('td')
+  const slettButton = document.createElement('button')
+  const kompetanse = cloneKompetanse()
+  tr.setAttribute('id', rowId)
+  slettButton.setAttribute('id', `slett${rowId}`)
+  slettButton.innerHTML = 'Slett'
+  slettButton.classList.add('mdl-button')
+  slettButton.classList.add('mdl-js-button')
+  slettButton.classList.add('mdl-button--raised')
+  slettButton.classList.add('mdl-js-ripple-effect')
+  oppgaveCelle.classList.add('mdl-data-table__cell--non-numeric')
+  oppgaveCelle.appendChild(createInput('arbeidsoppgaver'))
+  kompetanseCelle.classList.add('mdl-data-table__cell--non-numeric')
+  kompetanse.childNodes.forEach(child => kompetanseCelle.appendChild(child))
+  bedriftCelle.classList.add('mdl-data-table__cell--non-numeric')
+  bedriftCelle.appendChild(createInput('bedrift'))
+  slettCelle.classList.add('mdl-data-table__cell--non-numeric')
+  slettCelle.appendChild(slettButton)
+  tr.appendChild(kompetanseCelle)
+  tr.appendChild(oppgaveCelle)
+  tr.appendChild(bedriftCelle)
+  tr.appendChild(slettCelle)
+
+  body.appendChild(tr)
+
+  document.getElementById(`slett${rowId}`).addEventListener('click', (e) => {
+    e.preventDefault()
+    const id = e.target.id.replace('slett', '')
+    document.getElementById(e.target.id).removeEventListener('click', (e) => console.log('removed'))
+    removeRow(id)
+  })
+  toggleTable('planBedriftTable')
 }
 
 function duplicateRow (id) {
