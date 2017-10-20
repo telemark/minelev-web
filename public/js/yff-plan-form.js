@@ -29,9 +29,8 @@ function init () {
 }
 
 function getProgramInnhold (programId) {
-  const url = `/yff/programomrade/${programId}`
+  const url = `https://yff.service.minelev.no/yff/utdanningsprogrammer/${programId}`
   axios.get(url).then(result => {
-    console.log(result.data)
     yffData.programInnhold = result.data
     buildProgramOmrader()
   }).catch(error => console.error(error))
@@ -99,9 +98,17 @@ function buildProgramOmrader () {
 }
 
 function cloneKompetanse () {
-  const div = document.getElementById('kompetansemaal')
-  const clone = div.cloneNode(true)
-  return clone
+  const parent = document.getElementById('kompetansemaal')
+  const clone = parent.cloneNode(true)
+  const div = document.createElement('div')
+  clone.childNodes.forEach(child => {
+    const inputs = child.getElementsByTagName('input')
+    if (input[0].checked) {
+      div.appendChild(child)
+    }
+    console.log(inputs)
+  })
+  return div
 }
 
 function toggleTable (id) {
@@ -121,7 +128,7 @@ function removeRow (id) {
   toggleTable('planSkoleTable')
 }
 
-function createInput (name) {
+function createInput (options) {
   const id = new Date().getMilliseconds()
   const div = document.createElement('div')
   const input = document.createElement('input')
@@ -132,8 +139,9 @@ function createInput (name) {
   input.classList.add('mdl-textfield__input')
   label.classList.add('mdl-textfield__label')
   input.setAttribute('id', id)
-  input.setAttribute('name', name)
+  input.setAttribute('name', options.name)
   label.setAttribute('for', id)
+  label.innerHTML = options.text
   div.appendChild(input)
   div.appendChild(label)
   return div
@@ -157,9 +165,9 @@ function addUB () {
   slettButton.classList.add('mdl-button--raised')
   slettButton.classList.add('mdl-js-ripple-effect')
   programCelle.classList.add('mdl-data-table__cell--non-numeric')
-  programCelle.appendChild(createInput('program'))
+  programCelle.appendChild(createInput({name: 'program', text: ''}))
   produksjonsCelle.classList.add('mdl-data-table__cell--non-numeric')
-  produksjonsCelle.appendChild(createInput('produksjon'))
+  produksjonsCelle.appendChild(createInput({name: 'produksjon', text: ''}))
   slettCelle.classList.add('mdl-data-table__cell--non-numeric')
   slettCelle.appendChild(slettButton)
   tr.appendChild(programCelle)
@@ -196,9 +204,9 @@ function addSkole () {
   slettButton.classList.add('mdl-button--raised')
   slettButton.classList.add('mdl-js-ripple-effect')
   programCelle.classList.add('mdl-data-table__cell--non-numeric')
-  programCelle.appendChild(createInput('program'))
+  programCelle.appendChild(createInput({name: 'program', text: ''}))
   kompetanseCelle.classList.add('mdl-data-table__cell--non-numeric')
-  kompetanseCelle.appendChild(createInput('kompetanse'))
+  kompetanseCelle.appendChild(createInput({name: 'kompetanse', text: ''}))
   skoleCelle.classList.add('mdl-data-table__cell--non-numeric')
   skoleCelle.appendChild(createInput('skole'))
   slettCelle.classList.add('mdl-data-table__cell--non-numeric')
@@ -225,8 +233,7 @@ function addBedrift () {
   const body = table.getElementsByTagName('tbody')[0]
   const tr = document.createElement('tr')
   const kompetanseCelle = document.createElement('td')
-  const oppgaveCelle = document.createElement('td')
-  const bedriftCelle = document.createElement('td')
+  const infoDiv = document.createElement('div')
   const slettCelle = document.createElement('td')
   const slettButton = document.createElement('button')
   const kompetanse = cloneKompetanse()
@@ -237,12 +244,11 @@ function addBedrift () {
   slettButton.classList.add('mdl-js-button')
   slettButton.classList.add('mdl-button--raised')
   slettButton.classList.add('mdl-js-ripple-effect')
-  oppgaveCelle.classList.add('mdl-data-table__cell--non-numeric')
-  oppgaveCelle.appendChild(createInput('arbeidsoppgaver'))
+  infoDiv.appendChild(createInput({name: 'arbeidsoppgaver', text: 'Arbeidsoppgaver'}))
+  infoDiv.appendChild(createInput({name: 'bedrift', text: 'Bedrift'}))
   kompetanseCelle.classList.add('mdl-data-table__cell--non-numeric')
-  kompetanse.childNodes.forEach(child => kompetanseCelle.appendChild(child))
-  bedriftCelle.classList.add('mdl-data-table__cell--non-numeric')
-  bedriftCelle.appendChild(createInput('bedrift'))
+  kompetanseCelle.appendChild(kompetanse)
+  kompetanseCelle.appendChild(infoDiv)
   slettCelle.classList.add('mdl-data-table__cell--non-numeric')
   slettCelle.appendChild(slettButton)
   tr.appendChild(kompetanseCelle)

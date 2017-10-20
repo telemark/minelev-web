@@ -104,7 +104,7 @@ module.exports.information = async (request, reply) => {
 }
 
 module.exports.plan = async (request, reply) => {
-  const utdanningsprogrammer = require('../lib/data/yff/utdanningsprogrammer.json')
+  const utdanningsprogrammer = require('../lib/data/utdanningsprogrammer.json')
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
   const studentUserName = request.params.studentID
@@ -198,14 +198,6 @@ module.exports.evaluation = async (request, reply) => {
     logger('info', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, '401'])
     reply.redirect('/signout')
   }
-}
-
-module.exports.program = async (request, reply) => {
-  const programID = request.params.programID
-  const file = `../lib/data/yff/${programID}.json`
-  const program = require(file)
-  logger('info', ['yff', 'program', programID])
-  reply(program)
 }
 
 module.exports.generatePreview = (request, reply) => {

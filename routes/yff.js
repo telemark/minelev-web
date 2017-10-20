@@ -36,14 +36,6 @@ module.exports = [
     }
   },
   {
-    method: 'GET',
-    path: '/yff/programomrade/{programID}',
-    handler: handlers.program,
-    config: {
-      description: 'Get program for {programID}'
-    }
-  },
-  {
     method: 'POST',
     path: '/yff/preview/{studentID}',
     handler: handlers.generatePreview,

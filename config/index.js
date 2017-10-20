@@ -15,6 +15,7 @@ module.exports = {
   FEATURE_USE_YFF: process.env.FEATURE_USE_YFF,
   FEATURE_USE_NOTES: process.env.FEATURE_USE_NOTES,
   QUEUE_SERVICE_URL: process.env.QUEUE_SERVICE_URL || 'https://logs.minelev.win/logs',
+  YFF_SERVICE_URL: process.env.YFF_SERVICE_URL || 'https://yff.service.minelev.no',
   PAPERTRAIL_HOSTNAME: process.env.PAPERTRAIL_HOSTNAME || 'minelev-dev',
   PAPERTRAIL_HOST: process.env.PAPERTRAIL_HOST || 'logs.papertrailapp.com',
   PAPERTRAIL_PORT: process.env.PAPERTRAIL_PORT || 12345
