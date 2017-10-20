@@ -18,6 +18,11 @@ function init () {
     e.preventDefault()
     duplicateRow('planFellesTable')
   })
+  document.getElementById('utdanningsprogramVelger').addEventListener('change', (e) => {
+    e.preventDefault()
+    const programId = e.target.options[e.target.selectedIndex].value
+    getProgramInnhold(programId)
+  })
   toggleTable('planUBTable')
   toggleTable('planSkoleTable')
 }
@@ -27,13 +32,69 @@ function getProgramInnhold (programId) {
   axios.get(url).then(result => {
     console.log(result.data)
     yffData.programInnhold = result.data
+    buildProgramOmrader()
   }).catch(error => console.error(error))
 }
 
 function getKompetanseMaal (index) {
-  const maal = yffData[index].kompetansemaal
-  yffData.kompetansemaal = maal
-  console.log(index)
+  yffData.kompetansemaal = yffData.programInnhold[index].kompetansemaal
+  buildKompetansemaal()
+}
+
+function createKompetansemaalOption (item) {
+  const boxId = uuidv4()
+  const label = document.createElement('label')
+  const checkbox = document.createElement('input')
+  const span = document.createElement('span')
+  label.classList.add('mdl-checkbox')
+  label.classList.add('mdl-js-checkbox')
+  label.classList.add('mdl-js-ripple-effect')
+  label.classList.add('chxBxordenKompetanse')
+  checkbox.classList.add('mdl-checkbox__input')
+  span.classList.add('mdl-radio__label')
+  span.innerHTML = item.tittel
+  checkbox.setAttribute('type', 'checkbox')
+  checkbox.setAttribute('id', boxId)
+  checkbox.setAttribute('name', 'kompetansemaalvalg')
+  checkbox.setAttribute('value', item.tittel)
+  label.setAttribute('for', boxId)
+  label.appendChild(checkbox)
+  label.appendChild(span)
+  return label
+}
+
+function buildKompetansemaal () {
+  const div = document.getElementById('kompetansemaal')
+  div.innerHTML = ''
+  yffData.kompetansemaal.forEach(item => {
+    const option = createKompetansemaalOption(item)
+    div.appendChild(option)
+  })
+}
+
+function createProgramoradeOption(item) {
+  const option = document.createElement('option')
+  option.innerHTML = item.name
+  return option
+}
+
+function buildProgramOmrader () {
+  const div = document.getElementById('programomrader')
+  const select = document.createElement('select')
+  const firstOption = createProgramoradeOption({name: 'Velg programområde'})
+  select.appendChild(firstOption)
+  yffData.programInnhold.forEach(item => {
+    const option = createProgramoradeOption(item)
+    select.appendChild(option)
+  })
+  div.appendChild(select)
+  select.addEventListener('change', (e) => {
+    e.preventDefault()
+    const index = e.target.selectedIndex - 1
+    if (index >= 0) {
+      getKompetanseMaal(index)
+    }
+  })
 }
 
 function toggleTable (id) {

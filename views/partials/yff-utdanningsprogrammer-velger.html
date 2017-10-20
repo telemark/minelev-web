@@ -1,7 +1,14 @@
-<div class="mdl-typography--headline document-form-header margin-top-10">Utdanningsprogram</div>
-<select name="utdanningsprogramvelger" id="utdanningsprogramVelger">
-    <option>Velg utdanningsprogram</option>
-    {{#each utdanningsprogram}}
+<div class="mdl-typography--headline document-form-header margin-top-10">Hent inn kompetansemål</div>
+<div id="programomrader">
+    <select name="utdanningsprogramvelger" id="utdanningsprogramVelger">
+        <option>Velg utdanningsprogram</option>
+        {{#each utdanningsprogrammer}}
         <option value="{{id}}">{{name}}</option>
-    {{/each}}
-</select>
+        {{/each}}
+    </select>
+</div>
+<div id="kompetansemaal"></div>
+<div class="mdl-typography--headline document-form-header chxBxPlanKompetanse margin-top-10">Legg til for område</div>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color-text--black mdl-js-ripple-effect margin-top-10 margin-right-5" id="addPlanKompetanse">Utplassering</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color-text--black mdl-js-ripple-effect margin-top-10 margin-right-5" id="addPlanSkole">Skole</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color-text--black mdl-js-ripple-effect margin-top-10 margin-right-5" id="addPlanUB">Ungdomsbedrift</button>

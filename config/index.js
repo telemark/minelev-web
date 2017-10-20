@@ -1,5 +1,12 @@
 'use strict'
-
+process.env.FEATURE_USE_YFF = true
+process.env.ENCRYPTOR_SECRET = '... Nothing Lasts But Nothing Is Lost ... Nothing Lasts But Nothing Is Lost'
+process.env.JWT_SECRET = '... Nothing Lasts But Nothing Is Lost ... Nothing Lasts But Nothing Is Lost'
+process.env.AUTH_SERVICE_URL = 'https://feide.service.t-fk.no'
+process.env.BUDDY_SERVICE_URL = 'https://buddy.minelev.no'
+process.env.LOGS_SERVICE_URL = 'https://logs.dev.minelev.no'
+process.env.STATS_SERVICE_URL = 'https://logs.dev.minelev.no'
+process.env.QUEUE_SERVICE_URL = 'https://logs.dev.minelev.no/logs'
 module.exports = {
   WEB_SERVER_PORT: process.env.WEB_SERVER_PORT || 8000,
   ORIGIN_URL: process.env.ORIGIN_URL || 'http://localhost:8000/signin',
