@@ -104,6 +104,7 @@ module.exports.information = async (request, reply) => {
 }
 
 module.exports.plan = async (request, reply) => {
+  const utdanningsprogrammer = require('../lib/data/yff/utdanningsprogrammer.json')
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
   const studentUserName = request.params.studentID
@@ -113,7 +114,7 @@ module.exports.plan = async (request, reply) => {
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
   let mainGroupName = false
 
-  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses})
+  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, utdanningsprogrammer: utdanningsprogrammer})
 
   logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
@@ -197,6 +198,14 @@ module.exports.evaluation = async (request, reply) => {
     logger('info', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, '401'])
     reply.redirect('/signout')
   }
+}
+
+module.exports.program = async (request, reply) => {
+  const programID = request.params.programID
+  const file = `../lib/data/yff/${programID}.json`
+  const program = require(file)
+  logger('info', ['yff', 'program', programID])
+  reply(program)
 }
 
 module.exports.generatePreview = (request, reply) => {

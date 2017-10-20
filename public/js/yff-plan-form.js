@@ -1,5 +1,10 @@
 'use strict'
 
+let yffData = {
+  programInnhold: [],
+  kompetansemaal: []
+}
+
 function init () {
   document.getElementById('addPlanSkole').addEventListener('click', (e) => {
     e.preventDefault()
@@ -15,6 +20,20 @@ function init () {
   })
   toggleTable('planUBTable')
   toggleTable('planSkoleTable')
+}
+
+function getProgramInnhold (programId) {
+  const url = `/yff/programomrade/${programId}`
+  axios.get(url).then(result => {
+    console.log(result.data)
+    yffData.programInnhold = result.data
+  }).catch(error => console.error(error))
+}
+
+function getKompetanseMaal (index) {
+  const maal = yffData[index].kompetansemaal
+  yffData.kompetansemaal = maal
+  console.log(index)
 }
 
 function toggleTable (id) {

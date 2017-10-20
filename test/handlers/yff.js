@@ -10,4 +10,5 @@ test('yff handlers test', t => {
   t.truthy(handlers.evaluation, 'handler has method evaluation')
   t.truthy(handlers.generatePreview, 'handler has method generatePreview')
   t.truthy(handlers.submit, 'handler has method submit')
+  t.truthy(handlers.program, 'handler has method program')
 })
