@@ -6,30 +6,18 @@ let yffData = {
 }
 
 function init () {
-  document.getElementById('addPlanSkole').addEventListener('click', (e) => {
-    e.preventDefault()
-    addSkole()
-  })
-  document.getElementById('addPlanUB').addEventListener('click', (e) => {
-    e.preventDefault()
-    addUB()
-  })
-  document.getElementById('addPlanBedrift').addEventListener('click', (e) => {
-    e.preventDefault()
-    addBedrift()
-  })
+  hideVelger('utplasseringsVelger')
+  hideVelger('innholdsVelger')
+  hideVelger('submitVelger')
   document.getElementById('utdanningsprogramVelger').addEventListener('change', (e) => {
     e.preventDefault()
     const programId = e.target.options[e.target.selectedIndex].value
     getProgramInnhold(programId)
   })
-  toggleTable('planUBTable')
-  toggleTable('planSkoleTable')
-  toggleTable('planBedriftTable')
 }
 
 function getProgramInnhold (programId) {
-  const url = `https://yff.service.minelev.no/yff/utdanningsprogrammer/${programId}`
+  const url = `https://yff.service.minelev.no/utdanningsprogrammer/${programId}`
   axios.get(url).then(result => {
     yffData.programInnhold = result.data
     buildProgramOmrader()
@@ -39,6 +27,7 @@ function getProgramInnhold (programId) {
 function getKompetanseMaal (index) {
   yffData.kompetansemaal = yffData.programInnhold[index].kompetansemaal
   buildKompetansemaal()
+  showVelger('utplasseringsVelger')
 }
 
 function createKompetansemaalOption (item) {
@@ -109,6 +98,16 @@ function cloneKompetanse () {
     console.log(inputs)
   })
   return div
+}
+
+function hideVelger (velger) {
+  const velgers = document.querySelectorAll(`.${velger}`)
+  velgers.forEach(item => item.style.display = 'none')
+}
+
+function showVelger (velger) {
+  const velgers = document.querySelectorAll(`.${velger}`)
+  velgers.forEach(item => item.style.display = '')
 }
 
 function toggleTable (id) {
