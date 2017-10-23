@@ -281,3 +281,16 @@ module.exports.submit = async (request, reply) => {
       reply.redirect('/')
     })
 }
+
+module.exports.addLineToPlan = async (request, reply) => {
+  const user = request.auth.credentials.data
+  let data = request.payload
+  data.studentId = request.params.studentID
+  data.userId = user.userId
+  data.userName = user.userName
+  data.userAgent = request.headers['user-agent']
+
+  logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
+
+  reply.redirect(`/yff/plan/${data.studentUserName}`)
+}

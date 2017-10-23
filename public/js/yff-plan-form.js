@@ -16,6 +16,14 @@ function init () {
   })
 }
 
+//MDL Text Input Cleanup
+function mdlCleanUp () {
+  let mdlInputs = document.querySelectorAll('.mdl-js-textfield')
+  for (let i = 0, l = mdlInputs.length; i < l; i++) {
+    mdlInputs[i].MaterialTextfield.checkDirty()
+  }
+}
+
 function getProgramInnhold (programId) {
   const url = `https://yff.service.minelev.no/utdanningsprogrammer/${programId}`
   axios.get(url).then(result => {

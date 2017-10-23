@@ -50,5 +50,13 @@ module.exports = [
     config: {
       description: 'Submit documents for {studentID}'
     }
+  },
+  {
+    method: 'POST',
+    path: '/yff/plan/{studentID}',
+    handler: handlers.addLineToPlan,
+    config: {
+      description: 'Add line for {studentID} local plan'
+    }
   }
 ]
