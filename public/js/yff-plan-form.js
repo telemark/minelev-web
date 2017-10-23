@@ -28,6 +28,13 @@ function getKompetanseMaal (index) {
   yffData.kompetansemaal = yffData.programInnhold[index].kompetansemaal
   buildKompetansemaal()
   showVelger('utplasseringsVelger')
+  addListener('utplasseringsstedVelger', 'change', buildArbeidsoppghaver)
+}
+
+function addListener (id, type, func) {
+  const element = document.getElementById(id)
+  element.removeEventListener(type, func)
+  element.addEventListener(type, func)
 }
 
 function createKompetansemaalOption (item) {
@@ -71,6 +78,7 @@ function buildProgramOmrader () {
   const div = document.getElementById('programomrader')
   const select = document.createElement('select')
   const firstOption = createProgramoradeOption({name: 'Velg programområde'})
+  select.classList.add('margin-top-10')
   select.appendChild(firstOption)
   yffData.programInnhold.forEach(item => {
     const option = createProgramoradeOption(item)
@@ -84,6 +92,17 @@ function buildProgramOmrader () {
       getKompetanseMaal(index)
     }
   })
+}
+
+function buildArbeidsoppghaver (e) {
+  e.preventDefault()
+  const div = document.getElementById('innhold')
+  const br = document.createElement('br')
+  div.appendChild(createInput({name: 'arbeidsoppgaver', text: 'Arbeidsoppgaver'}))
+  div.appendChild(br)
+  div.appendChild(createInput({name: 'sted', text: 'Navn på utplasseringssted'}))
+  showVelger('innholdsVelger')
+  showVelger('submitVelger')
 }
 
 function cloneKompetanse () {

@@ -1,23 +1,38 @@
-<div class="mdl-typography--headline document-form-header margin-top-10">Opprett kompetansemål</div>
-<div id="programomrader">
-    <select name="utdanningsprogramvelger" id="utdanningsprogramVelger" class="margin-right-5">
-        <option>Velg utdanningsprogram</option>
-        {{#each utdanningsprogrammer}}
-        <option value="{{id}}">{{name}}</option>
-        {{/each}}
-    </select>
-</div>
-<div id="kompetansemaal"></div>
-<div class="mdl-typography--headline document-form-header margin-top-10 utplasseringsVelger">Utplasseringssted</div>
-<div id="utplassering" class="utplasseringsVelger">
-    <select name="utplasseringsstedvelger" id="utplasseringsstedVelger" class="margin-right-5">
-        <option>Velg utplasseringssted</option>
-        <option value="bedrift">Bedrift</option>
-        <option value="skole">Skole</option>
-        <option value="ub">Ungdomsbedrift (entreprenørskap)</option>
-    </select>
-</div>
-<div class="mdl-typography--headline document-form-header margin-top-10 innholdsVelger">Innhold</div>
-<div id="innhold" class="innholdsVelger"></div>
-<div class="mdl-typography--headline document-form-header chxBxPlanKompetanse margin-top-10 submitVelger">Legg til i læreplan</div>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color-text--black mdl-js-ripple-effect margin-top-10 margin-right-5 submitVelger" id="addPlanElement">Legg til</button>
+<form action="/yff/plan/{{student.personalIdNumber}}" method="post" id="submitPlanLinjeForm">
+    <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
+    <input type="hidden" name="studentMiddleName" value="{{student.middleName}}">
+    <input type="hidden" name="studentLastName" value="{{student.lastName}}">
+    <input type="hidden" name="studentName" value="{{student.fullName}}">
+    <input type="hidden" name="studentUserName" value="{{student.userName}}">
+    <input type="hidden" name="studentMail" value="{{student.mail}}">
+    <input type="hidden" name="studentPhone" value="{{student.mobilePhone}}">
+    <input type="hidden" name="studentMainGroupName" value="{{student.mainGroupName}}">
+    <input type="hidden" name="schoolId" value="{{student.unitId}}">
+    <input type="hidden" name="schoolName" value="{{student.unitName}}">
+    <input type="hidden" name="schoolPhone" value="{{student.unitPhone}}">
+    <input type="hidden" name="organizationNumber" value="{{student.organizationNumber}}">
+    <input type="hidden" name="type" value="yff-lokalplan-linje">
+    <div class="mdl-typography--headline document-form-header margin-top-10">Opprett kompetansemål</div>
+    <div id="programomrader">
+        <select name="utdanningsprogramvelger" id="utdanningsprogramVelger" class="margin-top-10 margin-right-10">
+            <option>Velg utdanningsprogram</option>
+            {{#each utdanningsprogrammer}}
+                <option value="{{id}}">{{name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div id="kompetansemaal" class="margin-top-10"></div>
+    <div class="mdl-typography--headline document-form-header margin-top-10 utplasseringsVelger">Utplasseringssted</div>
+    <div id="utplassering" class="utplasseringsVelger">
+        <select name="utplasseringsstedvelger" id="utplasseringsstedVelger" class="margin-top-10">
+            <option>Velg utplasseringssted</option>
+            <option value="bedrift">Bedrift</option>
+            <option value="skole">Skole</option>
+            <option value="ub">Ungdomsbedrift (entreprenørskap)</option>
+        </select>
+    </div>
+    <div class="mdl-typography--headline document-form-header margin-top-10 innholdsVelger">Innhold</div>
+    <div id="innhold" class="innholdsVelger"></div>
+    <div class="mdl-typography--headline document-form-header chxBxPlanKompetanse margin-top-10 submitVelger">Legg til i læreplan</div>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color-text--black mdl-js-ripple-effect margin-top-10 margin-right-5 submitVelger" id="addPlanElement">Legg til</button>
+</form>

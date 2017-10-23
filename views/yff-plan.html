@@ -1,5 +1,12 @@
 <div class="mdl-grid">
     <div id ="planCard" class="mdl-card mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+            <div class="mdl-card__title mdl-color-text--black">
+                <h2 class="mdl-card__title-text">Lokal læreplan {{student.fullName}}</h2>
+            </div>
+            <div class="mdl-card__supporting-text mdl-color-text--black">
+                {{>yff-plan-kompetansemaal-velger}}
+                {{>yff-plan-linjer}}
+            </div>
         <form action="/yff/{{student.personalIdNumber}}" method="post" id="submitPlanForm">
             <input type="hidden" name="skjemaUtfyllingStart" value="{{skjemaUtfyllingStart}}">
             <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
@@ -15,12 +22,6 @@
             <input type="hidden" name="schoolPhone" value="{{student.unitPhone}}">
             <input type="hidden" name="organizationNumber" value="{{student.organizationNumber}}">
             <input type="hidden" name="type" value="yff-lokalplan">
-            <div class="mdl-card__title mdl-color-text--black">
-                <h2 class="mdl-card__title-text">Lokal læreplan {{student.fullName}}</h2>
-            </div>
-            <div class="mdl-card__supporting-text mdl-color-text--black">
-                {{>yff-plan-kompetansemaal-velger}}
-            </div>
             <div class="mdl-card__actions mdl-card--border">
                 <a href="/" id="deletePlan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett lokal læreplan for {{student.fullName}}"><i class="material-icons">delete</i></a>
                 <div class="mdl-layout-spacer"></div>
