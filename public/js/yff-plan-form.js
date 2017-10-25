@@ -84,7 +84,13 @@ function createProgramoradeOption(item) {
 
 function buildProgramOmrader () {
   const div = document.getElementById('programomrader')
-  const select = document.createElement('select')
+  let select = document.getElementById('programomradeSelector')
+  if (select !== null) {
+    select.innerHTML = ''
+  } else {
+    select = document.createElement('select')
+    select.setAttribute('id', 'programomradeSelector')
+  }
   const firstOption = createProgramoradeOption({name: 'Velg programområde'})
   select.classList.add('margin-top-10')
   select.appendChild(firstOption)
