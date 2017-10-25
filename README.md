@@ -8,12 +8,36 @@ web frontend for minelev
 
 See [examples](docs/examples)
 
+## Settings
+
+production.env
+
+```bash
+NODE_ENV=production #Node environment
+WEB_SERVER_PORT=8000 #Port for web server
+ORIGIN_URL=https://www.minelev.no/signin #url for instance
+COOKIE_SECRET=@minelev-cookie-secret #secret for cookie
+ENCRYPTOR_SECRET=@minelev-encryptor-secret #secret for data encryption
+JWT_SECRET=@minelev-jwt-secret #Secret for jwt
+YAR_SECRET=@minelev-session-secret #Secret for local session
+AUTH_SERVICE_URL=@tfk-auth-service-feide #Url for auth service
+BUDDY_SERVICE_URL=@minelev-buddy-service-url #Url for buddy service (https://github.com/telemark/minelev-buddy)
+LOGS_SERVICE_URL=@minelev-logs-service-url #Url for logs service (https://github.com/telemark/minelev-logs)
+STATS_SERVICE_URL=@minelev-logs-service-url #Url for stats service (https://github.com/telemark/minelev-logs-stats)
+PDF_SERVICE_URL=https://pdf.minelev.no #Url for pdf service (https://github.com/telemark/pdftemplater-webservice-docker)
+QUEUE_SERVICE_URL=@minelev-queue-service-url #Url for queue service (https://github.com/telemark/minelev-logs)
+#FEATURE_USE_YFF=on #Enable yff
+#YFF_SERVICE_URL=https://yff.service.minelev.no #Url for yff-service (if enabled) (https://github.com/telemark/micro-yff-programomrader)
+PAPERTRAIL_HOSTNAME=minelev #Hostname for papertrail
+PAPERTRAIL_HOST=@tfk-papertrail-host #Url for papertrail
+PAPERTRAIL_PORT=@tfk-papertrail-port #Port for papertrail
+```
+
 ## Docker
 
 Be sure to get the time on the server right!
 
 `ntpdate no.pool.ntp.org`
-
 
 ### 1. with-docker-datacenter
 
@@ -76,6 +100,8 @@ Login with username: `gauss` password: `password`
 - [minelev-notifications](https://github.com/telemark/minelev-notifications) notifications service for MinElev
 - [minelev-leder](https://github.com/telemark/minelev-leder) web frontend for MinElev - school administration
 - [minelev-dashboard](https://github.com/telemark/minelev-dashboard) dashboard for MinElev
+- [micro-yff-programomrader](https://github.com/telemark/micro-yff-programomrader) yff services
+- [pdf-service](https://github.com/telemark/pdftemplater-webservice-docker) convert templates and data to pdf
 
 ## License
 
