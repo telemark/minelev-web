@@ -5,15 +5,21 @@ let yffData = {
   kompetansemaal: []
 }
 
+function updateProgramInnhold (e) {
+  e.preventDefault()
+  const utdanningsprogramVelger = document.getElementById('utdanningsprogramVelger')
+  const klassetrinnVelger = document.getElementById('klassetrinnVelger')
+  const programId = utdanningsprogramVelger.options[utdanningsprogramVelger.selectedIndex].value
+  const klassetrinn = klassetrinnVelger.options[klassetrinnVelger.selectedIndex].value
+  getProgramInnhold({programId: programId, klassetrinn: klassetrinn})
+}
+
 function init () {
   hideVelger('utplasseringsVelger')
   hideVelger('innholdsVelger')
   hideVelger('submitVelger')
-  document.getElementById('utdanningsprogramVelger').addEventListener('change', (e) => {
-    e.preventDefault()
-    const programId = e.target.options[e.target.selectedIndex].value
-    getProgramInnhold(programId)
-  })
+  addListener('utdanningsprogramVelger', 'change', updateProgramInnhold)
+  addListener('klassetrinnVelger', 'change', updateProgramInnhold)
 }
 
 //MDL Text Input Cleanup
@@ -24,8 +30,8 @@ function mdlCleanUp () {
   }
 }
 
-function getProgramInnhold (programId) {
-  const url = `https://yff.service.minelev.no/utdanningsprogrammer/${programId}`
+function getProgramInnhold (options) {
+  const url = `https://yff.service.minelev.no/utdanningsprogrammer/${options.programId}-${options.klassetrinn}`
   axios.get(url).then(result => {
     yffData.programInnhold = result.data
     buildProgramOmrader()
@@ -84,6 +90,8 @@ function createProgramoradeOption(item) {
 
 function buildProgramOmrader () {
   const div = document.getElementById('programomrader')
+  const maal = document.getElementById('kompetansemaal')
+  maal.innerHTML = ''
   let select = document.getElementById('programomradeSelector')
   if (select !== null) {
     select.innerHTML = ''
