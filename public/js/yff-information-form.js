@@ -1,9 +1,13 @@
 'use strict'
 
+let YFFData = {
+  organizations: []
+}
+
 function init () {
-  var lookupOrganizationButton = document.getElementById('lookupOrganisasjonsnummer')
+  var lookupOrganizationButton = document.getElementById('lookupOrganisasjon')
   var bedriftsWrapper = document.getElementById('bedriftsinfoWrapper')
-  var lookupField = document.getElementById('organisasjonsNummer')
+  var lookupField = document.getElementById('brregQuery')
 
   bedriftsWrapper.style.display = 'none'
   lookupOrganizationButton.addEventListener('click', function (e) {
@@ -39,16 +43,58 @@ function setupOrganization (data) {
   bedriftsWrapper.style.display = ''
 }
 
+function addListener (element, type, func) {
+  element.removeEventListener(type, func)
+  element.addEventListener(type, func)
+}
+
+function organizationSelected (e) {
+  e.preventDefault()
+  const selectedIndex = parseInt(e.target.value, 10)
+  const data = YFFData.organizations[selectedIndex]
+  setupOrganization(data)
+}
+
+function createRadio (options) {
+  const id = new Date().getMilliseconds()
+  const label = document.createElement('label')
+  const input = document.createElement('input')
+  const span = document.createElement('span')
+  label.classList.add('mdl-textfield__label')
+  input.classList.add('mdl-textfield__input')
+  span.classList.add('mdl-textfield__label')
+  input.setAttribute('id', id)
+  input.setAttribute('name', options.name)
+  label.setAttribute('type', 'radio')
+  label.setAttribute('id', options.index)
+  label.setAttribute('for', id)
+  label.innerHTML = options.text
+  label.appendChild(input)
+  label.appendChild(span)
+  return label
+}
+
+function buildOrganizationsSelector () {
+  const div = document.getElementById('lookupWrapper')
+  div.innerHTML = ''
+  YFFData.organizations.forEach((item, index) => {
+    const radio = createRadio(Object.assign(item, {index: index}))
+    div.appendChild(radio)
+    addListener(radio, 'click', organizationSelected)
+  })
+}
+
 function lookupOrganization () {
-  var organizationNumberField = document.getElementById('organisasjonsNummer')
-  var organizationNumber = organizationNumberField.value
-  var lookupIcon = document.getElementById('searchIcon')
-  const url = `https://organisasjonsnummer.service.t-fk.no?organisasjonsnummer=${organizationNumber}`
+  const queryField = document.getElementById('brregQuery')
+  const query = queryField.value
+  const lookupIcon = document.getElementById('searchIcon')
+  const url = `/yff/brreg`
   lookupIcon.innerText = 'hourglass_empty'
-  axios.get(url)
+  axios.post(url, {query: query})
     .then(result => {
       lookupIcon.innerText = 'search'
-      setupOrganization(result.data)
+      YFFData.organizations = result.data
+      buildOrganizationsSelector()
     }).catch(error => {
       console.error(error)
       lookupIcon.innerText = 'search'

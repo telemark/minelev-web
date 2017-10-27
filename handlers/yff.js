@@ -2,6 +2,7 @@
 
 const fs = require('fs')
 const axios = require('axios')
+const brreg = require('brreg')
 const getDocumentTemplatesPath = require('tfk-saksbehandling-minelev-templates')
 const FormData = require('form-data')
 const config = require('../config')
@@ -293,4 +294,22 @@ module.exports.addLineToPlan = async (request, reply) => {
   logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
 
   reply.redirect(`/yff/plan/${data.studentUserName}`)
+}
+
+module.exports.lookupBrreg = async (request, reply) => {
+  let data = request.payload
+  const query = data.query
+
+  logger('info', ['yff', 'lookupBrreg', 'query', query, 'start'])
+
+  const lookup = await brreg({query: query, format: 'json'})
+  let results = []
+  if (lookup.enhetsregisteret.error === false && lookup.underenheter.error === false) {
+    results = lookup.enhetsregisteret.data.entries.concat(lookup.underenheter.data.entries)
+  } else if (lookup.enhetsregisteret.error !== false && lookup.underenheter.error === false) {
+    results = lookup.underenheter.data.entries
+  } else if (lookup.enhetsregisteret.error === false && lookup.underenheter.error !== false) {
+    results = lookup.enhetsregisteret.data.entries
+  }
+  reply(results)
 }

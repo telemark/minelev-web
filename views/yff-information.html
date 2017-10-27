@@ -21,15 +21,19 @@
             </div>
             <div class="mdl-card__supporting-text mdl-color-text--black">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="organisasjonsNummer">
-                    <label class="mdl-textfield__label" for="organisasjonsNummer">Bedriftens organisasjonsnummer</label>
-                    <span class="mdl-textfield__error">Vennligst bare bruk tall</span>
+                    <input class="mdl-textfield__input" type="text" name="query" id="brregQuery">
+                    <label class="mdl-textfield__label" for="brregQuery">Søk etter bedrift</label>
                 </div>
-                <label class="mdl-button mdl-js-button mdl-button--icon" for="organisasjonsnummer" id="lookupOrganisasjonsnummer">
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="organisasjonsnummer" id="lookupOrganisasjons">
                     <i class="material-icons" id="searchIcon">search</i>
                 </label>
+                <div id="lookupWrapper"></div>
                 <div id="bedriftsinfoWrapper">
                     <div class="mdl-typography--headline">Bedriftsinformasjon</div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="organisasjonsNummer">
+                        <label class="mdl-textfield__label" for="organisasjonsNummer">Bedriftens organisasjonsnummer</label>
+                    </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                         <input class="mdl-textfield__input" type="text" id="organisasjonsNavn" readonly>
                         <label class="mdl-textfield__label" for="organisasjonsNavn">Navn</label>

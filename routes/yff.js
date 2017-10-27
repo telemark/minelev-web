@@ -58,5 +58,13 @@ module.exports = [
     config: {
       description: 'Add line for {studentID} local plan'
     }
+  },
+  {
+    method: 'POST',
+    path: '/yff/brreg',
+    handler: handlers.lookupBrreg,
+    config: {
+      description: 'Lookup brreg'
+    }
   }
 ]
