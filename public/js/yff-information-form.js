@@ -66,7 +66,6 @@ function organizationSelected (e) {
   e.preventDefault()
   const selectedIndex = parseInt(e.target.dataset.myIndex, 10)
   const data = YFFData.organizations[selectedIndex]
-  console.log(data)
   setupOrganization(data)
 }
 
