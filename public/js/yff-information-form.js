@@ -39,19 +39,22 @@ function mdlCleanUp () {
 }
 
 function setupOrganization (data) {
-  var bedriftsNavn = document.getElementById('organisasjonsNavn')
-  var bedriftsAdresse = document.getElementById('organisasjonsAdresse')
-  var bedriftsPostnummer = document.getElementById('organisasjonsPostnummer')
-  var bedriftsPoststed = document.getElementById('organisasjonsPoststed')
-  var bedriftsWrapper = document.getElementById('bedriftsinfoWrapper')
+  const bedriftsNavn = document.getElementById('organisasjonsNavn')
+  const bedriftsNummer = document.getElementById('organisasjonsNummer')
+  const bedriftsAdresse = document.getElementById('organisasjonsAdresse')
+  const bedriftsPostnummer = document.getElementById('organisasjonsPostnummer')
+  const bedriftsPoststed = document.getElementById('organisasjonsPoststed')
+  const bedriftsWrapper = document.getElementById('bedriftsinfoWrapper')
   // Updates fields
   bedriftsNavn.value = data.navn
-  bedriftsAdresse.value = data.forretningsadresse.adresse
-  bedriftsPostnummer.value = data.forretningsadresse.postnummer
-  bedriftsPoststed.value = data.forretningsadresse.poststed
+  bedriftsNummer.value = data.orgnr
+  bedriftsAdresse.value = data.forretningsadr
+  bedriftsPostnummer.value = data.forradrpostnr
+  bedriftsPoststed.value = data.forradrpoststed
   // Reveal info
   mdlCleanUp()
   bedriftsWrapper.style.display = ''
+  hideVelger('bedriftsVelger')
 }
 
 function addListener (element, type, func) {
@@ -61,13 +64,13 @@ function addListener (element, type, func) {
 
 function organizationSelected (e) {
   e.preventDefault()
-  const selectedIndex = parseInt(e.target.value, 10)
+  const selectedIndex = parseInt(e.target.dataset.myIndex, 10)
   const data = YFFData.organizations[selectedIndex]
+  console.log(data)
   setupOrganization(data)
 }
 
 function createRadio (options) {
-  console.log(options)
   const id = new Date().getMilliseconds()
   const label = document.createElement('label')
   const input = document.createElement('input')
@@ -78,11 +81,13 @@ function createRadio (options) {
   input.classList.add('mdl-radio__button')
   span.classList.add('mdl-radio__label')
   input.setAttribute('id', id)
+  input.setAttribute('data-my-index', options.index)
   input.setAttribute('name', options.name)
   input.setAttribute('type', 'radio')
   label.setAttribute('id', options.index)
   label.setAttribute('for', id)
-  label.innerHTML = `${options.navn} - ${options.forradrkommnavn}`
+  span.setAttribute('data-my-index', options.index)
+  span.innerHTML = `${options.navn} - ${options.forradrkommnavn}`
   label.appendChild(input)
   label.appendChild(span)
   return label
@@ -93,8 +98,9 @@ function buildOrganizationsSelector () {
   div.innerHTML = ''
   YFFData.organizations.forEach((item, index) => {
     const radio = createRadio(Object.assign(item, {index: index, name: 'selectOrg'}))
-    console.log(radio)
+    const br = document.createElement('br')
     div.appendChild(radio)
+    div.appendChild(br)
     addListener(radio, 'click', organizationSelected)
   })
   showVelger('bedriftsVelger')
