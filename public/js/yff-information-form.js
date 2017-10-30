@@ -5,18 +5,29 @@ let YFFData = {
 }
 
 function init () {
-  var lookupOrganizationButton = document.getElementById('lookupOrganisasjon')
-  var bedriftsWrapper = document.getElementById('bedriftsinfoWrapper')
-  var lookupField = document.getElementById('brregQuery')
+  const lookupOrganizationButton = document.getElementById('lookupOrganisasjonsButton')
+  const bedriftsWrapper = document.getElementById('bedriftsinfoWrapper')
+  const lookupField = document.getElementById('brregQuery')
 
   bedriftsWrapper.style.display = 'none'
-  lookupOrganizationButton.addEventListener('click', function (e) {
+  hideVelger('bedriftsVelger')
+  lookupOrganizationButton.addEventListener('click', e => {
     lookupOrganization()
   })
 
   setTimeout(function () {
     lookupField.focus()
   }, 500)
+}
+
+function hideVelger (velger) {
+  const velgers = document.querySelectorAll(`.${velger}`)
+  velgers.forEach(item => item.style.display = 'none')
+}
+
+function showVelger (velger) {
+  const velgers = document.querySelectorAll(`.${velger}`)
+  velgers.forEach(item => item.style.display = '')
 }
 
 //MDL Text Input Cleanup
@@ -56,19 +67,22 @@ function organizationSelected (e) {
 }
 
 function createRadio (options) {
+  console.log(options)
   const id = new Date().getMilliseconds()
   const label = document.createElement('label')
   const input = document.createElement('input')
   const span = document.createElement('span')
-  label.classList.add('mdl-textfield__label')
-  input.classList.add('mdl-textfield__input')
-  span.classList.add('mdl-textfield__label')
+  label.classList.add('mdl-radio')
+  label.classList.add('mdl-js-radio')
+  label.classList.add('mdl-js-ripple-effect')
+  input.classList.add('mdl-radio__button')
+  span.classList.add('mdl-radio__label')
   input.setAttribute('id', id)
   input.setAttribute('name', options.name)
-  label.setAttribute('type', 'radio')
+  input.setAttribute('type', 'radio')
   label.setAttribute('id', options.index)
   label.setAttribute('for', id)
-  label.innerHTML = options.text
+  label.innerHTML = `${options.navn} - ${options.forradrkommnavn}`
   label.appendChild(input)
   label.appendChild(span)
   return label
@@ -78,10 +92,12 @@ function buildOrganizationsSelector () {
   const div = document.getElementById('lookupWrapper')
   div.innerHTML = ''
   YFFData.organizations.forEach((item, index) => {
-    const radio = createRadio(Object.assign(item, {index: index}))
+    const radio = createRadio(Object.assign(item, {index: index, name: 'selectOrg'}))
+    console.log(radio)
     div.appendChild(radio)
     addListener(radio, 'click', organizationSelected)
   })
+  showVelger('bedriftsVelger')
 }
 
 function lookupOrganization () {

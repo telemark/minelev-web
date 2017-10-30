@@ -1,6 +1,5 @@
 <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--3-col"></div>
-    <div id ="contractCard" class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+    <div id ="contractCard" class="mdl-card mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-shadow--2dp">
         <form action="/yff/{{student.personalIdNumber}}" method="post" id="submitContractForm">
             <input type="hidden" name="skjemaUtfyllingStart" value="{{skjemaUtfyllingStart}}">
             <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
@@ -24,10 +23,11 @@
                     <input class="mdl-textfield__input" type="text" name="query" id="brregQuery">
                     <label class="mdl-textfield__label" for="brregQuery">Søk etter bedrift</label>
                 </div>
-                <label class="mdl-button mdl-js-button mdl-button--icon" for="organisasjonsnummer" id="lookupOrganisasjons">
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="organisasjonsnummer" id="lookupOrganisasjonsButton">
                     <i class="material-icons" id="searchIcon">search</i>
                 </label>
-                <div id="lookupWrapper"></div>
+                <div class="mdl-typography--headline bedriftsVelger">Velg bedrift</div>
+                <div id="lookupWrapper" class="bedriftsVelger"></div>
                 <div id="bedriftsinfoWrapper">
                     <div class="mdl-typography--headline">Bedriftsinformasjon</div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -97,7 +97,6 @@
             </div>
         </form>
     </div>
-    <div class="mdl-cell mdl-cell--3-col"></div>
     <div id="modalPreview" class="mdl-card mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-shadow--2dp">
         <div class="mdl-card__actions mdl-card--border-bottom">
             <div class="mdl-layout-spacer"></div>
