@@ -8,10 +8,15 @@ function init () {
   const lookupOrganizationButton = document.getElementById('lookupOrganisasjonsButton')
   const bedriftsWrapper = document.getElementById('bedriftsinfoWrapper')
   const lookupField = document.getElementById('brregQuery')
-
+  const lookupForm = document.getElementById('lookupOrganisasjonForm')
   bedriftsWrapper.style.display = 'none'
   hideVelger('bedriftsVelger')
+  lookupForm.addEventListener('submit', e => {
+    e.preventDefault()
+    lookupOrganization()
+  })
   lookupOrganizationButton.addEventListener('click', e => {
+    e.preventDefault()
     lookupOrganization()
   })
 

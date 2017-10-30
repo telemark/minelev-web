@@ -291,6 +291,10 @@ a:visited {
     width: 100%;
 }
 
+.width90 {
+    width: 90%;
+}
+
 .logo {
     width: 42px;
     height: 49px;
