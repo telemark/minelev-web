@@ -11,6 +11,7 @@ function init () {
   const lookupForm = document.getElementById('lookupOrganisasjonForm')
   bedriftsWrapper.style.display = 'none'
   hideVelger('bedriftsVelger')
+  hideVelger('lookupMessages')
   lookupForm.addEventListener('submit', e => {
     e.preventDefault()
     lookupOrganization()
@@ -60,6 +61,7 @@ function setupOrganization (data) {
   mdlCleanUp()
   bedriftsWrapper.style.display = ''
   hideVelger('bedriftsVelger')
+  hideVelger('lookupMessages')
 }
 
 function addListener (element, type, func) {
@@ -112,15 +114,27 @@ function buildOrganizationsSelector () {
 
 function lookupOrganization () {
   const queryField = document.getElementById('brregQuery')
+  const messages = document.getElementById('lookupMessages')
   const query = queryField.value
   const lookupIcon = document.getElementById('searchIcon')
   const url = `/yff/brreg`
   lookupIcon.innerText = 'hourglass_empty'
+  messages.innerHTML = ''
+  hideVelger('lookupMessages')
+  hideVelger('bedriftsWrapper')
+  hideVelger('bedriftsinfoWrapper')
   axios.post(url, {query: query})
     .then(result => {
       lookupIcon.innerText = 'search'
       YFFData.organizations = result.data
-      buildOrganizationsSelector()
+      if (result.data.length === 1) {
+        setupOrganization(result.data[0])
+      } else if (result.data.length === 0) {
+        messages.innerHTML = 'Ingen bedrifter funnet. Vennligst forsøk med andre søkekriterier'
+        showVelger('lookupMessages')
+      } else {
+        buildOrganizationsSelector()
+      }
     }).catch(error => {
       console.error(error)
       lookupIcon.innerText = 'search'

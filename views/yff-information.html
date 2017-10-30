@@ -15,6 +15,7 @@
                     </label>
                 </form>
                 <div class="mdl-typography--headline bedriftsVelger">Velg bedrift</div>
+                <div id="lookupMessages"></div>
                 <div id="lookupWrapper" class="bedriftsVelger"></div>
                 <form action="/yff/{{student.personalIdNumber}}" method="post" id="submitContractForm">
                     <input type="hidden" name="skjemaUtfyllingStart" value="{{skjemaUtfyllingStart}}">
@@ -31,7 +32,7 @@
                     <input type="hidden" name="schoolPhone" value="{{student.unitPhone}}">
                     <input type="hidden" name="organizationNumber" value="{{student.organizationNumber}}">
                     <input type="hidden" name="type" value="yff-informasjonsskriv">
-                    <div id="bedriftsinfoWrapper">
+                    <div id="bedriftsinfoWrapper" class="bedriftsinfoWrapper">
                         <div class="mdl-typography--headline">Bedriftsinformasjon</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
                             <input class="mdl-textfield__input" type="text" id="organisasjonsNummer">
