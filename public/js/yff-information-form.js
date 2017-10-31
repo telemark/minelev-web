@@ -44,6 +44,16 @@ function mdlCleanUp () {
   }
 }
 
+function spinnerOn () {
+  const spinner = document.getElementById('searchIcon')
+  spinner.innerText = 'hourglass_empty'
+}
+
+function spinnerOff () {
+  const spinner = document.getElementById('searchIcon')
+  spinner.innerText = 'search'
+}
+
 function setupOrganization (data) {
   const bedriftsNavn = document.getElementById('organisasjonsNavn')
   const bedriftsNummer = document.getElementById('organisasjonsNummer')
@@ -84,6 +94,7 @@ function createRadio (options) {
   label.classList.add('mdl-radio')
   label.classList.add('mdl-js-radio')
   label.classList.add('mdl-js-ripple-effect')
+  label.classList.add('hoverGrey')
   input.classList.add('mdl-radio__button')
   span.classList.add('mdl-radio__label')
   input.setAttribute('id', id)
@@ -116,16 +127,15 @@ function lookupOrganization () {
   const queryField = document.getElementById('brregQuery')
   const messages = document.getElementById('lookupMessages')
   const query = queryField.value
-  const lookupIcon = document.getElementById('searchIcon')
   const url = `/yff/brreg`
-  lookupIcon.innerText = 'hourglass_empty'
+  spinnerOn()
   messages.innerHTML = ''
   hideVelger('lookupMessages')
   hideVelger('bedriftsWrapper')
   hideVelger('bedriftsinfoWrapper')
   axios.post(url, {query: query})
     .then(result => {
-      lookupIcon.innerText = 'search'
+      spinnerOff()
       YFFData.organizations = result.data
       if (result.data.length === 1) {
         setupOrganization(result.data[0])
@@ -137,7 +147,7 @@ function lookupOrganization () {
       }
     }).catch(error => {
       console.error(error)
-      lookupIcon.innerText = 'search'
+      spinnerOff()
     })
 }
 
