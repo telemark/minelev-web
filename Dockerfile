@@ -1,5 +1,5 @@
-# Setting the base to nodejs 8.8.0
-FROM node:8.8.0-alpine
+# Setting the base to nodejs 8.8.1
+FROM node:8.8.1-alpine
 
 # Maintainer
 MAINTAINER Geir Gåsodden

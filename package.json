@@ -11,7 +11,7 @@
   },
   "main": "index.js",
   "engines": {
-    "node": ">=8.8.0"
+    "node": ">=8.8.1"
   },
   "scripts": {
     "test": "standard && nsp check && ava",
@@ -47,7 +47,7 @@
   "bugs": {
     "url": "https://github.com/telemark/minelev-web/issues"
   },
-  "homepage": "https://github.com/telemark/minelev-web",
+  "homepage": "https://github.com/telemark/minelev-web#readme",
   "now": {
     "alias": [
       "www.minelev.no"
