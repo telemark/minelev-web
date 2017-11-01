@@ -2,157 +2,59 @@
   "evaluation": [
     {
       "id": "respekt",
-      "description": "Viser respekt",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Viser respekt"
     },
     {
       "id": "hms",
-      "description": "Følger retningslinjer og HMS innenfor fagområdet",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Følger retningslinjer og HMS innenfor fagområdet"
     },
     {
       "id": "tilpasningsdyktig",
-      "description": "Tilpasningsdyktig",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Tilpasningsdyktig"
     },
     {
       "id": "utadvent",
-      "description": "Utadvent",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Utadvent"
     },
     {
       "id": "larevillig",
-      "description": "Lærevillig",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Lærevillig"
     },
     {
       "id": "selvstendig",
-      "description": "Selvstendig",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Selvstendig"
     },
     {
       "id": "holdninger",
-      "description": "Viser gode holdninger",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Viser gode holdninger"
     },
     {
       "id": "samarbeid",
-      "description": "Viser vilje og evne til å samarbeide",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Viser vilje og evne til å samarbeide"
     },
     {
       "id": "interesse",
-      "description": "Viser interesse",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Viser interesse"
     },
     {
       "id": "kommunikasjonsevner",
-      "description": "Kommunikasjonsevner",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Kommunikasjonsevner"
     },
     {
       "id": "sosialt",
-      "description": "Sosial tilpasning",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Sosial tilpasning"
     },
     {
       "id": "punktlighet",
-      "description": "Punktlighet",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Punktlighet"
     },
     {
       "id": "orden",
-      "description": "Orden",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Orden"
     },
     {
       "id": "positiv",
-      "description": "Positiv",
-      "scores": [
-        {"description": "1", "value": 1},
-        {"description": "2", "value": 2},
-        {"description": "3", "value": 3},
-        {"description": "4", "value": 4},
-        {"description": "5", "value": 5}
-      ]
+      "description": "Positiv"
     }
   ],
   "order": [
@@ -170,6 +72,24 @@
       "id": "03",
       "description": "Lite god",
       "value": "Lite god"
+    }
+  ],
+  "competense": [
+    {
+      "id": "01",
+      "description": "planlegge, gjennomføre og dokumentere eget arbeid ved oppgradering og fornyelse på produksjonsanleggets lav- og høyspenningsanlegg"
+    },
+    {
+      "id": "02",
+      "description": "planlegge, montere og dokumentere eget arbeid ved idriftsetting av effekt, skillebrytere og styringsanleggene for produksjonsanlegg"
+    },
+    {
+      "id": "03",
+      "description": "ha kjennskap til regelverk for elektronisk kommunikasjon"
+    },
+    {
+      "id": "04",
+      "description": "feilsøke og iverksette tiltak for å gjenopprette normal drift"
     }
   ]
 }

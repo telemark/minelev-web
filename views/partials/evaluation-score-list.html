@@ -1,7 +1,25 @@
-<div class="mdl-typography--headline document-form-header chxBxEvaluationScore margin-top-10">Faglig måloppnåelse</div>
-{{#each evaluationScores}}
-<label for="terminRadioCourse{{id}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxEvaluationScore">
-    <input type="radio" name="evaluationScore" value="{{value}}" id="terminRadioCourse{{id}}" class="mdl-radio__button period-selector chxBxEvaluationScore">
-    <span class="mdl-radio__label chxBxEvaluationScore">{{description}}</span>
-</label><br/>
-{{/each}}
+<div class="mdl-typography--headline document-form-header chxBxEvaluationScore margin-top-10">Inntrykk</div>
+<table class="fullWidth">
+    <thead>
+        <tr>
+            <th>Beskrivelse</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each evaluationScores}}
+            <tr class="hoverGrey">
+                <td class="fontBigger">{{description}}</td>
+                <td><input type="radio" name="{{id}}" value="1" id="terminRadioCourse{{id}}1" class="mdl-radio__button period-selector chxBxEvaluationScore"></td>
+                <td><input type="radio" name="{{id}}" value="2" id="terminRadioCourse{{id}}2" class="mdl-radio__button period-selector chxBxEvaluationScore"></td>
+                <td><input type="radio" name="{{id}}" value="3" id="terminRadioCourse{{id}}3" class="mdl-radio__button period-selector chxBxEvaluationScore"></td>
+                <td><input type="radio" name="{{id}}" value="4" id="terminRadioCourse{{id}}4" class="mdl-radio__button period-selector chxBxEvaluationScore"></td>
+                <td><input type="radio" name="{{id}}" value="5" id="terminRadioCourse{{id}}5" class="mdl-radio__button period-selector chxBxEvaluationScore"></td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

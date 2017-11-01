@@ -185,7 +185,7 @@ module.exports.evaluation = async (request, reply) => {
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
     viewOptions.evaluationScores = yffData.evaluation
-    viewOptions.evaluationOrders = yffData.order
+    viewOptions.competenseScores = yffData.competense
     viewOptions.evaluationPeriods = evaluationPeriods
 
     logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
