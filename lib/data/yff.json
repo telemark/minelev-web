@@ -1,19 +1,158 @@
 {
   "evaluation": [
     {
-      "id": "01",
-      "description": "Lav måloppnåelse",
-      "value": "Lav måloppnåelse"
+      "id": "respekt",
+      "description": "Viser respekt",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
     },
     {
-      "id": "02",
-      "description": "Middels måloppnåelse",
-      "value": "Middels måloppnåelse"
+      "id": "hms",
+      "description": "Følger retningslinjer og HMS innenfor fagområdet",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
     },
     {
-      "id": "03",
-      "description": "Høy måloppnåelse",
-      "value": "Høy måloppnåelse"
+      "id": "tilpasningsdyktig",
+      "description": "Tilpasningsdyktig",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
+    },
+    {
+      "id": "utadvent",
+      "description": "Utadvent",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
+    },
+    {
+      "id": "larevillig",
+      "description": "Lærevillig",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
+    },
+    {
+      "id": "selvstendig",
+      "description": "Selvstendig",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
+    },
+    {
+      "id": "holdninger",
+      "description": "Viser gode holdninger",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
+    },
+    {
+      "id": "samarbeid",
+      "description": "Viser vilje og evne til å samarbeide",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
+    },
+    {
+      "id": "interesse",
+      "description": "Viser interesse",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
+    },
+    {
+      "id": "kommunikasjonsevner",
+      "description": "Kommunikasjonsevner",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
+    },
+    {
+      "id": "sosialt",
+      "description": "Sosial tilpasning",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
+    },
+    {
+      "id": "punktlighet",
+      "description": "Punktlighet",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
+    },
+    {
+      "id": "orden",
+      "description": "Orden",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
+    },
+    {
+      "id": "positiv",
+      "description": "Positiv",
+      "scores": [
+        {"description": "1", "value": 1},
+        {"description": "2", "value": 2},
+        {"description": "3", "value": 3},
+        {"description": "4", "value": 4},
+        {"description": "5", "value": 5}
+      ]
     }
   ],
   "order": [
