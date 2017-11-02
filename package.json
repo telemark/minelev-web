@@ -53,6 +53,9 @@
       "www.minelev.no"
     ],
     "type": "npm",
+    "engines": {
+      "node": "8.9.0"
+    },
     "dotenv": "production.env"
   },
   "devDependencies": {
