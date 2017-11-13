@@ -23,6 +23,42 @@
                 {{>evaluation-period}}
                 {{>evaluation-score-list}}
                 {{>evaluation-competense-list}}
+                <div class="mdl-typography--headline document-form-header chxBxEvaluationOrder margin-top-10">Fravær under utplasseringen</div>
+                <table class="fullWidth">
+                    <thead>
+                    <tr>
+                        <th>Dager</th>
+                        <th>Timer</th>
+                        <th>Varslet eleven om fraværet?</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="fontBigger">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="number" value="0" id="fravarDager">
+                                <label class="mdl-textfield__label" for="fravarDager">Antall hele dager</label>
+                            </div>
+                        </td>
+                        <td class="fontBigger">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="number" value="0" id="fravarTimer">
+                                <label class="mdl-textfield__label" for="fravarTimer">Antall enkelttimer</label>
+                            </div>
+                        </td>
+                        <td class="fontBigger">
+                            <label for="fravarRadioJa" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxEvaluationPeriod">
+                                <input type="radio" name="varsletFravar" value="ja" id="fravarRadioJa" class="mdl-radio__button period-selector chxBxEvaluationPeriod">
+                                <span class="mdl-radio__label chxBxEvaluationPeriod">Ja</span>
+                            </label>
+                            <label for="fravarRadioNei" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxEvaluationPeriod">
+                                <input type="radio" name="varsletFravar" value="nei" id="fravarRadioNei" class="mdl-radio__button period-selector chxBxEvaluationPeriod">
+                                <span class="mdl-radio__label chxBxEvaluationPeriod">Nei</span>
+                            </label>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="mdl-card__actions mdl-card--border">
                 <a href="/" id="deleteEvaluation" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett evaluering for {{student.fullName}}"><i class="material-icons">delete</i></a>

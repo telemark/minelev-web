@@ -35,14 +35,6 @@
     {
       "id": "atferd",
       "description": "Atferd (holdninger, respekt)"
-    },
-    {
-      "id": "egenmelding",
-      "description": "Gir eleven beskjed ved fravær"
-    },
-    {
-      "id": "selvstendighet",
-      "description": "(Selvstendig innenfor sitt kompetanseområde. Stryke?)"
     }
   ],
   "order": [

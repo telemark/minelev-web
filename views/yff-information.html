@@ -54,7 +54,11 @@
                             <input class="mdl-textfield__input" type="text" id="organisasjonsPoststed" readonly>
                             <label class="mdl-textfield__label" for="organisasjonsPoststed">Poststed</label>
                         </div><br/>
-                        <div class="mdl-typography--headline">Kontaktperson</div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
+                            <input class="mdl-textfield__input" type="text" id="organisasjonsAvdeling">
+                            <label class="mdl-textfield__label" for="organisasjonsAvdeling">Avdeling</label>
+                        </div><br/>
+                        <div class="mdl-typography--headline contactPerson">Kontaktperson</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
                             <input class="mdl-textfield__input" type="text" id="kontaktpersonNavn">
                             <label class="mdl-textfield__label" for="kontaktpersonNavn">Kontaktperson</label>
@@ -63,6 +67,11 @@
                             <input class="mdl-textfield__input" type="text" id="kontaktpersonTelefon">
                             <label class="mdl-textfield__label" for="kontaktpersonTelefon">Telefon</label>
                         </div><br/>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
+                            <input class="mdl-textfield__input" type="text" id="kontaktpersonAvdeling">
+                            <label class="mdl-textfield__label" for="kontaktpersonAvdeling">Avdeling</label>
+                        </div><br/>
+                        <button title="Legg til flere kontaktpersoner" class="mdl-button mdl-js-button mdl-button--colored mdl-color-text--black addContactPersonButton">Legg til flere kontaktpersoner</button>
                         <div class="mdl-typography--headline">Tidsrom</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
                             <input class="mdl-textfield__input" type="date" id="startDato" value="{{thisDay}}">
@@ -85,7 +94,7 @@
                             <input class="mdl-textfield__input" type="time" id="sluttTid" value="16:00">
                             <label class="mdl-textfield__label" for="sluttTid">Til kl</label>
                         </div>
-                        <div class="mdl-typography--headline">Pårørende</div>
+                        <div class="mdl-typography--headline nextOfKin">Pårørende</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
                             <input class="mdl-textfield__input" type="text" id="parorendeNavn">
                             <label class="mdl-textfield__label" for="parorendeNavn">Navn</label>
@@ -94,6 +103,7 @@
                             <input class="mdl-textfield__input" type="text" id="parorendeTelefon">
                             <label class="mdl-textfield__label" for="parorendeTelefon">Telefon</label>
                         </div><br/>
+                        <button title="Legg til flere pårørende" class="mdl-button mdl-js-button mdl-button--colored mdl-color-text--black addNextOfKinButton">Legg til flere pårørende</button>
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
                         <a href="/" id="deleteContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett dokumentet for {{student.fullName}}"><i class="material-icons">delete</i></a>
