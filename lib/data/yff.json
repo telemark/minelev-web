@@ -1,60 +1,48 @@
 {
   "evaluation": [
     {
-      "id": "respekt",
-      "description": "Viser respekt"
-    },
-    {
       "id": "hms",
       "description": "Følger retningslinjer og HMS innenfor fagområdet"
     },
     {
+      "id": "respekt",
+      "description": "Vise holdninger og respekt til opplæringssteds retningslinjer/regler og andre mennesker"
+    },
+    {
       "id": "tilpasningsdyktig",
-      "description": "Tilpasningsdyktig"
+      "description": "Tilpasningsdyktig og evne til å samarbeide"
     },
     {
-      "id": "utadvent",
-      "description": "Utadvent"
+      "id": "kommunikasjon",
+      "description": "Kommunikasjonsevner i møte med kollegaer, kunder/pasienter etc."
     },
     {
-      "id": "larevillig",
-      "description": "Lærevillig"
+      "id": "veiledning",
+      "description": "Evne til å ta veiledning/læredyktig"
     },
     {
-      "id": "selvstendig",
-      "description": "Selvstendig"
+      "id": "oppfylle",
+      "description": "Oppfylle/utføre tildelte arbeidsoppgaver"
     },
     {
-      "id": "holdninger",
-      "description": "Viser gode holdninger"
-    },
-    {
-      "id": "samarbeid",
-      "description": "Viser vilje og evne til å samarbeide"
-    },
-    {
-      "id": "interesse",
-      "description": "Viser interesse"
-    },
-    {
-      "id": "kommunikasjonsevner",
-      "description": "Kommunikasjonsevner"
-    },
-    {
-      "id": "sosialt",
-      "description": "Sosial tilpasning"
-    },
-    {
-      "id": "punktlighet",
-      "description": "Punktlighet"
+      "id": "initiativ",
+      "description": "Initiativ og interesse"
     },
     {
       "id": "orden",
-      "description": "Orden"
+      "description": "Orden (punktlighet)"
     },
     {
-      "id": "positiv",
-      "description": "Positiv"
+      "id": "atferd",
+      "description": "Atferd (holdninger, respekt)"
+    },
+    {
+      "id": "egenmelding",
+      "description": "Gir eleven beskjed ved fravær"
+    },
+    {
+      "id": "selvstendighet",
+      "description": "(Selvstendig innenfor sitt kompetanseområde. Stryke?)"
     }
   ],
   "order": [
