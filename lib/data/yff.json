@@ -5,8 +5,12 @@
       "description": "Følger retningslinjer og HMS innenfor fagområdet"
     },
     {
-      "id": "respekt",
-      "description": "Vise holdninger og respekt til opplæringssteds retningslinjer/regler og andre mennesker"
+      "id": "respekt-retningslinjer",
+      "description": "Vise gode holdninger og respekt for opplæringssteds retningslinjer og regler"
+    },
+    {
+      "id": "respekt-mennesker",
+      "description": "Vise gode holdninger og respekt for mennesker de møter i forbindelse med utplasseringen"
     },
     {
       "id": "tilpasningsdyktig",
@@ -26,7 +30,7 @@
     },
     {
       "id": "initiativ",
-      "description": "Initiativ og interesse"
+      "description": "Initiativ og interesse for arbeidet"
     },
     {
       "id": "orden",
