@@ -91,6 +91,7 @@ function createInput (options) {
   div.classList.add('mdl-textfield')
   div.classList.add('mdl-js-textfield')
   div.classList.add('mdl-textfield--floating-label')
+  div.classList.add('width90')
   input.classList.add('mdl-textfield__input')
   label.classList.add('mdl-textfield__label')
   input.setAttribute('id', id)
@@ -104,26 +105,22 @@ function createInput (options) {
 
 function addContactPerson (e) {
   e.preventDefault()
-  const parent = e.target.parentNode
   const button = e.target
   const nameField = createInput({name: 'kontaktpersonNavn', text: 'Kontaktperson'})
   const phoneField = createInput({name: 'kontaktpersonTelefon', text: 'Telefon'})
   const departmentField = createInput({name: 'kontaktpersonAvdeling', text: 'Avdeling'})
-  parent.insertBefore(button, nameField)
-  parent.insertBefore(button, phoneField)
-  parent.insertBefore(button, departmentField)
-  console.log('Adding contactPerson')
+  button.parentNode.insertBefore(nameField, button)
+  button.parentNode.insertBefore(phoneField, button)
+  button.parentNode.insertBefore(departmentField, button)
 }
 
 function addNextOfKin (e) {
   e.preventDefault()
-  const parent = e.target.parentNode
   const button = e.target
   const nameField = createInput({name: 'parorendeNavn', text: 'Navn'})
-  const phoneField = createInput({name: 'parorendeTelefon', text: 'Telfon'})
-  parent.insertBefore(button, nameField)
-  parent.insertBefore(button, phoneField)
-  console.log('Adding NextOfKin')
+  const phoneField = createInput({name: 'parorendeTelefon', text: 'Telefon'})
+  button.parentNode.insertBefore(nameField, button)
+  button.parentNode.insertBefore(phoneField, button)
 }
 
 function organizationSelected (e) {
