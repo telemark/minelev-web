@@ -320,3 +320,7 @@ th {
 .hoverGrey:hover {
     background-color: #ececec;
 }
+
+.addPersonButton {
+    margin-bottom: 10px;
+}

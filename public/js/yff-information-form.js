@@ -46,6 +46,8 @@ function mdlCleanUp () {
 
 function spinnerOn () {
   const spinner = document.getElementById('searchIcon')
+  const resultDiv = document.getElementById('lookupWrapper')
+  resultDiv.innerHTML = ''
   spinner.innerText = 'hourglass_empty'
 }
 
@@ -72,11 +74,56 @@ function setupOrganization (data) {
   bedriftsWrapper.style.display = ''
   hideVelger('bedriftsVelger')
   hideVelger('lookupMessages')
+  addListener(document.getElementById('addContactPersonButton'), 'click', addContactPerson)
+  addListener(document.getElementById('addNextOfKinButton'), 'click', addNextOfKin)
 }
 
 function addListener (element, type, func) {
   element.removeEventListener(type, func)
   element.addEventListener(type, func)
+}
+
+function createInput (options) {
+  const id = uuidv4()
+  const div = document.createElement('div')
+  const input = document.createElement('input')
+  const label = document.createElement('label')
+  div.classList.add('mdl-textfield')
+  div.classList.add('mdl-js-textfield')
+  div.classList.add('mdl-textfield--floating-label')
+  input.classList.add('mdl-textfield__input')
+  label.classList.add('mdl-textfield__label')
+  input.setAttribute('id', id)
+  input.setAttribute('name', options.name)
+  label.setAttribute('for', id)
+  label.innerHTML = options.text
+  div.appendChild(input)
+  div.appendChild(label)
+  return div
+}
+
+function addContactPerson (e) {
+  e.preventDefault()
+  const parent = e.target.parentNode
+  const button = e.target
+  const nameField = createInput({name: 'kontaktpersonNavn', text: 'Kontaktperson'})
+  const phoneField = createInput({name: 'kontaktpersonTelefon', text: 'Telefon'})
+  const departmentField = createInput({name: 'kontaktpersonAvdeling', text: 'Avdeling'})
+  parent.insertBefore(button, nameField)
+  parent.insertBefore(button, phoneField)
+  parent.insertBefore(button, departmentField)
+  console.log('Adding contactPerson')
+}
+
+function addNextOfKin (e) {
+  e.preventDefault()
+  const parent = e.target.parentNode
+  const button = e.target
+  const nameField = createInput({name: 'parorendeNavn', text: 'Navn'})
+  const phoneField = createInput({name: 'parorendeTelefon', text: 'Telfon'})
+  parent.insertBefore(button, nameField)
+  parent.insertBefore(button, phoneField)
+  console.log('Adding NextOfKin')
 }
 
 function organizationSelected (e) {

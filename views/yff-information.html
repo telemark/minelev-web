@@ -60,18 +60,18 @@
                         </div><br/>
                         <div class="mdl-typography--headline contactPerson">Kontaktperson</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" id="kontaktpersonNavn">
+                            <input class="mdl-textfield__input" type="text" name="kontaktpersonNavn" id="kontaktpersonNavn">
                             <label class="mdl-textfield__label" for="kontaktpersonNavn">Kontaktperson</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" id="kontaktpersonTelefon">
+                            <input class="mdl-textfield__input" type="text" name="kontaktpersonTelefon" id="kontaktpersonTelefon">
                             <label class="mdl-textfield__label" for="kontaktpersonTelefon">Telefon</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" id="kontaktpersonAvdeling">
+                            <input class="mdl-textfield__input" type="text" name="kontaktpersonAvdeling" id="kontaktpersonAvdeling">
                             <label class="mdl-textfield__label" for="kontaktpersonAvdeling">Avdeling</label>
                         </div><br/>
-                        <button title="Legg til flere kontaktpersoner" class="mdl-button mdl-js-button mdl-button--colored mdl-color-text--black addContactPersonButton">Legg til flere kontaktpersoner</button>
+                        <button title="Legg til flere kontaktpersoner" class="mdl-button mdl-js-button mdl-button--colored mdl-color-text--black addPersonButton" id="addContactPersonButton">Legg til flere kontaktpersoner</button>
                         <div class="mdl-typography--headline">Tidsrom</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
                             <input class="mdl-textfield__input" type="date" id="startDato" value="{{thisDay}}">
@@ -94,16 +94,20 @@
                             <input class="mdl-textfield__input" type="time" id="sluttTid" value="16:00">
                             <label class="mdl-textfield__label" for="sluttTid">Til kl</label>
                         </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
+                            <input class="mdl-textfield__input" type="text" id="oppmotested">
+                            <label class="mdl-textfield__label" for="oppmotested">Oppmøtested</label>
+                        </div>
                         <div class="mdl-typography--headline nextOfKin">Pårørende</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" id="parorendeNavn">
+                            <input class="mdl-textfield__input" type="text" name="parorendeNavn" id="parorendeNavn">
                             <label class="mdl-textfield__label" for="parorendeNavn">Navn</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" id="parorendeTelefon">
+                            <input class="mdl-textfield__input" type="text" name="parorendeTelefon" id="parorendeTelefon">
                             <label class="mdl-textfield__label" for="parorendeTelefon">Telefon</label>
                         </div><br/>
-                        <button title="Legg til flere pårørende" class="mdl-button mdl-js-button mdl-button--colored mdl-color-text--black addNextOfKinButton">Legg til flere pårørende</button>
+                        <button title="Legg til flere pårørende" class="mdl-button mdl-js-button mdl-button--colored mdl-color-text--black addPersonButton" id="addNextOfKinButton">Legg til flere pårørende</button>
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
                         <a href="/" id="deleteContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett dokumentet for {{student.fullName}}"><i class="material-icons">delete</i></a>
@@ -135,5 +139,7 @@
 <script src="/public/js/yff-information-form.js"></script>
 <!-- Date input polyfill -->
 <script src="/public/js/date-input-polyfill.dist.js"></script>
+<!-- uuid -->
+<script src="https://wzrd.in/standalone/uuid%2Fv4@latest"></script>
 <!-- Axios -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
