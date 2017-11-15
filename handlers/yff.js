@@ -115,7 +115,12 @@ module.exports.plan = async (request, reply) => {
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
   let mainGroupName = false
 
-  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, utdanningsprogrammer: utdanningsprogrammer})
+  let viewOptions = createViewOptions({
+    credentials: request.auth.credentials,
+    myContactClasses: myContactClasses,
+    utdanningsprogrammer: utdanningsprogrammer,
+    utplasseringsSted: yffData.utplasseringsSted
+  })
 
   logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
@@ -285,15 +290,35 @@ module.exports.submit = async (request, reply) => {
 
 module.exports.addLineToPlan = async (request, reply) => {
   const user = request.auth.credentials.data
+  const token = generateSystemJwt(user.userId)
+  const url = `${config.QUEUE_SERVICE_URL}`
   let data = request.payload
   data.studentId = request.params.studentID
   data.userId = user.userId
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
 
+  let postData = prepareDocument(data)
+
+  postData.documentStatus = [
+    {
+      timeStamp: new Date().getTime(),
+      status: 'Registrert'
+    }
+  ]
+
+  axios.defaults.headers.common['Authorization'] = token
+
   logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
 
-  reply.redirect(`/yff/plan/${data.studentUserName}`)
+  axios.put(url, postData)
+    .then(results => {
+      logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'added'])
+      reply.redirect(`/yff/plan/${data.studentUserName}`)
+    }).catch(error => {
+      logger('error', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
+      reply.redirect('/')
+    })
 }
 
 module.exports.lookupBrreg = async (request, reply) => {

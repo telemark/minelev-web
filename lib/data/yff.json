@@ -75,5 +75,19 @@
       "id": "04",
       "description": "feilsøke og iverksette tiltak for å gjenopprette normal drift"
     }
+  ],
+  "utplasseringsSted": [
+    {
+      "id": "bedrift",
+      "description": "Bedrift"
+    },
+    {
+      "id": "skole",
+      "description": "Skole"
+    },
+    {
+      "id": "ub",
+      "description": "Ungdomsbedrift (entreprenørskap)"
+    }
   ]
 }
