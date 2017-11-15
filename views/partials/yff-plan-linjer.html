@@ -8,41 +8,12 @@
     </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                planlegge, gjennomføre og dokumentere eget arbeid ved oppgradering og fornyelse på produksjonsanleggets lav- og høyspenningsanlegg
-            </td>
-            <td>
-                Elkraft deLuxe, avdeling Sandefjord
-            </td>
-            <td><button>Slett</button></td>
-        </tr>
-        <tr>
-            <td>
-                planlegge, montere og dokumentere eget arbeid ved idriftsetting av effekt, skillebrytere og styringsanleggene for produksjonsanlegg
-            </td>
-            <td>
-                Elkraft deLuxe, avdeling Sandefjord
-            </td>
-            <td><button>Slett</button></td>
-        </tr>
-        <tr>
-            <td>
-                ha kjennskap til regelverk for elektronisk kommunikasjon
-            </td>
-            <td>
-                Skogmo videregående skole
-            </td>
-            <td><button>Slett</button></td>
-        </tr>
-        <tr>
-            <td>
-                feilsøke og iverksette tiltak for å gjenopprette normal drift
-            </td>
-            <td>
-                Feilslått UB
-            </td>
-            <td><button>Slett</button></td>
-        </tr>
+        {{#each maal}}
+            <tr class="hoverGrey">
+                <td>{{kompetanseMaal}}</td>
+                <td>{{utplasseringsSted}}</td>
+                <td><button>Slett</button></td>
+            </tr>
+        {{/each}}
     </tbody>
 </table>

@@ -118,7 +118,15 @@ module.exports.plan = async (request, reply) => {
     userId: userId,
     token: token,
     query: {
-      documentCategory: 'yff-yff-informasjonsskriv',
+      documentCategory: 'yff-informasjonsskriv',
+      studentUserName: studentUserName
+    }
+  }
+  const maalOptions = {
+    userId: userId,
+    token: token,
+    query: {
+      documentCategory: 'yff-lokalplan-maal',
       studentUserName: studentUserName
     }
   }
@@ -133,8 +141,8 @@ module.exports.plan = async (request, reply) => {
   logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
   axios.defaults.headers.common['Authorization'] = token
-  // Retrieves student, students contactTeachers and bedrift
-  const [results, contactTeachersResult, bedrifter] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions)])
+  // Retrieves student, students contactTeachers, bedrift and maal
+  const [results, contactTeachersResult, bedrifter, maal] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions), searchLogs(maalOptions)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -150,6 +158,7 @@ module.exports.plan = async (request, reply) => {
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
+    viewOptions.maal = maal
     viewOptions.bedrifter = bedrifter
     // If not bedrifter remove bedrifter from utplasseringssted
     viewOptions.utplasseringsSted = bedrifter.length > 0 ? yffData.utplasseringsSted : yffData.utplasseringsSted.slice(1)
@@ -308,6 +317,7 @@ module.exports.addLineToPlan = async (request, reply) => {
   data.userId = user.userId
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
+  data.kompetansemaalValg = Array.isArray(data.kompetansemaalvalg) ? data.kompetansemaalvalg : [data.kompetansemaalvalg]
 
   let postData = prepareDocument(data)
 
@@ -320,11 +330,13 @@ module.exports.addLineToPlan = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
 
-  logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
+  const jobs = data.kompetansemaalValg.map(line => axios.put(url, Object.assign({}, postData, {kompetanseMaal: line})))
 
-  axios.put(url, postData)
+  logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'jobs', jobs.length, 'start'])
+
+  Promise.all(jobs)
     .then(results => {
-      logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'added'])
+      logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'added', results.length])
       reply.redirect(`/yff/plan/${data.studentUserName}`)
     }).catch(error => {
       logger('error', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
