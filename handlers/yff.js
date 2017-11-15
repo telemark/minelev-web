@@ -10,6 +10,7 @@ const prepareDocument = require('../lib/prepare-document')
 const prepareDocumentPreview = require('../lib/prepare-document-preview')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
+const searchLogs = require('../lib/search-logs')
 const datePadding = require('../lib/date-padding')
 const getTemplateType = require('../lib/get-template-type')
 const logger = require('../lib/logger')
@@ -113,20 +114,27 @@ module.exports.plan = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
+  const bedriftsOptions = {
+    userId: userId,
+    token: token,
+    query: {
+      documentCategory: 'yff-yff-informasjonsskriv',
+      studentUserName: studentUserName
+    }
+  }
   let mainGroupName = false
 
   let viewOptions = createViewOptions({
     credentials: request.auth.credentials,
     myContactClasses: myContactClasses,
-    utdanningsprogrammer: utdanningsprogrammer,
-    utplasseringsSted: yffData.utplasseringsSted
+    utdanningsprogrammer: utdanningsprogrammer
   })
 
   logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
   axios.defaults.headers.common['Authorization'] = token
-  // Retrieves student and students contactTeachers
-  const [results, contactTeachersResult] = await Promise.all([axios.get(url), axios.get(urlContactTeachers)])
+  // Retrieves student, students contactTeachers and bedrift
+  const [results, contactTeachersResult, bedrifter] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -142,6 +150,9 @@ module.exports.plan = async (request, reply) => {
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
+    viewOptions.bedrifter = bedrifter
+    // If not bedrifter remove bedrifter from utplasseringssted
+    viewOptions.utplasseringsSted = bedrifter.length > 0 ? yffData.utplasseringsSted : yffData.utplasseringsSted.slice(1)
 
     logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
