@@ -4,7 +4,7 @@
     <tr>
         <th>Kompetansemål</th>
         <th>Utplasseringssted</th>
-        <th>Fjern</th>
+        <th class="text-center">Fjern</th>
     </tr>
     </thead>
     <tbody>
@@ -12,7 +12,7 @@
             <tr class="hoverGrey">
                 <td>{{kompetanseMaal}}</td>
                 <td>{{utplasseringsSted}}</td>
-                <td><button>Slett</button></td>
+                <td class="text-center"><a href="/yff/plan/remove/{{studentUserName}}/{{_id}}" title="Slett kompetansemålet {{kompetanseMaal}}" class="mdl-button mdl-js-button mdl-color-text--black material-icons">delete</a></td>
             </tr>
         {{/each}}
     </tbody>

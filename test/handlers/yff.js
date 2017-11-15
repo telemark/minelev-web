@@ -11,5 +11,6 @@ test('yff handlers test', t => {
   t.truthy(handlers.generatePreview, 'handler has method generatePreview')
   t.truthy(handlers.submit, 'handler has method submit')
   t.truthy(handlers.addLineToPlan, 'handler has method addLineToPlan')
+  t.truthy(handlers.removeLineFromPlan, 'handler has method removeLineFromPlan')
   t.truthy(handlers.lookupBrreg, 'handler has method lookupBrreg')
 })

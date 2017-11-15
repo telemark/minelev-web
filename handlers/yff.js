@@ -318,6 +318,7 @@ module.exports.addLineToPlan = async (request, reply) => {
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
   data.kompetansemaalValg = Array.isArray(data.kompetansemaalvalg) ? data.kompetansemaalvalg : [data.kompetansemaalvalg]
+  data.isQueued = false
 
   let postData = prepareDocument(data)
 
@@ -342,6 +343,40 @@ module.exports.addLineToPlan = async (request, reply) => {
       logger('error', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
       reply.redirect('/')
     })
+}
+
+module.exports.removeLineFromPlan = async (request, reply) => {
+  const user = request.auth.credentials.data
+  const token = generateSystemJwt(user.userId)
+  const { studentID, maalID } = request.params
+  const findUrl = `${config.QUEUE_SERVICE_URL}/${maalID}`
+  const deleteUrl = `${config.QUEUE_SERVICE_URL}/${maalID}`
+
+  axios.defaults.headers.common['Authorization'] = token
+
+  logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, 'start'])
+
+  try {
+    const { data } = await axios.get(findUrl)
+    console.log(JSON.stringify(data, null, 2))
+    if (data.length === 1 && data[0].studentUserName === studentID) {
+      axios.delete(deleteUrl)
+        .then(result => {
+          logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, 'removed'])
+          reply.redirect(`/yff/plan/${studentID}`)
+        })
+        .catch(error => {
+          logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, error])
+          reply.redirect(`/yff/plan/${studentID}`)
+        })
+    } else {
+      logger('error', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, 'mismatch in line', maalID])
+      reply.redirect(`/yff/plan/${studentID}`)
+    }
+  } catch (error) {
+    logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, error])
+    reply.redirect(`/yff/plan/${studentID}`)
+  }
 }
 
 module.exports.lookupBrreg = async (request, reply) => {

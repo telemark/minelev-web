@@ -3,7 +3,7 @@
 const test = require('ava')
 const pkg = require('../../package.json')
 const dependencies = pkg.devDependencies || {}
-const dropModules = ['micro-dev', 'nsp']
+const dropModules = ['nsp']
 const isDropped = (module) => !dropModules.includes(module)
 
 if (Object.keys(dependencies).length > 0) {
