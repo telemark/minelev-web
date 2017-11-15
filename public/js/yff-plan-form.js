@@ -15,11 +15,13 @@ function updateProgramInnhold (e) {
 }
 
 function init () {
+  const maalButtons = document.querySelectorAll('.kompetanseMaalButton')
   hideVelger('utplasseringsVelger')
   hideVelger('innholdsVelger')
   hideVelger('submitVelger')
-  addListener('utdanningsprogramVelger', 'change', updateProgramInnhold)
-  addListener('klassetrinnVelger', 'change', updateProgramInnhold)
+  addListener(document.getElementById('utdanningsprogramVelger'), 'change', updateProgramInnhold)
+  addListener(document.getElementById('klassetrinnVelger'), 'change', updateProgramInnhold)
+  maalButtons.forEach(button => addListener(button, 'click', deleteKompetanseMaal))
 }
 
 //MDL Text Input Cleanup
@@ -42,11 +44,10 @@ function getKompetanseMaal (index) {
   yffData.kompetansemaal = yffData.programInnhold[index].kompetansemaal
   buildKompetansemaal()
   showVelger('utplasseringsVelger')
-  addListener('utplasseringsstedVelger', 'change', buildArbeidsoppghaver)
+  addListener(document.getElementById('utplasseringsstedVelger'), 'change', buildArbeidsoppghaver)
 }
 
-function addListener (id, type, func) {
-  const element = document.getElementById(id)
+function addListener (element, type, func) {
   element.removeEventListener(type, func)
   element.addEventListener(type, func)
 }
@@ -166,6 +167,39 @@ function removeRow (id) {
   row.parentNode.removeChild(row)
   toggleTable('planUBTable')
   toggleTable('planSkoleTable')
+}
+
+function removeTableRow (id) {
+  const row = document.getElementById(id)
+  row.parentNode.removeChild(row)
+}
+
+function hideTableRow (id) {
+  const row = document.getElementById(id)
+  row.style.display = 'none'
+}
+
+function showTableRow (id) {
+  const row = document.getElementById(id)
+  row.style.display = ''
+}
+
+async function deleteKompetanseMaal (e) {
+  e.preventDefault()
+  if (confirm(`${e.target.title}?`)) {
+    console.log('Skal slettes')
+    const id = e.target.dataset.id
+    const url = e.target.href
+    hideTableRow(id)
+    const { data } = await axios(url)
+    if (data.success === true) {
+      removeTableRow(id)
+    } else {
+      showTableRow(id)
+    }
+  } else {
+    return false
+  }
 }
 
 function createInput (options) {

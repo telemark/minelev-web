@@ -358,20 +358,22 @@ module.exports.removeLineFromPlan = async (request, reply) => {
 
   try {
     const { data } = await axios.get(findUrl)
-    console.log(JSON.stringify(data, null, 2))
     if (data.length === 1 && data[0].studentUserName === studentID) {
       axios.delete(deleteUrl)
         .then(result => {
           logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, 'removed'])
-          reply.redirect(`/yff/plan/${studentID}`)
+          // reply.redirect(`/yff/plan/${studentID}`)
+          reply({success: true})
         })
         .catch(error => {
           logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, error])
-          reply.redirect(`/yff/plan/${studentID}`)
+          // reply.redirect(`/yff/plan/${studentID}`)
+          reply({success: false})
         })
     } else {
       logger('error', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, 'mismatch in line', maalID])
-      reply.redirect(`/yff/plan/${studentID}`)
+      // reply.redirect(`/yff/plan/${studentID}`)
+      reply({success: false})
     }
   } catch (error) {
     logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, error])

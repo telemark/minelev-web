@@ -9,10 +9,10 @@
     </thead>
     <tbody>
         {{#each maal}}
-            <tr class="hoverGrey">
+            <tr class="hoverGrey" id="{{_id}}">
                 <td>{{kompetanseMaal}}</td>
                 <td>{{utplasseringsSted}}</td>
-                <td class="text-center"><a href="/yff/plan/remove/{{studentUserName}}/{{_id}}" title="Slett kompetansemålet {{kompetanseMaal}}" class="mdl-button mdl-js-button mdl-color-text--black material-icons">delete</a></td>
+                <td class="text-center"><a href="/yff/plan/remove/{{studentUserName}}/{{_id}}" data-id="{{_id}}" title="Slett kompetansemålet {{kompetanseMaal}}" class="mdl-button mdl-js-button mdl-color-text--black material-icons kompetanseMaalButton">delete</a></td>
             </tr>
         {{/each}}
     </tbody>
