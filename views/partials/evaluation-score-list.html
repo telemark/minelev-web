@@ -11,12 +11,21 @@
     </thead>
     <tbody>
         {{#each evaluationScores}}
+            <input type="hidden" name="evaluation-{{id}}" value="{{description}}">
             <tr class="hoverGrey">
                 <td class="fontBigger">{{description}}</td>
-                <td class="text-center"><input type="radio" name="{{id}}" value="Under forventet" id="terminRadioCourse{{id}}1" class="mdl-radio__button period-selector chxBxEvaluationScore"></td>
-                <td class="text-center"><input type="radio" name="{{id}}" value="Som forventet" id="terminRadioCourse{{id}}2" class="mdl-radio__button period-selector chxBxEvaluationScore"></td>
-                <td class="text-center"><input type="radio" name="{{id}}" value="Over forventet" id="terminRadioCourse{{id}}3" class="mdl-radio__button period-selector chxBxEvaluationScore"></td>
-                <td class="text-center"><input type="radio" name="{{id}}" value="0" id="terminRadioCourse{{id}}4" class="mdl-radio__button period-selector chxBxEvaluationScore"></td>
+                <td class="text-center">
+                    <input type="radio" name="evaluationscore-{{id}}" value="Under forventet" id="terminRadioCourse{{id}}1" class="mdl-radio__button period-selector chxBxEvaluationScore">
+                </td>
+                <td class="text-center">
+                    <input type="radio" name="evaluationscore-{{id}}" value="Som forventet" id="terminRadioCourse{{id}}2" class="mdl-radio__button period-selector chxBxEvaluationScore">
+                </td>
+                <td class="text-center">
+                    <input type="radio" name="evaluationscore-{{id}}" value="Over forventet" id="terminRadioCourse{{id}}3" class="mdl-radio__button period-selector chxBxEvaluationScore">
+                </td>
+                <td class="text-center">
+                    <input type="radio" name="evaluationscore-{{id}}" value="0" id="terminRadioCourse{{id}}4" class="mdl-radio__button period-selector chxBxEvaluationScore">
+                </td>
             </tr>
         {{/each}}
     </tbody>

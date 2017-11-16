@@ -350,9 +350,10 @@ module.exports.addLineToPlan = async (request, reply) => {
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
   data.kompetansemaalValg = Array.isArray(data.kompetansemaalvalg) ? data.kompetansemaalvalg : [data.kompetansemaalvalg]
-  data.isQueued = false
 
-  let postData = prepareDocument(data)
+  const documentData = prepareDocument(data)
+  const yffData = prepareYffDocument(data)
+  let postData = Object.assign({}, documentData, yffData)
 
   postData.documentStatus = [
     {
@@ -360,6 +361,8 @@ module.exports.addLineToPlan = async (request, reply) => {
       status: 'Registrert'
     }
   ]
+
+  postData.isQueued = false
 
   axios.defaults.headers.common['Authorization'] = token
 

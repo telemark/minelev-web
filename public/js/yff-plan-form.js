@@ -18,7 +18,9 @@ function init () {
   const maalButtons = document.querySelectorAll('.kompetanseMaalButton')
   hideVelger('utplasseringBedriftVelger')
   hideVelger('utplasseringSkoleVelger')
+  hideVelger('utplasseringUBVelger')
   hideVelger('innholdsVelger')
+  hideVelger('kompetanseMaalVelger')
   hideVelger('submitVelger')
   addListener(document.getElementById('utplasseringsstedVelger'), 'change', buildArbeidsoppghaver)
   addListener(document.getElementById('utdanningsprogramVelger'), 'change', updateProgramInnhold)
@@ -62,6 +64,7 @@ function createKompetansemaalOption (item) {
   label.classList.add('mdl-js-checkbox')
   label.classList.add('mdl-js-ripple-effect')
   label.classList.add('chxBxordenKompetanse')
+  label.classList.add('hoverGrey')
   checkbox.classList.add('mdl-checkbox__input')
   span.classList.add('mdl-radio__label')
   span.innerHTML = item.tittel
@@ -82,6 +85,7 @@ function buildKompetansemaal () {
     const option = createKompetansemaalOption(item)
     div.appendChild(option)
   })
+  showVelger('submitVelger')
 }
 
 function createProgramoradeOption(item) {
@@ -123,19 +127,24 @@ function buildArbeidsoppghaver (e) {
   const utplasseringssted = e.target.options[e.target.selectedIndex].value
   const div = document.getElementById('innhold')
   const br = document.createElement('br')
+  div.innerHTML = ''
   div.appendChild(createInput({name: 'arbeidsoppgaver', text: 'Arbeidsoppgaver'}))
   div.appendChild(br)
   if (utplasseringssted == 'bedrift') {
     showVelger('utplasseringBedriftVelger')
     hideVelger('utplasseringSkoleVelger')
+    hideVelger('utplasseringUBVelger')
   } else if (utplasseringssted == 'skole') {
     showVelger('utplasseringSkoleVelger')
     hideVelger('utplasseringBedriftVelger')
+    hideVelger('utplasseringUBVelger')
   } else {
-    div.appendChild(createInput({name: 'sted', text: 'Navn på utplasseringssted'}))
+    showVelger('utplasseringUBVelger')
+    hideVelger('utplasseringBedriftVelger')
+    hideVelger('utplasseringSkoleVelger')
   }
   showVelger('innholdsVelger')
-  showVelger('submitVelger')
+  showVelger('kompetanseMaalVelger')
 }
 
 function cloneKompetanse () {
@@ -197,7 +206,6 @@ function showTableRow (id) {
 async function deleteKompetanseMaal (e) {
   e.preventDefault()
   if (confirm(`${e.target.title}?`)) {
-    console.log('Skal slettes')
     const id = e.target.dataset.id
     const url = e.target.href
     hideTableRow(id)
@@ -220,6 +228,7 @@ function createInput (options) {
   div.classList.add('mdl-textfield')
   div.classList.add('mdl-js-textfield')
   div.classList.add('mdl-textfield--floating-label')
+  div.classList.add('width90')
   input.classList.add('mdl-textfield__input')
   label.classList.add('mdl-textfield__label')
   input.setAttribute('id', id)

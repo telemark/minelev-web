@@ -1,9 +1,10 @@
 <div class="mdl-typography--headline document-form-header utplasseringSkoleVelger margin-top-10">Velg skole</div>
 <div class="utplasseringSkoleVelger">
     {{#each schools}}
-    <label for="terminRadioCourse{{organizationNumber}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxEvaluationPeriod hoverGrey">
-        <input type="radio" name="skoleID" value="{{organizationNumber}}" id="terminRadioCourse{{organizationNumber}}" class="mdl-radio__button period-selector chxBxEvaluationPeriod">
-        <span class="mdl-radio__label chxBxEvaluationPeriod">{{fullName}}</span>
-    </label><br/>
+        <input type="hidden" name="{{organizationNumber}}-skoleNavn" value="{{fullName}}">
+        <label for="terminRadioCourse{{organizationNumber}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxEvaluationPeriod hoverGrey">
+            <input type="radio" name="skoleID" value="{{organizationNumber}}" id="terminRadioCourse{{organizationNumber}}" class="mdl-radio__button period-selector chxBxEvaluationPeriod">
+            <span class="mdl-radio__label chxBxEvaluationPeriod">{{fullName}}</span>
+        </label><br/>
     {{/each}}
 </div>

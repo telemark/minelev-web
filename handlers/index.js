@@ -13,13 +13,14 @@ module.exports.getFrontpage = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.LOGS_SERVICE_URL}/logs/search`
   const myContactClasses = yar.get('myContactClasses') || []
-  let mongoQuery = {'userId': userId}
+  const validDocTypes = ['atferd', 'fag', 'orden', 'samtale', 'yff-informasjonsskriv', 'yff-evaluering']
+  let mongoQuery = {'userId': userId, documentCategory: {'$in': validDocTypes}}
 
   logger('info', ['index', 'getFrontpage', 'userId', userId, 'start'])
 
   if (myContactClasses.length > 0) {
     const classIds = myContactClasses.map(item => item.Id)
-    mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': classIds}}]}
+    mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': classIds}}], documentCategory: {'$in': validDocTypes}}
     logger('info', ['index', 'getFrontpage', 'userId', userId, 'contact teacher', classIds.join(', ')])
   }
 
