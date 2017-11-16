@@ -16,9 +16,11 @@ function updateProgramInnhold (e) {
 
 function init () {
   const maalButtons = document.querySelectorAll('.kompetanseMaalButton')
-  hideVelger('utplasseringsVelger')
+  hideVelger('utplasseringBedriftVelger')
+  hideVelger('utplasseringSkoleVelger')
   hideVelger('innholdsVelger')
   hideVelger('submitVelger')
+  addListener(document.getElementById('utplasseringsstedVelger'), 'change', buildArbeidsoppghaver)
   addListener(document.getElementById('utdanningsprogramVelger'), 'change', updateProgramInnhold)
   addListener(document.getElementById('klassetrinnVelger'), 'change', updateProgramInnhold)
   maalButtons.forEach(button => addListener(button, 'click', deleteKompetanseMaal))
@@ -44,7 +46,6 @@ function getKompetanseMaal (index) {
   yffData.kompetansemaal = yffData.programInnhold[index].kompetansemaal
   buildKompetansemaal()
   showVelger('utplasseringsVelger')
-  addListener(document.getElementById('utplasseringsstedVelger'), 'change', buildArbeidsoppghaver)
 }
 
 function addListener (element, type, func) {
@@ -119,11 +120,20 @@ function buildProgramOmrader () {
 
 function buildArbeidsoppghaver (e) {
   e.preventDefault()
+  const utplasseringssted = e.target.options[e.target.selectedIndex].value
   const div = document.getElementById('innhold')
   const br = document.createElement('br')
   div.appendChild(createInput({name: 'arbeidsoppgaver', text: 'Arbeidsoppgaver'}))
   div.appendChild(br)
-  div.appendChild(createInput({name: 'sted', text: 'Navn på utplasseringssted'}))
+  if (utplasseringssted == 'bedrift') {
+    showVelger('utplasseringBedriftVelger')
+    hideVelger('utplasseringSkoleVelger')
+  } else if (utplasseringssted == 'skole') {
+    showVelger('utplasseringSkoleVelger')
+    hideVelger('utplasseringBedriftVelger')
+  } else {
+    div.appendChild(createInput({name: 'sted', text: 'Navn på utplasseringssted'}))
+  }
   showVelger('innholdsVelger')
   showVelger('submitVelger')
 }

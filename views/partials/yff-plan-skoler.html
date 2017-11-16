@@ -1,13 +1,9 @@
-<div class="mdl-typography--headline document-form-header chxBxPlanSkole margin-top-10" id="planSkoleTableHeading">Samarbeid med andre skoler</div>
-<table id="planSkoleTable" class="mdl-data-table mdl-js-data-table fullWidth">
-    <thead>
-        <tr>
-            <th class="mdl-data-table__cell--non-numeric">Utdanningsprogram</th>
-            <th class="mdl-data-table__cell--non-numeric">Kompetansemål</th>
-            <th class="mdl-data-table__cell--non-numeric">Skole</th>
-            <th class="mdl-data-table__cell--non-numeric">Fjern</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<div class="mdl-typography--headline document-form-header utplasseringSkoleVelger margin-top-10">Velg skole</div>
+<div class="utplasseringSkoleVelger">
+    {{#each schools}}
+    <label for="terminRadioCourse{{organizationNumber}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxEvaluationPeriod hoverGrey">
+        <input type="radio" name="skoleID" value="{{organizationNumber}}" id="terminRadioCourse{{organizationNumber}}" class="mdl-radio__button period-selector chxBxEvaluationPeriod">
+        <span class="mdl-radio__label chxBxEvaluationPeriod">{{fullName}}</span>
+    </label><br/>
+    {{/each}}
+</div>

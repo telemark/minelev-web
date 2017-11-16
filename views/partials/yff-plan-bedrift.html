@@ -1,0 +1,9 @@
+<div class="mdl-typography--headline document-form-header utplasseringBedriftVelger margin-top-10">Velg bedrift</div>
+<div class="utplasseringBedriftVelger">
+    {{#each bedrifter}}
+    <label for="terminRadioCourse{{_id}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxEvaluationPeriod hoverGrey">
+        <input type="radio" name="bedriftID" value="{{_id}}" id="terminRadioCourse{{_id}}" class="mdl-radio__button period-selector chxBxEvaluationPeriod">
+        <span class="mdl-radio__label chxBxEvaluationPeriod">{{bedriftsNavn}} {{utplasseringsPeriode}}</span>
+    </label><br/>
+    {{/each}}
+</div>

@@ -5,6 +5,7 @@ const axios = require('axios')
 const brreg = require('brreg')
 const getDocumentTemplatesPath = require('tfk-saksbehandling-minelev-templates')
 const FormData = require('form-data')
+const schoolsInfo = require('tfk-schools-info')
 const config = require('../config')
 const prepareDocument = require('../lib/prepare-document')
 const prepareDocumentPreview = require('../lib/prepare-document-preview')
@@ -168,6 +169,7 @@ module.exports.plan = async (request, reply) => {
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
+    viewOptions.schools = schoolsInfo()
     viewOptions.maal = maal
     viewOptions.bedrifter = bedrifter
     // If not bedrifter remove bedrifter from utplasseringssted
