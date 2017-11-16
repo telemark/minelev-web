@@ -8,6 +8,7 @@ const FormData = require('form-data')
 const config = require('../config')
 const prepareDocument = require('../lib/prepare-document')
 const prepareDocumentPreview = require('../lib/prepare-document-preview')
+const prepareYffDocument = require('../lib/prepare-yff-document')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 const searchLogs = require('../lib/search-logs')
@@ -24,6 +25,14 @@ module.exports.frontPage = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
+  const bedriftsOptions = {
+    userId: userId,
+    token: token,
+    query: {
+      documentCategory: 'yff-informasjonsskriv',
+      studentUserName: studentUserName
+    }
+  }
   let mainGroupName = false
 
   let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses})
@@ -32,7 +41,7 @@ module.exports.frontPage = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
   // Retrieves student and students contactTeachers
-  const [results, contactTeachersResult] = await Promise.all([axios.get(url), axios.get(urlContactTeachers)])
+  const [results, contactTeachersResult, bedrifter] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -45,6 +54,7 @@ module.exports.frontPage = async (request, reply) => {
     let student = payload[0]
     student.mainGroupName = mainGroupName
     viewOptions.student = student
+    viewOptions.bedrifter = bedrifter
 
     logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
@@ -185,6 +195,23 @@ module.exports.evaluation = async (request, reply) => {
   const evaluationPeriods = require('../lib/data/dummy-evaluation.json')
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
+  const bedriftsOptions = {
+    userId: userId,
+    token: token,
+    query: {
+      documentCategory: 'yff-informasjonsskriv',
+      studentUserName: studentUserName
+    }
+  }
+  const maalOptions = {
+    userId: userId,
+    token: token,
+    query: {
+      documentCategory: 'yff-lokalplan-maal',
+      studentUserName: studentUserName
+    }
+  }
+
   let mainGroupName = false
 
   let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses})
@@ -193,7 +220,7 @@ module.exports.evaluation = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
   // Retrieves student and students contactTeachers
-  const [results, contactTeachersResult] = await Promise.all([axios.get(url), axios.get(urlContactTeachers)])
+  const [results, contactTeachersResult, bedrifter, maal] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions), searchLogs(maalOptions)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -212,6 +239,8 @@ module.exports.evaluation = async (request, reply) => {
     viewOptions.evaluationScores = yffData.evaluation
     viewOptions.competenseScores = yffData.competense
     viewOptions.evaluationPeriods = evaluationPeriods
+    viewOptions.maal = maal
+    viewOptions.bedrifter = bedrifter
 
     logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
@@ -283,8 +312,9 @@ module.exports.submit = async (request, reply) => {
   data.userId = user.userId
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
-  let postData = prepareDocument(data)
-
+  const yffData = prepareYffDocument(data)
+  const documentData = prepareDocument(data)
+  let postData = Object.assign({}, documentData, yffData)
   postData.documentStatus = [
     {
       timeStamp: new Date().getTime(),

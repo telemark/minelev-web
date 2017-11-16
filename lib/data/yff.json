@@ -58,24 +58,6 @@
       "value": "Lite god"
     }
   ],
-  "competense": [
-    {
-      "id": "01",
-      "description": "planlegge, gjennomføre og dokumentere eget arbeid ved oppgradering og fornyelse på produksjonsanleggets lav- og høyspenningsanlegg"
-    },
-    {
-      "id": "02",
-      "description": "planlegge, montere og dokumentere eget arbeid ved idriftsetting av effekt, skillebrytere og styringsanleggene for produksjonsanlegg"
-    },
-    {
-      "id": "03",
-      "description": "ha kjennskap til regelverk for elektronisk kommunikasjon"
-    },
-    {
-      "id": "04",
-      "description": "feilsøke og iverksette tiltak for å gjenopprette normal drift"
-    }
-  ],
   "utplasseringsSted": [
     {
       "id": "bedrift",

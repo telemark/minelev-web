@@ -35,27 +35,27 @@
                     <div id="bedriftsinfoWrapper" class="bedriftsinfoWrapper">
                         <div class="mdl-typography--headline">Bedriftsinformasjon</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" id="organisasjonsNummer">
+                            <input class="mdl-textfield__input" name="organisasjonsNummer" type="text" id="organisasjonsNummer">
                             <label class="mdl-textfield__label" for="organisasjonsNummer">Bedriftens organisasjonsnummer</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" id="organisasjonsNavn" readonly>
+                            <input class="mdl-textfield__input" name="organisasjonsNavn" type="text" id="organisasjonsNavn" readonly>
                             <label class="mdl-textfield__label" for="organisasjonsNavn">Navn</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" id="organisasjonsAdresse" readonly>
-                            <label class="mdl-textfield__label" for="organisasjonsNavn">Adresse</label>
+                            <input class="mdl-textfield__input" name="organisasjonsAdresse" type="text" id="organisasjonsAdresse" readonly>
+                            <label class="mdl-textfield__label" for="organisasjonsAdresse">Adresse</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" id="organisasjonsPostnummer" readonly>
+                            <input class="mdl-textfield__input" name="organisasjonsPostnummer" type="text" id="organisasjonsPostnummer" readonly>
                             <label class="mdl-textfield__label" for="organisasjonsPostnummer">Postnummer</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" id="organisasjonsPoststed" readonly>
+                            <input class="mdl-textfield__input" name="organisasjonsPoststed" type="text" id="organisasjonsPoststed" readonly>
                             <label class="mdl-textfield__label" for="organisasjonsPoststed">Poststed</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" id="organisasjonsAvdeling">
+                            <input class="mdl-textfield__input" name="organisasjonsAvdeling" type="text" id="organisasjonsAvdeling">
                             <label class="mdl-textfield__label" for="organisasjonsAvdeling">Avdeling</label>
                         </div><br/>
                         <div class="mdl-typography--headline contactPerson">Kontaktperson</div>
@@ -74,28 +74,28 @@
                         <button title="Legg til flere kontaktpersoner" class="mdl-button mdl-js-button mdl-button--colored mdl-color-text--black addPersonButton" id="addContactPersonButton">Legg til flere kontaktpersoner</button>
                         <div class="mdl-typography--headline">Tidsrom</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="date" id="startDato" value="{{thisDay}}">
+                            <input class="mdl-textfield__input" name="startDato" type="date" id="startDato" value="{{thisDay}}">
                             <label class="mdl-textfield__label" for="startDato">Fra og med</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="date" id="sluttDato" value="{{thisDay}}">
+                            <input class="mdl-textfield__input" name="sluttDato" type="date" id="sluttDato" value="{{thisDay}}">
                             <label class="mdl-textfield__label" for="sluttDato">Til og med</label>
                         </div>
                         <div class="mdl-typography--headline">Arbeidstid</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="number" id="daysPerWeek" value="5">
+                            <input class="mdl-textfield__input" name="daysPerWeek" type="number" id="daysPerWeek" value="5">
                             <label class="mdl-textfield__label" for="daysPerWeek">Antall dager i uken</label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="time" id="startTid" value="08:00">
+                            <input class="mdl-textfield__input" name="startTid" type="time" id="startTid" value="08:00">
                             <label class="mdl-textfield__label" for="startTid">Fra kl</label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="time" id="sluttTid" value="16:00">
+                            <input class="mdl-textfield__input" name="sluttTid" type="time" id="sluttTid" value="16:00">
                             <label class="mdl-textfield__label" for="sluttTid">Til kl</label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" id="oppmotested">
+                            <input class="mdl-textfield__input" name="oppmotested" type="text" id="oppmotested">
                             <label class="mdl-textfield__label" for="oppmotested">Oppmøtested</label>
                         </div>
                         <div class="mdl-typography--headline nextOfKin">Pårørende</div>

@@ -1,0 +1,21 @@
+<div class="mdl-typography--headline document-form-header chxBxEvaluationOrder margin-top-10">Faglig måloppnåelse</div>
+<table class="fullWidth">
+    <thead>
+    <tr>
+        <th>Område</th>
+        <th class="text-center">Lav</th>
+        <th class="text-center">Middels</th>
+        <th class="text-center">Høy</th>
+    </tr>
+    </thead>
+    <tbody>
+        {{#each maal}}
+            <tr class="hoverGrey">
+                <td class="fontBigger">{{kompetanseMaal}}</td>
+                <td class="fontBigger text-center"><input type="radio" name="{{_id}}" value="lav" id="terminRadioCourse{{_id}}lav" class="mdl-radio__button period-selector chxBxEvaluationScore"></td>
+                <td class="fontBigger text-center"><input type="radio" name="{{_id}}" value="middels" id="terminRadioCourse{{_id}}middels" class="mdl-radio__button period-selector chxBxEvaluationScore"></td>
+                <td class="fontBigger text-center"><input type="radio" name="{{_id}}" value="høy" id="terminRadioCourse{{_id}}hoy" class="mdl-radio__button period-selector chxBxEvaluationScore"></td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
