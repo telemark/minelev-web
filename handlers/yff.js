@@ -7,6 +7,7 @@ const getDocumentTemplatesPath = require('tfk-saksbehandling-minelev-templates')
 const FormData = require('form-data')
 const schoolsInfo = require('tfk-schools-info')
 const config = require('../config')
+const features = require('../config/features')
 const prepareDocument = require('../lib/prepare-document')
 const prepareDocumentPreview = require('../lib/prepare-document-preview')
 const prepareYffDocument = require('../lib/prepare-yff-document')
@@ -56,7 +57,11 @@ module.exports.frontPage = async (request, reply) => {
     student.mainGroupName = mainGroupName
     viewOptions.student = student
     viewOptions.bedrifter = bedrifter
-
+    if (features.usePictures !== false) {
+      logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'retrieve profile picture'])
+      const profilePicture = await axios.get(`${config.PICTURES_SERVICE_URL}/user/${studentUserName}`)
+      viewOptions.profilePicture = profilePicture.data
+    }
     logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
       reply.view('yff', viewOptions)
@@ -102,6 +107,11 @@ module.exports.information = async (request, reply) => {
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
+    if (features.usePictures !== false) {
+      logger('info', ['yff', 'contract', 'userId', userId, 'studentUserName', studentUserName, 'retrieve profile picture'])
+      const profilePicture = await axios.get(`${config.PICTURES_SERVICE_URL}/user/${studentUserName}`)
+      viewOptions.profilePicture = profilePicture.data
+    }
 
     logger('info', ['yff', 'contract', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
@@ -174,6 +184,11 @@ module.exports.plan = async (request, reply) => {
     viewOptions.bedrifter = bedrifter
     // If not bedrifter remove bedrifter from utplasseringssted
     viewOptions.utplasseringsSted = bedrifter.length > 0 ? yffData.utplasseringsSted : yffData.utplasseringsSted.slice(1)
+    if (features.usePictures !== false) {
+      logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'retrieve profile picture'])
+      const profilePicture = await axios.get(`${config.PICTURES_SERVICE_URL}/user/${studentUserName}`)
+      viewOptions.profilePicture = profilePicture.data
+    }
 
     logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
@@ -243,8 +258,13 @@ module.exports.evaluation = async (request, reply) => {
     viewOptions.evaluationPeriods = evaluationPeriods
     viewOptions.maal = maal
     viewOptions.bedrifter = bedrifter
+    if (features.usePictures !== false) {
+      logger('info', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, 'retrieve profile picture'])
+      const profilePicture = await axios.get(`${config.PICTURES_SERVICE_URL}/user/${studentUserName}`)
+      viewOptions.profilePicture = profilePicture.data
+    }
 
-    logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
+    logger('info', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
       reply.view('yff-evaluation', viewOptions)
     } else {
