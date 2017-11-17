@@ -14,8 +14,10 @@ module.exports = {
   PDF_SERVICE_URL: process.env.PDF_SERVICE_URL || 'https://pdf.minelev.win',
   FEATURE_USE_YFF: process.env.FEATURE_USE_YFF,
   FEATURE_USE_NOTES: process.env.FEATURE_USE_NOTES,
+  FEATURE_USE_PICTURES: process.env.FEATURE_USE_PICTURES,
   QUEUE_SERVICE_URL: process.env.QUEUE_SERVICE_URL || 'https://logs.minelev.win/logs',
   YFF_SERVICE_URL: process.env.YFF_SERVICE_URL || 'https://yff.service.minelev.no',
+  PICTURES_SERVICE_URL: process.env.PICTURES_SERVICE_URL || 'https://micro-user-photo-wslyfbstcy.now.sh',
   PAPERTRAIL_HOSTNAME: process.env.PAPERTRAIL_HOSTNAME || 'minelev-dev',
   PAPERTRAIL_HOST: process.env.PAPERTRAIL_HOST || 'logs.papertrailapp.com',
   PAPERTRAIL_PORT: process.env.PAPERTRAIL_PORT || 12345

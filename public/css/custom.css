@@ -328,3 +328,15 @@ th {
 .text-center {
     text-align: center;
 }
+
+.align-top {
+    align-self: flex-start;
+}
+
+.profile-picture {
+    margin-right: 10px;
+}
+
+.profile-picture > div > img {
+    width: 150px;
+}
