@@ -1,6 +1,6 @@
 <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--3-col"></div>
-    <div id ="evaluationCard" class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+    <div class="mdl-cell mdl-cell--2-col"></div>
+    <div id ="evaluationCard" class="mdl-card mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-shadow--2dp">
         <form action="/yff/{{student.personalIdNumber}}" method="post" id="submitEvaluationForm">
             <input type="hidden" name="skjemaUtfyllingStart" value="{{skjemaUtfyllingStart}}">
             <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
@@ -55,6 +55,14 @@
                                 <input type="radio" name="varsletFravar" value="nei" id="fravarRadioNei" class="mdl-radio__button period-selector chxBxEvaluationPeriod">
                                 <span class="mdl-radio__label chxBxEvaluationPeriod">Nei</span>
                             </label>
+                            <label for="fravarRadioAvOgTil" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxEvaluationPeriod">
+                                <input type="radio" name="varsletFravar" value="av og til" id="fravarRadioAvOgTil" class="mdl-radio__button period-selector chxBxEvaluationPeriod">
+                                <span class="mdl-radio__label chxBxEvaluationPeriod">Av og til</span>
+                            </label>
+                            <label for="fravarRadioIkkeAktuelt" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxEvaluationPeriod">
+                                <input type="radio" name="varsletFravar" value="0" id="fravarRadioIkkeAktuelt" class="mdl-radio__button period-selector chxBxEvaluationPeriod" checked>
+                                <span class="mdl-radio__label chxBxEvaluationPeriod">Ikke aktuelt</span>
+                            </label>
                         </td>
                     </tr>
                     </tbody>
@@ -69,7 +77,7 @@
             </div>
         </form>
     </div>
-    <div class="mdl-cell mdl-cell--3-col"></div>
+    <div class="mdl-cell mdl-cell--2-col"></div>
     <div id="modalPreview" class="mdl-card mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-shadow--2dp">
         <div class="mdl-card__actions mdl-card--border-bottom">
             <div class="mdl-layout-spacer"></div>

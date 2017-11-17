@@ -353,3 +353,12 @@ th {
 .profile-card-info {
     line-height: 24px;
 }
+
+.list-profile-image {
+    z-index: 1000;
+    position: absolute;
+}
+
+.showPictureButton {
+    cursor: hand;
+}
