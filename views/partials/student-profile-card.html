@@ -1,0 +1,11 @@
+<div class="profile-card fullWidth">
+    <div class="profile-picture {{featureToggle features.usePictures}} float-left">{{{profilePicture}}}</div>
+    <div>
+        <h1 class="margin-top-0">{{student.fullName}}</h1>
+        {{student.unitName}}<br/>
+        {{stripSchoolId student.mainGroupName}}<br/>
+        {{birthdateFromId student.personalIdNumber}}<br/>
+        {{student.mobilePhone}}<br/>
+        {{student.mail}}
+    </div>
+</div>
