@@ -357,6 +357,11 @@ th {
 .list-profile-image {
     z-index: 1000;
     position: absolute;
+    width: 150px;
+    border: 1px solid black;
+    border-radius: 25px;
+    background-color: white;
+    padding: 5px;
 }
 
 .showPictureButton {

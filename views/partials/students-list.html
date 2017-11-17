@@ -3,6 +3,7 @@
         <thead>
         <tr>
             <th class="mdl-data-table__cell--non-numeric">Logg</th>
+            <th class="mdl-data-table__cell--non-numeric {{featureToggle features.usePictures}}">Bilde</th>
             <th class="mdl-data-table__cell--non-numeric">Elev</th>
             <th class="mdl-data-table__cell--non-numeric">Klasse</th>
             <th class="mdl-data-table__cell--non-numeric">Ny</th>
@@ -16,6 +17,9 @@
                 <a href="/logs?studentId={{personalIdNumber}}" title="Vis aktivitetslogg for {{fullName}} {{birthdateFromId personalIdNumber}}" class="mdl-color-text--black">
                     <i class="material-icons">list</i>
                 </a>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric {{featureToggle ../features.usePictures}}">
+                <i class="material-icons showPictureButton" data-image-id="{{userName}}">assignment_ind</i>
             </td>
             <td class="mdl-data-table__cell--non-numeric">{{fullName}}</td>
             <td class="mdl-data-table__cell--non-numeric">
