@@ -7,13 +7,13 @@ const getDocumentTemplatesPath = require('tfk-saksbehandling-minelev-templates')
 const FormData = require('form-data')
 const schoolsInfo = require('tfk-schools-info')
 const config = require('../config')
-const features = require('../config/features')
 const prepareDocument = require('../lib/prepare-document')
 const prepareDocumentPreview = require('../lib/prepare-document-preview')
 const prepareYffDocument = require('../lib/prepare-yff-document')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 const searchLogs = require('../lib/search-logs')
+const getProfilePicture = require('../lib/get-profile-picture')
 const datePadding = require('../lib/date-padding')
 const getTemplateType = require('../lib/get-template-type')
 const logger = require('../lib/logger')
@@ -36,14 +36,12 @@ module.exports.frontPage = async (request, reply) => {
     }
   }
   let mainGroupName = false
-
   let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses})
 
   logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
   axios.defaults.headers.common['Authorization'] = token
-  // Retrieves student and students contactTeachers
-  const [results, contactTeachersResult, bedrifter] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions)])
+  const [results, contactTeachersResult, bedrifter, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions), getProfilePicture(studentUserName)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -57,9 +55,8 @@ module.exports.frontPage = async (request, reply) => {
     student.mainGroupName = mainGroupName
     viewOptions.student = student
     viewOptions.bedrifter = bedrifter
-    if (features.usePictures !== false) {
-      logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'retrieve profile picture'])
-      const profilePicture = await axios.get(`${config.PICTURES_SERVICE_URL}/user/${studentUserName}`)
+    if (profilePicture !== false) {
+      logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'retrieved profile picture'])
       viewOptions.profilePicture = profilePicture.data
     }
     logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
@@ -91,7 +88,7 @@ module.exports.information = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
   // Retrieves student and students contactTeachers
-  const [results, contactTeachersResult] = await Promise.all([axios.get(url), axios.get(urlContactTeachers)])
+  const [results, contactTeachersResult, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), getProfilePicture(studentUserName)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -107,9 +104,7 @@ module.exports.information = async (request, reply) => {
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
-    if (features.usePictures !== false) {
-      logger('info', ['yff', 'contract', 'userId', userId, 'studentUserName', studentUserName, 'retrieve profile picture'])
-      const profilePicture = await axios.get(`${config.PICTURES_SERVICE_URL}/user/${studentUserName}`)
+    if (profilePicture !== false) {
       viewOptions.profilePicture = profilePicture.data
     }
 
@@ -163,7 +158,7 @@ module.exports.plan = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
   // Retrieves student, students contactTeachers, bedrift and maal
-  const [results, contactTeachersResult, bedrifter, maal] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions), searchLogs(maalOptions)])
+  const [results, contactTeachersResult, bedrifter, maal, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions), searchLogs(maalOptions), getProfilePicture(studentUserName)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -184,9 +179,8 @@ module.exports.plan = async (request, reply) => {
     viewOptions.bedrifter = bedrifter
     // If not bedrifter remove bedrifter from utplasseringssted
     viewOptions.utplasseringsSted = bedrifter.length > 0 ? yffData.utplasseringsSted : yffData.utplasseringsSted.slice(1)
-    if (features.usePictures !== false) {
-      logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'retrieve profile picture'])
-      const profilePicture = await axios.get(`${config.PICTURES_SERVICE_URL}/user/${studentUserName}`)
+    if (profilePicture !== false) {
+      logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'retrieved profile picture'])
       viewOptions.profilePicture = profilePicture.data
     }
 
@@ -237,7 +231,7 @@ module.exports.evaluation = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
   // Retrieves student and students contactTeachers
-  const [results, contactTeachersResult, bedrifter, maal] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions), searchLogs(maalOptions)])
+  const [results, contactTeachersResult, bedrifter, maal, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions), searchLogs(maalOptions), getProfilePicture(studentUserName)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -258,9 +252,8 @@ module.exports.evaluation = async (request, reply) => {
     viewOptions.evaluationPeriods = evaluationPeriods
     viewOptions.maal = maal
     viewOptions.bedrifter = bedrifter
-    if (features.usePictures !== false) {
+    if (profilePicture !== false) {
       logger('info', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, 'retrieve profile picture'])
-      const profilePicture = await axios.get(`${config.PICTURES_SERVICE_URL}/user/${studentUserName}`)
       viewOptions.profilePicture = profilePicture.data
     }
 
