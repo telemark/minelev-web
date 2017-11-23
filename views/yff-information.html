@@ -1,6 +1,7 @@
+<a name="pageTop"></a>
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--2-col"></div>
-    <div id ="contractCard" class="mdl-card mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+    <div id ="documentCard" class="mdl-card mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-shadow--2dp">
         <div class="mdl-card__title mdl-color-text--black">
             {{>student-profile-card}}
         </div>
@@ -17,7 +18,7 @@
                 <div class="mdl-typography--headline bedriftsVelger">Velg bedrift</div>
                 <div id="lookupMessages" class="warningColor systemmsg"></div>
                 <div id="lookupWrapper" class="bedriftsVelger"></div>
-                <form action="/yff/{{student.personalIdNumber}}" method="post" id="submitContractForm">
+                <form action="/yff/{{student.personalIdNumber}}" method="post" id="submitDocumentForm">
                     <input type="hidden" name="skjemaUtfyllingStart" value="{{skjemaUtfyllingStart}}">
                     <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
                     <input type="hidden" name="studentMiddleName" value="{{student.middleName}}">
@@ -112,7 +113,7 @@
                     <div class="mdl-card__actions mdl-card--border">
                         <a href="/" id="deleteContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett dokumentet for {{student.fullName}}"><i class="material-icons">delete</i></a>
                         <div class="mdl-layout-spacer"></div>
-                        <button type="submit" formaction="/yff/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewContract" title="Forhåndsvis kontrakt for {{student.fullName}}" name="previewContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
+                        <button type="submit" formaction="/yff/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis kontrakt for {{student.fullName}}" name="previewContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
                         <span class="margin-right-5"></span>
                         <button type="submit" value="1" id="submitContract" title="Send kontrakt for {{student.fullName}}" name="submitContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">mail_outline</button>
                     </div>
@@ -135,6 +136,8 @@
 
 <!-- serialize -->
 <script src="/public/js/serialize-0.2.min.js"></script>
+<!-- Helperscript preview -->
+<script src="/public/js/generate-preview.js"></script>
 <!-- Helperscript for form -->
 <script src="/public/js/yff-information-form.js"></script>
 <!-- Date input polyfill -->

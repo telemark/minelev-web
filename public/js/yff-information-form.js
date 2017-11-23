@@ -24,6 +24,12 @@ function init () {
   setTimeout(function () {
     lookupField.focus()
   }, 500)
+
+  initPreview()
+}
+
+function validateDocumentForm () {
+  console.log('were ok')
 }
 
 function hideVelger (velger) {

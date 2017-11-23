@@ -5,7 +5,6 @@ const axios = require('axios')
 const getDocumentTemplatesPath = require('tfk-saksbehandling-minelev-templates')
 const FormData = require('form-data')
 const config = require('../config')
-const features = require('../config/features')
 const prepareDocument = require('../lib/prepare-document')
 const prepareDocumentPreview = require('../lib/prepare-document-preview')
 const documents = require('../lib/data/documents.json')
@@ -19,6 +18,7 @@ const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 const datePadding = require('../lib/date-padding')
 const getTemplateType = require('../lib/get-template-type')
+const getProfilePicture = require('../lib/get-profile-picture')
 const logger = require('../lib/logger')
 
 function filterDocumentTypes (contactTeacher) {
@@ -47,7 +47,7 @@ module.exports.write = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
   // Retrieves student and students contactTeachers
-  const [results, contactTeachersResult] = await Promise.all([axios.get(url), axios.get(urlContactTeachers)])
+  const [results, contactTeachersResult, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), getProfilePicture(studentUserName)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -64,9 +64,8 @@ module.exports.write = async (request, reply) => {
     viewOptions.warningTypes = filterDocumentTypes(student.contactTeacher)
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
-    if (features.usePictures !== false) {
-      logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'retrieve profile picture'])
-      const profilePicture = await axios.get(`${config.PICTURES_SERVICE_URL}/user/${studentUserName}`)
+    if (profilePicture !== false) {
+      logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'retrieved profile picture'])
       viewOptions.profilePicture = profilePicture.data
     }
 

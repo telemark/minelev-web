@@ -1,6 +1,7 @@
+<a name="pageTop"></a>
 <div class="mdl-grid">
-    <div id ="evaluationCard" class="mdl-card mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
-        <form action="/yff/{{student.personalIdNumber}}" method="post" id="submitEvaluationForm">
+    <div id ="documentCard" class="mdl-card mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
+        <form action="/yff/{{student.personalIdNumber}}" method="post" id="submitDocumentForm">
             <input type="hidden" name="skjemaUtfyllingStart" value="{{skjemaUtfyllingStart}}">
             <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
             <input type="hidden" name="studentMiddleName" value="{{student.middleName}}">
@@ -53,7 +54,7 @@
             <div class="mdl-card__actions mdl-card--border">
                 <a href="/" id="deleteEvaluation" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett evaluering for {{student.fullName}}"><i class="material-icons">delete</i></a>
                 <div class="mdl-layout-spacer"></div>
-                <button type="submit" formaction="/yff/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewEvaluation" title="Forhåndsvis evaluering for {{student.fullName}}" name="previewEvaluation" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
+                <button type="submit" formaction="/yff/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis evaluering for {{student.fullName}}" name="previewEvaluation" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
                 <span class="margin-right-5"></span>
                 <button type="submit" value="1" id="submitPlan" title="Send evaluering for {{student.fullName}}" name="submitEvaluation" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">mail_outline</button>
             </div>
@@ -76,3 +77,7 @@
 <script src="/public/js/serialize-0.2.min.js"></script>
 <!-- Date input polyfill -->
 <script src="/public/js/date-input-polyfill.dist.js"></script>
+<!-- Helperscript preview -->
+<script src="/public/js/generate-preview.js"></script>
+<!-- Helperscript for form -->
+<script src="/public/js/yff-evaluation-form.js"></script>

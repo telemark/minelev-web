@@ -26,6 +26,11 @@ function init () {
   addListener(document.getElementById('utdanningsprogramVelger'), 'change', updateProgramInnhold)
   addListener(document.getElementById('klassetrinnVelger'), 'change', updateProgramInnhold)
   maalButtons.forEach(button => addListener(button, 'click', deleteKompetanseMaal))
+  initPreview()
+}
+
+function validateDocumentForm () {
+  console.log('were ok')
 }
 
 //MDL Text Input Cleanup
