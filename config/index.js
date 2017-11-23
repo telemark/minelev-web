@@ -11,7 +11,7 @@ module.exports = {
   BUDDY_SERVICE_URL: process.env.BUDDY_SERVICE_URL || 'https://buddy.minelev.win',
   LOGS_SERVICE_URL: process.env.LOGS_SERVICE_URL || 'https://logs.minelev.win',
   STATS_SERVICE_URL: process.env.STATS_SERVICE_URL || 'https://logs.minelev.win',
-  PDF_SERVICE_URL: process.env.PDF_SERVICE_URL || 'https://pdf.minelev.win',
+  PDF_SERVICE_URL: process.env.PDF_SERVICE_URL || 'https://pdf.minelev.no',
   FEATURE_USE_YFF: process.env.FEATURE_USE_YFF,
   FEATURE_USE_NOTES: process.env.FEATURE_USE_NOTES,
   FEATURE_USE_PICTURES: process.env.FEATURE_USE_PICTURES,
