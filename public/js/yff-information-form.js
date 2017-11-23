@@ -9,27 +9,43 @@ function init () {
   const bedriftsWrapper = document.getElementById('bedriftsinfoWrapper')
   const lookupField = document.getElementById('brregQuery')
   const lookupForm = document.getElementById('lookupOrganisasjonForm')
+  const requiredFields = document.getElementById('submitDocumentForm').querySelectorAll('[required]')
   bedriftsWrapper.style.display = 'none'
   hideVelger('bedriftsVelger')
   hideVelger('lookupMessages')
-  lookupForm.addEventListener('submit', e => {
-    e.preventDefault()
-    lookupOrganization()
-  })
-  lookupOrganizationButton.addEventListener('click', e => {
-    e.preventDefault()
-    lookupOrganization()
-  })
+  addListener(lookupForm, 'submit', lookupOrganization)
+  addListener(lookupOrganizationButton, 'click', lookupOrganization)
+  requiredFields.forEach(field => addListener(field, 'keyup', validateDocumentForm))
 
   setTimeout(function () {
     lookupField.focus()
   }, 500)
 
+  validateDocumentForm()
+
   initPreview()
 }
 
 function validateDocumentForm () {
-  console.log('were ok')
+  const previewButton = document.getElementById('previewDocumentButton')
+  const submitButton = document.getElementById('submitFormButton')
+  const requiredFields = document.getElementById('submitDocumentForm').querySelectorAll('[required]')
+  let requiredValues = []
+
+  // disable buttons
+  submitButton.disabled = true
+  previewButton.disabled = true
+
+  requiredFields.forEach(field => {
+    if (field.value !== '') {
+      requiredValues.push(true)
+    }
+  })
+
+  if (requiredValues.length === requiredFields.length) {
+    submitButton.disabled = false
+    previewButton.disabled = false
+  }
 }
 
 function hideVelger (velger) {
@@ -173,7 +189,8 @@ function buildOrganizationsSelector () {
   showVelger('bedriftsVelger')
 }
 
-function lookupOrganization () {
+function lookupOrganization (e) {
+  e.preventDefault()
   const queryField = document.getElementById('brregQuery')
   const messages = document.getElementById('lookupMessages')
   const query = queryField.value

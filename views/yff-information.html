@@ -36,7 +36,7 @@
                     <div id="bedriftsinfoWrapper" class="bedriftsinfoWrapper">
                         <div class="mdl-typography--headline">Bedriftsinformasjon</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" name="organisasjonsNummer" type="text" id="organisasjonsNummer">
+                            <input class="mdl-textfield__input" name="organisasjonsNummer" type="text" id="organisasjonsNummer" readonly>
                             <label class="mdl-textfield__label" for="organisasjonsNummer">Bedriftens organisasjonsnummer</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
@@ -61,11 +61,11 @@
                         </div><br/>
                         <div class="mdl-typography--headline contactPerson">Kontaktperson</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" name="kontaktpersonNavn" id="kontaktpersonNavn">
+                            <input class="mdl-textfield__input" type="text" name="kontaktpersonNavn" id="kontaktpersonNavn" required>
                             <label class="mdl-textfield__label" for="kontaktpersonNavn">Kontaktperson</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" name="kontaktpersonTelefon" id="kontaktpersonTelefon">
+                            <input class="mdl-textfield__input" type="text" name="kontaktpersonTelefon" id="kontaktpersonTelefon" required>
                             <label class="mdl-textfield__label" for="kontaktpersonTelefon">Telefon</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
@@ -101,11 +101,11 @@
                         </div>
                         <div class="mdl-typography--headline nextOfKin">Pårørende</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" name="parorendeNavn" id="parorendeNavn">
+                            <input class="mdl-textfield__input" type="text" name="parorendeNavn" id="parorendeNavn" required>
                             <label class="mdl-textfield__label" for="parorendeNavn">Navn</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
-                            <input class="mdl-textfield__input" type="text" name="parorendeTelefon" id="parorendeTelefon">
+                            <input class="mdl-textfield__input" type="text" name="parorendeTelefon" id="parorendeTelefon" required>
                             <label class="mdl-textfield__label" for="parorendeTelefon">Telefon</label>
                         </div><br/>
                         <button title="Legg til flere pårørende" class="mdl-button mdl-js-button mdl-button--colored mdl-color-text--black addPersonButton" id="addNextOfKinButton">Legg til flere pårørende</button>
@@ -115,7 +115,7 @@
                         <div class="mdl-layout-spacer"></div>
                         <button type="submit" formaction="/yff/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis kontrakt for {{student.fullName}}" name="previewContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
                         <span class="margin-right-5"></span>
-                        <button type="submit" value="1" id="submitContract" title="Send kontrakt for {{student.fullName}}" name="submitContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">mail_outline</button>
+                        <button type="submit" value="1" id="submitFormButton" title="Send kontrakt for {{student.fullName}}" name="submitContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">mail_outline</button>
                     </div>
                 </form>
             </div>
@@ -143,6 +143,6 @@
 <!-- Date input polyfill -->
 <script src="/public/js/date-input-polyfill.dist.js"></script>
 <!-- uuid -->
-<script src="https://wzrd.in/standalone/uuid%2Fv4@latest"></script>
+<script src="/public/js/vendors/uuid.js"></script>
 <!-- Axios -->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/public/js/vendors/axios.min.js"></script>
