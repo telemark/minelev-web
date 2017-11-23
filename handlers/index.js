@@ -4,6 +4,8 @@ const axios = require('axios')
 const config = require('../config')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
+const validDocTypes = ['atferd', 'fag', 'orden', 'samtale', 'yff-informasjonsskriv', 'yff-evaluering']
+const applyLogDescriptions = require('../lib/apply-log-description')
 const logger = require('../lib/logger')
 
 module.exports.getFrontpage = async (request, reply) => {
@@ -13,7 +15,6 @@ module.exports.getFrontpage = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.LOGS_SERVICE_URL}/logs/search`
   const myContactClasses = yar.get('myContactClasses') || []
-  const validDocTypes = ['atferd', 'fag', 'orden', 'samtale', 'yff-informasjonsskriv', 'yff-evaluering']
   let mongoQuery = {'userId': userId, documentCategory: {'$in': validDocTypes}}
 
   logger('info', ['index', 'getFrontpage', 'userId', userId, 'start'])
@@ -47,7 +48,7 @@ module.exports.getLogspage = async (request, reply) => {
   const url = documentId ? `${config.LOGS_SERVICE_URL}/logs/${documentId}` : `${config.LOGS_SERVICE_URL}/logs/search`
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
-  let mongoQuery = {}
+  let mongoQuery = {documentCategory: {'$in': validDocTypes}}
 
   logger('info', ['index', 'getLogspage', 'userId', userId, 'start'])
 
@@ -58,7 +59,7 @@ module.exports.getLogspage = async (request, reply) => {
     if (myContactClasses.length > 0) {
       const classIds = myContactClasses.map(item => item.Id)
       logger('info', ['index', 'getLogspage', 'userId', userId, 'classes', classIds.join(', ')])
-      mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': classIds}}]}
+      mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': classIds}}], documentCategory: {'$in': validDocTypes}}
     } else {
       mongoQuery.userId = userId
       logger('info', ['index', 'getLogspage', 'userId', userId, 'single'])
@@ -68,7 +69,7 @@ module.exports.getLogspage = async (request, reply) => {
   axios.defaults.headers.common['Authorization'] = token
   const results = documentId ? await axios.get(url) : await axios.post(url, mongoQuery)
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, logs: results.data })
+  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, logs: applyLogDescriptions(results.data) })
 
   if (request.query.studentId || documentId) {
     logger('info', ['index', 'getLogspage', 'userId', userId, 'single log ok'])
