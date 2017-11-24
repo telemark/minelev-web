@@ -4,7 +4,7 @@ const axios = require('axios')
 const config = require('../config')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
-const validDocTypes = ['atferd', 'fag', 'orden', 'samtale', 'yff-informasjonsskriv', 'yff-evaluering']
+const validDocTypes = ['atferd', 'fag', 'orden', 'samtale', 'yff-informasjonsskriv', 'yff-lokalplan', 'yff-tilbakemelding']
 const applyLogDescriptions = require('../lib/apply-log-description')
 const logger = require('../lib/logger')
 
