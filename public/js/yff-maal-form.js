@@ -112,6 +112,7 @@ function toggleArbeidsOppgave (e) {
     const arbeidsoppgave = document.getElementById(`wrapper-${optionID}`)
     arbeidsoppgave.parentNode.removeChild(arbeidsoppgave, arbeidsoppgave.parentNode)
   }
+  componentHandler.upgradeElements(innhold)
   showVelger('innholdsVelger')
 }
 
