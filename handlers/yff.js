@@ -41,13 +41,21 @@ module.exports.frontPage = async (request, reply) => {
       studentUserName: studentUserName
     }
   }
+  const maalOptions = {
+    userId: userId,
+    token: token,
+    query: {
+      documentCategory: 'yff-lokalplan-maal',
+      studentUserName: studentUserName
+    }
+  }
   let mainGroupName = false
   let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses})
 
   logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
   axios.defaults.headers.common['Authorization'] = token
-  const [results, contactTeachersResult, bedrifter, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions), getProfilePicture(studentUserName)])
+  const [results, contactTeachersResult, bedrifter, maal, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(maalOptions), searchLogs(bedriftsOptions), getProfilePicture(studentUserName)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -61,6 +69,7 @@ module.exports.frontPage = async (request, reply) => {
     student.mainGroupName = mainGroupName
     viewOptions.student = student
     viewOptions.bedrifter = bedrifter
+    viewOptions.maal = maal
     if (profilePicture !== false) {
       logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'retrieved profile picture'])
       viewOptions.profilePicture = profilePicture.data
@@ -127,6 +136,82 @@ module.exports.information = async (request, reply) => {
   }
   if (payload.statusKode === 401) {
     logger('info', ['yff', 'contract', 'userId', userId, 'studentUserName', studentUserName, '401'])
+    reply.redirect('/signout')
+  }
+}
+
+module.exports.maal = async (request, reply) => {
+  const utdanningsprogrammer = require('../lib/data/utdanningsprogrammer.json')
+  const yar = request.yar
+  const myContactClasses = yar.get('myContactClasses') || []
+  const studentUserName = request.params.studentID
+  const userId = request.auth.credentials.data.userId
+  const token = generateSystemJwt(userId)
+  const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
+  const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
+  const bedriftsOptions = {
+    userId: userId,
+    token: token,
+    query: {
+      documentCategory: 'yff-informasjonsskriv',
+      studentUserName: studentUserName
+    }
+  }
+  const maalOptions = {
+    userId: userId,
+    token: token,
+    query: {
+      documentCategory: 'yff-lokalplan-maal',
+      studentUserName: studentUserName
+    }
+  }
+  let mainGroupName = false
+
+  let viewOptions = createViewOptions({
+    credentials: request.auth.credentials,
+    myContactClasses: myContactClasses,
+    utdanningsprogrammer: utdanningsprogrammer
+  })
+
+  logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'start'])
+
+  axios.defaults.headers.common['Authorization'] = token
+  // Retrieves student, students contactTeachers, bedrift and maal
+  const [results, contactTeachersResult, bedrifter, maal, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions), searchLogs(maalOptions), getProfilePicture(studentUserName)])
+  const payload = results.data
+  const contactTeachers = contactTeachersResult.data
+  if (contactTeachers.length > 0) {
+    mainGroupName = contactTeachers[0].groupId
+    logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'mainGroupName', mainGroupName])
+  } else {
+    logger('error', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
+  }
+  if (!payload.statusKode) {
+    let student = payload[0]
+    const today = new Date()
+    student.mainGroupName = mainGroupName
+    viewOptions.student = student
+    viewOptions.skjemaUtfyllingStart = today.getTime()
+    viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
+    viewOptions.schools = schoolsInfo()
+    viewOptions.maal = maal
+    viewOptions.bedrifter = bedrifter
+    // If not bedrifter remove bedrifter from utplasseringssted
+    viewOptions.utplasseringsSted = bedrifter.length > 0 ? yffData.utplasseringsSted : yffData.utplasseringsSted.slice(1)
+    if (profilePicture !== false) {
+      logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'retrieved profile picture'])
+      viewOptions.profilePicture = profilePicture.data
+    }
+
+    logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
+    if (mainGroupName !== false) {
+      reply.view('yff-maal', viewOptions)
+    } else {
+      reply.view('error-missing-contact-teacher', viewOptions)
+    }
+  }
+  if (payload.statusKode === 401) {
+    logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, '401'])
     reply.redirect('/signout')
   }
 }
@@ -397,7 +482,7 @@ module.exports.addLineToPlan = async (request, reply) => {
   Promise.all(jobs)
     .then(results => {
       logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'added', results.length])
-      reply.redirect(`/yff/plan/${data.studentUserName}`)
+      reply.redirect(`/yff/maal/${data.studentUserName}`)
     }).catch(error => {
       logger('error', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
       reply.redirect('/')

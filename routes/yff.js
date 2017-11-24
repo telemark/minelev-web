@@ -29,6 +29,14 @@ module.exports = [
   },
   {
     method: 'GET',
+    path: '/yff/maal/{studentID}',
+    handler: handlers.maal,
+    config: {
+      description: 'Prepare yff maal for {studentID}'
+    }
+  },
+  {
+    method: 'GET',
     path: '/yff/plan/remove/{studentID}/{maalID}',
     handler: handlers.removeLineFromPlan,
     config: {
