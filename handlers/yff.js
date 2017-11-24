@@ -86,6 +86,7 @@ module.exports.information = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
+  const urlUtdanningsProgrammer = `${config.YFF_SERVICE_URL}/utdanningsprogrammer`
   let mainGroupName = false
 
   let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses})
@@ -94,7 +95,7 @@ module.exports.information = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
   // Retrieves student and students contactTeachers
-  const [results, contactTeachersResult, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), getProfilePicture(studentUserName)])
+  const [results, contactTeachersResult, profilePicture, utdanningsProgrammer] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), getProfilePicture(studentUserName), axios.get(urlUtdanningsProgrammer)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -110,6 +111,7 @@ module.exports.information = async (request, reply) => {
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
+    viewOptions.utdanningsProgrammer = utdanningsProgrammer.data
     if (profilePicture !== false) {
       viewOptions.profilePicture = profilePicture.data
     }

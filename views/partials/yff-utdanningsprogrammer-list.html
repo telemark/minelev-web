@@ -1,0 +1,9 @@
+<div class="mdl-typography--headline document-form-header margin-top-10 utplasseringsVelger">Utdanningsprogram</div>
+<div id="utdanningsprogramWrapper" class="utdanningsprogramVelger">
+    <select name="utdanningsprogram" id="utdanningsprogramVelger" class="margin-top-10">
+        <option>Velg utdanningsprogram</option>
+        {{#each utdanningsProgrammer}}
+        <option value="{{name}}">{{name}}</option>
+        {{/each}}
+    </select>
+</div>
