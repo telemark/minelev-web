@@ -16,8 +16,14 @@ const searchLogs = require('../lib/search-logs')
 const getProfilePicture = require('../lib/get-profile-picture')
 const datePadding = require('../lib/date-padding')
 const getTemplateType = require('../lib/get-template-type')
+const getClassLevel = require('../lib/get-class-level')
 const logger = require('../lib/logger')
 const yffData = require('../lib/data/yff.json')
+
+const classLevels = [
+  {id: 'VG1', value: 'VG1', description: 'VG1', checked: ''},
+  {id: 'VG2', value: 'VG2', description: 'VG2', checked: ''}
+]
 
 module.exports.frontPage = async (request, reply) => {
   const yar = request.yar
@@ -110,6 +116,8 @@ module.exports.information = async (request, reply) => {
 
     logger('info', ['yff', 'contract', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
+      const classLevel = getClassLevel(mainGroupName)
+      viewOptions.classLevels = classLevels.map(thisClass => thisClass.id === classLevel ? Object.assign(thisClass, {checked: 'checked'}) : thisClass)
       reply.view('yff-information', viewOptions)
     } else {
       reply.view('error-missing-contact-teacher', viewOptions)
@@ -252,6 +260,7 @@ module.exports.evaluation = async (request, reply) => {
     viewOptions.evaluationPeriods = evaluationPeriods
     viewOptions.maal = maal
     viewOptions.bedrifter = bedrifter
+    viewOptions.classLevel = bedrifter[0].classLevel
     if (profilePicture !== false) {
       logger('info', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, 'retrieve profile picture'])
       viewOptions.profilePicture = profilePicture.data

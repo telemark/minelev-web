@@ -99,7 +99,9 @@
                             <input class="mdl-textfield__input" name="oppmotested" type="text" id="oppmotested">
                             <label class="mdl-textfield__label" for="oppmotested">Oppmøtested</label>
                         </div>
-                        <div class="mdl-typography--headline nextOfKin">Pårørende</div>
+                        <h1>Elevinformasjon</h1>
+                        {{>class-levels-list}}
+                        <div class="mdl-typography--headline nextOfKin margin-top-10">Pårørende</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
                             <input class="mdl-textfield__input" type="text" name="parorendeNavn" id="parorendeNavn" required>
                             <label class="mdl-textfield__label" for="parorendeNavn">Navn</label>
@@ -113,9 +115,9 @@
                     <div class="mdl-card__actions mdl-card--border">
                         <a href="/" id="deleteContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett dokumentet for {{student.fullName}}"><i class="material-icons">delete</i></a>
                         <div class="mdl-layout-spacer"></div>
-                        <button type="submit" formaction="/yff/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis kontrakt for {{student.fullName}}" name="previewContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
+                        <button type="submit" formaction="/yff/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis informasjonsskrivet for {{student.fullName}}" name="previewContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
                         <span class="margin-right-5"></span>
-                        <button type="submit" value="1" id="submitFormButton" title="Send kontrakt for {{student.fullName}}" name="submitContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">mail_outline</button>
+                        <button type="submit" value="1" id="submitFormButton" title="Send brevet digitalt til elev og bedrift. Det arkiveres automatisk i {{student.fullName}}s elevmappe." name="submitContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">mail_outline</button>
                     </div>
                 </form>
             </div>
