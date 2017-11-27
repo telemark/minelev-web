@@ -6,6 +6,7 @@ const brreg = require('brreg')
 const getDocumentTemplatesPath = require('tfk-saksbehandling-minelev-templates')
 const FormData = require('form-data')
 const schoolsInfo = require('tfk-schools-info')
+const arrify = require('arrify')
 const config = require('../config')
 const prepareDocument = require('../lib/prepare-document')
 const prepareDocumentPreview = require('../lib/prepare-document-preview')
@@ -459,7 +460,8 @@ module.exports.addLineToPlan = async (request, reply) => {
   data.userId = user.userId
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
-  data.kompetansemaalValg = Array.isArray(data.kompetansemaalvalg) ? data.kompetansemaalvalg : [data.kompetansemaalvalg]
+  data.kompetansemaalValg = arrify(data.kompetansemaalvalg)
+  data.arbeidsOppgaver = arrify(data.arbeidsoppgaver)
 
   const documentData = prepareDocument(data)
   const yffData = prepareYffDocument(data)
@@ -476,7 +478,7 @@ module.exports.addLineToPlan = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
 
-  const jobs = data.kompetansemaalValg.map(line => axios.put(url, Object.assign({}, postData, {kompetanseMaal: line})))
+  const jobs = data.kompetansemaalValg.map((line, index) => axios.put(url, Object.assign({}, postData, {kompetanseMaal: line}, {arbeidsOppgaver: data.arbeidsOppgaver[index]})))
 
   logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'jobs', jobs.length, 'start'])
 

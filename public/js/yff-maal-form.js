@@ -103,7 +103,7 @@ function toggleArbeidsOppgave (e) {
   if (optionStatus === true) {
     const options = {
       wrapperID: `wrapper-${optionID}`,
-      name: `arbeidsoppgave-${optionID}`,
+      name: `arbeidsoppgaver`,
       text: `Arbeidsoppgaver knyttet til ${optionValue}`
     }
     const arbeidsoppgave = createInput(options)
