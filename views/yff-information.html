@@ -9,7 +9,7 @@
                 <form action="/yff/brreg" id="lookupOrganisasjonForm">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
                         <input class="mdl-textfield__input" type="text" name="query" id="brregQuery">
-                        <label class="mdl-textfield__label" for="brregQuery">Søk etter bedrift</label>
+                        <label class="mdl-textfield__label" for="brregQuery">Søk etter bedriften hvor eleven skal på utplassering. Du kan søke på bedriftsnavn eller organisasjonsnummer.</label>
                     </div>
                     <label class="mdl-button mdl-js-button mdl-button--icon" for="organisasjonsnummer" id="lookupOrganisasjonsButton">
                         <i class="material-icons" id="searchIcon">search</i>
@@ -114,7 +114,7 @@
                         <button title="Legg til flere pårørende" class="mdl-button mdl-js-button mdl-button--colored mdl-color-text--black addPersonButton" id="addNextOfKinButton">Legg til flere pårørende</button>
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
-                        <a href="/" id="deleteContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett dokumentet for {{student.fullName}}"><i class="material-icons">delete</i></a>
+                        <a href="/yff/{{student.userName}}" id="deleteContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Avbryt og gå til YFF forsiden for {{student.fullName}}"><i class="material-icons">delete</i></a>
                         <div class="mdl-layout-spacer"></div>
                         <button type="submit" formaction="/yff/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis informasjonsskrivet for {{student.fullName}}" name="previewContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
                         <span class="margin-right-5"></span>

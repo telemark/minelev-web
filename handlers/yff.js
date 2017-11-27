@@ -439,7 +439,7 @@ module.exports.submit = async (request, reply) => {
     .then(results => {
       logger('info', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted'])
       yar.set('documentAdded', true)
-      reply.redirect('/')
+      reply.redirect(`/yff/${data.studentUserName}`)
     }).catch(error => {
       logger('error', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
       yar.set('documentAdded', false)

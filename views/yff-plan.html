@@ -6,8 +6,7 @@
             </div>
             <div class="mdl-card__supporting-text mdl-color-text--black">
                 <div>
-                    Nå kan du sende en oppdatert utgave av den lokale læreplanen til {{student.fullName}}<br />
-                    En kopi av planen blir også arkivert i elevmappen.
+                    Her sender du den lokale læreplanen til eleven, og arkiverer den i {{student.fullName}}s elevmappe. Du må ha opprettet en lokal læreplan først.  Læreplanen kan forandres når som helst i løpet av skoleåret. Dersom du sender læreplanen, vil du likevel kunne gjøre endringer i planen og sende en ny versjon senere. I elevmappa vil det alltid være den nyeste versjonen som er gjeldende.
                 </div>
                 {{>yff-plan-linjer-view}}
             </div>
@@ -27,7 +26,7 @@
             <input type="hidden" name="organizationNumber" value="{{student.organizationNumber}}">
             <input type="hidden" name="type" value="yff-lokalplan">
             <div class="mdl-card__actions mdl-card--border">
-                <a href="/yff/maal/{{student.userName}}" id="goToMaal" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Gå til kompetansemaal for {{student.fullName}}"><i class="material-icons">assignment</i></a>
+                <a href="/yff/maal/{{student.userName}}" id="goToMaal" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Gå til Opprett/endre lokal læreplan for {{student.fullName}}"><i class="material-icons">assignment</i></a>
                 <div class="mdl-layout-spacer"></div>
                 <button type="submit" formaction="/yff/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis lokal læreplan for {{student.fullName}}" name="previewPlan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
                 <span class="margin-right-5"></span>

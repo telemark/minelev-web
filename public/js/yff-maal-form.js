@@ -132,6 +132,7 @@ function buildProgramOmrader () {
   } else {
     select = document.createElement('select')
     select.setAttribute('id', 'programomradeSelector')
+    select.setAttribute('name', 'programomrade')
   }
   const firstOption = createProgramoradeOption({name: 'Velg programområde'})
   select.classList.add('margin-top-10')
