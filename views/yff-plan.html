@@ -5,8 +5,11 @@
                 {{>student-profile-card}}
             </div>
             <div class="mdl-card__supporting-text mdl-color-text--black">
-                {{>yff-plan-kompetansemaal-velger}}
-                {{>yff-plan-linjer}}
+                <div>
+                    Nå kan du sende en oppdatert utgave av den lokale læreplanen til {{student.fullName}}<br />
+                    En kopi av planen blir også arkivert i elevmappen.
+                </div>
+                {{>yff-plan-linjer-view}}
             </div>
         <form action="/yff/{{student.personalIdNumber}}" method="post" id="submitDocumentForm">
             <input type="hidden" name="skjemaUtfyllingStart" value="{{skjemaUtfyllingStart}}">
@@ -24,7 +27,7 @@
             <input type="hidden" name="organizationNumber" value="{{student.organizationNumber}}">
             <input type="hidden" name="type" value="yff-lokalplan">
             <div class="mdl-card__actions mdl-card--border">
-                <a href="/" id="deletePlan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett lokal læreplan for {{student.fullName}}"><i class="material-icons">delete</i></a>
+                <a href="/yff/maal/{{student.userName}}" id="goToMaal" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Gå til kompetansemaal for {{student.fullName}}"><i class="material-icons">assignment</i></a>
                 <div class="mdl-layout-spacer"></div>
                 <button type="submit" formaction="/yff/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis lokal læreplan for {{student.fullName}}" name="previewPlan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
                 <span class="margin-right-5"></span>

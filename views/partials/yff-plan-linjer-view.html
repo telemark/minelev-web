@@ -1,0 +1,17 @@
+<div class="mdl-typography--headline document-form-header chxBxPlanSkole margin-top-10 {{showMe maal}}" id="planSkoleTableHeading">Lokal læreplan innhold</div>
+<table id="planLinjerTable" class="fullWidth  evenodd margin-top-10 {{showMe maal}}">
+    <thead>
+    <tr>
+        <th>Kompetansemål/Arbeidsoppgaver</th>
+        <th>Utplasseringssted</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each maal}}
+    <tr class="hoverGrey" id="{{_id}}">
+        <td>{{kompetanseMaal}}<div class="{{showMe arbeidsOppgaver}}">{{arbeidsOppgaver}}</div></td>
+        <td>{{utplasseringsSted}}</td>
+    </tr>
+    {{/each}}
+    </tbody>
+</table>
