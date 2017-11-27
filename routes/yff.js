@@ -45,7 +45,7 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/yff/evaluation/{studentID}',
+    path: '/yff/evaluation/{studentID}/{utplasseringID}',
     handler: handlers.evaluation,
     config: {
       description: 'Prepare yff evaluation for {studentID}'

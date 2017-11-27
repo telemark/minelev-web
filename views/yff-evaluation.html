@@ -3,6 +3,7 @@
     <div id ="documentCard" class="mdl-card mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
         <form action="/yff/{{student.personalIdNumber}}" method="post" id="submitDocumentForm">
             <input type="hidden" name="skjemaUtfyllingStart" value="{{skjemaUtfyllingStart}}">
+            <input type="hidden" name="bedriftID" value="{{bedrift._id}}">
             <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
             <input type="hidden" name="studentMiddleName" value="{{student.middleName}}">
             <input type="hidden" name="studentLastName" value="{{student.lastName}}">
@@ -22,7 +23,6 @@
             </div>
             <div class="mdl-card__supporting-text mdl-color-text--black">
                 {{>evaluation-header}}
-                {{>evaluation-bedrift}}
                 {{>evaluation-kompetansemaal}}
                 {{>evaluation-score-list}}
                 <div class="mdl-typography--headline document-form-header chxBxEvaluationOrder margin-top-10">Fravær under utplasseringen</div>

@@ -1,8 +1,8 @@
 <div class="mdl-typography--headline document-form-header chxBxEvaluationOrder margin-top-10">Faglig måloppnåelse</div>
-<table class="fullWidth">
+<table id="planLinjerTable" class="fullWidth evenodd">
     <thead>
     <tr>
-        <th>Kompetansemål</th>
+        <th>Kompetansemål/Arbeidsoppgaver</th>
         <th class="text-center">Lav</th>
         <th class="text-center">Middels</th>
         <th class="text-center">Høy</th>
@@ -12,7 +12,7 @@
         {{#each maal}}
             <input type="hidden" name="kompetanse-{{_id}}" value="{{kompetanseMaal}}">
             <tr class="hoverGrey">
-                <td class="fontBigger">{{kompetanseMaal}}</td>
+                <td class="fontBigger">{{kompetanseMaal}}<div class="{{showMe arbeidsOppgaver}}">{{arbeidsOppgaver}}</div></td>
                 <td class="fontBigger text-center">
                     <input type="radio" name="kompetansemaal-{{_id}}" value="lav" id="terminRadioCourse{{_id}}lav" class="mdl-radio__button period-selector chxBxEvaluationScore">
                 </td>

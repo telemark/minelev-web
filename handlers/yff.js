@@ -56,7 +56,7 @@ module.exports.frontPage = async (request, reply) => {
   logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
   axios.defaults.headers.common['Authorization'] = token
-  const [results, contactTeachersResult, bedrifter, maal, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(maalOptions), searchLogs(bedriftsOptions), getProfilePicture(studentUserName)])
+  const [results, contactTeachersResult, maal, bedrifter, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(maalOptions), searchLogs(bedriftsOptions), getProfilePicture(studentUserName)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -297,25 +297,20 @@ module.exports.evaluation = async (request, reply) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
   const studentUserName = request.params.studentID
+  const utplasseringID = request.params.utplasseringID
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
   const evaluationPeriods = require('../lib/data/dummy-evaluation.json')
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
-  const bedriftsOptions = {
-    userId: userId,
-    token: token,
-    query: {
-      documentCategory: 'yff-informasjonsskriv',
-      studentUserName: studentUserName
-    }
-  }
+  const urlBedrift = `${config.LOGS_SERVICE_URL}/logs/${utplasseringID}`
   const maalOptions = {
     userId: userId,
     token: token,
     query: {
       documentCategory: 'yff-lokalplan-maal',
-      studentUserName: studentUserName
+      studentUserName: studentUserName,
+      utplasseringID: utplasseringID
     }
   }
 
@@ -327,7 +322,7 @@ module.exports.evaluation = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
   // Retrieves student and students contactTeachers
-  const [results, contactTeachersResult, bedrifter, maal, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions), searchLogs(maalOptions), getProfilePicture(studentUserName)])
+  const [results, contactTeachersResult, bedrifter, maal, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), axios.get(urlBedrift), searchLogs(maalOptions), getProfilePicture(studentUserName)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -339,6 +334,7 @@ module.exports.evaluation = async (request, reply) => {
   if (!payload.statusKode) {
     let student = payload[0]
     const today = new Date()
+    const bedrift = bedrifter.data[0]
     student.mainGroupName = mainGroupName
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
@@ -347,9 +343,9 @@ module.exports.evaluation = async (request, reply) => {
     viewOptions.competenseScores = yffData.competense
     viewOptions.evaluationPeriods = evaluationPeriods
     viewOptions.maal = maal
-    viewOptions.bedrifter = bedrifter
-    viewOptions.classLevel = bedrifter[0].classLevel
-    viewOptions.utdanningsprogram = bedrifter[0].utdanningsprogram
+    viewOptions.bedrift = bedrift
+    viewOptions.classLevel = bedrift.classLevel
+    viewOptions.utdanningsprogram = bedrift.utdanningsprogram
     if (profilePicture !== false) {
       logger('info', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, 'retrieve profile picture'])
       viewOptions.profilePicture = profilePicture.data
