@@ -318,7 +318,7 @@ th {
 }
 
 .hoverGrey:hover {
-    background-color: #ececec;
+    background-color: #ededed;
 }
 
 .addPersonButton {
@@ -354,6 +354,14 @@ th {
     line-height: 24px;
 }
 
+table.evenodd tr:nth-child(even) {
+    background-color: #e1f3ef;
+}
+
+table.evenodd tr:nth-child(even):hover {
+    background-color: #ededed;
+}
+
 .list-profile-image {
     z-index: 1000;
     position: absolute;
@@ -366,4 +374,28 @@ th {
 
 .showPictureButton {
     cursor: hand;
+}
+
+#planLinjerTable {
+    font-size: large;
+}
+
+#planLinjerTable td {
+    padding: 5px;
+    vertical-align: top;
+}
+
+#planLinjerTable td::first-letter {
+    text-transform: capitalize;
+}
+
+#planLinjerTable th {
+    padding: 5px;
+    vertical-align: top;
+}
+
+#planLinjerTable div {
+    padding-left: 25px;
+    font-size: medium;
+    color: gray;
 }

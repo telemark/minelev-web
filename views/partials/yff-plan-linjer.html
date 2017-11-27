@@ -1,8 +1,8 @@
 <div class="mdl-typography--headline document-form-header chxBxPlanSkole margin-top-10 {{showMe maal}}" id="planSkoleTableHeading">Lokal læreplan innhold</div>
-<table id="planLinjerTable" class="fullWidth  {{showMe maal}}">
+<table id="planLinjerTable" class="fullWidth  evenodd margin-top-10 {{showMe maal}}">
     <thead>
     <tr>
-        <th>Kompetansemål</th>
+        <th>Kompetansemål/Arbeidsoppgaver</th>
         <th>Utplasseringssted</th>
         <th class="text-center">Fjern</th>
     </tr>
@@ -10,7 +10,7 @@
     <tbody>
         {{#each maal}}
             <tr class="hoverGrey" id="{{_id}}">
-                <td>{{kompetanseMaal}}<div class="{{showMe arbeidsOppgaver}}">Arbeidsoppgaver: {{arbeidsOppgaver}}</div></td>
+                <td>{{kompetanseMaal}}<div class="{{showMe arbeidsOppgaver}}">- {{arbeidsOppgaver}}</div></td>
                 <td>{{utplasseringsSted}}</td>
                 <td class="text-center"><a href="/yff/plan/remove/{{studentUserName}}/{{_id}}" data-id="{{_id}}" title="Slett kompetansemålet {{kompetanseMaal}}" class="mdl-button mdl-js-button mdl-color-text--black material-icons kompetanseMaalButton">delete</a></td>
             </tr>
