@@ -9,13 +9,13 @@
                 <form action="/yff/brreg" id="lookupOrganisasjonForm">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
                         <input class="mdl-textfield__input" type="text" name="query" id="brregQuery">
-                        <label class="mdl-textfield__label" for="brregQuery">Søk etter bedriften hvor eleven skal på utplassering. Du kan søke på bedriftsnavn eller organisasjonsnummer.</label>
+                        <label class="mdl-textfield__label" for="brregQuery">Søk etter vriksomheten hvor eleven skal på utplassering. Du kan søke på virksomhetsnavn eller organisasjonsnummer.</label>
                     </div>
                     <label class="mdl-button mdl-js-button mdl-button--icon" for="organisasjonsnummer" id="lookupOrganisasjonsButton">
                         <i class="material-icons" id="searchIcon">search</i>
                     </label>
                 </form>
-                <div class="mdl-typography--headline bedriftsVelger">Velg bedrift</div>
+                <div class="mdl-typography--headline bedriftsVelger">Velg virksomhet</div>
                 <div id="lookupMessages" class="warningColor systemmsg"></div>
                 <div id="lookupWrapper" class="bedriftsVelger"></div>
                 <form action="/yff/{{student.personalIdNumber}}" method="post" id="submitDocumentForm">
@@ -37,7 +37,7 @@
                         <div class="mdl-typography--headline">Bedriftsinformasjon</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
                             <input class="mdl-textfield__input" name="organisasjonsNummer" type="text" id="organisasjonsNummer" readonly>
-                            <label class="mdl-textfield__label" for="organisasjonsNummer">Bedriftens organisasjonsnummer</label>
+                            <label class="mdl-textfield__label" for="organisasjonsNummer">Virksomhetens organisasjonsnummer</label>
                         </div><br/>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
                             <input class="mdl-textfield__input" name="organisasjonsNavn" type="text" id="organisasjonsNavn" readonly>

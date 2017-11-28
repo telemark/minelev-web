@@ -399,3 +399,7 @@ table.evenodd tr:nth-child(even):hover {
     font-size: medium;
     color: gray;
 }
+
+.done-button {
+    background-color: #e1f3ef !important;
+}
