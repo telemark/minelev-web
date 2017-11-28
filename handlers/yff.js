@@ -9,7 +9,7 @@ const schoolsInfo = require('tfk-schools-info')
 const arrify = require('arrify')
 const config = require('../config')
 const prepareDocument = require('../lib/prepare-document')
-const prepareDocumentPreview = require('../lib/prepare-document-preview')
+const prepareYffDocumentPreview = require('../lib/prepare-yff-document-preview')
 const prepareYffDocument = require('../lib/prepare-yff-document')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
@@ -371,8 +371,10 @@ module.exports.generatePreview = (request, reply) => {
   data.userId = user.userId
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
-  const postData = prepareDocument(data)
-  const previewData = prepareDocumentPreview(postData)
+  const yffData = prepareYffDocument(data)
+  const documentData = prepareDocument(data)
+  let postData = Object.assign({}, documentData, yffData)
+  const previewData = prepareYffDocumentPreview(postData)
   const template = getDocumentTemplatesPath(getTemplateType(postData))
   let templaterForm = new FormData()
 

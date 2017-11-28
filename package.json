@@ -59,7 +59,7 @@
     "dotenv": "production.env"
   },
   "devDependencies": {
-    "ava": "0.23.0",
+    "ava": "0.24.0",
     "coveralls": "3.0.0",
     "nsp": "3.1.0",
     "nyc": "11.3.0",
@@ -81,7 +81,7 @@
     "inert": "4.2.1",
     "jsonwebtoken": "8.1.0",
     "simple-encryptor": "1.1.1",
-    "tfk-saksbehandling-minelev-templates": "1.5.4",
+    "tfk-saksbehandling-minelev-templates": "1.5.5",
     "tfk-saksbehandling-schools-info": "2.0.12",
     "tfk-schools-info": "1.2.4",
     "vision": "4.1.1",
