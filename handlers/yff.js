@@ -379,6 +379,7 @@ module.exports.generatePreview = (request, reply) => {
   data.studentId = request.params.studentID
   data.userId = user.userId
   data.userName = user.userName
+  data.userMail = user.email
   data.userAgent = request.headers['user-agent']
   const yffData = prepareYffDocument(data)
   const documentData = prepareDocument(data)
@@ -431,6 +432,7 @@ module.exports.submit = async (request, reply) => {
   data.studentId = request.params.studentID
   data.userId = user.userId
   data.userName = user.userName
+  data.userMail = user.email
   data.userAgent = request.headers['user-agent']
   const yffData = prepareYffDocument(data)
   const documentData = prepareDocument(data)

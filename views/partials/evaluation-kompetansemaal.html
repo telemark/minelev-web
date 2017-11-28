@@ -10,17 +10,19 @@
     </thead>
     <tbody>
         {{#each maal}}
-            <input type="hidden" name="kompetanse-{{_id}}" value="{{kompetanseMaal}}">
             <tr class="hoverGrey">
-                <td class="fontBigger">{{kompetanseMaal}}<div class="{{showMe arbeidsOppgaver}}">{{arbeidsOppgaver}}</div></td>
-                <td class="fontBigger text-center">
-                    <input type="radio" name="kompetansemaal-{{_id}}" value="lav" id="terminRadioCourse{{_id}}lav" class="mdl-radio__button period-selector chxBxEvaluationScore">
+                <td class="fontBigger">
+                    <input type="hidden" name="kompetanse-{{_id}}" value="{{kompetanseMaal}}">
+                    {{kompetanseMaal}}<div class="{{showMe arbeidsOppgaver}}">{{arbeidsOppgaver}}</div>
                 </td>
                 <td class="fontBigger text-center">
-                    <input type="radio" name="kompetansemaal-{{_id}}" value="middels" id="terminRadioCourse{{_id}}middels" class="mdl-radio__button period-selector chxBxEvaluationScore">
+                    <input type="radio" name="kompetansemaal-{{_id}}" value="lav" id="terminRadioCourse{{_id}}lav" class="mdl-radio__button period-selector chxBxEvaluationScore" required>
                 </td>
                 <td class="fontBigger text-center">
-                    <input type="radio" name="kompetansemaal-{{_id}}" value="høy" id="terminRadioCourse{{_id}}hoy" class="mdl-radio__button period-selector chxBxEvaluationScore">
+                    <input type="radio" name="kompetansemaal-{{_id}}" value="middels" id="terminRadioCourse{{_id}}middels" class="mdl-radio__button period-selector chxBxEvaluationScore" required>
+                </td>
+                <td class="fontBigger text-center">
+                    <input type="radio" name="kompetansemaal-{{_id}}" value="høy" id="terminRadioCourse{{_id}}hoy" class="mdl-radio__button period-selector chxBxEvaluationScore" required>
                 </td>
             </tr>
         {{/each}}

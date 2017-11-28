@@ -29,7 +29,8 @@ function init () {
 }
 
 function validateDocumentForm () {
-  console.log('were ok')
+  const previewButton = document.getElementById('previewDocumentButton')
+  previewButton.disabled = false
 }
 
 //MDL Text Input Cleanup
