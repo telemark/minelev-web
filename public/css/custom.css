@@ -403,3 +403,31 @@ table.evenodd tr:nth-child(even):hover {
 .done-button {
     background-color: #e1f3ef !important;
 }
+
+.capitalFirstLetter::first-letter {
+    text-transform: capitalize;
+}
+
+.evaluationTable {
+    font-size: large;
+}
+
+.evaluationTable td {
+    padding: 5px;
+    vertical-align: top;
+}
+
+.evaluationTable td::first-letter {
+    text-transform: capitalize;
+}
+
+.evaluationTable th {
+    padding: 5px;
+    vertical-align: top;
+}
+
+.evaluationTable div {
+    padding-left: 25px;
+    font-size: medium;
+    color: gray;
+}

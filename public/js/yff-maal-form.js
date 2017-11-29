@@ -72,6 +72,7 @@ function createKompetansemaalOption (item) {
   label.classList.add('hoverGrey')
   checkbox.classList.add('mdl-checkbox__input')
   span.classList.add('mdl-radio__label')
+  span.classList.add('capitalFirstLetter')
   span.innerHTML = item.tittel
   checkbox.setAttribute('type', 'checkbox')
   checkbox.setAttribute('id', boxId)
