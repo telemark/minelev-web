@@ -405,7 +405,7 @@ table.evenodd tr:nth-child(even):hover {
 }
 
 .capitalFirstLetter::first-letter {
-    text-transform: capitalize;
+    text-transform: capitalize !important;
 }
 
 .evaluationTable {
@@ -430,4 +430,8 @@ table.evenodd tr:nth-child(even):hover {
     padding-left: 25px;
     font-size: medium;
     color: gray;
+}
+
+div.evenodd > label:nth-child(even) {
+    background-color: #e1f3ef;
 }
