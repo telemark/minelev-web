@@ -215,6 +215,8 @@ module.exports.maal = async (request, reply) => {
 
     logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
+      const classLevel = getClassLevel(mainGroupName)
+      viewOptions.classLevels = classLevels.map(thisClass => thisClass.id === classLevel ? Object.assign(thisClass, {checked: 'checked'}) : thisClass)
       reply.view('yff-maal', viewOptions)
     } else {
       reply.view('error-missing-contact-teacher', viewOptions)
