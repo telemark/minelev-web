@@ -1,18 +1,29 @@
 'use strict'
 
 function init () {
+  const requiredFields = document.getElementById('submitDocumentForm').querySelectorAll('[required]')
+  requiredFields.forEach(field => addListener(field, 'click', validateDocumentForm))
   initPreview()
+  validateDocumentForm()
+}
+
+function addListener (element, type, func) {
+  element.removeEventListener(type, func)
+  element.addEventListener(type, func)
 }
 
 function validateDocumentForm () {
   const previewButton = document.getElementById('previewDocumentButton')
   const submitButton = document.getElementById('submitFormButton')
   const requiredFields = document.getElementById('submitDocumentForm').querySelectorAll('[required]')
+  let requiredNames = new Set()
   let requiredValues = []
 
+  requiredFields.forEach(field => requiredNames.add(field.name))
+
   // Disables buttons
-  previewButton.disabled = false
-  submitButton.disabled = false
+  previewButton.disabled = true
+  submitButton.disabled = true
 
   requiredFields.forEach(field => {
     if (field.checked) {
@@ -20,7 +31,7 @@ function validateDocumentForm () {
     }
   })
 
-  if (requiredValues.length === requiredFields.length) {
+  if (requiredValues.length === requiredNames.size) {
     submitButton.disabled = false
     previewButton.disabled = false
   }
