@@ -10,6 +10,10 @@ function serialize(form) {
 		switch (form.elements[i].nodeName) {
 		case 'INPUT':
 			switch (form.elements[i].type) {
+			case 'number':
+			case 'date':
+			case 'time':
+			case 'email':
 			case 'text':
 			case 'hidden':
 			case 'password':
