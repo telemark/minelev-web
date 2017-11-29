@@ -26,8 +26,10 @@
             <input type="hidden" name="organizationNumber" value="{{student.organizationNumber}}">
             <input type="hidden" name="type" value="yff-lokalplan">
             <div class="mdl-card__actions mdl-card--border">
-                <a href="/yff/maal/{{student.userName}}" id="goToMaal" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Gå til Opprett/endre lokal læreplan for {{student.fullName}}"><i class="material-icons">assignment</i></a>
+                <a href="/yff/{{student.userName}}" id="cancelPlan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Avbryt og gå til yff forsiden for {{student.fullName}}"><i class="material-icons">delete</i></a>
                 <div class="mdl-layout-spacer"></div>
+                <a href="/yff/maal/{{student.userName}}" id="goToMaal" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Endre lokal læreplan for {{student.fullName}}"><i class="material-icons">create</i></a>
+                <span class="margin-right-5"></span>
                 <button type="submit" formaction="/yff/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis lokal læreplan for {{student.fullName}}" name="previewPlan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
                 <span class="margin-right-5"></span>
                 <button type="submit" value="1" id="submitPlan" title="Send brevet digitalt til elev. Det arkiveres automatisk i {{student.fullName}}s elevmappe." name="submitPlan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">mail_outline</button>
