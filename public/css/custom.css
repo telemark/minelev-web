@@ -404,10 +404,6 @@ table.evenodd tr:nth-child(even):hover {
     background-color: #e1f3ef !important;
 }
 
-.capitalFirstLetter::first-letter {
-    text-transform: capitalize !important;
-}
-
 .evaluationTable {
     font-size: large;
 }
@@ -434,4 +430,8 @@ table.evenodd tr:nth-child(even):hover {
 
 div.evenodd > label:nth-child(even) {
     background-color: #e1f3ef;
+}
+
+div.evenodd > label:nth-child(even):hover {
+    background-color: #ededed;
 }

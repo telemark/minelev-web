@@ -70,9 +70,11 @@ function createKompetansemaalOption (item) {
   label.classList.add('mdl-js-ripple-effect')
   label.classList.add('chxBxordenKompetanse')
   label.classList.add('hoverGrey')
+  label.classList.add('margin-bottom-10')
   checkbox.classList.add('mdl-checkbox__input')
   span.classList.add('mdl-radio__label')
   span.classList.add('capitalFirstLetter')
+  span.classList.add('fontBigger')
   span.innerHTML = item.tittel
   checkbox.setAttribute('type', 'checkbox')
   checkbox.setAttribute('id', boxId)
@@ -110,12 +112,16 @@ function toggleArbeidsOppgave (e) {
     }
     const arbeidsoppgave = createInput(options)
     innhold.appendChild(arbeidsoppgave)
+    componentHandler.upgradeElements(innhold)
+    showVelger('innholdsVelger')
   } else {
     const arbeidsoppgave = document.getElementById(`wrapper-${optionID}`)
+    const parent = arbeidsoppgave.parentNode
     arbeidsoppgave.parentNode.removeChild(arbeidsoppgave, arbeidsoppgave.parentNode)
+    if (parent.children.length === 0) {
+      hideVelger('innholdsVelger')
+    }
   }
-  componentHandler.upgradeElements(innhold)
-  showVelger('innholdsVelger')
 }
 
 function createProgramoradeOption(item) {
@@ -266,159 +272,6 @@ function createInput (options) {
   div.appendChild(input)
   div.appendChild(label)
   return div
-}
-
-function addUB () {
-  const rowId = uuidv4()
-  const table = document.getElementById('planUBTable')
-  const body = table.getElementsByTagName('tbody')[0]
-  const tr = document.createElement('tr')
-  const programCelle = document.createElement('td')
-  const produksjonsCelle = document.createElement('td')
-  const slettCelle = document.createElement('td')
-  const slettButton = document.createElement('button')
-
-  tr.setAttribute('id', rowId)
-  slettButton.setAttribute('id', `slett${rowId}`)
-  slettButton.innerHTML = 'Slett'
-  slettButton.classList.add('mdl-button')
-  slettButton.classList.add('mdl-js-button')
-  slettButton.classList.add('mdl-button--raised')
-  slettButton.classList.add('mdl-js-ripple-effect')
-  programCelle.classList.add('mdl-data-table__cell--non-numeric')
-  programCelle.appendChild(createInput({name: 'program', text: ''}))
-  produksjonsCelle.classList.add('mdl-data-table__cell--non-numeric')
-  produksjonsCelle.appendChild(createInput({name: 'produksjon', text: ''}))
-  slettCelle.classList.add('mdl-data-table__cell--non-numeric')
-  slettCelle.appendChild(slettButton)
-  tr.appendChild(programCelle)
-  tr.appendChild(produksjonsCelle)
-  tr.appendChild(slettCelle)
-
-  body.appendChild(tr)
-
-  document.getElementById(`slett${rowId}`).addEventListener('click', (e) => {
-    e.preventDefault()
-    const id = e.target.id.replace('slett', '')
-    document.getElementById(e.target.id).removeEventListener('click', (e) => console.log('removed'))
-    removeRow(id)
-  })
-  toggleTable('planUBTable')
-}
-
-function addSkole () {
-  const rowId = uuidv4()
-  const table = document.getElementById('planSkoleTable')
-  const body = table.getElementsByTagName('tbody')[0]
-  const tr = document.createElement('tr')
-  const programCelle = document.createElement('td')
-  const kompetanseCelle = document.createElement('td')
-  const skoleCelle = document.createElement('td')
-  const slettCelle = document.createElement('td')
-  const slettButton = document.createElement('button')
-
-  tr.setAttribute('id', rowId)
-  slettButton.setAttribute('id', `slett${rowId}`)
-  slettButton.innerHTML = 'Slett'
-  slettButton.classList.add('mdl-button')
-  slettButton.classList.add('mdl-js-button')
-  slettButton.classList.add('mdl-button--raised')
-  slettButton.classList.add('mdl-js-ripple-effect')
-  programCelle.classList.add('mdl-data-table__cell--non-numeric')
-  programCelle.appendChild(createInput({name: 'program', text: ''}))
-  kompetanseCelle.classList.add('mdl-data-table__cell--non-numeric')
-  kompetanseCelle.appendChild(createInput({name: 'kompetanse', text: ''}))
-  skoleCelle.classList.add('mdl-data-table__cell--non-numeric')
-  skoleCelle.appendChild(createInput('skole'))
-  slettCelle.classList.add('mdl-data-table__cell--non-numeric')
-  slettCelle.appendChild(slettButton)
-  tr.appendChild(programCelle)
-  tr.appendChild(kompetanseCelle)
-  tr.appendChild(skoleCelle)
-  tr.appendChild(slettCelle)
-
-  body.appendChild(tr)
-
-  document.getElementById(`slett${rowId}`).addEventListener('click', (e) => {
-    e.preventDefault()
-    const id = e.target.id.replace('slett', '')
-    document.getElementById(e.target.id).removeEventListener('click', (e) => console.log('removed'))
-    removeRow(id)
-  })
-  toggleTable('planSkoleTable')
-}
-
-function addBedrift () {
-  const rowId = uuidv4()
-  const table = document.getElementById('planBedriftTable')
-  const body = table.getElementsByTagName('tbody')[0]
-  const tr = document.createElement('tr')
-  const kompetanseCelle = document.createElement('td')
-  const infoDiv = document.createElement('div')
-  const slettCelle = document.createElement('td')
-  const slettButton = document.createElement('button')
-  const kompetanse = cloneKompetanse()
-  tr.setAttribute('id', rowId)
-  slettButton.setAttribute('id', `slett${rowId}`)
-  slettButton.innerHTML = 'Slett'
-  slettButton.classList.add('mdl-button')
-  slettButton.classList.add('mdl-js-button')
-  slettButton.classList.add('mdl-button--raised')
-  slettButton.classList.add('mdl-js-ripple-effect')
-  infoDiv.appendChild(createInput({name: 'arbeidsoppgaver', text: 'Arbeidsoppgaver'}))
-  infoDiv.appendChild(createInput({name: 'bedrift', text: 'Bedrift'}))
-  kompetanseCelle.classList.add('mdl-data-table__cell--non-numeric')
-  kompetanseCelle.appendChild(kompetanse)
-  kompetanseCelle.appendChild(infoDiv)
-  slettCelle.classList.add('mdl-data-table__cell--non-numeric')
-  slettCelle.appendChild(slettButton)
-  tr.appendChild(kompetanseCelle)
-  tr.appendChild(oppgaveCelle)
-  tr.appendChild(bedriftCelle)
-  tr.appendChild(slettCelle)
-
-  body.appendChild(tr)
-
-  document.getElementById(`slett${rowId}`).addEventListener('click', (e) => {
-    e.preventDefault()
-    const id = e.target.id.replace('slett', '')
-    document.getElementById(e.target.id).removeEventListener('click', (e) => console.log('removed'))
-    removeRow(id)
-  })
-  toggleTable('planBedriftTable')
-}
-
-function duplicateRow (id) {
-  const rowId = uuidv4()
-  const table = document.getElementById(id)
-  const body = table.getElementsByTagName('tbody')[0]
-  const tr = body.getElementsByTagName('tr')[0]
-  const newRow = tr.cloneNode(true)
-  const cells = newRow.getElementsByTagName('td')
-  const slettCelle = document.createElement('td')
-  const slettButton = document.createElement('button')
-  const lastCell = cells[cells.length - 1]
-
-  newRow.setAttribute('id', rowId)
-  slettButton.setAttribute('id', `slett${rowId}`)
-  slettButton.innerHTML = 'Slett'
-  slettButton.classList.add('mdl-button')
-  slettButton.classList.add('mdl-js-button')
-  slettButton.classList.add('mdl-button--raised')
-  slettButton.classList.add('mdl-js-ripple-effect')
-  slettCelle.classList.add('mdl-data-table__cell--non-numeric')
-  slettCelle.appendChild(slettButton)
-
-  newRow.replaceChild(slettCelle, lastCell)
-
-  body.appendChild(newRow)
-
-  document.getElementById(`slett${rowId}`).addEventListener('click', (e) => {
-    e.preventDefault()
-    const id = e.target.id.replace('slett', '')
-    document.getElementById(e.target.id).removeEventListener('click', (e) => console.log('removed'))
-    removeRow(id)
-  })
 }
 
 function ready (fn) {
