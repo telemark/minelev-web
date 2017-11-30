@@ -18,6 +18,7 @@ const getProfilePicture = require('../lib/get-profile-picture')
 const datePadding = require('../lib/date-padding')
 const getTemplateType = require('../lib/get-template-type')
 const getClassLevel = require('../lib/get-class-level')
+const buildLareplan = require('../lib/yff-build-lareplan')
 const logger = require('../lib/logger')
 const yffData = require('../lib/data/yff.json')
 
@@ -375,7 +376,7 @@ module.exports.evaluation = async (request, reply) => {
   }
 }
 
-module.exports.generatePreview = (request, reply) => {
+module.exports.generatePreview = async (request, reply) => {
   const user = request.auth.credentials.data
   let data = request.payload
   data.studentId = request.params.studentID
@@ -383,6 +384,9 @@ module.exports.generatePreview = (request, reply) => {
   data.userName = user.userName
   data.userMail = user.email
   data.userAgent = request.headers['user-agent']
+  if (data.type === 'yff-lokalplan') {
+    data.lokalPlanLinjer = await buildLareplan({userId: user.userId, studentUserName: data.studentUserName})
+  }
   const yffData = prepareYffDocument(data)
   const documentData = prepareDocument(data)
   let postData = Object.assign({}, documentData, yffData)
