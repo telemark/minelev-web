@@ -18,7 +18,6 @@ const getProfilePicture = require('../lib/get-profile-picture')
 const datePadding = require('../lib/date-padding')
 const getTemplateType = require('../lib/get-template-type')
 const getClassLevel = require('../lib/get-class-level')
-const buildLareplan = require('../lib/yff-build-lareplan')
 const logger = require('../lib/logger')
 const yffData = require('../lib/data/yff.json')
 
@@ -284,6 +283,8 @@ module.exports.plan = async (request, reply) => {
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
     viewOptions.schools = schoolsInfo()
     viewOptions.maal = maal
+    viewOptions.classLevel = maal[0].classLevel
+    viewOptions.utdanningsprogram = maal[0].utdanningsprogram
     viewOptions.bedrifter = bedrifter
     // If not bedrifter remove bedrifter from utplasseringssted
     viewOptions.utplasseringsSted = bedrifter.length > 0 ? yffData.utplasseringsSted : yffData.utplasseringsSted.slice(1)
