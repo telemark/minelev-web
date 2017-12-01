@@ -50,6 +50,14 @@ module.exports.frontPage = async (request, reply) => {
       studentUserName: studentUserName
     }
   }
+  const planOptions = {
+    userId: userId,
+    token: token,
+    query: {
+      documentCategory: 'yff-lokalplan',
+      studentUserName: studentUserName
+    }
+  }
   const tilbakemeldingsOptions = {
     userId: userId,
     token: token,
@@ -64,7 +72,7 @@ module.exports.frontPage = async (request, reply) => {
   logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
   axios.defaults.headers.common['Authorization'] = token
-  const [results, contactTeachersResult, maal, bedrifter, tilbakemeldinger, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(maalOptions), searchLogs(bedriftsOptions), searchLogs(tilbakemeldingsOptions), getProfilePicture(studentUserName)])
+  const [results, contactTeachersResult, maal, bedrifter, tilbakemeldinger, planer, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(maalOptions), searchLogs(bedriftsOptions), searchLogs(tilbakemeldingsOptions), searchLogs(planOptions), getProfilePicture(studentUserName)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -79,6 +87,7 @@ module.exports.frontPage = async (request, reply) => {
     viewOptions.student = student
     viewOptions.bedrifter = bedrifter
     viewOptions.maal = maal
+    viewOptions.planer = planer
     viewOptions.tilbakemeldinger = tilbakemeldinger
     if (profilePicture !== false) {
       logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'retrieved profile picture'])

@@ -12,6 +12,9 @@
     <input type="hidden" name="schoolPhone" value="{{student.unitPhone}}">
     <input type="hidden" name="organizationNumber" value="{{student.organizationNumber}}">
     <input type="hidden" name="type" value="yff-lokalplan-maal">
+    {{#each utdanningsprogrammer}}
+        <input type="hidden" name="utdanningsprogramvelger-{{id}}" value="{{name}}">
+    {{/each}}
     {{>class-levels-list}}
     {{>yff-utplassering-sted}}
     {{>yff-plan-skoler}}
