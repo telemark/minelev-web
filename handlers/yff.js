@@ -384,8 +384,17 @@ module.exports.generatePreview = async (request, reply) => {
   data.userName = user.userName
   data.userMail = user.email
   data.userAgent = request.headers['user-agent']
+  const token = generateSystemJwt(user.userId)
   if (data.type === 'yff-lokalplan') {
-    data.lokalPlanLinjer = await buildLareplan({userId: user.userId, studentUserName: data.studentUserName})
+    const maalOptions = {
+      userId: user.userId,
+      token: token,
+      query: {
+        documentCategory: 'yff-lokalplan-maal',
+        studentUserName: data.studentUserName
+      }
+    }
+    data.lokalPlanMaal = await searchLogs(maalOptions)
   }
   const yffData = prepareYffDocument(data)
   const documentData = prepareDocument(data)
@@ -440,6 +449,19 @@ module.exports.submit = async (request, reply) => {
   data.userName = user.userName
   data.userMail = user.email
   data.userAgent = request.headers['user-agent']
+
+  if (data.type === 'yff-lokalplan') {
+    const maalOptions = {
+      userId: user.userId,
+      token: token,
+      query: {
+        documentCategory: 'yff-lokalplan-maal',
+        studentUserName: data.studentUserName
+      }
+    }
+    data.lokalPlanMaal = await searchLogs(maalOptions)
+  }
+
   const yffData = prepareYffDocument(data)
   const documentData = prepareDocument(data)
   let postData = Object.assign({}, documentData, yffData)
