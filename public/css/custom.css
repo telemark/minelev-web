@@ -404,6 +404,10 @@ table.evenodd tr:nth-child(even):hover {
     background-color: #e1f3ef !important;
 }
 
+.wait-button {
+    background-color: #ededed !important;
+}
+
 .evaluationTable {
     font-size: large;
 }
