@@ -5,21 +5,7 @@ const server = new Hapi.Server()
 const config = require('./config')
 const louieService = require('./index')
 const validate = require('./lib/validateJWT')
-
-const goodOptions = {
-  ops: {
-    interval: 900000
-  },
-  reporters: {
-    console: [{
-      module: 'good-squeeze',
-      name: 'Squeeze',
-      args: [{ log: '*', ops: '*', error: '*' }]
-    }, {
-      module: 'good-console'
-    }, 'stdout']
-  }
-}
+const logger = require('./lib/logger')
 
 const yarOptions = {
   storeBlank: false,
@@ -34,13 +20,12 @@ const plugins = [
   {register: require('hapi-auth-cookie')},
   {register: require('vision')},
   {register: require('inert')},
-  {register: require('yar'), options: yarOptions},
-  {register: require('good'), options: goodOptions}
+  {register: require('yar'), options: yarOptions}
 ]
 
 function endIfError (error) {
   if (error) {
-    console.error(error)
+    logger('error', ['server', 'endIfError', error])
     process.exit(1)
   }
 }
@@ -101,19 +86,19 @@ function registerRoutes () {
     }
   ], function (err) {
     if (err) {
-      console.error('Failed to load a plugin:', err)
+      logger('error', ['server', 'registerRoutes', err])
     }
   })
 }
 
 module.exports.start = () => {
   server.start(() => {
-    console.log('Server running at:', server.info.uri)
+    logger('info', ['server', 'start', server.info.uri])
   })
 }
 
 module.exports.stop = () => {
   server.stop(() => {
-    console.log('Server stopped')
+    logger('info', ['server', 'stop', 'success'])
   })
 }
