@@ -25,7 +25,9 @@ function init () {
   addListener(document.getElementById('utplasseringsstedVelger'), 'change', buildArbeidsoppghaver)
   addListener(document.getElementById('utdanningsprogramVelger'), 'change', updateProgramInnhold)
   addListener(document.getElementById('klassetrinnVelger'), 'change', updateProgramInnhold)
-  maalButtons.forEach(button => addListener(button, 'click', deleteKompetanseMaal))
+  maalButtons.forEach(function (button) {
+    addListener(button, 'click', deleteKompetanseMaal)
+  })
 }
 
 function validateDocumentForm () {
@@ -43,10 +45,12 @@ function mdlCleanUp () {
 
 function getProgramInnhold (options) {
   const url = `https://yff.service.minelev.no/utdanningsprogrammer/${options.programId}-${options.klassetrinn}`
-  axios.get(url).then(result => {
+  axios.get(url).then(function (result) {
     yffData.programInnhold = result.data
     buildProgramOmrader()
-  }).catch(error => console.error(error))
+  }).catch(function (error) {
+    console.error(error)
+  })
 }
 
 function getKompetanseMaal (index) {
@@ -89,7 +93,7 @@ function createKompetansemaalOption (item) {
 function buildKompetansemaal () {
   const div = document.getElementById('kompetansemaal')
   div.innerHTML = ''
-  yffData.kompetansemaal.forEach(item => {
+  yffData.kompetansemaal.forEach(function (item) {
     const option = createKompetansemaalOption(item)
     div.appendChild(option)
     addListener(option, 'change', toggleArbeidsOppgave)
@@ -145,12 +149,12 @@ function buildProgramOmrader () {
   const firstOption = createProgramoradeOption({name: 'Velg programområde'})
   select.classList.add('margin-top-10')
   select.appendChild(firstOption)
-  yffData.programInnhold.forEach(item => {
+  yffData.programInnhold.forEach(function (item) {
     const option = createProgramoradeOption(item)
     select.appendChild(option)
   })
   div.appendChild(select)
-  select.addEventListener('change', (e) => {
+  select.addEventListener('change', function (e) {
     e.preventDefault()
     const index = e.target.selectedIndex - 1
     if (index >= 0) {
@@ -194,12 +198,16 @@ function cloneKompetanse () {
 
 function hideVelger (velger) {
   const velgers = document.querySelectorAll(`.${velger}`)
-  velgers.forEach(item => item.style.display = 'none')
+  velgers.forEach(function (item) {
+    item.style.display = 'none'
+  })
 }
 
 function showVelger (velger) {
   const velgers = document.querySelectorAll(`.${velger}`)
-  velgers.forEach(item => item.style.display = '')
+  velgers.forEach(function (item) {
+    item.style.display = ''
+  })
 }
 
 function toggleTable (id) {

@@ -19,13 +19,15 @@ function validateDocumentForm () {
   let requiredNames = new Set()
   let requiredValues = []
 
-  requiredFields.forEach(field => requiredNames.add(field.name))
+  requiredFields.forEach(function (field) {
+    requiredNames.add(field.name)
+  })
 
   // Disables buttons
   previewButton.disabled = true
   submitButton.disabled = true
 
-  requiredFields.forEach(field => {
+  requiredFields.forEach(function (field) {
     if (field.checked) {
       requiredValues.push(true)
     }

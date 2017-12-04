@@ -36,7 +36,7 @@ function validateDocumentForm () {
   submitButton.disabled = true
   previewButton.disabled = true
 
-  requiredFields.forEach(field => {
+  requiredFields.forEach(function (field) {
     if (field.value !== '') {
       requiredValues.push(true)
     }
@@ -50,12 +50,16 @@ function validateDocumentForm () {
 
 function hideVelger (velger) {
   const velgers = document.querySelectorAll(`.${velger}`)
-  velgers.forEach(item => item.style.display = 'none')
+  velgers.forEach(function (item) {
+    item.style.display = 'none'
+  })
 }
 
 function showVelger (velger) {
   const velgers = document.querySelectorAll(`.${velger}`)
-  velgers.forEach(item => item.style.display = '')
+  velgers.forEach(function (item) {
+    item.style.display = ''
+  })
 }
 
 //MDL Text Input Cleanup
@@ -134,6 +138,7 @@ function addContactPerson (e) {
   button.parentNode.insertBefore(nameField, button)
   button.parentNode.insertBefore(phoneField, button)
   button.parentNode.insertBefore(departmentField, button)
+  componentHandler.upgradeElements(button.parentNode)
 }
 
 function addNextOfKin (e) {
@@ -143,6 +148,7 @@ function addNextOfKin (e) {
   const phoneField = createInput({name: 'parorendeTelefon', text: 'Telefon'})
   button.parentNode.insertBefore(nameField, button)
   button.parentNode.insertBefore(phoneField, button)
+  componentHandler.upgradeElements(button.parentNode)
 }
 
 function organizationSelected (e) {
@@ -201,7 +207,7 @@ function lookupOrganization (e) {
   hideVelger('bedriftsWrapper')
   hideVelger('bedriftsinfoWrapper')
   axios.post(url, {query: query})
-    .then(result => {
+    .then(function (result) {
       spinnerOff()
       YFFData.organizations = result.data
       if (result.data.length === 1) {
@@ -212,7 +218,7 @@ function lookupOrganization (e) {
       } else {
         buildOrganizationsSelector()
       }
-    }).catch(error => {
+    }).catch(function (error) {
       console.error(error)
       spinnerOff()
     })
