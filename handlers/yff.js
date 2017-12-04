@@ -366,8 +366,6 @@ module.exports.evaluation = async (request, reply) => {
     viewOptions.evaluationPeriods = evaluationPeriods
     viewOptions.maal = maal
     viewOptions.bedrift = bedrift
-    viewOptions.classLevel = bedrift.classLevel
-    viewOptions.utdanningsprogram = bedrift.utdanningsprogram
     if (profilePicture !== false) {
       logger('info', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, 'retrieve profile picture'])
       viewOptions.profilePicture = profilePicture.data

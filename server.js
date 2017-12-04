@@ -7,6 +7,21 @@ const louieService = require('./index')
 const validate = require('./lib/validateJWT')
 const logger = require('./lib/logger')
 
+const goodOptions = {
+  ops: {
+    interval: 900000
+  },
+  reporters: {
+    console: [{
+      module: 'good-squeeze',
+      name: 'Squeeze',
+      args: [{ log: '*', ops: '*', error: '*' }]
+    }, {
+      module: 'good-console'
+    }, 'stdout']
+  }
+}
+
 const yarOptions = {
   storeBlank: false,
   cookieOptions: {
@@ -20,6 +35,7 @@ const plugins = [
   {register: require('hapi-auth-cookie')},
   {register: require('vision')},
   {register: require('inert')},
+  {register: require('good'), options: goodOptions},
   {register: require('yar'), options: yarOptions}
 ]
 
