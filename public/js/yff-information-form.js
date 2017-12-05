@@ -51,14 +51,14 @@ function validateDocumentForm () {
 }
 
 function hideVelger (velger) {
-  const velgers = document.querySelectorAll(`.${velger}`)
+  const velgers = document.querySelectorAll('.' + velger)
   velgers.forEach(function (item) {
     item.style.display = 'none'
   })
 }
 
 function showVelger (velger) {
-  const velgers = document.querySelectorAll(`.${velger}`)
+  const velgers = document.querySelectorAll('.' + velger)
   velgers.forEach(function (item) {
     item.style.display = ''
   })
@@ -178,7 +178,7 @@ function createRadio (options) {
   label.setAttribute('id', options.index)
   label.setAttribute('for', id)
   span.setAttribute('data-my-index', options.index)
-  span.innerHTML = `${options.navn} - ${options.forradrkommnavn}`
+  span.innerHTML = options.navn + ' - ' + options.forradrkommnavn
   label.appendChild(input)
   label.appendChild(span)
   return label

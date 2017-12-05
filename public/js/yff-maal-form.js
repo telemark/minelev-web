@@ -44,7 +44,7 @@ function mdlCleanUp () {
 }
 
 function getProgramInnhold (options) {
-  const url = `https://yff.service.minelev.no/utdanningsprogrammer/${options.programId}-${options.klassetrinn}`
+  const url = 'https://yff.service.minelev.no/utdanningsprogrammer/' + options.programId + '-' + options.klassetrinn
   axios.get(url).then(function (result) {
     yffData.programInnhold = result.data
     buildProgramOmrader()
@@ -110,16 +110,16 @@ function toggleArbeidsOppgave (e) {
 
   if (optionStatus === true) {
     const options = {
-      wrapperID: `wrapper-${optionID}`,
-      name: `arbeidsoppgaver`,
-      text: `Arbeidsoppgaver knyttet til ${optionValue}`
+      wrapperID: 'wrapper-' + optionID,
+      name: 'arbeidsoppgaver',
+      text: 'Arbeidsoppgaver knyttet til ' + optionValue
     }
     const arbeidsoppgave = createInput(options)
     innhold.appendChild(arbeidsoppgave)
     componentHandler.upgradeElements(innhold)
     showVelger('innholdsVelger')
   } else {
-    const arbeidsoppgave = document.getElementById(`wrapper-${optionID}`)
+    const arbeidsoppgave = document.getElementById('wrapper-' + optionID)
     const parent = arbeidsoppgave.parentNode
     arbeidsoppgave.parentNode.removeChild(arbeidsoppgave, arbeidsoppgave.parentNode)
     if (parent.children.length === 0) {
@@ -197,14 +197,14 @@ function cloneKompetanse () {
 }
 
 function hideVelger (velger) {
-  const velgers = document.querySelectorAll(`.${velger}`)
+  const velgers = document.querySelectorAll('.' + velger)
   velgers.forEach(function (item) {
     item.style.display = 'none'
   })
 }
 
 function showVelger (velger) {
-  const velgers = document.querySelectorAll(`.${velger}`)
+  const velgers = document.querySelectorAll('.' + velger)
   velgers.forEach(function (item) {
     item.style.display = ''
   })
@@ -212,7 +212,7 @@ function showVelger (velger) {
 
 function toggleTable (id) {
   const table = document.getElementById(id)
-  const heading = document.getElementById(`${id}Heading`)
+  const heading = document.getElementById(id + 'Heading')
   const body = table.getElementsByTagName('tbody')[0]
   const trs = body.getElementsByTagName('tr')
   const display = trs.length > 0 ? '' : 'none'
@@ -244,7 +244,7 @@ function showTableRow (id) {
 
 async function deleteKompetanseMaal (e) {
   e.preventDefault()
-  if (confirm(`${e.target.title}?`)) {
+  if (confirm(e.target.title + '?')) {
     const id = e.target.dataset.id
     const url = e.target.href
     hideTableRow(id)
