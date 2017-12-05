@@ -202,7 +202,7 @@ function lookupOrganization (e) {
   const queryField = document.getElementById('brregQuery')
   const messages = document.getElementById('lookupMessages')
   const query = queryField.value
-  const url = `/yff/brreg`
+  const url = '/yff/brreg'
   spinnerOn()
   messages.innerHTML = ''
   hideVelger('lookupMessages')
