@@ -15,7 +15,9 @@ function init () {
   hideVelger('lookupMessages')
   addListener(lookupForm, 'submit', lookupOrganization)
   addListener(lookupOrganizationButton, 'click', lookupOrganization)
-  requiredFields.forEach(field => addListener(field, 'keyup', validateDocumentForm))
+  requiredFields.forEach(function (field) {
+    addListener(field, 'keyup', validateDocumentForm)
+  })
 
   setTimeout(function () {
     lookupField.focus()
@@ -185,7 +187,7 @@ function createRadio (options) {
 function buildOrganizationsSelector () {
   const div = document.getElementById('lookupWrapper')
   div.innerHTML = ''
-  YFFData.organizations.forEach((item, index) => {
+  YFFData.organizations.forEach(function (item, index) {
     const radio = createRadio(Object.assign(item, {index: index, name: 'selectOrg'}))
     const br = document.createElement('br')
     div.appendChild(radio)

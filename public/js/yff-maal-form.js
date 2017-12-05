@@ -186,7 +186,7 @@ function cloneKompetanse () {
   const parent = document.getElementById('kompetansemaal')
   const clone = parent.cloneNode(true)
   const div = document.createElement('div')
-  clone.childNodes.forEach(child => {
+  clone.childNodes.forEach(function (child) {
     const inputs = child.getElementsByTagName('input')
     if (input[0].checked) {
       div.appendChild(child)
@@ -248,12 +248,14 @@ async function deleteKompetanseMaal (e) {
     const id = e.target.dataset.id
     const url = e.target.href
     hideTableRow(id)
-    const { data } = await axios(url)
-    if (data.success === true) {
-      removeTableRow(id)
-    } else {
-      showTableRow(id)
-    }
+    axios(url)
+    .then(function (result) {
+      if (result.data.success === true) {
+        removeTableRow(id)
+      } else {
+        showTableRow(id)
+      }  
+    })
   } else {
     return false
   }
