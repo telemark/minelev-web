@@ -16,7 +16,11 @@ function init () {
   addListener(lookupForm, 'submit', lookupOrganization)
   addListener(lookupOrganizationButton, 'click', lookupOrganization)
   requiredFields.forEach(function (field) {
-    addListener(field, 'keyup', validateDocumentForm)
+    if (field.type === 'select-one') {
+      addListener(field, 'change', validateDocumentForm)
+    } else {
+      addListener(field, 'keyup', validateDocumentForm)
+    }
   })
 
   setTimeout(function () {
@@ -39,7 +43,14 @@ function validateDocumentForm () {
   previewButton.disabled = true
 
   requiredFields.forEach(function (field) {
-    if (field.value !== '') {
+    if (field.type === 'select-one' && field.value !== 'Velg utdanningsprogram') {
+      requiredValues.push(true)
+    }
+    if (field.type === 'text' && field.value !== '') {
+      requiredValues.push(true)
+    }
+    if (field.type === 'radio' && field.checked) {
+      requiredValues.push(true)
       requiredValues.push(true)
     }
   })
