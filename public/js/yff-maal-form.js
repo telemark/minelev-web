@@ -45,10 +45,12 @@ function mdlCleanUp () {
 
 function getProgramInnhold (options) {
   const url = 'https://yff.service.minelev.no/utdanningsprogrammer/' + options.programId + '-' + options.klassetrinn
-  axios.get(url).then(function (result) {
+  axios.get(url)
+  .then(function (result) {
     yffData.programInnhold = result.data
     buildProgramOmrader()
-  }).catch(function (error) {
+  })
+  .catch(function (error) {
     console.error(error)
   })
 }
@@ -242,7 +244,7 @@ function showTableRow (id) {
   row.style.display = ''
 }
 
-async function deleteKompetanseMaal (e) {
+function deleteKompetanseMaal (e) {
   e.preventDefault()
   if (confirm(e.target.title + '?')) {
     const id = e.target.dataset.id
