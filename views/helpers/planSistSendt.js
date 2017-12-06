@@ -8,6 +8,8 @@ module.exports = plans => {
         return current.timeStamp
       } else if (current.timeStamp > prev) {
         return current.timeStamp
+      } else {
+        return prev
       }
     }, '')
     text = `Sist sendt ut og arkivert ${formatDateTime(latest)}`
