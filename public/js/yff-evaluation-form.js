@@ -2,7 +2,9 @@
 
 function init () {
   const requiredFields = document.getElementById('submitDocumentForm').querySelectorAll('[required]')
-  requiredFields.forEach(field => addListener(field, 'click', validateDocumentForm))
+  requiredFields.forEach(function (field) {
+    addListener(field, 'click', validateDocumentForm)
+  })
   initPreview()
   validateDocumentForm()
 }
