@@ -2,35 +2,35 @@
   "evaluation": [
     {
       "id": "hms",
-      "description": "Følger retningslinjer og HMS innenfor fagområdet"
+      "description": "Eleven følger retningslinjer og HMS innenfor fagområdet"
     },
     {
       "id": "respekt-retningslinjer",
-      "description": "Vise gode holdninger og respekt for opplæringssteds retningslinjer og regler"
+      "description": "Eleven viser gode holdninger og respekt for opplæringsstedets regler og retningslinjer"
     },
     {
       "id": "respekt-mennesker",
-      "description": "Vise gode holdninger og respekt for mennesker de møter i forbindelse med utplasseringen"
+      "description": "Eleven viser gode holdninger og respekt for mennesker de møter under utplasseringen"
     },
     {
       "id": "tilpasningsdyktig",
-      "description": "Tilpasningsdyktig og evne til å samarbeide"
+      "description": "Eleven er tilpasningsdyktig og greier å samarbeide"
     },
     {
       "id": "kommunikasjon",
-      "description": "Kommunikasjonsevner i møte med kollegaer, kunder/pasienter etc."
+      "description": "Eleven har kommunikasjonsevner i møte med kollegaer, kunder og brukere"
     },
     {
       "id": "veiledning",
-      "description": "Evne til å ta veiledning/læredyktig"
+      "description": "Eleven tar imot veiledning"
     },
     {
       "id": "oppfylle",
-      "description": "Oppfylle/utføre tildelte arbeidsoppgaver"
+      "description": "Eleven utfører tildelte arbeidsoppgaver"
     },
     {
       "id": "initiativ",
-      "description": "Initiativ og interesse for arbeidet"
+      "description": "Eleven viser initiativ og interesse for arbeidet"
     },
     {
       "id": "orden",

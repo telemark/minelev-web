@@ -1,9 +1,12 @@
 <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--3-col"></div>
-    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+    <div class="mdl-cell mdl-cell--2-col"></div>
+    <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet">
         <p class="fontBigger">
             Nedenfor finner du <a href="#faq">ofte stilte spørsmål og svar</a> og en forklaring på <a href="#iconexpl">ikoner og statuser i løsningen</a>.
         </p>
+        <p class="fontBigger {{featureToggle features.useYFF}}">
+                <a href="#yff">YFF</a> har i tillegg egen introduksjon og noen ekstra <a href="#iconexplyff">ikoner</a>.
+            </p>
         <p class="fontBigger">
             <a href="https://skoletfk.sharepoint.com/sites/arbrom/laering/e-laering/kontorstotte/Sider/MinElev---elevsamtaler.aspx" target="_blank" title="Gå til E-læringen til MinElev – elevsamtaler">E-læringen til MinElev – elevsamtaler finner du her.</a>
         <p/>
@@ -14,9 +17,9 @@
             Feil, mangler og ønsker kan du sende til <a href="mailto:post.opplaring@t-fk.no" title="Send e-post til post.opplaring@t-fk.no" target="_blank">post.opplaring@t-fk.no</a>
         </p>
     </div>
-    <div class="mdl-cell mdl-cell--3-col"></div>
-    <div class="mdl-cell mdl-cell--3-col"></div>
-    <table class="mdl-data-table mdl-js-data-table mdl-cell--6-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+    <div class="mdl-cell mdl-cell--2-col"></div>
+    <div class="mdl-cell mdl-cell--2-col"></div>
+    <table class="mdl-data-table mdl-js-data-table mdl-cell--8-col mdl-cell--8-col-tablet mdl-shadow--2dp">
         <tbody>
         <tr id="faq">
             <td class="mdl-data-table__cell--non-numeric" colspan="2">
@@ -27,7 +30,7 @@
             <td class="mdl-data-table__cell--non-numeric">Hvor finner jeg elevmappene?</td>
             <td class="mdl-data-table__cell--non-numeric">
                 Du har tilgang til <a href="https://elevmappa360.t-fk.no" target="_blank" title="Gå til ElevMappa360">ElevMappa360</a><br/>
-                <strong>Du må være pålogget Telemark fylkeskommune sitt nettverk for få tilgang til ElevMappa360.</strong><br/>
+                <strong>Du må være pålogget Telemark fylkeskommune sitt nettverk<br /> for få tilgang til ElevMappa360.</strong><br/>
             </td>
         </tr>
         <tr>
@@ -35,6 +38,7 @@
             <td class="mdl-data-table__cell--non-numeric">
                 I listevisninger kan du la musepekeren hvile over <i class="material-icons">list</i> eller <i class="material-icons">note_add</i><br/>
                 Da vises også elevens fødselsdato.<br />
+                <span class="{{featureToggle features.usePictures}}">Lar du pekeren hvile over <i class="material-icons">assignment_ind</i> vises et bilde av eleven,<br/> dersom dette er tilgjengelig.</span>
             </td>
         </tr>
         <tr id="iconexpl">
@@ -153,5 +157,56 @@
         </tr>
         </tbody>
     </table>
-    <div class="mdl-cell mdl-cell--3-col"></div>
+    <div class="mdl-cell mdl-cell--2-col"></div>
+    <div class="mdl-cell mdl-cell--2-col {{featureToggle features.useYFF}}"></div>
+        <table class="mdl-data-table mdl-js-data-table mdl-cell--8-col mdl-cell--8-col-tablet mdl-shadow--2dp{{featureToggle features.useYFF}}">
+            <tbody>
+            <tr id="yff">
+                <td class="mdl-data-table__cell--non-numeric" colspan="2">
+                    <strong>YFF</strong>
+                </td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Hvor finner jeg YFF for en elev?</td>
+                <td class="mdl-data-table__cell--non-numeric">
+                    I listevisninger trykker du på <i class="material-icons">playlist_add</i> for å komme til elevens YFF-forside.
+                    <br /> Derfra er det egne hjelpe beskrivelser for alle aktivitetene.
+                </td>
+            </tr>
+            <tr id="iconexplyff">
+                <td class="mdl-data-table__cell--non-numeric"><strong>Ikon/Valg</strong></td>
+                <td class="mdl-data-table__cell--non-numeric"><strong>Funksjon</strong></td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric"><i class="material-icons">playlist_add</i></td>
+                <td class="mdl-data-table__cell--non-numeric">Til YFF-forsiden</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric"><i class="material-icons">library_books</i></td>
+                <td class="mdl-data-table__cell--non-numeric">Informasjonsskriv for elev og virksomhet</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric"><i class="material-icons">assignment</i></td>
+                <td class="mdl-data-table__cell--non-numeric">Opprette/endre lokal læreplan</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric"><i class="material-icons">queue</i></td>
+                <td class="mdl-data-table__cell--non-numeric">Sende/arkivere lokal læreplan</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric"><i class="material-icons">equalizer</i></td>
+                <td class="mdl-data-table__cell--non-numeric">Tilbakemeldinger</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric"><i class="material-icons">done</i></td>
+                <td class="mdl-data-table__cell--non-numeric">Tilbakemeldinger ferdig</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric"><i class="material-icons">error_outline</i></td>
+                <td class="mdl-data-table__cell--non-numeric">Tilbakemeldinger mangler informasjon</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="mdl-cell mdl-cell--2-col {{featureToggle features.useYFF}}"></div>
+    </div>
 </div>
