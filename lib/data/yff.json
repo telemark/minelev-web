@@ -31,7 +31,9 @@
     {
       "id": "initiativ",
       "description": "Eleven viser initiativ og interesse for arbeidet"
-    },
+    }
+  ],
+  "order": [
     {
       "id": "orden",
       "description": "Orden (punktlighet)"
@@ -39,23 +41,6 @@
     {
       "id": "atferd",
       "description": "Atferd (holdninger, respekt)"
-    }
-  ],
-  "order": [
-    {
-      "id": "01",
-      "description": "God",
-      "value": "God"
-    },
-    {
-      "id": "02",
-      "description": "Nokså god",
-      "value": "Nokså god"
-    },
-    {
-      "id": "03",
-      "description": "Lite god",
-      "value": "Lite god"
     }
   ],
   "utplasseringsSted": [

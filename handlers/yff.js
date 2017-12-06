@@ -364,6 +364,7 @@ module.exports.evaluation = async (request, reply) => {
     viewOptions.evaluationScores = yffData.evaluation
     viewOptions.competenseScores = yffData.competense
     viewOptions.evaluationPeriods = evaluationPeriods
+    viewOptions.evaluationOrder = yffData.order
     viewOptions.maal = maal
     viewOptions.bedrift = bedrift
     if (profilePicture !== false) {

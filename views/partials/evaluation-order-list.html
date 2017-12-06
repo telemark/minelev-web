@@ -1,0 +1,30 @@
+<div class="mdl-typography--headline document-form-header chxBxEvaluationScore margin-top-10 evenodd">Orden og atferd</div>
+<table class="fullWidth evaluationTable evenodd">
+    <thead>
+        <tr>
+            <th>Beskrivelse</th>
+            <th class="text-center">Under forventet</th>
+            <th class="text-center">Som forventet</th>
+            <th class="text-center">Over forventet</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each evaluationOrder}}
+            <tr class="hoverGrey">
+                <td class="fontBigger">
+                    <input type="hidden" name="evaluation-{{id}}" value="{{description}}">
+                    {{description}}
+                </td>
+                <td class="text-center">
+                    <input type="radio" name="evaluationscore-{{id}}" value="Under forventet" id="terminRadioCourse{{id}}1" class="mdl-radio__button period-selector chxBxEvaluationScore" required>
+                </td>
+                <td class="text-center">
+                    <input type="radio" name="evaluationscore-{{id}}" value="Som forventet" id="terminRadioCourse{{id}}2" class="mdl-radio__button period-selector chxBxEvaluationScore" required>
+                </td>
+                <td class="text-center">
+                    <input type="radio" name="evaluationscore-{{id}}" value="Over forventet" id="terminRadioCourse{{id}}3" class="mdl-radio__button period-selector chxBxEvaluationScore" required>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
