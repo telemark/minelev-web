@@ -38,7 +38,7 @@ module.exports.frontPage = async (request, reply) => {
     userId: userId,
     token: token,
     query: {
-      documentCategory: 'yff-informasjonsskriv',
+      documentCategory: 'yff-bekreftelse',
       studentUserName: studentUserName
     }
   }
@@ -106,7 +106,7 @@ module.exports.frontPage = async (request, reply) => {
   }
 }
 
-module.exports.information = async (request, reply) => {
+module.exports.bekreftelse = async (request, reply) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
   const studentUserName = request.params.studentID
@@ -119,7 +119,7 @@ module.exports.information = async (request, reply) => {
 
   let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses})
 
-  logger('info', ['yff', 'contract', 'userId', userId, 'studentUserName', studentUserName, 'start'])
+  logger('info', ['yff', 'bekreftelse', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
   axios.defaults.headers.common['Authorization'] = token
   // Retrieves student and students contactTeachers
@@ -128,9 +128,9 @@ module.exports.information = async (request, reply) => {
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
     mainGroupName = contactTeachers[0].groupId
-    logger('info', ['yff', 'contract', 'userId', userId, 'studentUserName', studentUserName, 'mainGroupName', mainGroupName])
+    logger('info', ['yff', 'bekreftelse', 'userId', userId, 'studentUserName', studentUserName, 'mainGroupName', mainGroupName])
   } else {
-    logger('error', ['yff', 'contract', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
+    logger('error', ['yff', 'bekreftelse', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
   }
   if (!payload.statusKode) {
     let student = payload[0]
@@ -144,11 +144,11 @@ module.exports.information = async (request, reply) => {
       viewOptions.profilePicture = profilePicture.data
     }
 
-    logger('info', ['yff', 'contract', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
+    logger('info', ['yff', 'bekreftelse', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
       const classLevel = getClassLevel(mainGroupName)
       viewOptions.classLevels = classLevels.map(thisClass => thisClass.id === classLevel ? Object.assign(thisClass, {checked: 'checked'}) : thisClass)
-      reply.view('yff-information', viewOptions)
+      reply.view('yff-bekreftelse', viewOptions)
     } else {
       reply.view('error-missing-contact-teacher', viewOptions)
     }
@@ -172,7 +172,7 @@ module.exports.maal = async (request, reply) => {
     userId: userId,
     token: token,
     query: {
-      documentCategory: 'yff-informasjonsskriv',
+      documentCategory: 'yff-bekreftelse',
       studentUserName: studentUserName
     }
   }
@@ -250,7 +250,7 @@ module.exports.plan = async (request, reply) => {
     userId: userId,
     token: token,
     query: {
-      documentCategory: 'yff-informasjonsskriv',
+      documentCategory: 'yff-bekreftelse',
       studentUserName: studentUserName
     }
   }

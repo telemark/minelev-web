@@ -13,10 +13,10 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/yff/information/{studentID}',
-    handler: handlers.information,
+    path: '/yff/bekreftelse/{studentID}',
+    handler: handlers.bekreftelse,
     config: {
-      description: 'Prepare yff information for {studentID}'
+      description: 'Prepare yff bekreftelse for {studentID}'
     }
   },
   {
