@@ -48,6 +48,10 @@ module.exports.getLogspage = async (request, reply) => {
   const myContactClasses = yar.get('myContactClasses') || []
   let mongoQuery = {documentCategory: {'$in': validDocTypes}}
 
+  function isValid (doc) {
+    return userId === doc.userId || myContactClasses.map(line => line.Id).includes(doc.studentMainGroupName)
+  }
+
   logger('info', ['index', 'getLogspage', 'userId', userId, 'start'])
 
   if (request.query.studentId) {
@@ -65,17 +69,16 @@ module.exports.getLogspage = async (request, reply) => {
   }
 
   axios.defaults.headers.common['Authorization'] = token
-  const results = documentId ? await axios.get(url) : await axios.post(url, mongoQuery)
-
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, logs: applyLogDescriptions(results.data) })
+  let { data: results } = documentId ? await axios.get(url) : await axios.post(url, mongoQuery)
 
   if (request.query.studentId || documentId) {
-    logger('info', ['index', 'getLogspage', 'userId', userId, 'single log ok'])
-    const doc = results.data[0]
-    const isValid = (userId === doc.userId || myContactClasses.map(line => line.Id).includes(doc.studentMainGroupName))
-    if (!isValid) {
-      viewOptions.logs = []
-    }
+    results = results.filter(isValid)
+  }
+
+  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, logs: applyLogDescriptions(results) })
+
+  if (request.query.studentId || documentId) {
+    logger('info', ['index', 'getLogspage', 'userId', userId, 'detailed logs ok'])
     reply.view('logs-detailed', viewOptions)
   } else {
     logger('info', ['index', 'getLogspage', 'userId', userId, 'multiple logs ok'])
