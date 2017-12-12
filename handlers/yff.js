@@ -483,18 +483,28 @@ module.exports.submit = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
 
-  logger('info', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
+  logger('info', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, postData.documentCategory, 'start'])
 
-  axios.put(url, postData)
-    .then(results => {
-      logger('info', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted'])
-      yar.set('documentAdded', true)
-      reply.redirect(`/yff/${data.studentUserName}`)
-    }).catch(error => {
-      logger('error', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
-      yar.set('documentAdded', false)
-      reply.redirect('/')
-    })
+  const jobs = [axios.put(url, postData)]
+
+  // adds copy if bekreftelse
+  if (postData.documentCategory === 'yff-bekreftelse') {
+    logger('info', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'yff-bekreftelse', 'creates copy'])
+    let postDataBedrift = Object.assign({}, postData)
+    postDataBedrift.documentCategory = 'yff-bekreftelse-bedrift'
+    jobs.push(axios.put(url, postDataBedrift))
+  }
+
+  try {
+    const results = await Promise.all(jobs)
+    logger('info', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted', results.length])
+    yar.set('documentAdded', true)
+    reply.redirect(`/yff/${data.studentUserName}`)
+  } catch (error) {
+    logger('error', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
+    yar.set('documentAdded', false)
+    reply.redirect('/')
+  }
 }
 
 module.exports.addLineToPlan = async (request, reply) => {
