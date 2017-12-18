@@ -55,14 +55,17 @@ module.exports.getLogspage = async (request, reply) => {
   logger('info', ['index', 'getLogspage', 'userId', userId, 'start'])
 
   if (request.query.studentId) {
+    // Retrieve logs for a student
     logger('info', ['index', 'getLogspage', 'userId', userId, 'studentId', request.query.studentId])
     mongoQuery.studentId = request.query.studentId
   } else {
     if (myContactClasses.length > 0) {
+      // Retrieve logs from me and/or to my classes
       const classIds = myContactClasses.map(item => item.Id)
       logger('info', ['index', 'getLogspage', 'userId', userId, 'classes', classIds.join(', ')])
       mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': classIds}}], documentCategory: {'$in': validDocTypes}}
     } else {
+      // Retrieve logs from me
       mongoQuery.userId = userId
       logger('info', ['index', 'getLogspage', 'userId', userId, 'single'])
     }
