@@ -3,7 +3,7 @@
     {{#each schools}}
         <input type="hidden" name="{{organizationNumber}}-skoleNavn" value="{{fullName}}">
         <label for="terminRadioCourse{{organizationNumber}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxEvaluationPeriod hoverGrey">
-            <input type="radio" name="skoleID" value="{{organizationNumber}}" id="terminRadioCourse{{organizationNumber}}" class="mdl-radio__button period-selector chxBxEvaluationPeriod">
+            <input type="radio" name="skoleID" value="{{organizationNumber}}" id="terminRadioCourse{{organizationNumber}}" class="mdl-radio__button period-selector chxBxEvaluationPeriod skoleRadioSelect">
             <span class="mdl-radio__label chxBxEvaluationPeriod">{{fullName}}</span>
         </label><br/>
     {{/each}}

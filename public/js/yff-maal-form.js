@@ -37,11 +37,45 @@ function init () {
   if (isUtdanningsprogramSelected() === true) {
     updateProgramInnhold({preventDefault: function () {return false}})
   }
+  validateDocumentForm()
+}
+
+function isAnySelected (cName) {
+  const checksList = document.querySelectorAll('.' + cName)
+  let checks = []
+  checksList.forEach(function (item) {
+    if (item.checked) {
+      checks.push(true)
+    }
+  })
+  return checks.length > 0
 }
 
 function validateDocumentForm () {
-  const previewButton = document.getElementById('previewDocumentButton')
-  previewButton.disabled = false
+  const saveButton = document.getElementById('addPlanElement')
+  const utplasseringsVelger = document.getElementById('utplasseringsstedVelger')
+  const utplasseringsSted = utplasseringsVelger[utplasseringsVelger.selectedIndex].value
+  let stedSelected = false
+
+  // First we disable save
+  saveButton.disabled = true
+  
+  if (utplasseringsSted === 'bedrift') {
+    stedSelected = isAnySelected('bedriftRadioSelect')
+  }
+  
+  if (utplasseringsSted === 'skole') {
+    stedSelected = isAnySelected('skoleRadioSelect')
+  }
+
+  if (utplasseringsSted === 'ub') {
+    const ubNavn = document.getElementById('UBNavn')
+    stedSelected = ubNavn.value ? ubNavn.value !== '' : false
+  }
+
+  if (isAnySelected('kompetanseMaalValgCheckbox') === true && stedSelected === true) {
+    saveButton.disabled = false
+  }
 }
 
 //MDL Text Input Cleanup
@@ -87,6 +121,7 @@ function createKompetansemaalOption (item) {
   label.classList.add('hoverGrey')
   label.classList.add('margin-bottom-10')
   checkbox.classList.add('mdl-checkbox__input')
+  checkbox.classList.add('kompetanseMaalValgCheckbox')
   span.classList.add('mdl-radio__label')
   span.classList.add('capitalFirstLetter')
   span.classList.add('fontBigger')
@@ -108,6 +143,7 @@ function buildKompetansemaal () {
     const option = createKompetansemaalOption(item)
     div.appendChild(option)
     addListener(option, 'change', toggleArbeidsOppgave)
+    addListener(option, 'change', validateDocumentForm)
   })
   showVelger('submitVelger')
 }
@@ -181,30 +217,26 @@ function buildArbeidsoppghaver (e) {
     showVelger('utplasseringBedriftVelger')
     hideVelger('utplasseringSkoleVelger')
     hideVelger('utplasseringUBVelger')
+    const checkList = document.querySelectorAll('.bedriftRadioSelect')
+    checkList.forEach(function (item) {
+      addListener(item, 'change', validateDocumentForm)
+    })
   } else if (utplasseringssted == 'skole') {
     showVelger('utplasseringSkoleVelger')
     hideVelger('utplasseringBedriftVelger')
     hideVelger('utplasseringUBVelger')
+    const checkList = document.querySelectorAll('.skoleRadioSelect')
+    checkList.forEach(function (item) {
+      addListener(item, 'change', validateDocumentForm)
+    })
   } else {
     showVelger('utplasseringUBVelger')
     hideVelger('utplasseringBedriftVelger')
     hideVelger('utplasseringSkoleVelger')
+    addListener(document.getElementById('UBNavn'), 'keyup', validateDocumentForm)
   }
   showVelger('kompetanseMaalVelger')
-}
-
-function cloneKompetanse () {
-  const parent = document.getElementById('kompetansemaal')
-  const clone = parent.cloneNode(true)
-  const div = document.createElement('div')
-  clone.childNodes.forEach(function (child) {
-    const inputs = child.getElementsByTagName('input')
-    if (input[0].checked) {
-      div.appendChild(child)
-    }
-    console.log(inputs)
-  })
-  return div
+  validateDocumentForm()
 }
 
 function hideVelger (velger) {

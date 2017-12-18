@@ -3,9 +3,9 @@
     {{#each bedrifter}}
         <input type="hidden" name="{{_id}}-bedriftsNavn" value="{{bedriftsNavn}}">
         <input type="hidden" name="{{_id}}-bedriftsPeriode" value="{{utplasseringsPeriode}}">
-        <label for="terminRadioCourse{{_id}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxEvaluationPeriod hoverGrey">
-            <input type="radio" name="bedriftID" value="{{_id}}" id="terminRadioCourse{{_id}}" class="mdl-radio__button period-selector chxBxEvaluationPeriod">
-            <span class="mdl-radio__label chxBxEvaluationPeriod">{{bedriftsNavn}} {{utplasseringsPeriode}}</span>
+        <label for="terminRadioCourse{{_id}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxBedrifter hoverGrey">
+            <input type="radio" name="bedriftID" value="{{_id}}" id="terminRadioCourse{{_id}}" class="mdl-radio__button period-selector chxBxEvaluationPeriod bedriftRadioSelect">
+            <span class="mdl-radio__label chxBxBedrifter">{{bedriftsNavn}} {{utplasseringsPeriode}}</span>
         </label><br/>
     {{/each}}
 </div>
