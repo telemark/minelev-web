@@ -1,5 +1,3 @@
-'use strict'
-
 const test = require('ava')
 
 test('basic check', t => {

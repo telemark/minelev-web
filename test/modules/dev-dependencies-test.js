@@ -1,5 +1,3 @@
-'use strict'
-
 const test = require('ava')
 const pkg = require('../../package.json')
 const dependencies = pkg.devDependencies || {}
@@ -14,7 +12,7 @@ if (Object.keys(dependencies).length > 0) {
     })
   })
 } else {
-  test('no dependecies to test', t => {
+  test('no dev-dependecies to test', t => {
     t.truthy(true)
   })
 }
