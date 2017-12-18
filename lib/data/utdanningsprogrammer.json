@@ -2,41 +2,49 @@
   {
     "name": "Bygg- og anleggsteknikk",
     "id": "BA",
-    "url": "https://www.udir.no/kl06/BA"
+    "url": "https://www.udir.no/kl06/BA",
+    "selected": ""
   },
   {
     "name": "Design og håndverk",
     "id": "DH",
-    "url": "https://www.udir.no/kl06/DH"
+    "url": "https://www.udir.no/kl06/DH",
+    "selected": ""
   },
   {
     "name": "Elektrofag",
     "id": "EL",
-    "url": "https://www.udir.no/kl06/EL"
+    "url": "https://www.udir.no/kl06/EL",
+    "selected": ""
   },
   {
     "name": "Helse- og oppvekstfag",
     "id": "HS",
-    "url": "https://www.udir.no/kl06/HS"
+    "url": "https://www.udir.no/kl06/HS",
+    "selected": ""
   },
   {
     "name": "Naturbruk",
     "id": "NA",
-    "url": "https://www.udir.no/kl06/NA"
+    "url": "https://www.udir.no/kl06/NA",
+    "selected": ""
   },
   {
     "name": "Restaurant- og matfag",
     "id": "RM",
-    "url": "https://www.udir.no/kl06/RM"
+    "url": "https://www.udir.no/kl06/RM",
+    "selected": ""
   },
   {
     "name": "Service og samferdsel",
     "id": "SS",
-    "url": "https://www.udir.no/kl06/SS"
+    "url": "https://www.udir.no/kl06/SS",
+    "selected": ""
   },
   {
     "name": "Teknikk og industriell produksjon",
     "id": "TP",
-    "url": "https://www.udir.no/kl06/TP"
+    "url": "https://www.udir.no/kl06/TP",
+    "selected": ""
   }
 ]

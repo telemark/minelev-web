@@ -188,8 +188,7 @@ module.exports.maal = async (request, reply) => {
 
   let viewOptions = createViewOptions({
     credentials: request.auth.credentials,
-    myContactClasses: myContactClasses,
-    utdanningsprogrammer: utdanningsprogrammer
+    myContactClasses: myContactClasses
   })
 
   logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'start'])
@@ -217,6 +216,12 @@ module.exports.maal = async (request, reply) => {
     viewOptions.bedrifter = bedrifter
     // If not bedrifter remove bedrifter from utplasseringssted
     viewOptions.utplasseringsSted = bedrifter.length > 0 ? yffData.utplasseringsSted : yffData.utplasseringsSted.slice(1)
+    if (maal.length > 0) {
+      const upName = maal[0].utdanningsprogram
+      viewOptions.utdanningsprogrammer = utdanningsprogrammer.map(up => up.name === upName ? Object.assign(up, {selected: 'selected'}) : up)
+    } else {
+      viewOptions.utdanningsprogrammer = utdanningsprogrammer
+    }
     if (profilePicture !== false) {
       logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'retrieved profile picture'])
       viewOptions.profilePicture = profilePicture.data

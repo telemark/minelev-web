@@ -14,6 +14,12 @@ function updateProgramInnhold (e) {
   getProgramInnhold({programId: programId, klassetrinn: klassetrinn})
 }
 
+function isUtdanningsprogramSelected () {
+  const utdanningsprogramVelger = document.getElementById('utdanningsprogramVelger')
+  const programId = utdanningsprogramVelger.options[utdanningsprogramVelger.selectedIndex].value
+  return programId !== ''
+}
+
 function init () {
   const maalButtons = document.querySelectorAll('.kompetanseMaalButton')
   hideVelger('utplasseringBedriftVelger')
@@ -28,6 +34,9 @@ function init () {
   maalButtons.forEach(function (button) {
     addListener(button, 'click', deleteKompetanseMaal)
   })
+  if (isUtdanningsprogramSelected() === true) {
+    updateProgramInnhold({preventDefault: function () {return false}})
+  }
 }
 
 function validateDocumentForm () {
