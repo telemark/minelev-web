@@ -397,7 +397,7 @@ table.evenodd tr:nth-child(even):hover {
 #planLinjerTable div {
     padding-left: 25px;
     font-size: medium;
-    color: gray;
+    color: #4c4c4c;
 }
 
 .done-button {
