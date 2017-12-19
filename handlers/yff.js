@@ -1,5 +1,3 @@
-'use strict'
-
 const fs = require('fs')
 const axios = require('axios')
 const brreg = require('brreg')
@@ -218,6 +216,9 @@ module.exports.maal = async (request, reply) => {
     viewOptions.utplasseringsSted = bedrifter.length > 0 ? yffData.utplasseringsSted : yffData.utplasseringsSted.slice(1)
     if (maal.length > 0) {
       const upName = maal[0].utdanningsprogram
+      viewOptions.utdanningsprogrammer = utdanningsprogrammer.map(up => up.name === upName ? Object.assign(up, {selected: 'selected'}) : up)
+    } else if (bedrifter.length > 0) {
+      const upName = bedrifter[0].utdanningsprogram
       viewOptions.utdanningsprogrammer = utdanningsprogrammer.map(up => up.name === upName ? Object.assign(up, {selected: 'selected'}) : up)
     } else {
       viewOptions.utdanningsprogrammer = utdanningsprogrammer
