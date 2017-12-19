@@ -1,3 +1,11 @@
+body {
+    font-family: "Open sans", sans-serif;
+}
+
+h1, h2, h3, h4, h4, h6 {
+    font-family: Arial, sans-serif;
+}
+
 .mdl-layout {
     align-items: center;
     justify-content: center;
@@ -151,7 +159,7 @@ a:visited {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-family: "Open sans", sans-serif;
     will-change: transform;
     -webkit-transform: translate(0, 80px);
     transform: translate(0, 80px);

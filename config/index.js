@@ -1,3 +1,6 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 module.exports = {
   WEB_SERVER_PORT: process.env.WEB_SERVER_PORT || 8000,
   ORIGIN_URL: process.env.ORIGIN_URL || 'http://localhost:8000/signin',
