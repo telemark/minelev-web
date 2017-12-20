@@ -5,6 +5,7 @@ const createViewOptions = require('../lib/create-view-options')
 const validDocTypes = ['atferd', 'fag', 'orden', 'samtale', 'yff-bekreftelse', 'yff-lokalplan', 'yff-tilbakemelding']
 const applyLogDescriptions = require('../lib/apply-log-description')
 const logger = require('../lib/logger')
+const anonymize = require('../lib/anonymize-personal-id')
 
 module.exports.getFrontpage = async (request, reply) => {
   const yar = request.yar
@@ -56,7 +57,7 @@ module.exports.getLogspage = async (request, reply) => {
 
   if (request.query.studentId) {
     // Retrieve logs for a student
-    logger('info', ['index', 'getLogspage', 'userId', userId, 'studentId', request.query.studentId])
+    logger('info', ['index', 'getLogspage', 'userId', userId, 'studentId', anonymize(request.query.studentId)])
     mongoQuery.studentId = request.query.studentId
   } else {
     if (myContactClasses.length > 0) {
