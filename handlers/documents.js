@@ -1,5 +1,3 @@
-'use strict'
-
 const fs = require('fs')
 const axios = require('axios')
 const getDocumentTemplatesPath = require('tfk-saksbehandling-minelev-templates')
@@ -34,7 +32,7 @@ function filterDocumentTypes (contactTeacher) {
 module.exports.write = async (request, reply) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
-  const studentUserName = request.params.studentID
+  const studentUserName = request.params.studentUserName
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
@@ -85,7 +83,6 @@ module.exports.write = async (request, reply) => {
 module.exports.generatePreview = (request, reply) => {
   const user = request.auth.credentials.data
   let data = request.payload
-  data.studentId = request.params.studentID
   data.userId = user.userId
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
@@ -135,7 +132,6 @@ module.exports.submit = async (request, reply) => {
   const token = generateSystemJwt(user.userId)
   const url = `${config.QUEUE_SERVICE_URL}`
   let data = request.payload
-  data.studentId = request.params.studentID
   data.userId = user.userId
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']

@@ -1,4 +1,5 @@
-<form action="/yff/plan/{{student.personalIdNumber}}" method="post" id="submitPlanLinjeForm">
+<form action="/yff/plan/{{student.userName}}" method="post" id="submitPlanLinjeForm">
+    <input type="hidden" name="studentId" value="{{student.personalIdNumber}}">
     <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
     <input type="hidden" name="studentMiddleName" value="{{student.middleName}}">
     <input type="hidden" name="studentLastName" value="{{student.lastName}}">

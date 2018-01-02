@@ -1,8 +1,9 @@
 <a name="pageTop"></a>
 <div class="mdl-grid">
     <div id ="documentCard" class="mdl-card mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
-        <form action="/yff/{{student.personalIdNumber}}" method="post" id="submitDocumentForm">
+        <form action="/yff/{{student.userName}}" method="post" id="submitDocumentForm">
             <input type="hidden" name="skjemaUtfyllingStart" value="{{skjemaUtfyllingStart}}">
+            <input type="hidden" name="studentId" value="{{student.personalIdNumber}}">
             <input type="hidden" name="bedriftID" value="{{bedrift._id}}">
             <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
             <input type="hidden" name="studentMiddleName" value="{{student.middleName}}">

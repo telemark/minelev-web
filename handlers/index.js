@@ -5,7 +5,6 @@ const createViewOptions = require('../lib/create-view-options')
 const validDocTypes = ['atferd', 'fag', 'orden', 'samtale', 'yff-bekreftelse', 'yff-lokalplan', 'yff-tilbakemelding']
 const applyLogDescriptions = require('../lib/apply-log-description')
 const logger = require('../lib/logger')
-const anonymize = require('../lib/anonymize-personal-id')
 
 module.exports.getFrontpage = async (request, reply) => {
   const yar = request.yar
@@ -55,10 +54,10 @@ module.exports.getLogspage = async (request, reply) => {
 
   logger('info', ['index', 'getLogspage', 'userId', userId, 'start'])
 
-  if (request.query.studentId) {
+  if (request.query.studentUserName) {
     // Retrieve logs for a student
-    logger('info', ['index', 'getLogspage', 'userId', userId, 'studentId', anonymize(request.query.studentId)])
-    mongoQuery.studentId = request.query.studentId
+    logger('info', ['index', 'getLogspage', 'userId', userId, 'studentUserName', request.query.studentUserName])
+    mongoQuery.studentUserName = request.query.studentUserName
   } else {
     if (myContactClasses.length > 0) {
       // Retrieve logs from me and/or to my classes
@@ -75,13 +74,13 @@ module.exports.getLogspage = async (request, reply) => {
   axios.defaults.headers.common['Authorization'] = token
   let { data: results } = documentId ? await axios.get(url) : await axios.post(url, mongoQuery)
 
-  if (request.query.studentId || documentId) {
+  if (request.query.studentUserName || documentId) {
     results = results.filter(isValid)
   }
 
   let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, logs: applyLogDescriptions(results) })
 
-  if (request.query.studentId || documentId) {
+  if (request.query.studentUserName || documentId) {
     logger('info', ['index', 'getLogspage', 'userId', userId, 'detailed logs ok'])
     reply.view('logs-detailed', viewOptions)
   } else {

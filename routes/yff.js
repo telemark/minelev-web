@@ -1,78 +1,76 @@
-'use strict'
-
 const handlers = require('../handlers/yff')
 
 module.exports = [
   {
     method: 'GET',
-    path: '/yff/{studentID}',
+    path: '/yff/{studentUserName}',
     handler: handlers.frontPage,
     config: {
-      description: 'Prepare yff frontpage for {studentID}'
+      description: 'Prepare yff frontpage for {studentUserName}'
     }
   },
   {
     method: 'GET',
-    path: '/yff/bekreftelse/{studentID}',
+    path: '/yff/bekreftelse/{studentUserName}',
     handler: handlers.bekreftelse,
     config: {
-      description: 'Prepare yff bekreftelse for {studentID}'
+      description: 'Prepare yff bekreftelse for {studentUserName}'
     }
   },
   {
     method: 'GET',
-    path: '/yff/plan/{studentID}',
+    path: '/yff/plan/{studentUserName}',
     handler: handlers.plan,
     config: {
-      description: 'Prepare yff plan for {studentID}'
+      description: 'Prepare yff plan for {studentUserName}'
     }
   },
   {
     method: 'GET',
-    path: '/yff/maal/{studentID}',
+    path: '/yff/maal/{studentUserName}',
     handler: handlers.maal,
     config: {
-      description: 'Prepare yff maal for {studentID}'
+      description: 'Prepare yff maal for {studentUserName}'
     }
   },
   {
     method: 'GET',
-    path: '/yff/plan/remove/{studentID}/{maalID}',
+    path: '/yff/plan/remove/{studentUserName}/{maalID}',
     handler: handlers.removeLineFromPlan,
     config: {
-      description: 'Remove maalID from plan for {studentID}'
+      description: 'Remove maalID from plan for {studentUserName}'
     }
   },
   {
     method: 'GET',
-    path: '/yff/evaluation/{studentID}/{utplasseringID}',
+    path: '/yff/evaluation/{studentUserName}/{utplasseringID}',
     handler: handlers.evaluation,
     config: {
-      description: 'Prepare yff evaluation for {studentID}'
+      description: 'Prepare yff evaluation for {studentUserName}'
     }
   },
   {
     method: 'POST',
-    path: '/yff/preview/{studentID}',
+    path: '/yff/preview/{studentUserName}',
     handler: handlers.generatePreview,
     config: {
-      description: 'Show preview for {studentID}'
+      description: 'Show preview for {studentUserName}'
     }
   },
   {
     method: 'POST',
-    path: '/yff/{studentID}',
+    path: '/yff/{studentUserName}',
     handler: handlers.submit,
     config: {
-      description: 'Submit documents for {studentID}'
+      description: 'Submit documents for {studentUserName}'
     }
   },
   {
     method: 'POST',
-    path: '/yff/plan/{studentID}',
+    path: '/yff/plan/{studentUserName}',
     handler: handlers.addLineToPlan,
     config: {
-      description: 'Add line for {studentID} local plan'
+      description: 'Add line for {studentUserName} local plan'
     }
   },
   {

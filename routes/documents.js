@@ -1,30 +1,28 @@
-'use strict'
-
 const handlers = require('../handlers/documents')
 
 module.exports = [
   {
     method: 'GET',
-    path: '/document/{studentID}',
+    path: '/document/{studentUserName}',
     handler: handlers.write,
     config: {
-      description: 'Prepare document for {studentID}'
+      description: 'Prepare document for {studentUserName}'
     }
   },
   {
     method: 'POST',
-    path: '/document/preview/{studentID}',
+    path: '/document/preview/{studentUserName}',
     handler: handlers.generatePreview,
     config: {
-      description: 'Show preview for {studentID}'
+      description: 'Show preview for {studentUserName}'
     }
   },
   {
     method: 'POST',
-    path: '/document/{studentID}',
+    path: '/document/{studentUserName}',
     handler: handlers.submit,
     config: {
-      description: 'Submit documents for {studentID}'
+      description: 'Submit documents for {studentUserName}'
     }
   }
 ]

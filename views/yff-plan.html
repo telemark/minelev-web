@@ -10,8 +10,9 @@
                 </div>
                 {{>yff-plan-linjer-view}}
             </div>
-        <form action="/yff/{{student.personalIdNumber}}" method="post" id="submitDocumentForm">
+        <form action="/yff/{{student.userName}}" method="post" id="submitDocumentForm">
             <input type="hidden" name="skjemaUtfyllingStart" value="{{skjemaUtfyllingStart}}">
+            <input type="hidden" name="studentId" value="{{student.personalIdNumber}}">
             <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
             <input type="hidden" name="studentMiddleName" value="{{student.middleName}}">
             <input type="hidden" name="studentLastName" value="{{student.lastName}}">

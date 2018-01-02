@@ -27,7 +27,7 @@ const classLevels = [
 module.exports.frontPage = async (request, reply) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
-  const studentUserName = request.params.studentID
+  const studentUserName = request.params.studentUserName
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
@@ -107,7 +107,7 @@ module.exports.frontPage = async (request, reply) => {
 module.exports.bekreftelse = async (request, reply) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
-  const studentUserName = request.params.studentID
+  const studentUserName = request.params.studentUserName
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
@@ -161,7 +161,7 @@ module.exports.maal = async (request, reply) => {
   const utdanningsprogrammer = require('../lib/data/utdanningsprogrammer.json')
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
-  const studentUserName = request.params.studentID
+  const studentUserName = request.params.studentUserName
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
@@ -247,7 +247,7 @@ module.exports.plan = async (request, reply) => {
   const utdanningsprogrammer = require('../lib/data/utdanningsprogrammer.json')
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
-  const studentUserName = request.params.studentID
+  const studentUserName = request.params.studentUserName
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
   const url = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}`
@@ -324,7 +324,7 @@ module.exports.plan = async (request, reply) => {
 module.exports.evaluation = async (request, reply) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
-  const studentUserName = request.params.studentID
+  const studentUserName = request.params.studentUserName
   const utplasseringID = request.params.utplasseringID
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
@@ -394,7 +394,6 @@ module.exports.evaluation = async (request, reply) => {
 module.exports.generatePreview = async (request, reply) => {
   const user = request.auth.credentials.data
   let data = request.payload
-  data.studentId = request.params.studentID
   data.userId = user.userId
   data.userName = user.userName
   data.userMail = user.email
@@ -459,7 +458,6 @@ module.exports.submit = async (request, reply) => {
   const token = generateSystemJwt(user.userId)
   const url = `${config.QUEUE_SERVICE_URL}`
   let data = request.payload
-  data.studentId = request.params.studentID
   data.userId = user.userId
   data.userName = user.userName
   data.userMail = user.email
@@ -518,7 +516,6 @@ module.exports.addLineToPlan = async (request, reply) => {
   const token = generateSystemJwt(user.userId)
   const url = `${config.QUEUE_SERVICE_URL}`
   let data = request.payload
-  data.studentId = request.params.studentID
   data.userId = user.userId
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
@@ -557,36 +554,33 @@ module.exports.addLineToPlan = async (request, reply) => {
 module.exports.removeLineFromPlan = async (request, reply) => {
   const user = request.auth.credentials.data
   const token = generateSystemJwt(user.userId)
-  const { studentID, maalID } = request.params
+  const { studentUserName, maalID } = request.params
   const findUrl = `${config.QUEUE_SERVICE_URL}/${maalID}`
   const deleteUrl = `${config.QUEUE_SERVICE_URL}/${maalID}`
 
   axios.defaults.headers.common['Authorization'] = token
 
-  logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, 'start'])
+  logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, 'start'])
 
   try {
     const { data } = await axios.get(findUrl)
-    if (data.length === 1 && data[0].studentUserName === studentID) {
+    if (data.length === 1 && data[0].studentUserName === studentUserName) {
       axios.delete(deleteUrl)
         .then(result => {
-          logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, 'removed'])
-          // reply.redirect(`/yff/plan/${studentID}`)
+          logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, 'removed'])
           reply({success: true})
         })
         .catch(error => {
-          logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, error])
-          // reply.redirect(`/yff/plan/${studentID}`)
+          logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, error])
           reply({success: false})
         })
     } else {
-      logger('error', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, 'mismatch in line', maalID])
-      // reply.redirect(`/yff/plan/${studentID}`)
+      logger('error', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, 'mismatch in line', maalID])
       reply({success: false})
     }
   } catch (error) {
-    logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentID, 'id', maalID, error])
-    reply.redirect(`/yff/plan/${studentID}`)
+    logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, error])
+    reply.redirect(`/yff/plan/${studentUserName}`)
   }
 }
 
