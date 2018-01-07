@@ -1,7 +1,37 @@
 'use strict'
 
 let YFFData = {
-  organizations: []
+  organizations: [],
+  programInnhold: []
+}
+
+function updateProgramInnhold (e) {
+  const utdanningsprogramVelger = document.getElementById('utdanningsprogramVelger')
+  const programId = utdanningsprogramVelger.options[utdanningsprogramVelger.selectedIndex].value
+  const klassetrinn = getSelectedClassLevel()
+  if (klassetrinn === 'VG2' && programId !== '') {
+    getProgramInnhold({programId: programId, klassetrinn: klassetrinn})
+  }
+}
+
+function getSelectedClassLevel () {
+  const klassetrinnVelger = document.querySelectorAll('.class-level-selector')
+  let klassetrinn = ''
+  klassetrinnVelger.forEach(function (radio) {
+    if (radio.checked === true) {
+      klassetrinn = radio.value
+    }
+  })
+  return klassetrinn
+}
+
+function showProgramomrade () {
+  const klassetrinn = getSelectedClassLevel()
+  if (klassetrinn === 'VG2') {
+    showVelger('programomradeVelger')
+  } else {
+    hideVelger('programomradeVelger')
+  }
 }
 
 function init () {
@@ -10,11 +40,17 @@ function init () {
   const lookupField = document.getElementById('brregQuery')
   const lookupForm = document.getElementById('lookupOrganisasjonForm')
   const requiredFields = document.getElementById('submitDocumentForm').querySelectorAll('[required]')
+  const classLevelRadios = document.querySelectorAll('.radioClassLevel')
   bedriftsWrapper.style.display = 'none'
   hideVelger('bedriftsVelger')
   hideVelger('lookupMessages')
+  hideVelger('programomradeVelger')
   addListener(lookupForm, 'submit', lookupOrganization)
   addListener(lookupOrganizationButton, 'click', lookupOrganization)
+  addListener(document.getElementById('utdanningsprogramVelger'), 'change', updateProgramInnhold)
+  classLevelRadios.forEach(function (radio) {
+    addListener(radio, 'click', updateProgramInnhold)
+  })
   requiredFields.forEach(function (field) {
     if (field.type === 'select-one') {
       addListener(field, 'change', validateDocumentForm)
@@ -235,6 +271,44 @@ function lookupOrganization (e) {
       console.error(error)
       spinnerOff()
     })
+}
+
+function createProgramoradeOption (item) {
+  const option = document.createElement('option')
+  option.setAttribute('value', item.name)
+  option.innerHTML = item.name
+  return option
+}
+
+function buildProgramOmrader () {
+  let select = document.getElementById('programomradeSelector')
+  if (select !== null) {
+    select.innerHTML = ''
+  } else {
+    select = document.createElement('select')
+    select.setAttribute('id', 'programomradeSelector')
+    select.setAttribute('name', 'programomrade')
+  }
+  const firstOption = createProgramoradeOption({name: 'Velg programområde'})
+  select.classList.add('margin-top-10')
+  select.appendChild(firstOption)
+  YFFData.programInnhold.forEach(function (item) {
+    const option = createProgramoradeOption(item)
+    select.appendChild(option)
+  })
+  showProgramomrade()
+}
+
+function getProgramInnhold (options) {
+  const url = 'https://yff.service.minelev.no/utdanningsprogrammer/' + options.programId + '-' + options.klassetrinn
+  axios.get(url)
+  .then(function (result) {
+    YFFData.programInnhold = result.data
+    buildProgramOmrader()
+  })
+  .catch(function (error) {
+    console.error(error)
+  })
 }
 
 function ready (fn) {

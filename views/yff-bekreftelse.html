@@ -34,6 +34,9 @@
                     <input type="hidden" name="schoolPhone" value="{{student.unitPhone}}">
                     <input type="hidden" name="organizationNumber" value="{{student.organizationNumber}}">
                     <input type="hidden" name="type" value="yff-bekreftelse">
+                    {{#each utdanningsprogrammer}}
+                        <input type="hidden" name="utdanningsprogramvelger-{{id}}" value="{{name}}">
+                    {{/each}}
                     <div id="bedriftsinfoWrapper" class="bedriftsinfoWrapper">
                         <div class="mdl-typography--headline">Virksomhetsinformasjon</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
@@ -102,7 +105,11 @@
                         </div>
                         <h1>Elevinformasjon</h1>
                         {{>class-levels-list}}
-                        {{>yff-utdanningsprogrammer-list}}
+                        {{>yff-utdanningsprogrammer-select}}
+                        <div class="mdl-typography--headline document-form-header margin-top-10 programomradeVelger">Programområde</div>
+                        <div id="programomradeWrapper" class="programomradeVelger">
+                            <select name="programomrade" id="programomradeSelector" class="margin-top-10"></select>
+                        </div>
                         <div class="mdl-typography--headline nextOfKin margin-top-10">Pårørende</div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width90">
                             <input class="mdl-textfield__input" type="text" name="parorendeNavn" id="parorendeNavn" required>

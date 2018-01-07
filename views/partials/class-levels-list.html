@@ -1,7 +1,7 @@
 <div class="mdl-typography--headline document-form-header chxBxwarningPeriod margin-top-10">Klassetrinn</div>
 {{#each classLevels}}
-<label for="classLevel{{id}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect chxBxwarningPeriod">
+<label for="classLevel{{id}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect radioClassLevel">
     <input type="radio" name="classLevel" value="{{value}}" id="classLevel{{id}}" class="mdl-radio__button class-level-selector" {{checked}} required>
-    <span class="mdl-radio__label chxBxwarningPeriod">{{description}}</span>
+    <span class="mdl-radio__label radioClassLevel">{{description}}</span>
 </label>
 {{/each}}

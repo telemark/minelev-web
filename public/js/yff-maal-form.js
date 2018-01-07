@@ -175,7 +175,7 @@ function toggleArbeidsOppgave (e) {
   }
 }
 
-function createProgramoradeOption(item) {
+function createProgramoradeOption (item) {
   const option = document.createElement('option')
   option.setAttribute('value', item.name)
   option.innerHTML = item.name
