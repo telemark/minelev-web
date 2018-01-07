@@ -26,7 +26,7 @@
         <select name="utdanningsprogramvelger" id="utdanningsprogramVelger" class="margin-top-10 margin-right-10">
             <option>Velg utdanningsprogram</option>
             {{#each utdanningsprogrammer}}
-                <option value="{{id}}" selected={{selected}}>{{name}}</option>
+                <option value="{{id}}" {{selected}}>{{name}}</option>
             {{/each}}
         </select>
         <select name="klassetrinn" id="klassetrinnVelger" class="margin-top-10 margin-right-10">
