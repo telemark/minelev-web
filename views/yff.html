@@ -6,7 +6,7 @@
         <div class="mdl-card__title mdl-color-text--black">
             <h2 class="mdl-card__title-text">Bekreftelse om utplassering av elev</h2>
         </div>
-        <div class="mdl-card__supporting-text mdl-color-text--black">
+        <div class="mdl-card__supporting-text mdl-card--expand mdl-color-text--black">
             Opprett bekreftelse om utplassering av {{student.fullName}}.<br />
             Du vil ha behov for navnet eller organisasjonsnummeret til virksomheten hvor eleven skal utplasseres, avdelingen hvor eleven skal arbeide, og oppmøtested.
             I tillegg må du fylle ut kontaktinformasjon for kontaktperson(er) hos virksomheten og kontaktinformasjon for elevens pårørende.
@@ -15,11 +15,11 @@
             <a href="/yff/bekreftelse/{{student.userName}}" id="createContract" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Opprett bekreftelse for {{student.fullName}}"><i class="material-icons">library_books</i></a>
         </div>
     </div>
-    <div class="mdl-cell mdl-cell--6-col mdl-shadow--2dp {{hideMe maal}}">
+    <div class="mdl-card mdl-cell--6-col mdl-shadow--2dp {{hideMe maal}}">
         <div class="mdl-card__title mdl-color-text--black">
             <h2 class="mdl-card__title-text">Opprett lokal læreplan</h2>
         </div>
-        <div class="mdl-card__supporting-text mdl-color-text--black">
+        <div class="mdl-card__supporting-text mdl-card--expand mdl-color-text--black">
             Her oppretter du den lokale læreplanen for {{student.fullName}} og velger kompetansemål eleven skal jobbe med i løpet av utplasseringen.
             Du skriver også inn elevens arbeidsoppgaver knyttet til hvert kompetansemål.
         </div>
@@ -27,11 +27,11 @@
             <a href="/yff/maal/{{student.userName}}" id="createMaal" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Opprett lokal læreplan for {{student.fullName}}"><i class="material-icons">assignment</i></a>
         </div>
     </div>
-    <div class="mdl-cell mdl-cell--6-col mdl-shadow--2dp {{showMe maal}}">
+    <div class="mdl-card mdl-cell--6-col mdl-shadow--2dp {{showMe maal}}">
         <div class="mdl-card__title mdl-color-text--black">
             <h2 class="mdl-card__title-text">Lokal læreplan</h2>
         </div>
-        <div class="mdl-card__supporting-text mdl-color-text--black">
+        <div class="mdl-card__supporting-text mdl-card--expand mdl-color-text--black">
             Her endrer du den lokale læreplanen for {{student.fullName}} og velger kompetansemål eleven skal jobbe med i løpet av utplasseringen.
             Du skriver også inn elevens arbeidsoppgaver knyttet til hvert kompetansemål.
         </div>
@@ -39,11 +39,11 @@
             <a href="/yff/maal/{{student.userName}}" id="editMaal" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Endre lokal læreplan for {{student.fullName}}"><i class="material-icons">assignment</i></a>
         </div>
     </div>
-    <div class="mdl-cell mdl-cell--6-col mdl-shadow--2dp {{showMe maal}}">
+    <div class="mdl-card mdl-cell--6-col mdl-shadow--2dp {{showMe maal}}">
         <div class="mdl-card__title mdl-color-text--black">
             <h2 class="mdl-card__title-text">Send og arkiver lokal læreplan</h2>
         </div>
-        <div class="mdl-card__supporting-text mdl-color-text--black">
+        <div class="mdl-card__supporting-text mdl-card--expand mdl-card--expand mdl-color-text--black">
             {{planSistSendt planer}}
         </div>
         <div class="mdl-card__actions mdl-card--border">
