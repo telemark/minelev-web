@@ -447,3 +447,8 @@ div.evenodd > label:nth-child(even) {
 div.evenodd > label:nth-child(even):hover {
     background-color: #ededed;
 }
+
+.required {
+    color: red;
+    font-weight: bold
+}
