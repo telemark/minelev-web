@@ -13,9 +13,9 @@ module.exports.getStats = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const urlTotalVarsel = `${config.STATS_SERVICE_URL}/stats/total/varsel`
   const urlTotalSamtale = `${config.STATS_SERVICE_URL}/stats/total/samtale`
-  const urlTotalBekreftelse = `${config.STATS_SERVICE_URL}/stats/total/yff-bekreftelse`
-  const urlTotalTilbakemelding = `${config.STATS_SERVICE_URL}/stats/total/yff-tilbakemelding`
-  const urlTotalLokalplan = `${config.STATS_SERVICE_URL}/stats/total/yff-lokalplan`
+  const urlTotalBekreftelse = `${config.STATS_SERVICE_URL}/stats/total/category/yff-bekreftelse`
+  const urlTotalTilbakemelding = `${config.STATS_SERVICE_URL}/stats/total/category/yff-tilbakemelding`
+  const urlTotalLokalplan = `${config.STATS_SERVICE_URL}/stats/total/category/yff-lokalplan`
   const urlSchoolsVarsel = `${config.STATS_SERVICE_URL}/stats/schools/varsel`
   const urlSchoolsSamtale = `${config.STATS_SERVICE_URL}/stats/schools/samtale`
   const urlCategories = `${config.STATS_SERVICE_URL}/stats/categories`
