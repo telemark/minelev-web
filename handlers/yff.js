@@ -20,8 +20,8 @@ const logger = require('../lib/logger')
 const yffData = require('../lib/data/yff.json')
 
 const classLevels = [
-  {id: 'VG1', value: 'VG1', description: 'VG1', checked: ''},
-  {id: 'VG2', value: 'VG2', description: 'VG2', checked: ''}
+  {id: 'VG1', value: 'VG1', description: 'vg1', checked: ''},
+  {id: 'VG2', value: 'VG2', description: 'vg2', checked: ''}
 ]
 
 module.exports.frontPage = async (request, reply) => {
