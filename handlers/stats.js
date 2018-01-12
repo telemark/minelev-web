@@ -1,5 +1,3 @@
-'use strict'
-
 const axios = require('axios')
 const config = require('../config')
 const generateSystemJwt = require('../lib/generate-system-jwt')
@@ -18,6 +16,9 @@ module.exports.getStats = async (request, reply) => {
   const urlTotalLokalplan = `${config.STATS_SERVICE_URL}/stats/total/category/yff-lokalplan`
   const urlSchoolsVarsel = `${config.STATS_SERVICE_URL}/stats/schools/varsel`
   const urlSchoolsSamtale = `${config.STATS_SERVICE_URL}/stats/schools/samtale`
+  const urlSchoolsBekreftelse = `${config.STATS_SERVICE_URL}/stats/schools/category/yff-bekreftelse`
+  const urlSchoolsTilbakemelding = `${config.STATS_SERVICE_URL}/stats/schools/category/yff-tilbakemelding`
+  const urlSchoolsLokalplan = `${config.STATS_SERVICE_URL}/stats/schools/yff-lokalplan`
   const urlCategories = `${config.STATS_SERVICE_URL}/stats/categories`
   const myContactClasses = yar.get('myContactClasses') || []
 
@@ -33,6 +34,9 @@ module.exports.getStats = async (request, reply) => {
     totalLokalplan,
     schoolsVarsel,
     schoolsSamtale,
+    schoolsBekreftelse,
+    schoolsTilbakemelding,
+    schoolsLokalplan,
     categories
   ] = await Promise.all([
     axios.get(urlTotalVarsel),
@@ -42,6 +46,9 @@ module.exports.getStats = async (request, reply) => {
     axios.get(urlTotalLokalplan),
     axios.get(urlSchoolsVarsel),
     axios.get(urlSchoolsSamtale),
+    axios.get(urlSchoolsBekreftelse),
+    axios.get(urlSchoolsTilbakemelding),
+    axios.get(urlSchoolsLokalplan),
     axios.get(urlCategories)
   ])
 
@@ -53,6 +60,9 @@ module.exports.getStats = async (request, reply) => {
     totalLokalplan: totalLokalplan.data,
     schoolsVarsel: schoolsVarsel.data,
     schoolsSamtale: schoolsSamtale.data,
+    schoolsBekreftelse: schoolsBekreftelse.data,
+    schoolsTilbakemelding: schoolsTilbakemelding.data,
+    schoolsLokalplan: schoolsLokalplan.data,
     categories: categories.data
   })
 

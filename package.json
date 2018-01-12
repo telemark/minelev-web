@@ -19,7 +19,7 @@
     "coverage": "nyc ava",
     "coveralls": "nyc ava && nyc report --reporter=lcov && cat coverage/lcov.info | coveralls",
     "standard-fix": "standard --fix",
-    "now-deploy": "npm test && now --npm && now alias",
+    "deploy": "npm test && now && now alias",
     "start": "node standalone.js",
     "dev": "NODE_ENV=development node standalone.js"
   },
