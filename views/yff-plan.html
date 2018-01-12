@@ -6,7 +6,9 @@
             </div>
             <div class="mdl-card__supporting-text mdl-color-text--black">
                 <div>
-                    Her sender du den lokale læreplanen til eleven, og arkiverer den i {{student.fullName}}s elevmappe. Dersom du sender og arkiverer læreplanen, vil du likevel kunne gjøre endringer i planen og sende en ny versjon senere. I elevmappa vil det alltid være den nyeste versjonen som er gjeldende
+                    Her sender du den lokale læreplanen til eleven, og arkiverer den i {{student.fullName}}s elevmappe.<br />
+                    Hvis du sender og arkiverer kan du likevel gjøre endringer i planen og sende en ny versjon senere.<br />
+                    I elevmappa vil det alltid være den nyeste versjonen som er gjeldende.
                 </div>
                 {{>yff-plan-linjer-view}}
             </div>
@@ -29,9 +31,9 @@
             <input type="hidden" name="utdanningsprogram" value="{{utdanningsprogram}}">
             <input type="hidden" name="type" value="yff-lokalplan">
             <div class="mdl-card__actions mdl-card--border">
-                <a href="/yff/{{student.userName}}" id="cancelPlan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Avbryt og gå til yff forsiden for {{student.fullName}}"><i class="material-icons">delete</i></a>
+                <a href="/yff/{{student.userName}}" id="cancelPlan" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Avbryt og gå til YFF-forsiden for {{student.fullName}}"><i class="material-icons">delete</i></a>
                 <div class="mdl-layout-spacer"></div>
-                <a href="/yff/{{student.userName}}" id="backToYffMain" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Trykk her for å gå tilbake til YFF forsiden for {{student.fullName}}"><i class="material-icons">playlist_add</i></a>
+                <a href="/yff/{{student.userName}}" id="backToYffMain" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Trykk her for å gå tilbake til YFF-forsiden for {{student.fullName}}"><i class="material-icons">playlist_add</i></a>
                 <span class="margin-right-5"></span>
                 <a href="/yff/maal/{{student.userName}}" id="goToMaal" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Endre lokal læreplan for {{student.fullName}}"><i class="material-icons">create</i></a>
                 <span class="margin-right-5"></span>

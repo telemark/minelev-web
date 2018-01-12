@@ -209,7 +209,7 @@ module.exports.maal = async (request, reply) => {
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
-    viewOptions.schools = schoolsInfo()
+    viewOptions.schools = schoolsInfo({yff: true})
     viewOptions.maal = maal
     viewOptions.bedrifter = bedrifter
     // If not bedrifter remove bedrifter from utplasseringssted
