@@ -189,7 +189,7 @@ module.exports.maal = async (request, reply) => {
     myContactClasses: myContactClasses
   })
 
-  logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'start'])
+  logger('info', ['yff', 'maal', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
   axios.defaults.headers.common['Authorization'] = token
   // Retrieves student, students contactTeachers, bedrift and maal
@@ -198,9 +198,9 @@ module.exports.maal = async (request, reply) => {
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
     mainGroupName = contactTeachers[0].groupId
-    logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'mainGroupName', mainGroupName])
+    logger('info', ['yff', 'maal', 'userId', userId, 'studentUserName', studentUserName, 'mainGroupName', mainGroupName])
   } else {
-    logger('error', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
+    logger('error', ['yff', 'maal', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
   }
   if (!payload.statusKode) {
     let student = payload[0]
@@ -224,11 +224,11 @@ module.exports.maal = async (request, reply) => {
       viewOptions.utdanningsprogrammer = utdanningsprogrammer
     }
     if (profilePicture !== false) {
-      logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'retrieved profile picture'])
+      logger('info', ['yff', 'maal', 'userId', userId, 'studentUserName', studentUserName, 'retrieved profile picture'])
       viewOptions.profilePicture = profilePicture.data
     }
 
-    logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
+    logger('info', ['yff', 'maal', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
       const classLevel = getClassLevel(mainGroupName)
       viewOptions.classLevels = classLevels.map(thisClass => thisClass.id === classLevel ? Object.assign(thisClass, {checked: 'checked'}) : thisClass)
@@ -238,7 +238,7 @@ module.exports.maal = async (request, reply) => {
     }
   }
   if (payload.statusKode === 401) {
-    logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, '401'])
+    logger('info', ['yff', 'maal', 'userId', userId, 'studentUserName', studentUserName, '401'])
     reply.redirect('/signout')
   }
 }
