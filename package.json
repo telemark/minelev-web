@@ -21,7 +21,8 @@
     "standard-fix": "standard --fix",
     "deploy": "npm test && now && now alias",
     "start": "node standalone.js",
-    "dev": "NODE_ENV=development node standalone.js"
+    "dev": "NODE_ENV=development node standalone.js",
+    "refresh": "rm -rf node_modules && rm package-lock.json && npm install"
   },
   "keywords": [
     "Louie",
