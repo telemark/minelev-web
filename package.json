@@ -71,7 +71,7 @@
     "axios": "0.17.1",
     "brreg": "3.0.0",
     "dotenv": "5.0.0",
-    "form-data": "2.3.1",
+    "form-data": "2.3.2",
     "get-skole-aar": "1.0.0",
     "good": "7.3.0",
     "good-console": "7.0.1",
