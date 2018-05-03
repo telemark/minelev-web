@@ -79,7 +79,7 @@
     "handlebars": "4.0.11",
     "hapi": "16.6.3",
     "hapi-auth-cookie": "7.0.0",
-    "hapi-auth-jwt2": "7.4.1",
+    "hapi-auth-jwt2": "8.1.0",
     "inert": "4.2.1",
     "jsonwebtoken": "8.2.1",
     "minelev-tilbakemelding-nynorsk": "1.0.0",
