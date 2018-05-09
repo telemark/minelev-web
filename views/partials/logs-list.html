@@ -10,6 +10,7 @@
             <th class="mdl-data-table__cell--non-numeric">Dato</th>
             <th class="mdl-data-table__cell--non-numeric">Sendt av</th>
             <th class="mdl-data-table__cell--non-numeric">Ny</th>
+            <th class="mdl-data-table__cell--non-numeric {{featureToggle features.useNotes}}">Notat</th>
             <th class="mdl-data-table__cell--non-numeric {{featureToggle features.useYFF}}">YFF</th>
         </tr>
         </thead>
@@ -32,6 +33,11 @@
             <td class="mdl-data-table__cell--non-numeric">
                 <a href="/document/{{studentUserName}}" title="Skriv nytt dokument for {{studentName}}" class="mdl-color-text--black">
                     <span class="material-icons">note_add</span>
+                </a>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric {{featureToggle ../features.useNotes}}">
+                <a href="/notes/{{studentUserName}}" title="Notat for {{studentName}}" class="mdl-color-text--black">
+                    <i class="material-icons">create_new_folder</i>
                 </a>
             </td>
             <td class="mdl-data-table__cell--non-numeric {{featureToggle ../features.useYFF}}">
