@@ -1,0 +1,56 @@
+<a name="pageTop"></a>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--3-col"></div>
+    <div id ="documentCard" class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+        <form action="/document/{{student.userName}}" method="post" id="submitDocumentForm">
+            <input type="hidden" name="skjemaUtfyllingStart" value="{{skjemaUtfyllingStart}}">
+            <input type="hidden" name="studentId" value="{{student.personalIdNumber}}">
+            <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
+            <input type="hidden" name="studentMiddleName" value="{{student.middleName}}">
+            <input type="hidden" name="studentLastName" value="{{student.lastName}}">
+            <input type="hidden" name="studentName" value="{{student.fullName}}">
+            <input type="hidden" name="studentUserName" value="{{student.userName}}">
+            <input type="hidden" name="studentMail" value="{{student.mail}}">
+            <input type="hidden" name="studentPhone" value="{{student.mobilePhone}}">
+            <input type="hidden" name="studentMainGroupName" value="{{student.mainGroupName}}">
+            <input type="hidden" name="schoolId" value="{{student.unitId}}">
+            <input type="hidden" name="schoolName" value="{{student.unitName}}">
+            <input type="hidden" name="schoolPhone" value="{{student.unitPhone}}">
+            <input type="hidden" name="organizationNumber" value="{{student.organizationNumber}}">
+            <div class="mdl-card__title mdl-color-text--black">
+                {{>student-profile-card}}
+            </div>
+            <div class="mdl-card__supporting-text mdl-color-text--black">
+                {{>note-type-list}}
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a href="/" id="deleteNote" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett notatet for {{student.fullName}}"><i class="material-icons">delete</i></a>
+                <div class="mdl-layout-spacer"></div>
+                <button type="submit" formaction="/note/preview/{{student.userName}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis notatet for {{student.fullName}}" name="previewNote" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
+                <span class="margin-right-5"></span>
+                <button type="submit" value="1" id="submitNote" title="Arkiver notatet for {{student.fullName}}" name="submitNote" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">archive</button>
+            </div>
+        </form>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col"></div>
+    <div id="modalPreview" class="mdl-card mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-shadow--2dp">
+        <div class="mdl-card__actions mdl-card--border-bottom">
+            <div class="mdl-layout-spacer"></div>
+            <button title="Lukk forhåndsvisning for {{student.fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons closePreviewButton">close</button>
+        </div>
+        <div id="previewContainer" class="mdl-card__supporting-text"></div>
+        <div class="mdl-card__actions mdl-card--border">
+            <div class="mdl-layout-spacer"></div>
+            <button title="Lukk forhåndsvisning for {{student.fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons closePreviewButton">close</button>
+        </div>
+    </div>
+</div>
+
+<!-- serialize -->
+<script src="/public/js/serialize-0.2.min.js"></script>
+<!-- Date input polyfill -->
+<script src="/public/js/date-input-polyfill.dist.js"></script>
+<!-- Helperscript preview -->
+<script src="/public/js/generate-preview.js"></script>
+<!-- Helperscript for form -->
+<script src="/public/js/note-form.js"></script>

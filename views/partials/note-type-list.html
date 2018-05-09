@@ -1,0 +1,7 @@
+<div class="mdl-typography--headline">Type notat</div>
+{{#each noteTypes}}
+<label for="type-{{id}}" class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+    <input type="radio" name="type" value="{{value}}" id="type-{{id}}" class="mdl-radio__button note-type-selector">
+    <span class="mdl-radio__label">{{description}}</span>
+</label>
+{{/each}}

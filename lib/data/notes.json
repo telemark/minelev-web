@@ -1,0 +1,19 @@
+{
+  "categories": [
+    {
+      "id": "fag",
+      "description": "Faglige forhold",
+      "value": "fag"
+    },
+    {
+      "id": "sosial",
+      "description": "Sosiale forhold",
+      "value": "sosial"
+    },
+    {
+      "id": "personlig",
+      "description": "Personlige forhold",
+      "value": "personlig"
+    }
+  ]
+}

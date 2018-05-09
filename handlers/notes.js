@@ -5,29 +5,14 @@ const FormData = require('form-data')
 const config = require('../config')
 const prepareDocument = require('../lib/prepare-document')
 const prepareDocumentPreview = require('../lib/prepare-document-preview')
-const documents = require('../lib/data/documents.json')
-const courseCategory = documents.courses
-const order = documents.order
-const behaviour = documents.behaviour
-const documentTypes = documents.categories
-const samtale = documents.samtale
-const warningPeriods = documents.period
+const notes = require('../lib/data/notes.json')
+const noteTypes = notes.categories
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 const datePadding = require('../lib/date-padding')
 const getTemplateType = require('../lib/get-template-type')
 const getProfilePicture = require('../lib/get-profile-picture')
 const logger = require('../lib/logger')
-
-function filterDocumentTypes (contactTeacher) {
-  let filteredList = []
-  documentTypes.forEach(type => {
-    if (type.id === 'fag' || contactTeacher) {
-      filteredList.push(type)
-    }
-  })
-  return filteredList
-}
 
 module.exports.write = async (request, reply) => {
   const yar = request.yar
@@ -39,7 +24,7 @@ module.exports.write = async (request, reply) => {
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
   let mainGroupName = false
 
-  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory, samtale: samtale, documentTypes: documentTypes, warningPeriods: warningPeriods})
+  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, noteTypes: noteTypes})
 
   logger('info', ['notes', 'write', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
@@ -59,7 +44,6 @@ module.exports.write = async (request, reply) => {
     const today = new Date()
     student.mainGroupName = mainGroupName
     viewOptions.student = student
-    viewOptions.warningTypes = filterDocumentTypes(student.contactTeacher)
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
     if (profilePicture !== false) {
@@ -69,7 +53,7 @@ module.exports.write = async (request, reply) => {
 
     logger('info', ['notes', 'write', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
-      reply.view('document', viewOptions)
+      reply.view('note', viewOptions)
     } else {
       reply.view('error-missing-contact-teacher', viewOptions)
     }
