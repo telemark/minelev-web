@@ -19,12 +19,11 @@ function validateDocumentForm () {
   var noteTypes = document.querySelectorAll('.note-type-selector')
   var type = false
   var typeOK = false
-  
   // Starts by disabling button
   submitButton.disabled = true
   previewButton.disabled = true
 
-  Array.prototype.forEach.call(notesTypes, function(el) {
+  Array.prototype.forEach.call(noteTypes, function(el) {
     if (el.checked) {
       type = el.value
       typeOK = true

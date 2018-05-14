@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/telemark/minelev-web.svg?branch=master)](https://travis-ci.org/telemark/minelev-web)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
-[![Greenkeeper badge](https://badges.greenkeeper.io/telemark/minelev-web.svg)](https://greenkeeper.io/)
 
 # minelev-web
 
@@ -28,8 +27,10 @@ PDF_SERVICE_URL=https://pdf.minelev.no #Url for pdf service (https://github.com/
 QUEUE_SERVICE_URL=@minelev-queue-service-url #Url for queue service (https://github.com/telemark/minelev-logs)
 #FEATURE_USE_YFF=on #Enable yff
 #FEATURE_USE_PICTURES=on #Enable pictures. Requires pictureservice
+#FEATURE_USE_NOTES=on #Enable notes. Requires notesservice
 #YFF_SERVICE_URL=https://yff.service.minelev.no #Url for yff-service (if enabled) (https://github.com/telemark/micro-yff-programomrader)
-#PICTURES_SERVICE_URL=https://micro-user-photo-wslyfbstcy.now.sh #Url for picture-service (if enabled) (https://github.com/telemark/micro-user-photo)
+#NOTES_SERVICE_URL=https://notes.service.io #Url for notes-service (if enabled) (https://github.com/telemark/micro-sikker-sone-queue)
+#NOTES_SERVICE_SECRET=@notes-service-secret #Secret for notes service
 PAPERTRAIL_HOSTNAME=minelev #Hostname for papertrail
 PAPERTRAIL_HOST=@tfk-papertrail-host #Url for papertrail
 PAPERTRAIL_PORT=@tfk-papertrail-port #Port for papertrail
