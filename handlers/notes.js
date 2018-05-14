@@ -12,6 +12,7 @@ const createViewOptions = require('../lib/create-view-options')
 const datePadding = require('../lib/date-padding')
 const getTemplateType = require('../lib/get-template-type')
 const getProfilePicture = require('../lib/get-profile-picture')
+const putData = require('../lib/put-data')
 const logger = require('../lib/logger')
 
 module.exports.write = async (request, reply) => {
@@ -113,8 +114,6 @@ module.exports.generatePreview = (request, reply) => {
 module.exports.submit = async (request, reply) => {
   const yar = request.yar
   const user = request.auth.credentials.data
-  const token = generateSystemJwt(user.userId)
-  const url = `${config.QUEUE_SERVICE_URL}`
   let data = request.payload
   data.userId = user.userId
   data.userName = user.userName
@@ -128,18 +127,33 @@ module.exports.submit = async (request, reply) => {
     }
   ]
 
-  axios.defaults.headers.common['Authorization'] = token
-
   logger('info', ['notes', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
 
-  axios.put(url, postData)
-    .then(results => {
-      logger('info', ['notes', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted'])
-      yar.set('documentAdded', true)
-      reply.redirect('/')
-    }).catch(error => {
-      logger('error', ['notes', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
-      yar.set('documentAdded', false)
-      reply.redirect('/')
+  try {
+    await putData({
+      config: {
+        userId: data.userId,
+        secret: config.NOTES_SERVICE_SECRET
+      },
+      url: config.NOTES_SERVICE_URL,
+      data: postData
     })
+
+    await putData({
+      config: {
+        userId: data.userId,
+        secret: config.JWT_SECRET
+      },
+      url: config.QUEUE_SERVICE_URL,
+      data: postData
+    })
+
+    logger('info', ['notes', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted'])
+    yar.set('documentAdded', true)
+    reply.redirect('/')
+  } catch (error) {
+    logger('error', ['notes', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
+    yar.set('documentAdded', false)
+    reply.redirect('/')
+  }
 }
