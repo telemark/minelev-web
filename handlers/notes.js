@@ -120,11 +120,11 @@ module.exports.submit = async (request, reply) => {
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
   let postData = prepareDocument(data)
+  console.log(JSON.stringify(postData, null, 2))
   const encrypted = code({
     secret: config.JWT_SECRET,
     data: postData,
-    method: 'encrypt',
-    include: ['documentContent']
+    method: 'encrypt'
   })
   postData.isQueued = false
   postData.documentContent = ''
