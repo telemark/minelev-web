@@ -123,7 +123,8 @@ module.exports.submit = async (request, reply) => {
   const encrypted = code({
     secret: config.JWT_SECRET,
     data: postData,
-    method: 'encrypt'
+    method: 'encrypt',
+    include: ['documentContent']
   })
   postData.isQueued = false
   postData.documentContent = ''
