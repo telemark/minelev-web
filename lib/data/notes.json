@@ -3,17 +3,17 @@
     {
       "id": "fag",
       "description": "Faglige forhold",
-      "value": "fag"
+      "value": "notat-fag"
     },
     {
       "id": "sosial",
       "description": "Sosiale forhold",
-      "value": "sosial"
+      "value": "notat-sosial"
     },
     {
       "id": "personlig",
       "description": "Personlige forhold",
-      "value": "personlig"
+      "value": "notat-personlig"
     }
   ]
 }
