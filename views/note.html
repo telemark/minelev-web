@@ -2,7 +2,7 @@
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--3-col"></div>
     <div id ="documentCard" class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-shadow--2dp">
-        <form action="/document/{{student.userName}}" method="post" id="submitDocumentForm">
+        <form action="/notes/{{student.userName}}" method="post" id="submitDocumentForm">
             <input type="hidden" name="skjemaUtfyllingStart" value="{{skjemaUtfyllingStart}}">
             <input type="hidden" name="studentId" value="{{student.personalIdNumber}}">
             <input type="hidden" name="studentFirstName" value="{{student.firstName}}">
@@ -22,7 +22,7 @@
             </div>
             <div class="mdl-card__supporting-text mdl-color-text--black">
                 {{>note-type-list}}
-                <div>
+                <div class="margin-top-10">
                     <textarea name="noteContent" id="noteContent" cols="30" rows="30" class="fullWidth fontBigger"></textarea>
                 </div>
             </div>

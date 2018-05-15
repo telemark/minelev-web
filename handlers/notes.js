@@ -125,11 +125,12 @@ module.exports.submit = async (request, reply) => {
     data: postData,
     method: 'encrypt'
   })
-
+  postData.isQueued = false
+  postData.documentContent = ''
   postData.documentStatus = [
     {
       timeStamp: new Date().getTime(),
-      status: 'I kø'
+      status: 'Sendt til elevmappa'
     }
   ]
 

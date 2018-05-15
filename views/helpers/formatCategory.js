@@ -12,6 +12,12 @@ module.exports = documentCategory => {
     category = 'Varselbrev orden'
   } else if (documentCategory === 'samtale') {
     category = 'Elevsamtale'
+  } else if (documentCategory === 'notat-fag') {
+    category = 'Notat - faglig'
+  } else if (documentCategory === 'notat-sosial') {
+    category = 'Notat - sosialt'
+  } else if (documentCategory === 'notat-personlig') {
+    category = 'Notat - personlig'
   }
   return category
 }
