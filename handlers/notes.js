@@ -2,6 +2,7 @@ const fs = require('fs')
 const axios = require('axios')
 const getDocumentTemplatesPath = require('tfk-saksbehandling-minelev-templates')
 const FormData = require('form-data')
+const code = require('crypto-props')
 const config = require('../config')
 const prepareDocument = require('../lib/prepare-document')
 const prepareDocumentPreview = require('../lib/prepare-document-preview')
@@ -119,6 +120,11 @@ module.exports.submit = async (request, reply) => {
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
   let postData = prepareDocument(data)
+  const encrypted = code({
+    secret: config.JWT_SECRET,
+    data: postData,
+    method: 'encrypt'
+  })
 
   postData.documentStatus = [
     {
@@ -136,7 +142,7 @@ module.exports.submit = async (request, reply) => {
         secret: config.NOTES_SERVICE_SECRET
       },
       url: config.NOTES_SERVICE_URL,
-      data: postData
+      data: encrypted
     })
 
     await putData({
