@@ -71,7 +71,7 @@
     "axios": "0.18.0",
     "brreg": "3.0.0",
     "crypto-props": "1.0.2",
-    "dotenv": "5.0.1",
+    "dotenv": "6.0.0",
     "form-data": "2.3.2",
     "get-skole-aar": "1.0.0",
     "good": "7.3.0",
