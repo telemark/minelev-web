@@ -6,8 +6,6 @@ const code = require('crypto-props')
 const config = require('../config')
 const prepareDocument = require('../lib/prepare-document')
 const prepareDocumentPreview = require('../lib/prepare-document-preview')
-const notes = require('../lib/data/notes.json')
-const noteTypes = notes.categories
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
 const datePadding = require('../lib/date-padding')
@@ -26,7 +24,7 @@ module.exports.write = async (request, reply) => {
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
   let mainGroupName = false
 
-  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, noteTypes: noteTypes})
+  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses})
 
   logger('info', ['notes', 'write', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
