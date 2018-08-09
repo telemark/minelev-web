@@ -49,16 +49,6 @@
     "url": "https://github.com/telemark/minelev-web/issues"
   },
   "homepage": "https://github.com/telemark/minelev-web#readme",
-  "now": {
-    "alias": [
-      "www.minelev.no"
-    ],
-    "type": "npm",
-    "engines": {
-      "node": ">=10.0.0"
-    },
-    "dotenv": "production.env"
-  },
   "devDependencies": {
     "ava": "0.25.0",
     "coveralls": "3.0.2",
