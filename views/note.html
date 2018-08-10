@@ -23,7 +23,7 @@
             </div>
             <div class="mdl-card__supporting-text mdl-color-text--black">
                 <div class="margin-top-10">
-                    <div class="mdl-typography--headline">Notat til elevmappen</div>
+                    <div class="mdl-typography--headline margin-bottom-10">Notat til elevmappen</div>
                     <textarea name="noteContent" id="noteContent" cols="30" rows="25" class="fullWidth fontBigger"></textarea>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <div class="mdl-layout-spacer"></div>
                 <button type="submit" formaction="/notes/preview/{{student.userName}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis notatet for {{student.fullName}}" name="previewNote" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
                 <span class="margin-right-10"></span>
-                <button type="submit" value="1" id="submitNote" title="Arkiver notatet for {{student.fullName}}" name="submitNote" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">archive</button>
+                <button type="submit" value="1" id="submitNote" title="Send notatet for {{student.fullName}} til elevmappen" name="submitNote" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">mail_outline</button>
             </div>
         </form>
     </div>
