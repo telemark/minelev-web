@@ -70,7 +70,7 @@
     "hapi": "16.6.3",
     "hapi-auth-cookie": "7.1.0",
     "hapi-auth-jwt2": "7.4.1",
-    "inert": "4.2.1",
+    "inert": "5.1.0",
     "jsonwebtoken": "8.3.0",
     "minelev-tilbakemelding-nynorsk": "1.0.1",
     "simple-encryptor": "1.4.0",
