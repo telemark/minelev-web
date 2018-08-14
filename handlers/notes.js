@@ -120,7 +120,7 @@ module.exports.submit = async (request, reply) => {
   let postData = prepareDocument(data)
   console.log(JSON.stringify(postData, null, 2))
   const encrypted = code({
-    secret: config.JWT_SECRET,
+    secret: config.NOTES_KEY,
     data: postData,
     method: 'encrypt'
   })

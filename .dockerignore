@@ -1,1 +1,6 @@
+.env
+.travis.yml
+*.env
+now.json
+renovate.json
 node_modules

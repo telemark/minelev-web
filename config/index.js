@@ -21,6 +21,7 @@ module.exports = {
   PICTURES_SERVICE_URL: process.env.PICTURES_SERVICE_URL || 'https://photos.minelev.no',
   NOTES_SERVICE_URL: process.env.NOTES_SERVICE_URL || 'https://notes.service.no',
   NOTES_SERVICE_SECRET: process.env.NOTES_SERVICE_SECRET || 'Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go',
+  NOTES_KEY: process.env.NOTES_KEY || 'Louie Louie, oh no, I got to go Louie Louie, oh no, I got to go',
   PAPERTRAIL_HOSTNAME: process.env.PAPERTRAIL_HOSTNAME || 'minelev-dev',
   PAPERTRAIL_HOST: process.env.PAPERTRAIL_HOST || 'logs.papertrailapp.com',
   PAPERTRAIL_PORT: process.env.PAPERTRAIL_PORT || 12345
