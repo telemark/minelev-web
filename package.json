@@ -74,7 +74,7 @@
     "jsonwebtoken": "8.3.0",
     "minelev-tilbakemelding-nynorsk": "1.0.1",
     "simple-encryptor": "1.4.0",
-    "tfk-saksbehandling-minelev-templates": "2.3.2",
+    "tfk-saksbehandling-minelev-templates": "2.3.3",
     "tfk-saksbehandling-schools-info": "2.0.12",
     "tfk-schools-info": "2.1.4",
     "uuid": "3.3.2",
