@@ -1,5 +1,3 @@
-'use strict'
-
 const axios = require('axios')
 const config = require('../config')
 const generateSystemJwt = require('../lib/generate-system-jwt')

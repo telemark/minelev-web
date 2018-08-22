@@ -11,11 +11,13 @@ module.exports.getStats = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const urlTotalVarsel = `${config.STATS_SERVICE_URL}/stats/total/varsel`
   const urlTotalSamtale = `${config.STATS_SERVICE_URL}/stats/total/samtale`
+  const urlTotalNotat = `${config.STATS_SERVICE_URL}/stats/total/notat`
   const urlTotalBekreftelse = `${config.STATS_SERVICE_URL}/stats/total/category/yff-bekreftelse`
   const urlTotalTilbakemelding = `${config.STATS_SERVICE_URL}/stats/total/category/yff-tilbakemelding`
   const urlTotalLokalplan = `${config.STATS_SERVICE_URL}/stats/total/category/yff-lokalplan`
   const urlSchoolsVarsel = `${config.STATS_SERVICE_URL}/stats/schools/varsel`
   const urlSchoolsSamtale = `${config.STATS_SERVICE_URL}/stats/schools/samtale`
+  const urlSchoolsNotat = `${config.STATS_SERVICE_URL}/stats/schools/notat`
   const urlSchoolsBekreftelse = `${config.STATS_SERVICE_URL}/stats/schools/category/yff-bekreftelse`
   const urlSchoolsTilbakemelding = `${config.STATS_SERVICE_URL}/stats/schools/category/yff-tilbakemelding`
   const urlSchoolsLokalplan = `${config.STATS_SERVICE_URL}/stats/schools/yff-lokalplan`
@@ -29,11 +31,13 @@ module.exports.getStats = async (request, reply) => {
   const [
     totalVarsel,
     totalSamtale,
+    totalNotat,
     totalBekreftelse,
     totalTilbakemelding,
     totalLokalplan,
     schoolsVarsel,
     schoolsSamtale,
+    schoolsNotat,
     schoolsBekreftelse,
     schoolsTilbakemelding,
     schoolsLokalplan,
@@ -41,11 +45,13 @@ module.exports.getStats = async (request, reply) => {
   ] = await Promise.all([
     axios.get(urlTotalVarsel),
     axios.get(urlTotalSamtale),
+    axios.get(urlTotalNotat),
     axios.get(urlTotalBekreftelse),
     axios.get(urlTotalTilbakemelding),
     axios.get(urlTotalLokalplan),
     axios.get(urlSchoolsVarsel),
     axios.get(urlSchoolsSamtale),
+    axios.get(urlSchoolsNotat),
     axios.get(urlSchoolsBekreftelse),
     axios.get(urlSchoolsTilbakemelding),
     axios.get(urlSchoolsLokalplan),
@@ -55,11 +61,13 @@ module.exports.getStats = async (request, reply) => {
   const stats = repackStats({
     totalVarsel: totalVarsel.data,
     totalSamtale: totalSamtale.data,
+    totalNotat: totalNotat.data,
     totalBekreftelse: totalBekreftelse.data,
     totalTilbakemelding: totalTilbakemelding.data,
     totalLokalplan: totalLokalplan.data,
     schoolsVarsel: schoolsVarsel.data,
     schoolsSamtale: schoolsSamtale.data,
+    schoolsNotat: schoolsNotat.data,
     schoolsBekreftelse: schoolsBekreftelse.data,
     schoolsTilbakemelding: schoolsTilbakemelding.data,
     schoolsLokalplan: schoolsLokalplan.data,
