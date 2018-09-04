@@ -29,7 +29,7 @@ module.exports.checkSystems = async (request, reply) => {
   try {
     const checks = await Promise.all(jobs)
     const results = checks.map(check => check.data)
-    reply(systems.map((site, index) => Object.assign(site, {result: results[index]})))
+    reply(systems.map((site, index) => Object.assign(site, { result: results[index] })))
   } catch (error) {
     logger('error', ['systems', 'checkSystems', error])
     reply(error)

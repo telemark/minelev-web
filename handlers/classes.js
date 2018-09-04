@@ -33,7 +33,7 @@ module.exports.listStudentsInClass = async (request, reply) => {
   const payload = results.data
 
   if (!payload.statusKode) {
-    viewOptions.students = payload.map(student => Object.assign(student, {mainGroupName: groupId}))
+    viewOptions.students = payload.map(student => Object.assign(student, { mainGroupName: groupId }))
     logger('info', ['classes', 'listStudentsInClass', 'userId', userId, 'success'])
     reply.view('klasse-elevliste', viewOptions)
   }

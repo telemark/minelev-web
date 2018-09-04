@@ -13,17 +13,17 @@ module.exports.getFrontpage = async (request, reply) => {
   const token = generateSystemJwt(userId)
   const url = `${config.LOGS_SERVICE_URL}/logs/search`
   const myContactClasses = yar.get('myContactClasses') || []
-  let mongoQuery = {'userId': userId, documentCategory: {'$in': validDocTypes}}
+  let mongoQuery = { 'userId': userId, documentCategory: { '$in': validDocTypes } }
 
   logger('info', ['index', 'getFrontpage', 'userId', userId, 'start'])
 
   if (myContactClasses.length > 0) {
     const classIds = myContactClasses.map(item => item.Id)
-    mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': classIds}}], documentCategory: {'$in': validDocTypes}}
+    mongoQuery = { '$or': [{ 'userId': userId }, { 'studentMainGroupName': { '$in': classIds } }], documentCategory: { '$in': validDocTypes } }
     logger('info', ['index', 'getFrontpage', 'userId', userId, 'contact teacher', classIds.join(', ')])
   }
 
-  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, latestIdDocument: documentAdded ? 'Ok' : ''})
+  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, latestIdDocument: documentAdded ? 'Ok' : '' })
 
   yar.set('documentAdded', false)
 
@@ -46,7 +46,7 @@ module.exports.getLogspage = async (request, reply) => {
   const url = documentId ? `${config.LOGS_SERVICE_URL}/logs/${documentId}` : `${config.LOGS_SERVICE_URL}/logs/search`
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
-  let mongoQuery = {documentCategory: {'$in': validDocTypes}}
+  let mongoQuery = { documentCategory: { '$in': validDocTypes } }
 
   function isValid (doc) {
     return userId === doc.userId || myContactClasses.map(line => line.Id).includes(doc.studentMainGroupName)
@@ -63,7 +63,7 @@ module.exports.getLogspage = async (request, reply) => {
       // Retrieve logs from me and/or to my classes
       const classIds = myContactClasses.map(item => item.Id)
       logger('info', ['index', 'getLogspage', 'userId', userId, 'classes', classIds.join(', ')])
-      mongoQuery = {'$or': [{'userId': userId}, {'studentMainGroupName': {'$in': classIds}}], documentCategory: {'$in': validDocTypes}}
+      mongoQuery = { '$or': [{ 'userId': userId }, { 'studentMainGroupName': { '$in': classIds } }], documentCategory: { '$in': validDocTypes } }
     } else {
       // Retrieve logs from me
       mongoQuery.userId = userId

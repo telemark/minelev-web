@@ -24,7 +24,7 @@ module.exports.write = async (request, reply) => {
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
   let mainGroupName = false
 
-  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses})
+  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
 
   logger('info', ['notes', 'write', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 

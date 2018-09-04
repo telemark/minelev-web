@@ -24,7 +24,7 @@ module.exports.getWarningsClassReport = async (request, reply) => {
 
   const report = myContactClasses.map(line => line.Id).includes(classId) ? repackClassReport(results.data) : []
 
-  const viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses, report: report, classId: classId})
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, report: report, classId: classId })
 
   reply.view('report-class-warnings', viewOptions)
 }

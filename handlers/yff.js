@@ -20,8 +20,8 @@ const logger = require('../lib/logger')
 const yffData = require('../lib/data/yff.json')
 
 const classLevels = [
-  {id: 'VG1', value: 'VG1', description: 'vg1', checked: ''},
-  {id: 'VG2', value: 'VG2', description: 'vg2', checked: ''}
+  { id: 'VG1', value: 'VG1', description: 'vg1', checked: '' },
+  { id: 'VG2', value: 'VG2', description: 'vg2', checked: '' }
 ]
 
 module.exports.frontPage = async (request, reply) => {
@@ -65,7 +65,7 @@ module.exports.frontPage = async (request, reply) => {
     }
   }
   let mainGroupName = false
-  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses})
+  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
 
   logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
@@ -115,7 +115,7 @@ module.exports.bekreftelse = async (request, reply) => {
   const urlUtdanningsProgrammer = `${config.YFF_SERVICE_URL}/utdanningsprogrammer`
   let mainGroupName = false
 
-  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses})
+  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
 
   logger('info', ['yff', 'bekreftelse', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
@@ -145,7 +145,7 @@ module.exports.bekreftelse = async (request, reply) => {
     logger('info', ['yff', 'bekreftelse', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
       const classLevel = getClassLevel(mainGroupName)
-      viewOptions.classLevels = classLevels.map(thisClass => thisClass.id === classLevel ? Object.assign(thisClass, {checked: 'checked'}) : thisClass)
+      viewOptions.classLevels = classLevels.map(thisClass => thisClass.id === classLevel ? Object.assign(thisClass, { checked: 'checked' }) : thisClass)
       reply.view('yff-bekreftelse', viewOptions)
     } else {
       reply.view('error-missing-contact-teacher', viewOptions)
@@ -209,17 +209,17 @@ module.exports.maal = async (request, reply) => {
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
-    viewOptions.schools = schoolsInfo({yff: true})
+    viewOptions.schools = schoolsInfo({ yff: true })
     viewOptions.maal = maal
     viewOptions.bedrifter = bedrifter
     // If not bedrifter remove bedrifter from utplasseringssted
     viewOptions.utplasseringsSted = bedrifter.length > 0 ? yffData.utplasseringsSted : yffData.utplasseringsSted.slice(1)
     if (maal.length > 0) {
       const upName = maal[0].utdanningsprogram
-      viewOptions.utdanningsprogrammer = utdanningsprogrammer.map(up => up.name === upName ? Object.assign(up, {selected: 'selected'}) : up)
+      viewOptions.utdanningsprogrammer = utdanningsprogrammer.map(up => up.name === upName ? Object.assign(up, { selected: 'selected' }) : up)
     } else if (bedrifter.length > 0) {
       const upName = bedrifter[0].utdanningsprogram
-      viewOptions.utdanningsprogrammer = utdanningsprogrammer.map(up => up.name === upName ? Object.assign(up, {selected: 'selected'}) : up)
+      viewOptions.utdanningsprogrammer = utdanningsprogrammer.map(up => up.name === upName ? Object.assign(up, { selected: 'selected' }) : up)
     } else {
       viewOptions.utdanningsprogrammer = utdanningsprogrammer
     }
@@ -231,7 +231,7 @@ module.exports.maal = async (request, reply) => {
     logger('info', ['yff', 'maal', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
       const classLevel = getClassLevel(mainGroupName)
-      viewOptions.classLevels = classLevels.map(thisClass => thisClass.id === classLevel ? Object.assign(thisClass, {checked: 'checked'}) : thisClass)
+      viewOptions.classLevels = classLevels.map(thisClass => thisClass.id === classLevel ? Object.assign(thisClass, { checked: 'checked' }) : thisClass)
       reply.view('yff-maal', viewOptions)
     } else {
       reply.view('error-missing-contact-teacher', viewOptions)
@@ -344,7 +344,7 @@ module.exports.evaluation = async (request, reply) => {
 
   let mainGroupName = false
 
-  let viewOptions = createViewOptions({credentials: request.auth.credentials, myContactClasses: myContactClasses})
+  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
 
   logger('info', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
@@ -537,7 +537,7 @@ module.exports.addLineToPlan = async (request, reply) => {
 
   axios.defaults.headers.common['Authorization'] = token
 
-  const jobs = data.kompetansemaalValg.map((line, index) => axios.put(url, Object.assign({}, postData, {kompetanseMaal: line}, {arbeidsOppgaver: data.arbeidsOppgaver[index]})))
+  const jobs = data.kompetansemaalValg.map((line, index) => axios.put(url, Object.assign({}, postData, { kompetanseMaal: line }, { arbeidsOppgaver: data.arbeidsOppgaver[index] })))
 
   logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'jobs', jobs.length, 'start'])
 
@@ -568,15 +568,15 @@ module.exports.removeLineFromPlan = async (request, reply) => {
       axios.delete(deleteUrl)
         .then(result => {
           logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, 'removed'])
-          reply({success: true})
+          reply({ success: true })
         })
         .catch(error => {
           logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, error])
-          reply({success: false})
+          reply({ success: false })
         })
     } else {
       logger('error', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, 'mismatch in line', maalID])
-      reply({success: false})
+      reply({ success: false })
     }
   } catch (error) {
     logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, error])
@@ -590,7 +590,7 @@ module.exports.lookupBrreg = async (request, reply) => {
 
   logger('info', ['yff', 'lookupBrreg', 'query', query, 'start'])
 
-  const lookup = await brreg({query: query, format: 'json'})
+  const lookup = await brreg({ query: query, format: 'json' })
   let results = []
   if (lookup.enhetsregisteret.error === false && lookup.underenheter.error === false) {
     results = lookup.enhetsregisteret.data.entries.concat(lookup.underenheter.data.entries)

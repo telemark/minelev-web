@@ -15,7 +15,7 @@ module.exports.doSignIn = async (request, reply) => {
 
     logger('info', ['auth', 'doSignIn', 'verified', user.userId])
 
-    request.cookieAuth.set({data: user, token: token})
+    request.cookieAuth.set({ data: user, token: token })
     yar.set('myContactClasses', Array.isArray(myContactClasses) ? myContactClasses : [])
 
     if (nextPath && nextPath.length > 0) {
