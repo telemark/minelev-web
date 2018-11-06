@@ -67,7 +67,7 @@
     "good-console": "7.1.0",
     "good-squeeze": "5.1.0",
     "handlebars": "4.0.12",
-    "hapi": "16.6.3",
+    "hapi": "16.7.0",
     "hapi-auth-cookie": "7.1.0",
     "hapi-auth-jwt2": "7.4.1",
     "inert": "4.2.1",
