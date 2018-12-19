@@ -1,21 +1,11 @@
-FROM node:10.14.2-alpine
+FROM mhart/alpine-node:10 as base
+WORKDIR /usr/src
+COPY package.json package-lock.json /usr/src/
+RUN npm i --production
+COPY . .
 
-#### Begin setup ####
-
-# Installs git
-RUN apk add --update --no-cache git
-
-# Bundle app source
-COPY . /src
-
-# Change working directory
-WORKDIR "/src"
-
-# Install dependencies
-RUN npm install --production
-
-# Expose 8000
+FROM mhart/alpine-node:base-10
+WORKDIR /usr/src
+COPY --from=base /usr/src .
 EXPOSE 8000
-
-# Startup
-ENTRYPOINT npm start
+CMD ["node", "standalone.js"]
