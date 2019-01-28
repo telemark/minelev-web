@@ -2,7 +2,7 @@
   "version": 1,
   "name": "minelev-web",
   "alias": [
-    "www.minelev.no"
+    "www.minelev.win"
   ],
   "type": "docker",
   "dotenv": "production.env",
