@@ -5,7 +5,7 @@
     "www.minelev.win"
   ],
   "type": "docker",
-  "dotenv": "production.env",
+  "dotenv": "demo.env",
   "features": {
     "cloud": "v1"
   }
