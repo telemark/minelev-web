@@ -183,9 +183,11 @@ function addContactPerson (e) {
   const button = e.target
   const nameField = createInput({name: 'kontaktpersonNavn', text: 'Kontaktperson'})
   const phoneField = createInput({name: 'kontaktpersonTelefon', text: 'Telefon'})
+  const emailField = createInput({name: 'kontaktpersonEpost', text: 'E-post'})
   const departmentField = createInput({name: 'kontaktpersonAvdeling', text: 'Avdeling'})
   button.parentNode.insertBefore(nameField, button)
   button.parentNode.insertBefore(phoneField, button)
+  button.parentNode.insertBefore(emailField, button)
   button.parentNode.insertBefore(departmentField, button)
   componentHandler.upgradeElements(button.parentNode)
 }

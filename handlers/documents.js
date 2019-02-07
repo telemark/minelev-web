@@ -1,7 +1,5 @@
-const fs = require('fs')
 const axios = require('axios')
 const getDocumentTemplatesPath = require('tfk-saksbehandling-minelev-templates')
-const FormData = require('form-data')
 const config = require('../config')
 const prepareDocument = require('../lib/prepare-document')
 const prepareDocumentPreview = require('../lib/prepare-document-preview')
@@ -14,6 +12,7 @@ const samtale = documents.samtale
 const warningPeriods = documents.period
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
+const createPreview = require('../lib/create-preview')
 const datePadding = require('../lib/date-padding')
 const getTemplateType = require('../lib/get-template-type')
 const getProfilePicture = require('../lib/get-profile-picture')
@@ -80,7 +79,7 @@ module.exports.write = async (request, h) => {
   }
 }
 
-module.exports.generatePreview = (request, h) => {
+module.exports.generatePreview = async (request, h) => {
   const user = request.auth.credentials.data
   let data = request.payload
   data.userId = user.userId
@@ -89,41 +88,11 @@ module.exports.generatePreview = (request, h) => {
   const postData = prepareDocument(data)
   const previewData = prepareDocumentPreview(postData)
   const template = getDocumentTemplatesPath(getTemplateType(postData))
-  let templaterForm = new FormData()
 
   logger('info', ['documents', 'generatePreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
 
-  Object.keys(previewData).forEach(key => {
-    templaterForm.append(key, previewData[key])
-  })
-
-  templaterForm.append('file', fs.createReadStream(template))
-
-  templaterForm.submit(config.PDF_SERVICE_URL, (error, docx) => {
-    if (error) {
-      logger('error', ['documents', 'generatePreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'error', error])
-      throw error
-    } else {
-      let chunks = []
-      let totallength = 0
-
-      docx.on('data', function (chunk) {
-        chunks.push(chunk)
-        totallength += chunk.length
-      })
-
-      docx.on('end', function () {
-        let results = Buffer.alloc(totallength)
-        let pos = 0
-        for (var i = 0; i < chunks.length; i++) {
-          chunks[i].copy(results, pos)
-          pos += chunks[i].length
-        }
-        logger('info', ['documents', 'generatePreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'preview generated'])
-        return results.toString('base64')
-      })
-    }
-  })
+  const prewiewDocument = await createPreview(template, previewData)
+  return prewiewDocument
 }
 
 module.exports.submit = async (request, h) => {
