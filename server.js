@@ -9,7 +9,6 @@ const documents = require('./routes/documents')
 const notes = require('./routes/notes')
 const systems = require('./routes/systems')
 const yff = require('./routes/yff')
-const validate = require('./lib/validateJWT')
 const logger = require('./lib/logger')
 
 // Create a server with a host and port
@@ -38,10 +37,10 @@ const yarOptions = {
 }
 
 const plugins = [
-  { register: require('hapi-auth-cookie') },
-  { register: require('vision') },
-  { register: require('inert') },
-  { register: require('yar'), options: yarOptions }
+  { plugin: require('hapi-auth-cookie') },
+  { plugin: require('vision') },
+  { plugin: require('inert') },
+  { plugin: require('yar'), options: yarOptions }
 ]
 
 // Start the server
@@ -69,7 +68,7 @@ async function start () {
     path: 'views',
     layout: true,
     layoutPath: 'views/layouts',
-    helpersPath: 'view/helpers',
+    helpersPath: 'views/helpers',
     partialsPath: 'views/partials'
   })
 
@@ -83,12 +82,6 @@ async function start () {
   })
 
   server.auth.default('session')
-
-  server.auth.strategy('jwt', 'jwt', {
-    key: config.JWT_SECRET,
-    validate: validate,
-    verifyOptions: { algorithms: [ 'HS256' ] }
-  })
 
   await server.start()
   logger('info', ['server', 'Server running', server.info.uri])

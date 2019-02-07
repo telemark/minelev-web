@@ -20,8 +20,8 @@
     "coveralls": "nyc ava && nyc report --reporter=lcov && cat coverage/lcov.info | coveralls",
     "standard-fix": "standard --fix",
     "deploy": "npm test && now && now alias",
-    "start": "node standalone.js",
-    "dev": "NODE_ENV=development node standalone.js",
+    "start": "node server.js",
+    "dev": "NODE_ENV=development node server.js",
     "refresh": "rm -rf node_modules && rm package-lock.json && npm install"
   },
   "keywords": [

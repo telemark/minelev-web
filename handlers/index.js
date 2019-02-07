@@ -28,15 +28,16 @@ module.exports.getFrontpage = async (request, h) => {
   yar.set('documentAdded', false)
 
   axios.defaults.headers.common['Authorization'] = token
-  axios.post(url, mongoQuery).then(results => {
-    viewOptions.logs = results.data || []
+  try {
+    const { data } = await axios.post(url, mongoQuery)
+    viewOptions.logs = data || []
     logger('info', ['index', 'getFrontpage', 'userId', userId, 'got logs', viewOptions.logs.length])
     return h.view('index', viewOptions)
-  }).catch(error => {
+  } catch (error) {
     logger('error', ['index', 'getFrontpage', 'userId', userId, error])
     viewOptions.logs = []
     return h.view('index', viewOptions)
-  })
+  }
 }
 
 module.exports.getLogspage = async (request, h) => {
