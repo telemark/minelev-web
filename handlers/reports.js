@@ -5,7 +5,7 @@ const repackClassReport = require('../lib/repack-class-report')
 const createViewOptions = require('../lib/create-view-options')
 const logger = require('../lib/logger')
 
-module.exports.getWarningsClassReport = async (request, reply) => {
+module.exports.getWarningsClassReport = async (request, h) => {
   const yar = request.yar
   const userId = request.auth.credentials.data.userId
   const classId = request.params.groupID
@@ -26,10 +26,10 @@ module.exports.getWarningsClassReport = async (request, reply) => {
 
   const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, report: report, classId: classId })
 
-  reply.view('report-class-warnings', viewOptions)
+  return h.view('report-class-warnings', viewOptions)
 }
 
-module.exports.getFollowupsClassReport = async (request, reply) => {
+module.exports.getFollowupsClassReport = async (request, h) => {
   const yar = request.yar
   const userId = request.auth.credentials.data.userId
   const classId = request.params.groupID
@@ -51,5 +51,5 @@ module.exports.getFollowupsClassReport = async (request, reply) => {
 
   const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, report: report })
 
-  reply.view('report-class-followups', viewOptions)
+  return h.view('report-class-followups', viewOptions)
 }

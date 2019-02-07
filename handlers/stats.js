@@ -5,7 +5,7 @@ const repackStats = require('../lib/repack-stats')
 const createViewOptions = require('../lib/create-view-options')
 const logger = require('../lib/logger')
 
-module.exports.getStats = async (request, reply) => {
+module.exports.getStats = async (request, h) => {
   const yar = request.yar
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
@@ -76,5 +76,5 @@ module.exports.getStats = async (request, reply) => {
 
   const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, stats: stats })
 
-  reply.view('statistikk', viewOptions)
+  return h.view('statistikk', viewOptions)
 }

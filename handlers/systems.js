@@ -1,10 +1,8 @@
-'use strict'
-
 const axios = require('axios')
 const config = require('../config')
 const logger = require('../lib/logger')
 
-module.exports.checkSystems = async (request, reply) => {
+module.exports.checkSystems = async (request, h) => {
   const systems = [
     {
       id: 'buddy',
@@ -29,9 +27,9 @@ module.exports.checkSystems = async (request, reply) => {
   try {
     const checks = await Promise.all(jobs)
     const results = checks.map(check => check.data)
-    reply(systems.map((site, index) => Object.assign(site, { result: results[index] })))
+    return systems.map((site, index) => Object.assign(site, { result: results[index] }))
   } catch (error) {
     logger('error', ['systems', 'checkSystems', error])
-    reply(error)
+    throw error
   }
 }

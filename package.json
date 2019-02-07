@@ -9,7 +9,7 @@
     "email": "geir.gasodden@pythonia.no",
     "url": "https://github.com/zrrrzzt"
   },
-  "main": "index.js",
+  "main": "server.js",
   "engines": {
     "node": ">=10.15.1"
   },
@@ -63,14 +63,11 @@
     "dotenv": "6.2.0",
     "form-data": "2.3.3",
     "get-skole-aar": "2.0.0",
-    "good": "7.3.0",
-    "good-console": "7.1.0",
-    "good-squeeze": "5.1.0",
     "handlebars": "4.0.12",
-    "hapi": "16.7.0",
-    "hapi-auth-cookie": "7.1.0",
-    "hapi-auth-jwt2": "7.4.1",
-    "inert": "4.2.1",
+    "hapi": "18.1.0",
+    "hapi-auth-cookie": "9.1.0",
+    "hapi-auth-jwt2": "8.3.0",
+    "inert": "5.1.2",
     "jsonwebtoken": "8.4.0",
     "minelev-tilbakemelding-nynorsk": "1.0.2",
     "simple-encryptor": "2.0.0",
@@ -78,9 +75,9 @@
     "tfk-saksbehandling-schools-info": "2.0.12",
     "tfk-schools-info": "2.1.4",
     "uuid": "3.3.2",
-    "vision": "4.1.1",
+    "vision": "5.4.4",
     "winston": "2.4.4",
     "winston-papertrail": "1.0.5",
-    "yar": "8.1.2"
+    "yar": "9.1.0"
   }
 }

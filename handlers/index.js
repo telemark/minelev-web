@@ -6,7 +6,7 @@ const validDocTypes = ['atferd', 'fag', 'orden', 'samtale', 'yff-bekreftelse', '
 const applyLogDescriptions = require('../lib/apply-log-description')
 const logger = require('../lib/logger')
 
-module.exports.getFrontpage = async (request, reply) => {
+module.exports.getFrontpage = async (request, h) => {
   const yar = request.yar
   const documentAdded = yar.get('documentAdded')
   const userId = request.auth.credentials.data.userId
@@ -31,15 +31,15 @@ module.exports.getFrontpage = async (request, reply) => {
   axios.post(url, mongoQuery).then(results => {
     viewOptions.logs = results.data || []
     logger('info', ['index', 'getFrontpage', 'userId', userId, 'got logs', viewOptions.logs.length])
-    reply.view('index', viewOptions)
+    return h.view('index', viewOptions)
   }).catch(error => {
     logger('error', ['index', 'getFrontpage', 'userId', userId, error])
     viewOptions.logs = []
-    reply.view('index', viewOptions)
+    return h.view('index', viewOptions)
   })
 }
 
-module.exports.getLogspage = async (request, reply) => {
+module.exports.getLogspage = async (request, h) => {
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
   const documentId = request.query.documentId
@@ -82,14 +82,14 @@ module.exports.getLogspage = async (request, reply) => {
 
   if (request.query.studentUserName || documentId) {
     logger('info', ['index', 'getLogspage', 'userId', userId, 'detailed logs ok'])
-    reply.view('logs-detailed', viewOptions)
+    return h.view('logs-detailed', viewOptions)
   } else {
     logger('info', ['index', 'getLogspage', 'userId', userId, 'multiple logs ok'])
-    reply.view('logs', viewOptions)
+    return h.view('logs', viewOptions)
   }
 }
 
-module.exports.getHelppage = (request, reply) => {
+module.exports.getHelppage = (request, h) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
   const userId = request.auth.credentials.data.userId
@@ -97,10 +97,10 @@ module.exports.getHelppage = (request, reply) => {
 
   logger('info', ['index', 'getHelppage', 'userId', userId, 'start'])
 
-  reply.view('help', viewOptions)
+  return h.view('help', viewOptions)
 }
 
-module.exports.doSearch = async (request, reply) => {
+module.exports.doSearch = async (request, h) => {
   const yar = request.yar
   const data = request.payload
   const searchText = data.searchText
@@ -120,15 +120,15 @@ module.exports.doSearch = async (request, reply) => {
   if (!payload.statusKode) {
     viewOptions.students = payload
     logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, 'success', payload.length, 'hits'])
-    reply.view('search-results', viewOptions)
+    return h.view('search-results', viewOptions)
   }
   if (payload.statusKode === 404) {
     viewOptions.students = []
     logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, '404'])
-    reply.view('search-results', viewOptions)
+    return h.view('search-results', viewOptions)
   }
   if (payload.statusKode === 401) {
     logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, '401'])
-    reply.redirect('/signout')
+    return h.redirect('/signout')
   }
 }

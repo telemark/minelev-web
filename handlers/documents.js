@@ -29,7 +29,7 @@ function filterDocumentTypes (contactTeacher) {
   return filteredList
 }
 
-module.exports.write = async (request, reply) => {
+module.exports.write = async (request, h) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
   const studentUserName = request.params.studentUserName
@@ -69,18 +69,18 @@ module.exports.write = async (request, reply) => {
 
     logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
-      reply.view('document', viewOptions)
+      return h.view('document', viewOptions)
     } else {
-      reply.view('error-missing-contact-teacher', viewOptions)
+      return h.view('error-missing-contact-teacher', viewOptions)
     }
   }
   if (payload.statusKode === 401) {
     logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, '401'])
-    reply.redirect('/signout')
+    return h.redirect('/signout')
   }
 }
 
-module.exports.generatePreview = (request, reply) => {
+module.exports.generatePreview = (request, h) => {
   const user = request.auth.credentials.data
   let data = request.payload
   data.userId = user.userId
@@ -102,7 +102,7 @@ module.exports.generatePreview = (request, reply) => {
   templaterForm.submit(config.PDF_SERVICE_URL, (error, docx) => {
     if (error) {
       logger('error', ['documents', 'generatePreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'error', error])
-      reply(error)
+      throw error
     } else {
       let chunks = []
       let totallength = 0
@@ -120,13 +120,13 @@ module.exports.generatePreview = (request, reply) => {
           pos += chunks[i].length
         }
         logger('info', ['documents', 'generatePreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'preview generated'])
-        reply(results.toString('base64'))
+        return results.toString('base64')
       })
     }
   })
 }
 
-module.exports.submit = async (request, reply) => {
+module.exports.submit = async (request, h) => {
   const yar = request.yar
   const user = request.auth.credentials.data
   const token = generateSystemJwt(user.userId)
@@ -152,10 +152,10 @@ module.exports.submit = async (request, reply) => {
     .then(results => {
       logger('info', ['documents', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted'])
       yar.set('documentAdded', true)
-      reply.redirect('/')
+      return h.redirect('/')
     }).catch(error => {
       logger('error', ['documents', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
       yar.set('documentAdded', false)
-      reply.redirect('/')
+      return h.redirect('/')
     })
 }

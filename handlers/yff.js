@@ -24,7 +24,7 @@ const classLevels = [
   { id: 'VG2', value: 'VG2', description: 'vg2', checked: '' }
 ]
 
-module.exports.frontPage = async (request, reply) => {
+module.exports.frontPage = async (request, h) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
   const studentUserName = request.params.studentUserName
@@ -93,18 +93,18 @@ module.exports.frontPage = async (request, reply) => {
     }
     logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
-      reply.view('yff', viewOptions)
+      return h.view('yff', viewOptions)
     } else {
-      reply.view('error-missing-contact-teacher', viewOptions)
+      return h.view('error-missing-contact-teacher', viewOptions)
     }
   }
   if (payload.statusKode === 401) {
     logger('info', ['yff', 'frontPages', 'userId', userId, 'studentUserName', studentUserName, '401'])
-    reply.redirect('/signout')
+    return h.redirect('/signout')
   }
 }
 
-module.exports.bekreftelse = async (request, reply) => {
+module.exports.bekreftelse = async (request, h) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
   const studentUserName = request.params.studentUserName
@@ -146,18 +146,18 @@ module.exports.bekreftelse = async (request, reply) => {
     if (mainGroupName !== false) {
       const classLevel = getClassLevel(mainGroupName)
       viewOptions.classLevels = classLevels.map(thisClass => thisClass.id === classLevel ? Object.assign(thisClass, { checked: 'checked' }) : thisClass)
-      reply.view('yff-bekreftelse', viewOptions)
+      return h.view('yff-bekreftelse', viewOptions)
     } else {
-      reply.view('error-missing-contact-teacher', viewOptions)
+      return h.view('error-missing-contact-teacher', viewOptions)
     }
   }
   if (payload.statusKode === 401) {
     logger('info', ['yff', 'contract', 'userId', userId, 'studentUserName', studentUserName, '401'])
-    reply.redirect('/signout')
+    return h.redirect('/signout')
   }
 }
 
-module.exports.maal = async (request, reply) => {
+module.exports.maal = async (request, h) => {
   const utdanningsprogrammer = require('../lib/data/utdanningsprogrammer.json')
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
@@ -232,18 +232,18 @@ module.exports.maal = async (request, reply) => {
     if (mainGroupName !== false) {
       const classLevel = getClassLevel(mainGroupName)
       viewOptions.classLevels = classLevels.map(thisClass => thisClass.id === classLevel ? Object.assign(thisClass, { checked: 'checked' }) : thisClass)
-      reply.view('yff-maal', viewOptions)
+      return h.view('yff-maal', viewOptions)
     } else {
-      reply.view('error-missing-contact-teacher', viewOptions)
+      return h.view('error-missing-contact-teacher', viewOptions)
     }
   }
   if (payload.statusKode === 401) {
     logger('info', ['yff', 'maal', 'userId', userId, 'studentUserName', studentUserName, '401'])
-    reply.redirect('/signout')
+    return h.redirect('/signout')
   }
 }
 
-module.exports.plan = async (request, reply) => {
+module.exports.plan = async (request, h) => {
   const utdanningsprogrammer = require('../lib/data/utdanningsprogrammer.json')
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
@@ -310,18 +310,18 @@ module.exports.plan = async (request, reply) => {
 
     logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
-      reply.view('yff-plan', viewOptions)
+      return h.view('yff-plan', viewOptions)
     } else {
-      reply.view('error-missing-contact-teacher', viewOptions)
+      return h.view('error-missing-contact-teacher', viewOptions)
     }
   }
   if (payload.statusKode === 401) {
     logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, '401'])
-    reply.redirect('/signout')
+    return h.redirect('/signout')
   }
 }
 
-module.exports.evaluation = async (request, reply) => {
+module.exports.evaluation = async (request, h) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
   const studentUserName = request.params.studentUserName
@@ -380,18 +380,18 @@ module.exports.evaluation = async (request, reply) => {
 
     logger('info', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, 'student data retrieved'])
     if (mainGroupName !== false) {
-      reply.view('yff-evaluation', viewOptions)
+      return h.view('yff-evaluation', viewOptions)
     } else {
-      reply.view('error-missing-contact-teacher', viewOptions)
+      return h.view('error-missing-contact-teacher', viewOptions)
     }
   }
   if (payload.statusKode === 401) {
     logger('info', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, '401'])
-    reply.redirect('/signout')
+    return h.redirect('/signout')
   }
 }
 
-module.exports.generatePreview = async (request, reply) => {
+module.exports.generatePreview = async (request, h) => {
   const user = request.auth.credentials.data
   let data = request.payload
   data.userId = user.userId
@@ -428,7 +428,7 @@ module.exports.generatePreview = async (request, reply) => {
   templaterForm.submit(config.PDF_SERVICE_URL, (error, docx) => {
     if (error) {
       logger('error', ['yff', 'generatePreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'error', error])
-      reply(error)
+      throw error
     } else {
       let chunks = []
       let totallength = 0
@@ -446,13 +446,13 @@ module.exports.generatePreview = async (request, reply) => {
           pos += chunks[i].length
         }
         logger('info', ['yff', 'generatePreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'preview generated'])
-        reply(results.toString('base64'))
+        return results.toString('base64')
       })
     }
   })
 }
 
-module.exports.submit = async (request, reply) => {
+module.exports.submit = async (request, h) => {
   const yar = request.yar
   const user = request.auth.credentials.data
   const token = generateSystemJwt(user.userId)
@@ -503,15 +503,15 @@ module.exports.submit = async (request, reply) => {
     const results = await Promise.all(jobs)
     logger('info', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted', results.length])
     yar.set('documentAdded', true)
-    reply.redirect(`/yff/${data.studentUserName}`)
+    return h.redirect(`/yff/${data.studentUserName}`)
   } catch (error) {
     logger('error', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
     yar.set('documentAdded', false)
-    reply.redirect('/')
+    return h.redirect('/')
   }
 }
 
-module.exports.addLineToPlan = async (request, reply) => {
+module.exports.addLineToPlan = async (request, h) => {
   const user = request.auth.credentials.data
   const token = generateSystemJwt(user.userId)
   const url = `${config.QUEUE_SERVICE_URL}`
@@ -544,14 +544,14 @@ module.exports.addLineToPlan = async (request, reply) => {
   Promise.all(jobs)
     .then(results => {
       logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'added', results.length])
-      reply.redirect(`/yff/maal/${data.studentUserName}`)
+      return h.redirect(`/yff/maal/${data.studentUserName}`)
     }).catch(error => {
       logger('error', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
-      reply.redirect('/')
+      return h.redirect('/')
     })
 }
 
-module.exports.removeLineFromPlan = async (request, reply) => {
+module.exports.removeLineFromPlan = async (request, h) => {
   const user = request.auth.credentials.data
   const token = generateSystemJwt(user.userId)
   const { studentUserName, maalID } = request.params
@@ -568,23 +568,23 @@ module.exports.removeLineFromPlan = async (request, reply) => {
       axios.delete(deleteUrl)
         .then(result => {
           logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, 'removed'])
-          reply({ success: true })
+          return { success: true }
         })
         .catch(error => {
           logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, error])
-          reply({ success: false })
+          return { success: false }
         })
     } else {
       logger('error', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, 'mismatch in line', maalID])
-      reply({ success: false })
+      return { success: false }
     }
   } catch (error) {
     logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, error])
-    reply.redirect(`/yff/plan/${studentUserName}`)
+    return h.redirect(`/yff/plan/${studentUserName}`)
   }
 }
 
-module.exports.lookupBrreg = async (request, reply) => {
+module.exports.lookupBrreg = async (request, h) => {
   let data = request.payload
   const query = data.query
 
@@ -599,5 +599,5 @@ module.exports.lookupBrreg = async (request, reply) => {
   } else if (lookup.enhetsregisteret.error === false && lookup.underenheter.error !== false) {
     results = lookup.enhetsregisteret.data.entries
   }
-  reply(results)
+  return results
 }
