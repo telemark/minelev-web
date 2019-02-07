@@ -109,5 +109,3 @@ Login with username: `gauss` password: `password`
 ## License
 
 [MIT](LICENSE)
-
-![Robohash image of minelev-web](https://robots.kebabstudios.party/minelev-web.png "Robohash image of minelev-web")
