@@ -1,5 +1,5 @@
 const axios = require('axios')
-const getDocumentTemplatesPath = require('tfk-saksbehandling-minelev-templates')
+const getDocumentTemplate = require('document-templates')
 const code = require('crypto-props')
 const config = require('../config')
 const prepareDocument = require('../lib/prepare-document')
@@ -71,7 +71,8 @@ module.exports.generatePreview = async (request, h) => {
   data.userAgent = request.headers['user-agent']
   const postData = prepareDocument(data)
   const previewData = prepareDocumentPreview(postData)
-  const template = getDocumentTemplatesPath(getTemplateType(postData))
+  const documentTemplate = getDocumentTemplate({ domain: 'minelev', templateId: getTemplateType(postData) })
+  const template = documentTemplate.filePath
 
   logger('info', ['notes', 'generatePreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
 

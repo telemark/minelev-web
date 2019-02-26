@@ -1,6 +1,6 @@
 const axios = require('axios')
 const brreg = require('brreg')
-const getDocumentTemplatesPath = require('tfk-saksbehandling-minelev-templates')
+const getDocumentTemplate = require('document-templates')
 const schoolsInfo = require('tfk-schools-info')
 const arrify = require('arrify')
 const config = require('../config')
@@ -414,7 +414,8 @@ module.exports.generatePreview = async (request, h) => {
   const documentData = prepareDocument(data)
   let postData = Object.assign({}, documentData, yffData)
   const previewData = prepareYffDocumentPreview(postData)
-  const template = getDocumentTemplatesPath(getTemplateType(postData))
+  const documentTemplate = getDocumentTemplate({ domain: 'minelev', templateId: getTemplateType(postData) })
+  const template = documentTemplate.filePath
 
   logger('info', ['yff', 'generatePreview', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
 
