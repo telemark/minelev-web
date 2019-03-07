@@ -118,14 +118,14 @@ module.exports.submit = async (request, h) => {
 
   logger('info', ['documents', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'start'])
 
-  axios.put(url, postData)
-    .then(results => {
-      logger('info', ['documents', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted'])
-      yar.set('documentAdded', true)
-      return h.redirect('/')
-    }).catch(error => {
-      logger('error', ['documents', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
-      yar.set('documentAdded', false)
-      return h.redirect('/')
-    })
+  try {
+    await axios.put(url, postData)
+    logger('info', ['documents', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'submitted'])
+    yar.set('documentAdded', true)
+    return h.redirect('/')
+  } catch (error) {
+    logger('error', ['documents', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
+    yar.set('documentAdded', false)
+    return h.redirect('/')
+  }
 }
