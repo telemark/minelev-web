@@ -73,12 +73,14 @@ async function start () {
   })
 
   server.auth.strategy('session', 'cookie', {
-    password: config.COOKIE_SECRET,
-    cookie: 'web-minelev-session',
+    cookie: {
+      name: 'web-minelev-leder-session',
+      password: config.COOKIE_SECRET,
+      isSecure: process.env.NODE_ENV !== 'development',
+      isSameSite: 'Lax'
+    },
     redirectTo: `${config.AUTH_SERVICE_URL}/login?origin=${config.ORIGIN_URL}`,
-    appendNext: 'nextPath',
-    isSecure: process.env.NODE_ENV !== 'development',
-    isSameSite: 'Lax'
+    appendNext: 'nextPath'
   })
 
   server.auth.default('session')
