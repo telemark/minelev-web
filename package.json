@@ -58,7 +58,7 @@
   "dependencies": {
     "arrify": "1.0.1",
     "axios": "0.18.0",
-    "azure-queue-add-message": "1.0.0",
+    "azure-queue-add-message": "2.1.0",
     "brreg": "3.0.1",
     "crypto-props": "2.0.3",
     "document-templates": "1.1.0",
