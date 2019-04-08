@@ -56,7 +56,7 @@
     "standard": "12.0.1"
   },
   "dependencies": {
-    "arrify": "1.0.1",
+    "arrify": "2.0.0",
     "axios": "0.18.0",
     "azure-queue-add-message": "2.1.1",
     "brreg": "3.0.1",
