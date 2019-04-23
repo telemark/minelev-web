@@ -1,4 +1,4 @@
-const Hapi = require('hapi')
+const Hapi = require('@hapi/hapi')
 const config = require('./config')
 const routes = require('./routes')
 const auth = require('./routes/auth')
