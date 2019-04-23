@@ -38,8 +38,8 @@ const yarOptions = {
 
 const plugins = [
   { plugin: require('hapi-auth-cookie') },
-  { plugin: require('vision') },
-  { plugin: require('inert') },
+  { plugin: require('@hapi/vision') },
+  { plugin: require('@hapi/inert') },
   { plugin: require('yar'), options: yarOptions }
 ]
 
@@ -74,7 +74,7 @@ async function start () {
 
   server.auth.strategy('session', 'cookie', {
     cookie: {
-      name: 'web-minelev-leder-session',
+      name: 'web-minelev-session',
       password: config.COOKIE_SECRET,
       isSecure: process.env.NODE_ENV !== 'development',
       isSameSite: 'Lax'
