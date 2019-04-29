@@ -73,7 +73,7 @@
     "hapi-auth-jwt2": "8.4.0",
     "jsonwebtoken": "8.5.1",
     "minelev-tilbakemelding-nynorsk": "1.0.2",
-    "simple-encryptor": "2.0.0",
+    "simple-encryptor": "3.0.0",
     "tfk-saksbehandling-schools-info": "2.0.12",
     "tfk-schools-info": "2.1.5",
     "uuid": "3.3.2",
