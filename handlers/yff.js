@@ -516,14 +516,14 @@ module.exports.addLineToPlan = async (request, h) => {
 
   logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'jobs', jobs.length, 'start'])
 
-  Promise.all(jobs)
-    .then(results => {
-      logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'added', results.length])
-      return h.redirect(`/yff/maal/${data.studentUserName}`)
-    }).catch(error => {
-      logger('error', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
-      return h.redirect('/')
-    })
+  try {
+    const { data: results } = await Promise.all(jobs)
+    logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'added', results.length])
+    return h.redirect(`/yff/maal/${data.studentUserName}`)
+  } catch (error) {
+    logger('error', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
+    return h.redirect('/')
+  }
 }
 
 module.exports.removeLineFromPlan = async (request, h) => {
