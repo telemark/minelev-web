@@ -1,0 +1,51 @@
+{
+  "version": 2,
+  "name": "minelev-web",
+  "scope": "minelev",
+  "alias": [
+    "www.minelev.win"
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "WEB_SERVER_PORT": "8000",
+    "ORIGIN_URL": "https://www.minelev.no/signin",
+    "COOKIE_SECRET": "@minelev-cookie-secret",
+    "ENCRYPTOR_SECRET": "@minelev-encryptor-secret",
+    "JWT_SECRET": "@minelev-jwt-secret",
+    "YAR_SECRET": "@minelev-session-secret",
+    "AUTH_SERVICE_URL": "@tfk-auth-service-feide",
+    "BUDDY_SERVICE_URL": "@minelev-buddy-service-url",
+    "LOGS_SERVICE_URL": "@minelev-logs-service-url",
+    "STATS_SERVICE_URL": "@minelev-stats-service-url",
+    "PDF_SERVICE_URL": "https://pdf.minelev.no",
+    "QUEUE_SERVICE_URL": "@minelev-queue-service-url",
+    "FEATURE_USE_YFF": "on",
+    "YFF_SERVICE_URL": "https://yff.service.minelev.no",
+    "FEATURE_USE_PICTURES": "on",
+    "PICTURES_SERVICE_URL": "https://photos.minelev.no",
+    "FEATURE_USE_NOTES": "on",
+    "NOTES_SERVICE_URL": "@minelev-notes-service-url",
+    "NOTES_SERVICE_SECRET": "@sikker-queue-secret",
+    "NOTES_KEY": "@minelev-notes-key",
+    "MESSAGE_QUEUE_CONNECTION_STRING": "@msg-queue-connection",
+    "MESSAGE_QUEUE_NAME": "yffbekreftelsebedrift",
+    "PAPERTRAIL_HOSTNAME": "minelev",
+    "PAPERTRAIL_HOST": "@tfk-papertrail-host",
+    "PAPERTRAIL_PORT": "@tfk-papertrail-port"
+  },
+  "builds": [
+    {
+      "src": "/server.js",
+      "use": "@now/node",
+      "config": {
+        "maxLambdaSize": "15mb"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
+    }
+  ]
+}
