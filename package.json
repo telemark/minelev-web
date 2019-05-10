@@ -1,6 +1,6 @@
 {
   "name": "minelev-web",
-  "version": "3.2.6",
+  "version": "3.2.7",
   "description": "web frontend for MinElev",
   "license": "MIT",
   "private": true,
