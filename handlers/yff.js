@@ -522,7 +522,7 @@ module.exports.addLineToPlan = async (request, h) => {
     return h.redirect(`/yff/maal/${data.studentUserName}`)
   } catch (error) {
     logger('error', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, error])
-    return h.redirect('/')
+    return h.redirect(`/yff/maal/${data.studentUserName}`)
   }
 }
 
