@@ -517,7 +517,7 @@ module.exports.addLineToPlan = async (request, h) => {
   logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'jobs', jobs.length, 'start'])
 
   try {
-    const { data: results } = await Promise.all(jobs)
+    const results = await Promise.all(jobs)
     logger('info', ['yff', 'addLineToPlan', 'userId', data.userId, 'studentUserName', data.studentUserName, 'added', results.length])
     return h.redirect(`/yff/maal/${data.studentUserName}`)
   } catch (error) {
