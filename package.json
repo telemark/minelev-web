@@ -62,7 +62,7 @@
     "arrify": "2.0.1",
     "axios": "0.19.0",
     "azure-queue-add-message": "2.1.1",
-    "brreg": "3.0.1",
+    "brreg": "4.0.1",
     "crypto-props": "2.0.3",
     "document-templates": "1.2.1",
     "dotenv": "8.0.0",
