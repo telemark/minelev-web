@@ -65,7 +65,7 @@ module.exports.frontPage = async (request, h) => {
     }
   }
   let mainGroupName = false
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
 
   logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
@@ -80,7 +80,7 @@ module.exports.frontPage = async (request, h) => {
     logger('error', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
   }
   if (!payload.statusKode) {
-    let student = payload[0]
+    const student = payload[0]
     student.mainGroupName = mainGroupName
     viewOptions.student = student
     viewOptions.bedrifter = bedrifter
@@ -115,7 +115,7 @@ module.exports.bekreftelse = async (request, h) => {
   const urlUtdanningsProgrammer = `${config.YFF_SERVICE_URL}/utdanningsprogrammer`
   let mainGroupName = false
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
 
   logger('info', ['yff', 'bekreftelse', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
@@ -131,7 +131,7 @@ module.exports.bekreftelse = async (request, h) => {
     logger('error', ['yff', 'bekreftelse', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
   }
   if (!payload.statusKode) {
-    let student = payload[0]
+    const student = payload[0]
     const today = new Date()
     student.mainGroupName = mainGroupName
     viewOptions.student = student
@@ -184,7 +184,7 @@ module.exports.maal = async (request, h) => {
   }
   let mainGroupName = false
 
-  let viewOptions = createViewOptions({
+  const viewOptions = createViewOptions({
     credentials: request.auth.credentials,
     myContactClasses: myContactClasses
   })
@@ -203,7 +203,7 @@ module.exports.maal = async (request, h) => {
     logger('error', ['yff', 'maal', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
   }
   if (!payload.statusKode) {
-    let student = payload[0]
+    const student = payload[0]
     const today = new Date()
     student.mainGroupName = mainGroupName
     viewOptions.student = student
@@ -270,7 +270,7 @@ module.exports.plan = async (request, h) => {
   }
   let mainGroupName = false
 
-  let viewOptions = createViewOptions({
+  const viewOptions = createViewOptions({
     credentials: request.auth.credentials,
     myContactClasses: myContactClasses,
     utdanningsprogrammer: utdanningsprogrammer
@@ -290,7 +290,7 @@ module.exports.plan = async (request, h) => {
     logger('error', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
   }
   if (!payload.statusKode) {
-    let student = payload[0]
+    const student = payload[0]
     const today = new Date()
     student.mainGroupName = mainGroupName
     viewOptions.student = student
@@ -344,7 +344,7 @@ module.exports.evaluation = async (request, h) => {
 
   let mainGroupName = false
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
 
   logger('info', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
@@ -360,7 +360,7 @@ module.exports.evaluation = async (request, h) => {
     logger('error', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
   }
   if (!payload.statusKode) {
-    let student = payload[0]
+    const student = payload[0]
     const today = new Date()
     const bedrift = bedrifter.data[0]
     student.mainGroupName = mainGroupName
@@ -393,7 +393,7 @@ module.exports.evaluation = async (request, h) => {
 
 module.exports.generatePreview = async (request, h) => {
   const user = request.auth.credentials.data
-  let data = request.payload
+  const data = request.payload
   data.userId = user.userId
   data.userName = user.userName
   data.userMail = user.email
@@ -412,7 +412,7 @@ module.exports.generatePreview = async (request, h) => {
   }
   const yffData = prepareYffDocument(data)
   const documentData = prepareDocument(data)
-  let postData = Object.assign({}, documentData, yffData)
+  const postData = Object.assign({}, documentData, yffData)
   const previewData = prepareYffDocumentPreview(postData)
   const documentTemplate = getDocumentTemplate({ domain: 'minelev', templateId: getTemplateType(postData) })
   const template = documentTemplate.filePath
@@ -428,7 +428,7 @@ module.exports.submit = async (request, h) => {
   const user = request.auth.credentials.data
   const token = generateSystemJwt(user.userId)
   const url = `${config.QUEUE_SERVICE_URL}`
-  let data = request.payload
+  const data = request.payload
   data.userId = user.userId
   data.userName = user.userName
   data.userMail = user.email
@@ -448,7 +448,7 @@ module.exports.submit = async (request, h) => {
 
   const yffData = prepareYffDocument(data)
   const documentData = prepareDocument(data)
-  let postData = Object.assign({}, documentData, yffData)
+  const postData = Object.assign({}, documentData, yffData)
   postData.documentStatus = [
     {
       timeStamp: new Date().getTime(),
@@ -465,7 +465,7 @@ module.exports.submit = async (request, h) => {
   // adds copy if bekreftelse
   if (postData.documentCategory === 'yff-bekreftelse') {
     logger('info', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'yff-bekreftelse', 'creates copy'])
-    let postDataBedrift = Object.assign({}, postData)
+    const postDataBedrift = Object.assign({}, postData)
     postDataBedrift.documentCategory = 'yff-bekreftelse-bedrift'
     jobs.push(axios.put(url, postDataBedrift))
     if (config.MESSAGE_QUEUE_CONNECTION_STRING) {
@@ -490,7 +490,7 @@ module.exports.addLineToPlan = async (request, h) => {
   const user = request.auth.credentials.data
   const token = generateSystemJwt(user.userId)
   const url = `${config.QUEUE_SERVICE_URL}`
-  let data = request.payload
+  const data = request.payload
   data.userId = user.userId
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
@@ -499,7 +499,7 @@ module.exports.addLineToPlan = async (request, h) => {
 
   const documentData = prepareDocument(data)
   const yffData = prepareYffDocument(data)
-  let postData = Object.assign({}, documentData, yffData)
+  const postData = Object.assign({}, documentData, yffData)
 
   postData.documentStatus = [
     {
@@ -559,7 +559,7 @@ module.exports.removeLineFromPlan = async (request, h) => {
 }
 
 module.exports.lookupBrreg = async (request, h) => {
-  let data = request.payload
+  const data = request.payload
   const query = data.query
 
   logger('info', ['yff', 'lookupBrreg', 'query', query, 'start'])

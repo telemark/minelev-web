@@ -23,7 +23,7 @@ module.exports.write = async (request, h) => {
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
   let mainGroupName = false
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
 
   logger('info', ['notes', 'write', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
@@ -39,7 +39,7 @@ module.exports.write = async (request, h) => {
     logger('error', ['notes', 'write', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
   }
   if (!payload.statusKode) {
-    let student = payload[0]
+    const student = payload[0]
     const today = new Date()
     student.mainGroupName = mainGroupName
     viewOptions.student = student
@@ -65,7 +65,7 @@ module.exports.write = async (request, h) => {
 
 module.exports.generatePreview = async (request, h) => {
   const user = request.auth.credentials.data
-  let data = request.payload
+  const data = request.payload
   data.userId = user.userId
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
@@ -83,11 +83,11 @@ module.exports.generatePreview = async (request, h) => {
 module.exports.submit = async (request, h) => {
   const yar = request.yar
   const user = request.auth.credentials.data
-  let data = request.payload
+  const data = request.payload
   data.userId = user.userId
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
-  let postData = prepareDocument(data)
+  const postData = prepareDocument(data)
   const encrypted = code({
     secret: config.NOTES_KEY,
     data: postData,

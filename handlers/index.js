@@ -13,17 +13,17 @@ module.exports.getFrontpage = async (request, h) => {
   const token = generateSystemJwt(userId)
   const url = `${config.LOGS_SERVICE_URL}/logs/search`
   const myContactClasses = yar.get('myContactClasses') || []
-  let mongoQuery = { 'userId': userId, documentCategory: { '$in': validDocTypes } }
+  let mongoQuery = { userId: userId, documentCategory: { $in: validDocTypes } }
 
   logger('info', ['index', 'getFrontpage', 'userId', userId, 'start'])
 
   if (myContactClasses.length > 0) {
     const classIds = myContactClasses.map(item => item.Id)
-    mongoQuery = { '$or': [{ 'userId': userId }, { 'studentMainGroupName': { '$in': classIds } }], documentCategory: { '$in': validDocTypes } }
+    mongoQuery = { $or: [{ userId: userId }, { studentMainGroupName: { $in: classIds } }], documentCategory: { $in: validDocTypes } }
     logger('info', ['index', 'getFrontpage', 'userId', userId, 'contact teacher', classIds.join(', ')])
   }
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, latestIdDocument: documentAdded ? 'Ok' : '' })
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, latestIdDocument: documentAdded ? 'Ok' : '' })
 
   yar.set('documentAdded', false)
 
@@ -47,7 +47,7 @@ module.exports.getLogspage = async (request, h) => {
   const url = documentId ? `${config.LOGS_SERVICE_URL}/logs/${documentId}` : `${config.LOGS_SERVICE_URL}/logs/search`
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
-  let mongoQuery = { documentCategory: { '$in': validDocTypes } }
+  let mongoQuery = { documentCategory: { $in: validDocTypes } }
 
   function isValid (doc) {
     return userId === doc.userId || myContactClasses.map(line => line.Id).includes(doc.studentMainGroupName)
@@ -64,7 +64,7 @@ module.exports.getLogspage = async (request, h) => {
       // Retrieve logs from me and/or to my classes
       const classIds = myContactClasses.map(item => item.Id)
       logger('info', ['index', 'getLogspage', 'userId', userId, 'classes', classIds.join(', ')])
-      mongoQuery = { '$or': [{ 'userId': userId }, { 'studentMainGroupName': { '$in': classIds } }], documentCategory: { '$in': validDocTypes } }
+      mongoQuery = { $or: [{ userId: userId }, { studentMainGroupName: { $in: classIds } }], documentCategory: { $in: validDocTypes } }
     } else {
       // Retrieve logs from me
       mongoQuery.userId = userId
@@ -79,7 +79,7 @@ module.exports.getLogspage = async (request, h) => {
     results = results.filter(isValid)
   }
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, logs: applyLogDescriptions(results) })
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, logs: applyLogDescriptions(results) })
 
   if (request.query.studentUserName || documentId) {
     logger('info', ['index', 'getLogspage', 'userId', userId, 'detailed logs ok'])
@@ -112,7 +112,7 @@ module.exports.doSearch = async (request, h) => {
 
   logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, 'start'])
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, searchText: searchText })
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, searchText: searchText })
 
   axios.defaults.headers.common['Authorization'] = token
   const results = await axios.get(url)

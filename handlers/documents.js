@@ -19,7 +19,7 @@ const getProfilePicture = require('../lib/get-profile-picture')
 const logger = require('../lib/logger')
 
 function filterDocumentTypes (contactTeacher) {
-  let filteredList = []
+  const filteredList = []
   documentTypes.forEach(type => {
     if (type.id === 'fag' || contactTeacher) {
       filteredList.push(type)
@@ -38,7 +38,7 @@ module.exports.write = async (request, h) => {
   const urlContactTeachers = `${config.BUDDY_SERVICE_URL}/students/${studentUserName}/contactteachers`
   let mainGroupName = false
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory, samtale: samtale, documentTypes: documentTypes, warningPeriods: warningPeriods })
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory, samtale: samtale, documentTypes: documentTypes, warningPeriods: warningPeriods })
 
   logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
@@ -54,7 +54,7 @@ module.exports.write = async (request, h) => {
     logger('error', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
   }
   if (!payload.statusKode) {
-    let student = payload[0]
+    const student = payload[0]
     const today = new Date()
     student.mainGroupName = mainGroupName
     viewOptions.student = student
@@ -81,7 +81,7 @@ module.exports.write = async (request, h) => {
 
 module.exports.generatePreview = async (request, h) => {
   const user = request.auth.credentials.data
-  let data = request.payload
+  const data = request.payload
   data.userId = user.userId
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
@@ -101,11 +101,11 @@ module.exports.submit = async (request, h) => {
   const user = request.auth.credentials.data
   const token = generateSystemJwt(user.userId)
   const url = `${config.QUEUE_SERVICE_URL}`
-  let data = request.payload
+  const data = request.payload
   data.userId = user.userId
   data.userName = user.userName
   data.userAgent = request.headers['user-agent']
-  let postData = prepareDocument(data)
+  const postData = prepareDocument(data)
 
   postData.documentStatus = [
     {

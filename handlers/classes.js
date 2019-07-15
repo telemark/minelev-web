@@ -7,7 +7,7 @@ const logger = require('../lib/logger')
 module.exports.showClasses = async (request, h) => {
   const yar = request.yar
   const myContactClasses = yar.get('myContactClasses') || []
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, classes: myContactClasses })
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, classes: myContactClasses })
 
   return h.view('klasseliste', viewOptions)
 }
@@ -20,7 +20,7 @@ module.exports.listStudentsInClass = async (request, h) => {
   const url = `${config.BUDDY_SERVICE_URL}/classes/${groupId}/students`
   const myContactClasses = yar.get('myContactClasses') || []
 
-  let viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
 
   logger('info', ['classes', 'listStudentsInClass', 'userId', userId, 'start'])
 
