@@ -35,7 +35,7 @@
   },
   "builds": [
     {
-      "src": "/server.js",
+      "src": "/index.js",
       "use": "@now/node",
       "config": {
         "maxLambdaSize": "15mb"
@@ -45,7 +45,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/server.js"
+      "dest": "/index.js"
     }
   ]
 }
