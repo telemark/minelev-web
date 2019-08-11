@@ -64,7 +64,7 @@
     "azure-queue-add-message": "2.1.1",
     "brreg": "4.0.1",
     "crypto-props": "2.0.3",
-    "document-templates": "1.2.4",
+    "document-templates": "1.2.5",
     "dotenv": "8.0.0",
     "form-data": "2.5.0",
     "get-skole-aar": "2.0.0",
