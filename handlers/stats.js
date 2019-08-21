@@ -26,7 +26,7 @@ module.exports.getStats = async (request, h) => {
 
   logger('info', ['stats', 'getStats', 'user', userId])
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
 
   const [
     totalVarsel,

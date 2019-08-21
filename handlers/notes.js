@@ -27,7 +27,7 @@ module.exports.write = async (request, h) => {
 
   logger('info', ['notes', 'write', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
   // Retrieves student and students contactTeachers
   const [results, contactTeachersResult, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), getProfilePicture(studentUserName)])
   const payload = results.data

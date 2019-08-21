@@ -27,7 +27,7 @@ module.exports.getFrontpage = async (request, h) => {
 
   yar.set('documentAdded', false)
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
   try {
     const { data } = await axios.post(url, mongoQuery)
     viewOptions.logs = data || []
@@ -72,7 +72,7 @@ module.exports.getLogspage = async (request, h) => {
     }
   }
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
   let { data: results } = documentId ? await axios.get(url) : await axios.post(url, mongoQuery)
 
   if (request.query.studentUserName || documentId) {
@@ -114,7 +114,7 @@ module.exports.doSearch = async (request, h) => {
 
   const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, searchText: searchText })
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
   const results = await axios.get(url)
   const payload = results.data
 

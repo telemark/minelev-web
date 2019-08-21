@@ -69,7 +69,7 @@ module.exports.frontPage = async (request, h) => {
 
   logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
   const [results, contactTeachersResult, maal, bedrifter, tilbakemeldinger, planer, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(maalOptions), searchLogs(bedriftsOptions), searchLogs(tilbakemeldingsOptions), searchLogs(planOptions), getProfilePicture(studentUserName)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
@@ -119,7 +119,7 @@ module.exports.bekreftelse = async (request, h) => {
 
   logger('info', ['yff', 'bekreftelse', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
   // Retrieves student and students contactTeachers
   const [results, contactTeachersResult, profilePicture, utdanningsProgrammer] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), getProfilePicture(studentUserName), axios.get(urlUtdanningsProgrammer)])
   const payload = results.data
@@ -191,7 +191,7 @@ module.exports.maal = async (request, h) => {
 
   logger('info', ['yff', 'maal', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
   // Retrieves student, students contactTeachers, bedrift and maal
   const [results, contactTeachersResult, bedrifter, maal, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions), searchLogs(maalOptions), getProfilePicture(studentUserName)])
   const payload = results.data
@@ -278,7 +278,7 @@ module.exports.plan = async (request, h) => {
 
   logger('info', ['yff', 'plan', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
   // Retrieves student, students contactTeachers, bedrift and maal
   const [results, contactTeachersResult, bedrifter, maal, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(bedriftsOptions), searchLogs(maalOptions), getProfilePicture(studentUserName)])
   const payload = results.data
@@ -348,7 +348,7 @@ module.exports.evaluation = async (request, h) => {
 
   logger('info', ['yff', 'evaluation', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
   // Retrieves student and students contactTeachers
   const [results, contactTeachersResult, bedrifter, maal, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), axios.get(urlBedrift), searchLogs(maalOptions), getProfilePicture(studentUserName)])
   const payload = results.data
@@ -456,7 +456,7 @@ module.exports.submit = async (request, h) => {
     }
   ]
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
 
   logger('info', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, postData.documentCategory, 'start'])
 
@@ -510,7 +510,7 @@ module.exports.addLineToPlan = async (request, h) => {
 
   postData.isQueued = false
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
 
   const jobs = data.kompetansemaalValg.map((line, index) => axios.put(url, Object.assign({}, postData, { kompetanseMaal: line }, { arbeidsOppgaver: data.arbeidsOppgaver[index] })))
 
@@ -533,7 +533,7 @@ module.exports.removeLineFromPlan = async (request, h) => {
   const findUrl = `${config.QUEUE_SERVICE_URL}/${maalID}`
   const deleteUrl = `${config.QUEUE_SERVICE_URL}/${maalID}`
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
 
   logger('info', ['yff', 'removeLineFromPlan', 'userId', user.userId, 'studentUserName', studentUserName, 'id', maalID, 'start'])
 

@@ -24,7 +24,7 @@ module.exports.listStudentsInClass = async (request, h) => {
 
   logger('info', ['classes', 'listStudentsInClass', 'userId', userId, 'start'])
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
 
   const results = await axios.get(url)
 

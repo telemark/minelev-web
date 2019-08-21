@@ -17,7 +17,7 @@ module.exports.getWarningsClassReport = async (request, h) => {
     documentType: 'varsel'
   }
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
 
   logger('info', ['reports', 'getWarningsClassReport', 'class', classId, 'user', userId])
   const results = await axios.post(url, query)
@@ -43,7 +43,7 @@ module.exports.getFollowupsClassReport = async (request, h) => {
 
   logger('info', ['reports', 'getFollowupsClassReport', 'class', classId, 'user', userId])
 
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common.Authorization = token
 
   const results = await axios.post(url, query)
 
