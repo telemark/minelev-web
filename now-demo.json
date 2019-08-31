@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "name": "minelev-web",
+  "alias": [
+    "www.minelev.win"
+  ],
+  "type": "docker",
+  "dotenv": "demo.env",
+  "features": {
+    "cloud": "v1"
+  }
+}

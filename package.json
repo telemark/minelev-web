@@ -20,6 +20,7 @@
     "coveralls": "nyc ava && nyc report --reporter=lcov && cat coverage/lcov.info | coveralls",
     "standard-fix": "standard --fix",
     "deploy": "npm test && now && now alias",
+    "deploy-demo": "npm test && now --local-config now-demo.json && now alias",
     "start": "node server.js",
     "dev": "NODE_ENV=development node server.js",
     "refresh": "rm -rf node_modules && rm package-lock.json && npm install"
