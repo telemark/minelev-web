@@ -107,7 +107,7 @@ module.exports.doSearch = async (request, h) => {
   const searchText = data.searchText
   const userId = request.auth.credentials.data.userId
   const token = generateSystemJwt(userId)
-  const url = `${config.BUDDY_SERVICE_URL}/students?name=${searchText}`
+  const url = `${config.BUDDY_SERVICE_URL}/students?name=${encodeURIComponent(searchText)}`
   const myContactClasses = yar.get('myContactClasses') || []
 
   logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, 'start'])
