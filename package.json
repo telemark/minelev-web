@@ -69,7 +69,7 @@
     "dotenv": "8.1.0",
     "form-data": "2.5.1",
     "get-skole-aar": "2.0.0",
-    "handlebars": "4.1.2",
+    "handlebars": "4.3.3",
     "hapi-auth-cookie": "10.0.0",
     "hapi-auth-jwt2": "8.6.2",
     "jsonwebtoken": "8.5.1",
