@@ -56,7 +56,6 @@ module.exports.write = async (request, h) => {
   if (!payload.statusKode) {
     const student = payload[0]
     const today = new Date()
-    student.mainGroupName = mainGroupName
     viewOptions.student = student
     viewOptions.warningTypes = filterDocumentTypes(student.contactTeacher)
     viewOptions.skjemaUtfyllingStart = today.getTime()
