@@ -71,7 +71,7 @@
     "get-skole-aar": "2.0.0",
     "handlebars": "4.3.3",
     "hapi-auth-cookie": "10.0.0",
-    "hapi-auth-jwt2": "8.6.2",
+    "hapi-auth-jwt2": "8.8.1",
     "jsonwebtoken": "8.5.1",
     "minelev-tilbakemelding-nynorsk": "1.0.2",
     "simple-encryptor": "3.0.0",
