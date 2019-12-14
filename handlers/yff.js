@@ -81,7 +81,6 @@ module.exports.frontPage = async (request, h) => {
   }
   if (!payload.statusKode) {
     const student = payload[0]
-    student.mainGroupName = mainGroupName
     viewOptions.student = student
     viewOptions.bedrifter = bedrifter
     viewOptions.maal = maal
@@ -204,7 +203,6 @@ module.exports.maal = async (request, h) => {
   if (!payload.statusKode) {
     const student = payload[0]
     const today = new Date()
-    student.mainGroupName = mainGroupName
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
@@ -291,7 +289,6 @@ module.exports.plan = async (request, h) => {
   if (!payload.statusKode) {
     const student = payload[0]
     const today = new Date()
-    student.mainGroupName = mainGroupName
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
@@ -362,7 +359,6 @@ module.exports.evaluation = async (request, h) => {
     const student = payload[0]
     const today = new Date()
     const bedrift = bedrifter.data[0]
-    student.mainGroupName = mainGroupName
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
