@@ -133,7 +133,6 @@ module.exports.bekreftelse = async (request, h) => {
   if (!payload.statusKode) {
     const student = payload[0]
     const today = new Date()
-    student.mainGroupName = mainGroupName
     viewOptions.student = student
     viewOptions.skjemaUtfyllingStart = today.getTime()
     viewOptions.thisDay = `${today.getFullYear()}-${datePadding(today.getMonth() + 1)}-${datePadding(today.getDate())}`
