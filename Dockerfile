@@ -1,11 +1,12 @@
-FROM mhart/alpine-node:10 as base
+FROM node:12
 WORKDIR /usr/src
 COPY package.json package-lock.json /usr/src/
 RUN npm i --production
 COPY . .
 
-FROM mhart/alpine-node:base-10
+FROM node:12-slim
 WORKDIR /usr/src
-COPY --from=base /usr/src .
+COPY --from=0 /usr/src .
+COPY . .
 EXPOSE 8000
 CMD ["node", "server.js"]
