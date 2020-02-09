@@ -52,7 +52,7 @@
   },
   "homepage": "https://github.com/telemark/minelev-web#readme",
   "devDependencies": {
-    "ava": "3.2.0",
+    "ava": "3.3.0",
     "coveralls": "3.0.9",
     "nyc": "15.0.0",
     "standard": "14.3.1"
