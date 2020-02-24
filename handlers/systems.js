@@ -2,6 +2,10 @@ const axios = require('axios')
 const config = require('../config')
 const logger = require('../lib/logger')
 
+const up = (result) => {
+  return result.ping === 'pong' || result.message === 'Only POST is supported' || false
+}
+
 module.exports.checkSystems = async (request, h) => {
   const systems = [
     {
@@ -27,7 +31,7 @@ module.exports.checkSystems = async (request, h) => {
   try {
     const checks = await Promise.all(jobs)
     const results = checks.map(check => check.data)
-    return systems.map((site, index) => Object.assign(site, { result: results[index] }))
+    return systems.map((site, index) => Object.assign(site, { result: results[index], up: up(results[index]) }))
   } catch (error) {
     logger('error', ['systems', 'checkSystems', error])
     throw error
