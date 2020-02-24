@@ -5,7 +5,7 @@ const logger = require('../lib/logger')
 module.exports.checkSystems = async (request, h) => {
   const systems = [
     {
-      id: 'buddy',
+      id: 'tjommi',
       url: `${config.BUDDY_SERVICE_URL}/ping`
     },
     {
