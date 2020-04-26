@@ -6370,8 +6370,6 @@ input.mdl-button[type="submit"] {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  overflow-y: auto;
-  overflow-x: hidden;
   position: relative;
   -webkit-overflow-scrolling: touch; }
 
@@ -6711,14 +6709,13 @@ input.mdl-button[type="submit"] {
 .mdl-layout__content {
   -ms-flex: 0 1 auto;
   display: inline-block;
-  overflow-y: auto;
-  overflow-x: hidden;
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
   z-index: 1;
-  -webkit-overflow-scrolling: touch; }
+  -webkit-overflow-scrolling: touch; 
+}
   .mdl-layout--fixed-drawer > .mdl-layout__content {
     margin-left: 240px; }
   .mdl-layout__container.has-scrolling-header .mdl-layout__content {
