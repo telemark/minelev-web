@@ -22,7 +22,7 @@ h1, h2, h3, h4, h4, h6 {
 }
 
 .mdl-layout__container .mdl-layout {
-    overflow: hidden !important;
+    height: auto;
 }
 
 .mdl-card__media {
