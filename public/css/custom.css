@@ -18,7 +18,8 @@ h1, h2, h3, h4, h4, h6 {
 }
 
 .mdl-layout__header {
-    background-color: #FFD520;
+    background-color: #005260;
+    color: #fff !important;
 }
 
 .mdl-layout__container .mdl-layout {
@@ -26,23 +27,23 @@ h1, h2, h3, h4, h4, h6 {
 }
 
 .mdl-card__media {
-    background-color: #6AC4AE;
+    background-color: #B2DCDA;
 }
 
 .mdl-color--primary {
-    background-color: #FFD520 !important;
+    background-color: #005260 !important;
 }
 
 .mdl-button--accent {
-    background-color: #6AC4AE !important;
+    background-color: #B2DCDA !important;
 }
 
 .mdl-button--colored {
-    background-color: #FFD520 !important;
+    background-color: #005260 !important;
 }
 
 .mdl-textfield__label:after {
-    background-color: #6AC4AE !important;
+    background-color: #B2DCDA !important;
 }
 
 .docs-footer.mdl-mini-footer {
@@ -93,7 +94,7 @@ h1, h2, h3, h4, h4, h6 {
 }
 
 button[disabled=disabled], button:disabled {
-    background-color: #B2B2B2 !important;
+    background-color: #D4D5CE !important;
 }
 
 .padding5 {
@@ -140,11 +141,12 @@ th.mdl-data-table__cell--non-numeric {
 }
 
 a {
-    color: #007f7a;
+    color: #005260;
 }
 
 a:visited {
-    color: #007c97;
+    color: #005260;
+    text-decoration-style: dotted;
 }
 
 .highlight-me {
@@ -459,4 +461,14 @@ div.evenodd > label:nth-child(even):hover {
 
 .small-text {
     font-size: 12px;
+}
+
+::-moz-selection {
+    background: #B2DCDA;
+    text-shadow: none
+}
+
+::selection {
+    background: #B2DCDA;
+    text-shadow: none
 }
