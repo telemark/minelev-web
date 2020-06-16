@@ -59,25 +59,25 @@
                 </label>
             </div>
             <div class="mdl-card__actions mdl-card--border">
-                <a href="/yff/{{student.userName}}" id="deleteEvaluation" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Avbryt og gå til YFF-forsiden for {{student.fullName}}"><i class="material-icons">delete</i></a>
+                <a href="/yff/{{student.userName}}" id="deleteEvaluation" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white" title="Avbryt og gå til YFF-forsiden for {{student.fullName}}"><i class="material-icons">delete</i></a>
                 <div class="mdl-layout-spacer"></div>
-                <a href="/yff/{{student.userName}}" id="backToYffMain" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Trykk her for å gå tilbake til YFF-forsiden for {{student.fullName}}"><i class="material-icons">playlist_add</i></a>
+                <a href="/yff/{{student.userName}}" id="backToYffMain" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white" title="Trykk her for å gå tilbake til YFF-forsiden for {{student.fullName}}"><i class="material-icons">playlist_add</i></a>
                 <span class="margin-right-10"></span>
-                <button type="submit" formaction="/yff/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis tilbakemelding for {{student.fullName}}" name="previewEvaluation" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
+                <button type="submit" formaction="/yff/preview/{{student.personalIdNumber}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis tilbakemelding for {{student.fullName}}" name="previewEvaluation" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white material-icons">description</button>
                 <span class="margin-right-10"></span>
-                <button type="submit" value="1" id="submitFormButton" title="Send brevet digitalt til elev. Det arkiveres automatisk i {{student.fullName}}s elevmappe." name="submitEvaluation" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">mail_outline</button>
+                <button type="submit" value="1" id="submitFormButton" title="Send brevet digitalt til elev. Det arkiveres automatisk i {{student.fullName}}s elevmappe." name="submitEvaluation" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white material-icons">mail_outline</button>
             </div>
         </form>
     </div>
     <div id="modalPreview" class="mdl-card mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-shadow--2dp">
         <div class="mdl-card__actions mdl-card--border-bottom">
             <div class="mdl-layout-spacer"></div>
-            <button title="Lukk forhåndsvisning for {{student.fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons closePreviewButton">close</button>
+            <button title="Lukk forhåndsvisning for {{student.fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white material-icons closePreviewButton">close</button>
         </div>
         <div id="previewContainer" class="mdl-card__supporting-text"></div>
         <div class="mdl-card__actions mdl-card--border">
             <div class="mdl-layout-spacer"></div>
-            <button title="Lukk forhåndsvisning for {{student.fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons closePreviewButton">close</button>
+            <button title="Lukk forhåndsvisning for {{student.fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white material-icons closePreviewButton">close</button>
         </div>
     </div>
 </div>

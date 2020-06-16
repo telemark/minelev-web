@@ -30,11 +30,11 @@
                 {{>behaviour-categories-list}}
             </div>
             <div class="mdl-card__actions mdl-card--border">
-                <a href="/" id="deleteWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black" title="Slett dokumentet for {{student.fullName}}"><i class="material-icons">delete</i></a>
+                <a href="/" id="deleteWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white" title="Slett dokumentet for {{student.fullName}}"><i class="material-icons">delete</i></a>
                 <div class="mdl-layout-spacer"></div>
-                <button type="submit" formaction="/document/preview/{{student.userName}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis dokumentet for {{student.fullName}}" name="previewWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">description</button>
+                <button type="submit" formaction="/document/preview/{{student.userName}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis dokumentet for {{student.fullName}}" name="previewWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white material-icons">description</button>
                 <span class="margin-right-10"></span>
-                <button type="submit" value="1" id="submitWarning" title="Send dokumentet for {{student.fullName}}" name="submitWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons">mail_outline</button>
+                <button type="submit" value="1" id="submitWarning" title="Send dokumentet for {{student.fullName}}" name="submitWarning" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white material-icons">mail_outline</button>
             </div>
         </form>
     </div>
@@ -42,12 +42,12 @@
     <div id="modalPreview" class="mdl-card mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-shadow--2dp">
         <div class="mdl-card__actions mdl-card--border-bottom">
             <div class="mdl-layout-spacer"></div>
-            <button title="Lukk forhåndsvisning for {{student.fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons closePreviewButton">close</button>
+            <button title="Lukk forhåndsvisning for {{student.fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white material-icons closePreviewButton">close</button>
         </div>
         <div id="previewContainer" class="mdl-card__supporting-text"></div>
         <div class="mdl-card__actions mdl-card--border">
             <div class="mdl-layout-spacer"></div>
-            <button title="Lukk forhåndsvisning for {{student.fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--black material-icons closePreviewButton">close</button>
+            <button title="Lukk forhåndsvisning for {{student.fullName}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white material-icons closePreviewButton">close</button>
         </div>
     </div>
 </div>
