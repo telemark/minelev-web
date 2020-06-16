@@ -75,7 +75,7 @@
     "hapi-auth-jwt2": "10.1.0",
     "jsonwebtoken": "8.5.1",
     "minelev-tilbakemelding-nynorsk": "1.0.2",
-    "simple-encryptor": "3.0.0",
+    "simple-encryptor": "4.0.0",
     "vtfk-schools-info": "1.1.2",
     "uuid": "8.1.0",
     "winston": "2.4.4",
