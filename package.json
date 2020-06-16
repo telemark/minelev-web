@@ -76,7 +76,6 @@
     "jsonwebtoken": "8.5.1",
     "minelev-tilbakemelding-nynorsk": "1.0.2",
     "simple-encryptor": "3.0.0",
-    "tfk-saksbehandling-schools-info": "2.0.12",
     "vtfk-schools-info": "1.1.2",
     "uuid": "8.0.0",
     "winston": "2.4.4",
