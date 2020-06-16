@@ -55,7 +55,7 @@
     "ava": "3.9.0",
     "coveralls": "3.1.0",
     "standard": "14.3.4",
-    "nyc": "15.1.0",
+    "nyc": "15.1.0"
   },
   "dependencies": {
     "@hapi/hapi": "19.1.1",
