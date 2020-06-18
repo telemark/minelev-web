@@ -38,11 +38,11 @@
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
-                <span class="mdl-layout-title">
+                <span class="mdl-layout-title" title="{{systemName}} v{{version}} - {{credentials.data.userName}}">
                     <span class="logo"></span>
                     &nbsp;&nbsp;{{systemName}}
                 </span>
-                <span class="margin-left-20">{{credentials.data.userName}}</span>
+                <!--<span class="margin-left-20">{{credentials.data.userName}}</span>-->
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation. We hide it in small screens. -->
@@ -58,7 +58,7 @@
                     <a class="mdl-navigation__link mdl-navigation__link--icon" href="/help"><span id="helppageLink" class="material-icons">help_outline</span></a>
                     <div class="mdl-tooltip mdl-tooltip--large" for="helppageLink">Til hjelpesiden</div>
                     <a class="mdl-navigation__link mdl-navigation__link--icon" href="/signout"><span id="logoutLink" class="material-icons">power_settings_new</span></a>
-                    <div class="mdl-tooltip mdl-tooltip--large" for="logoutLink">Logg ut av {{systemName}}</div>
+                    <div class="mdl-tooltip mdl-tooltip--large" for="logoutLink">Logg {{credentials.data.userName}} ut av {{systemName}}</div>
                 </nav>
             </div>
         </header>
