@@ -1,10 +1,80 @@
 body {
-    font-family: "Open sans", sans-serif;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
 }
 
 h1, h2, h3, h4, h4, h6 {
-    font-family: Arial, sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
+
+@media print, screen and (min-width: 40em)  {
+    h1, .h1 {
+        font-size: 2rem;
+        line-height: 2em;
+    }
+}
+
+.grid-container {
+    max-width: 120rem;
+    margin: 20px auto 0px auto;
+    padding: 0px 20px;
+}
+
+.vt-center {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.vt-card {
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    transition: 1s;
+
+    font-size: 1rem;
+
+    border-radius: 5px;
+    padding: 20px 25px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+
+    width: fit-content;
+    max-width: 90%;
+}
+
+/* On mouse-over, add a deeper shadow */
+.vt-card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 2s;
+}
+
+.error-page img {
+    display: block;
+    margin: 10% auto 0 auto;
+    width: 80%;
+    max-width: 400px;
+
+    opacity: 0.5;
+}
+
+.intro {
+    background-color: #B2DCDA;
+}
+
+.intro .title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    line-height: 2;
+}
+
+.error {
+    background-color: #F6B6B3;
+}
+
+.error .title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    line-height: 2;
+}
+
 
 .mdl-layout {
     align-items: center;
