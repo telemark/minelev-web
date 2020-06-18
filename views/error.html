@@ -1,0 +1,26 @@
+<div class="error-page">
+  {{#if (equals statusCode 404)}}
+    <p class="vt-card error vt-center">
+        <span class="title">Vi klarte dessverre ikke å finne siden du leter etter!</span><br/>
+        Siden kan være flyttet eller slettet. Forsøk å gå <a href="/">tilbake til startsiden</a>, og prøv igjen.
+    </p>
+    <img src="/public/images/vectors/undraw_taken.svg" / >
+
+  {{else if (equals statusCode 500)}}
+    <p class="vt-card error vt-center">
+        <span class="title">Å nei! Nå skjedde det noe gæli her...</span><br/>
+        Det som skjedde nå skal egentlig ikke skje...<br />
+        Forsøk å gå <a href="/">tilbake til startsiden</a>, og prøv på nytt. <br /><br />
+        
+        Opplever du at feilen gjentar seg - gi beskjed til systemansvarlig!
+    </p>
+    <img src="/public/images/vectors/undraw_server_down.svg" / >
+
+  {{else}}
+    <p class="vt-card error vt-center">
+        <span class="title">{{statusCode}} - {{errName}}!</span><br/>
+    </p>
+    <img src="/public/images/vectors/undraw_taken.svg" / >
+
+  {{/if}}
+</div>

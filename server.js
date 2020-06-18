@@ -60,6 +60,18 @@ async function start () {
     }
   })
 
+  server.ext('onPreResponse', ({ response }, reply) => {
+    if (response && response.isBoom) {
+      const errName = response.output.payload.error
+      const statusCode = response.output.payload.statusCode
+
+      const viewOptions = createViewOptions({ statusCode, errName }) || { statusCode, errName }
+      return reply.view('error', viewOptions).code(statusCode)
+    }
+
+    return reply.continue
+  })
+
   server.views({
     engines: {
       html: require('handlebars')
