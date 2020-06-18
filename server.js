@@ -10,6 +10,7 @@ const notes = require('./routes/notes')
 const systems = require('./routes/systems')
 const yff = require('./routes/yff')
 const logger = require('./lib/logger')
+const createViewOptions = require('./lib/create-view-options')
 
 // Create a server with a host and port
 const server = Hapi.server({
