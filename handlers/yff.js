@@ -70,7 +70,26 @@ module.exports.frontPage = async (request, h) => {
   logger('info', ['yff', 'frontPage', 'userId', userId, 'studentUserName', studentUserName, 'start'])
 
   axios.defaults.headers.common.Authorization = token
-  const [results, contactTeachersResult, maal, bedrifter, tilbakemeldinger, planer, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), searchLogs(maalOptions), searchLogs(bedriftsOptions), searchLogs(tilbakemeldingsOptions), searchLogs(planOptions), getProfilePicture(studentUserName)])
+
+  let results, contactTeachersResult, profilePicture
+  try {
+    axios.defaults.headers.common.Authorization = token
+    results = await axios.get(url)
+    contactTeachersResult = await axios.get(urlContactTeachers)
+    profilePicture = await getProfilePicture(studentUserName)
+  } catch (error) {
+    const status = error.response.status
+    logger('error', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'unable to get data', error.response.config.url, status, error])
+
+    if (status === 401 || status === 403) {
+      return h.view('error-no-access-to-student', { ...viewOptions, statusCode: status })
+    } else {
+      return h.view('error', { ...viewOptions, statusCode: 500 })
+    }
+  }
+
+  const [maal, bedrifter, tilbakemeldinger, planer] = await Promise.all([searchLogs(maalOptions), searchLogs(bedriftsOptions), searchLogs(tilbakemeldingsOptions), searchLogs(planOptions)])
+
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
