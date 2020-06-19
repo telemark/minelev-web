@@ -41,10 +41,24 @@ module.exports.write = async (request, h) => {
   const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, order: order, behaviour: behaviour, courseCategory: courseCategory, samtale: samtale, documentTypes: documentTypes, warningPeriods: warningPeriods })
 
   logger('info', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'start'])
+  let results, contactTeachersResult, profilePicture
+  try {
+    axios.defaults.headers.common.Authorization = token
+    results = await axios.get(url)
+    contactTeachersResult = await axios.get(urlContactTeachers)
+    profilePicture = await getProfilePicture(studentUserName)
+  } catch (error) {
+    const status = error.response.status
+    logger('error', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'unable to get data', error.response.config.url, status, error])
 
-  axios.defaults.headers.common.Authorization = token
+    if (status === 401 || status === 403) {
+      return h.view('error-no-access-to-student', { ...viewOptions, statusCode: status })
+    } else {
+      return h.view('error', { ...viewOptions, statusCode: 500 })
+    }
+  }
+
   // Retrieves student and students contactTeachers
-  const [results, contactTeachersResult, profilePicture] = await Promise.all([axios.get(url), axios.get(urlContactTeachers), getProfilePicture(studentUserName)])
   const payload = results.data
   const contactTeachers = contactTeachersResult.data
   if (contactTeachers.length > 0) {
@@ -53,6 +67,7 @@ module.exports.write = async (request, h) => {
   } else {
     logger('error', ['documents', 'write', 'userId', userId, 'studentUserName', studentUserName, 'contactTeachers not found'])
   }
+
   if (!payload.statusKode) {
     const student = payload[0]
     const today = new Date()
