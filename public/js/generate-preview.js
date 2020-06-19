@@ -40,6 +40,23 @@ function convertDataURIToBinary(dataURI) {
   return array;
 }
 
+function setSnackbarContainer(message, timeout = 2000) {
+  var snackbarContainer = document.querySelector('.mdl-js-snackbar')
+  snackbarContainer.MaterialSnackbar.showSnackbar({message, timeout})
+}
+
+function setPreviewButtonState(disable = false) {
+  var previewButton = document.getElementById('previewDocumentButton')
+
+  if(disable) {
+    previewButton.disabled = true
+    previewButton.textContent = 'cloud_download'  
+  } else {
+    previewButton.disabled = false
+    previewButton.textContent = 'description'
+  }
+}
+
 function previewDocument (e) {
   e.preventDefault()
   var previewButton = document.getElementById('previewDocumentButton')
@@ -48,18 +65,13 @@ function previewDocument (e) {
   var form = document.getElementById('submitDocumentForm')
   var previewContainer = document.getElementById('previewContainer')
   var xhr = new XMLHttpRequest()
-  var snackbarContainer = document.querySelector('.mdl-js-snackbar')
-  var data = {
-    message: 'Forhåndsvisning genereres nå. Vennligst vent...',
-    timeout: 2000
-  }
-
-  snackbarContainer.MaterialSnackbar.showSnackbar(data)
-  previewButton.disabled = true
-  previewButton.textContent = 'cloud_download'
+  
+  setPreviewButtonState(true)
+  setSnackbarContainer("Forhåndsvisning genereres nå. Vennligst vent...")
 
   xhr.open('POST', previewButton.getAttribute('formaction'), true)
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+  
   xhr.onload = function() {
     if (xhr.status === 200) {
       var pdfAsDataUri = "data:application/pdf;base64," + xhr.responseText
@@ -72,13 +84,28 @@ function previewDocument (e) {
       documentCard.style.visibility = 'hidden'
       documentCard.style.display = 'none'
       documentCard.style.opacity = 0
-    }
-    else if (xhr.status !== 200) {
+      setPreviewButtonState(false)
+    } else {
+      setTimeout(function() {
+        setSnackbarContainer("Det fungerte ikke så bra, prøv igjen...")
+        setPreviewButtonState(false)
+      }, 2000)
+  
       console.error(xhr.status)
     }
-    previewButton.textContent = 'description'
+
     validateDocumentForm()
   }
+
+  xhr.onerror = function() {
+    console.error(xhr.status)
+    
+    setTimeout(function() {
+      setSnackbarContainer("Det fungerte ikke så bra, prøv igjen...")
+      setPreviewButtonState(false)
+    }, 2000)
+  }
+
   xhr.send(serialize(form))
 }
 
