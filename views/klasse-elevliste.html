@@ -1,4 +1,8 @@
-{{>students-list}}
+<div clas="mdl-grid {{showMe students}}">
+    <h1 class="grid-container">{{stripSchoolId groupId}}</h1>
+
+    {{>students-list}}
+</div>
 
 <div class="mdl-grid {{hideMe students}}">
     <div class="mdl-cell mdl-cell--3-col"></div>
