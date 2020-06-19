@@ -20,28 +20,29 @@ module.exports.listStudentsInClass = async (request, h) => {
   const url = `${config.BUDDY_SERVICE_URL}/classes/${groupId}/students`
   const myContactClasses = yar.get('myContactClasses') || []
 
-  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses })
+  const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, groupId })
 
   logger('info', ['classes', 'listStudentsInClass', 'userId', userId, 'start'])
 
   axios.defaults.headers.common.Authorization = token
 
-  const results = await axios.get(url)
+  try {
+    const results = await axios.get(url)
+    const payload = results.data
 
-  const payload = results.data
-
-  if (!payload.statusKode) {
     viewOptions.students = payload.map(student => Object.assign(student, { mainGroupName: groupId }))
     logger('info', ['classes', 'listStudentsInClass', 'userId', userId, 'success'])
+
     return h.view('klasse-elevliste', viewOptions)
-  }
-  if (payload.statusKode === 404) {
-    viewOptions.students = []
-    logger('info', ['classes', 'listStudentsInClass', 'userId', userId, '404'])
-    return h.view('klasse-elevliste', viewOptions)
-  }
-  if (payload.statusKode === 401) {
-    logger('info', ['classes', 'listStudentsInClass', 'userId', userId, '401'])
-    return h.redirect('/signout')
+  } catch (error) {
+    const status = error.response.status
+    logger('error', ['classes', 'listStudentsInClass', 'userId', userId, 'groupId', 'unable to get data', error.response.config.url, status, error])
+
+    if (status === 401 || status === 403) {
+      viewOptions.students = []
+      return h.view('error-no-access-to-class', { ...viewOptions, groupId: groupId.toUpperCase() })
+    } else {
+      return h.view('error', { ...viewOptions, statusCode: 500 })
+    }
   }
 }
