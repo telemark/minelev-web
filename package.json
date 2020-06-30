@@ -63,7 +63,6 @@
     "@hapi/vision": "6.0.0",
     "arrify": "2.0.1",
     "axios": "0.19.2",
-    "azure-queue-add-message": "2.1.1",
     "brreg": "5.0.3",
     "crypto-props": "2.0.3",
     "document-templates": "1.4.9",
