@@ -16,7 +16,6 @@ const datePadding = require('../lib/date-padding')
 const getTemplateType = require('../lib/get-template-type')
 const getClassLevel = require('../lib/get-class-level')
 const logger = require('../lib/logger')
-const queueMessage = require('../lib/queue-message')
 const yffData = require('../lib/data/yff.json')
 
 const classLevels = [
@@ -482,10 +481,6 @@ module.exports.submit = async (request, h) => {
     const postDataBedrift = Object.assign({}, postData)
     postDataBedrift.documentCategory = 'yff-bekreftelse-bedrift'
     jobs.push(axios.put(url, postDataBedrift))
-    if (config.MESSAGE_QUEUE_CONNECTION_STRING) {
-      logger('info', ['yff', 'submit', 'userId', data.userId, 'studentUserName', data.studentUserName, 'yff-bekreftelse', 'Adds to message queue'])
-      jobs.push(queueMessage(postDataBedrift))
-    }
   }
 
   try {
