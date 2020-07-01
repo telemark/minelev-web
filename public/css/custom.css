@@ -561,10 +561,10 @@ div.evenodd > label:nth-child(even):hover {
 
 .mdl-typography--headline {
     font-family: 'Nunito Sans', sans-serif;
-    font-size: '20px';
+    font-size: 20px;
 }
 
 .mdl-layout-title {
     font-family: 'Nunito', sans-serif;
-    font-size: '22px';
+    font-size: 22px;
 }
