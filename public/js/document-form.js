@@ -51,6 +51,7 @@ function preselectFag () {
   if (radios.length === 1) {
     radios[0].checked = true
     showMe(radios[0].value)
+    showWarningPeriods()
   }
   if (courses.length === 1) {
     courses[0].checked = true
