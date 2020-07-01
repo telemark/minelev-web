@@ -558,3 +558,13 @@ div.evenodd > label:nth-child(even):hover {
 .mdl-checkbox.is-checked .mdl-checkbox__box-outline {
     border-color: #005260;
 }
+
+.mdl-typography--headline {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: '20px';
+}
+
+.mdl-layout-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: '22px';
+}
