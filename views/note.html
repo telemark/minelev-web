@@ -30,8 +30,6 @@
             <div class="mdl-card__actions mdl-card--border">
                 <a href="/" id="deleteNote" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white" title="Slett notatet for {{student.fullName}}"><i class="material-icons">delete</i></a>
                 <div class="mdl-layout-spacer"></div>
-                <button type="submit" formaction="/notes/preview/{{student.userName}}" formmethod="post" formtarget="previewFrame" value="1" id="previewDocumentButton" title="Forhåndsvis notatet for {{student.fullName}}" name="previewNote" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white material-icons">description</button>
-                <span class="margin-right-10"></span>
                 <button type="submit" value="1" id="submitNote" title="Send notatet for {{student.fullName}} til elevmappen" name="submitNote" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color-text--white material-icons">mail_outline</button>
             </div>
         </form>
