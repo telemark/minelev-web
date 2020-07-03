@@ -1,4 +1,4 @@
-const axios = require('axios')
+const axios = require('axios').default
 const config = require('../config')
 const generateSystemJwt = require('../lib/generate-system-jwt')
 const createViewOptions = require('../lib/create-view-options')
@@ -114,22 +114,23 @@ module.exports.doSearch = async (request, h) => {
 
   const viewOptions = createViewOptions({ credentials: request.auth.credentials, myContactClasses: myContactClasses, searchText: searchText })
 
-  axios.defaults.headers.common.Authorization = token
-  const results = await axios.get(url)
-  const payload = results.data
+  try {
+    axios.defaults.headers.common.Authorization = token
+    const results = await axios.get(url)
+    const payload = results.data
 
-  if (!payload.statusKode) {
-    viewOptions.students = payload
     logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, 'success', payload.length, 'hits'])
-    return h.view('search-results', viewOptions)
-  }
-  if (payload.statusKode === 404) {
-    viewOptions.students = []
-    logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, '404'])
-    return h.view('search-results', viewOptions)
-  }
-  if (payload.statusKode === 401) {
-    logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, '401'])
-    return h.redirect('/signout')
+    return h.view('search-results', { viewOptions, students: payload })
+  } catch (error) {
+    const { status } = error.response
+    logger('info', ['index', 'doSearch', 'userId', userId, 'searchText', searchText, status])
+
+    if (status === 404) {
+      return h.view('error', { ...viewOptions, statusCode: 500 })
+    } else if (status === 401) {
+      return h.view('error-no-access', viewOptions)
+    } else {
+      return h.view('search-results', { ...viewOptions, students: [] })
+    }
   }
 }
