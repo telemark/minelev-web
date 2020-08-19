@@ -18,16 +18,13 @@ function init () {
 
 function validateDocumentForm () {
   var submitButton = document.getElementById('submitNote')
-  var previewButton = document.getElementById('previewDocumentButton')
   var noteContentField = document.getElementById('noteContent')
   // Starts by disabling button
   submitButton.disabled = true
-  previewButton.disabled = true
 
   // If everything is OK let's go :-)
   if (noteContentField.value.length > 0) {
     submitButton.disabled = false
-    previewButton.disabled = false
   }
 }
 
