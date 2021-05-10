@@ -68,7 +68,7 @@
     "document-templates": "1.4.14",
     "dotenv": "8.2.0",
     "form-data": "3.0.1",
-    "get-skole-aar": "2.0.0",
+    "get-skole-aar": "2.1.0",
     "handlebars": "4.7.6",
     "hapi-auth-cookie": "10.0.0",
     "hapi-auth-jwt2": "10.2.0",
