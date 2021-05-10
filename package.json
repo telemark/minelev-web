@@ -67,7 +67,7 @@
     "crypto-props": "2.0.3",
     "document-templates": "1.4.14",
     "dotenv": "8.2.0",
-    "form-data": "3.0.1",
+    "form-data": "4.0.0",
     "get-skole-aar": "2.0.0",
     "handlebars": "4.7.6",
     "hapi-auth-cookie": "10.0.0",
