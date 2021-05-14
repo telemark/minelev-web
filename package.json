@@ -62,7 +62,7 @@
     "@hapi/inert": "6.0.3",
     "@hapi/vision": "6.0.1",
     "arrify": "2.0.1",
-    "axios": "0.20.0",
+    "axios": "0.21.1",
     "brreg": "5.0.5",
     "crypto-props": "2.0.3",
     "document-templates": "1.4.14",
