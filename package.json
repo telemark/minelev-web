@@ -66,7 +66,7 @@
     "brreg": "5.0.5",
     "crypto-props": "2.0.3",
     "document-templates": "1.4.14",
-    "dotenv": "8.2.0",
+    "dotenv": "10.0.0",
     "form-data": "3.0.1",
     "get-skole-aar": "2.0.0",
     "handlebars": "4.7.6",
