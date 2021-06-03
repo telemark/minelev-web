@@ -1,10 +1,10 @@
-FROM node:13.14
+FROM node:16.3
 WORKDIR /usr/src
 COPY package.json package-lock.json /usr/src/
 RUN npm i --production
 COPY . .
 
-FROM node:13.14-slim
+FROM node:16.3-slim
 WORKDIR /usr/src
 COPY --from=0 /usr/src .
 COPY . .
